@@ -67,7 +67,7 @@ export const searchIndex: SearchItem[] = [
     category: 'page',
   },
 
-  // Journey Activities
+  // Journey Activities - Ready Stage
   {
     id: 'learn-condition',
     title: 'Learn About Your Condition',
@@ -82,6 +82,60 @@ export const searchIndex: SearchItem[] = [
     description: 'Learn about healthcare roles and add your care team members',
     keywords: ['team', 'doctor', 'nurse', 'gp', 'consultant', 'therapist', 'healthcare', 'staff', 'care'],
     href: '/journey/my-team',
+    category: 'guide',
+  },
+
+  // Journey Activities - Steady Stage
+  {
+    id: 'speak-up',
+    title: 'Speak Up at Appointments',
+    description: 'Practice answering questions and build confidence at appointments',
+    keywords: ['speak', 'appointments', 'confidence', 'questions', 'answers', 'practice', 'steady'],
+    href: '/journey/speak-up',
+    category: 'guide',
+  },
+  {
+    id: 'my-medicines',
+    title: 'Know Your Medicines',
+    description: 'Track your medicines, dosages, and pharmacy information',
+    keywords: ['medicines', 'medication', 'tablets', 'pills', 'dose', 'pharmacy', 'prescription'],
+    href: '/journey/my-medicines',
+    category: 'guide',
+  },
+
+  // Journey Activities - Go Stage
+  {
+    id: 'move-date',
+    title: 'Ask About Your Move Date',
+    description: 'Plan your transition to adult services and track important dates',
+    keywords: ['move', 'transition', 'date', 'adult', 'services', 'transfer', 'plan', 'go'],
+    href: '/journey/move-date',
+    category: 'guide',
+  },
+  {
+    id: 'pip-info',
+    title: 'Look into PIP',
+    description: 'Learn about Personal Independence Payment and check eligibility',
+    keywords: ['pip', 'benefit', 'money', 'dla', 'disability', 'allowance', 'payment', '16'],
+    href: '/journey/pip',
+    category: 'guide',
+  },
+
+  // Journey Activities - Adult Stage
+  {
+    id: 'new-team',
+    title: 'Say Hello to Your New Team',
+    description: 'Meet your adult care team and learn how to contact them',
+    keywords: ['new', 'team', 'adult', 'services', 'contact', 'hello', 'meet'],
+    href: '/journey/new-team',
+    category: 'guide',
+  },
+  {
+    id: 'check-support',
+    title: 'Check Your Support',
+    description: 'Review your support at education, work, and home',
+    keywords: ['support', 'benefits', 'education', 'work', 'home', 'college', 'university', 'social'],
+    href: '/journey/check-support',
     category: 'guide',
   },
 

@@ -3,6 +3,12 @@ import { AppShell } from './components/layout/AppShell'
 import { Home } from './pages/Home'
 import { LearnAboutCondition } from './pages/LearnAboutCondition'
 import { MyTeam } from './pages/MyTeam'
+import { SpeakUpAtAppointments } from './pages/SpeakUpAtAppointments'
+import { KnowYourMedicines } from './pages/KnowYourMedicines'
+import { AskAboutMoveDate } from './pages/AskAboutMoveDate'
+import { LookIntoPIP } from './pages/LookIntoPIP'
+import { HelloNewTeam } from './pages/HelloNewTeam'
+import { CheckYourSupport } from './pages/CheckYourSupport'
 import { Consent16to17 } from './pages/Consent16to17'
 import { MyJourney } from './pages/MyJourney'
 import { RightsHub } from './pages/RightsHub'
@@ -21,6 +27,12 @@ function App() {
           <Route path="/journey" element={<MyJourney />} />
           <Route path="/journey/learn-about-condition" element={<LearnAboutCondition />} />
           <Route path="/journey/my-team" element={<MyTeam />} />
+          <Route path="/journey/speak-up" element={<SpeakUpAtAppointments />} />
+          <Route path="/journey/my-medicines" element={<KnowYourMedicines />} />
+          <Route path="/journey/move-date" element={<AskAboutMoveDate />} />
+          <Route path="/journey/pip" element={<LookIntoPIP />} />
+          <Route path="/journey/new-team" element={<HelloNewTeam />} />
+          <Route path="/journey/check-support" element={<CheckYourSupport />} />
           <Route path="/rights" element={<RightsHub />} />
           <Route path="/rights/consent-16-17" element={<Consent16to17 />} />
           <Route path="/money" element={<MoneyPip />} />

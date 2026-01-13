@@ -66,11 +66,15 @@ const tasks: Record<
       title: 'Speak up at appointments',
       emoji: '💬',
       description: 'Try answering a question or two yourself at your next appointment - you can do it!',
+      linkLabel: 'Practice speaking up →',
+      linkHref: '/journey/speak-up',
     },
     {
       title: 'Know your medicines',
       emoji: '💊',
       description: 'Learn what your medicines are for and when you need to take them.',
+      linkLabel: 'Track my medicines →',
+      linkHref: '/journey/my-medicines',
     },
   ],
   go: [
@@ -95,12 +99,16 @@ const tasks: Record<
       emoji: '📅',
       description:
         "Chat with your team about when you're likely to move to adult services, and what your new service will be called.",
+      linkLabel: 'Plan my move →',
+      linkHref: '/journey/move-date',
     },
     {
       title: 'Look into PIP',
       emoji: '💰',
       description:
         'If you\'re turning 16 and have extra care or mobility needs, it\'s worth checking out Personal Independence Payment (PIP).',
+      linkLabel: 'Learn about PIP →',
+      linkHref: '/journey/pip',
     },
   ],
   adult: [
@@ -108,12 +116,16 @@ const tasks: Record<
       title: 'Say hello to your new team',
       emoji: '🤝',
       description: 'Get to know the names of your new adult doctors and nurses, and find out how to get in touch with them.',
+      linkLabel: 'Meet my new team →',
+      linkHref: '/journey/new-team',
     },
     {
       title: 'Check your support',
       emoji: '🛡️',
       description:
         'Make sure you\'ve got the right support at college, work, or home - and know who to talk to if things change.',
+      linkLabel: 'Review my support →',
+      linkHref: '/journey/check-support',
     },
   ],
 }
