@@ -160,18 +160,23 @@
 
 ## Elements Requiring Attention
 
-### NO_HANDLER - Non-functional but looks clickable
+### NO_HANDLER - ~~Non-functional but looks clickable~~ ALL FIXED!
 
-1. **AppShell.tsx:49** - Search input box
-   - Has placeholder but no search functionality implemented
+1. **~~AppShell.tsx:49~~ FIXED** - Search input box
+   - ~~Has placeholder but no search functionality implemented~~
+   - **Now has:** Full search with fuzzy matching, dropdown results, keyboard navigation
 
-2. **AppShell.tsx:56** - Notifications bell button
-   - Has button styling but no onClick handler
+2. **~~AppShell.tsx:56~~ FIXED** - Notifications bell button
+   - ~~Has button styling but no onClick handler~~
+   - **Now has:** Notifications dropdown with read/unread state, badge count, localStorage persistence
 
-3. **RightsHub.tsx:98-108** - TopicPill buttons (x3)
-   - "Consent and capacity", "Privacy & sharing info", "Decision-making after 18"
-   - Have button styling but no onClick handlers
-   - These appear to be filter buttons with no functionality
+3. **~~RightsHub.tsx~~ FIXED** - TopicPill buttons (x3)
+   - ~~"Consent and capacity", "Privacy & sharing info", "Decision-making after 18"~~
+   - ~~Have button styling but no onClick handlers~~
+   - **Now has:** Full content sections with real healthcare transition information:
+     - Consent: Gillick competence, Fraser guidelines, capacity assessment
+     - Privacy: Confidentiality rights, safeguarding, medical records access
+     - Decision-making: Legal changes at 18, Mental Capacity Act, LPA info
 
 ### Intentionally Disabled (Coming Soon)
 
