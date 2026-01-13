@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Search } from './Search'
+import { Notifications } from './Notifications'
 
 interface AppShellProps {
   children: ReactNode
@@ -47,10 +48,7 @@ export function AppShell({ children }: AppShellProps) {
             <Search />
           </div>
           <div className="ml-3 flex items-center gap-3">
-            <button className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-warm-200 bg-white hover:bg-warm-50 hover:border-primary-300 transition-all hover:shadow-card">
-              <span className="sr-only">Notifications</span>
-              <span className="text-lg">🔔</span>
-            </button>
+            <Notifications />
             <div className="h-9 w-9 rounded-full bg-gradient-to-br from-accent-400 to-accent-500 flex items-center justify-center text-xs font-bold text-white shadow-card">
               YP
             </div>
