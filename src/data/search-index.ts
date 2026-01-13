@@ -67,6 +67,24 @@ export const searchIndex: SearchItem[] = [
     category: 'page',
   },
 
+  // Journey Activities
+  {
+    id: 'learn-condition',
+    title: 'Learn About Your Condition',
+    description: 'Interactive activity to understand and describe your health condition',
+    keywords: ['condition', 'learn', 'health', 'ready', 'activity', 'describe', 'understand', 'illness', 'diagnosis'],
+    href: '/journey/learn-about-condition',
+    category: 'guide',
+  },
+  {
+    id: 'my-team',
+    title: 'Get to Know Your Team',
+    description: 'Learn about healthcare roles and add your care team members',
+    keywords: ['team', 'doctor', 'nurse', 'gp', 'consultant', 'therapist', 'healthcare', 'staff', 'care'],
+    href: '/journey/my-team',
+    category: 'guide',
+  },
+
   // Guides
   {
     id: 'consent-16-17',

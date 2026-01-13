@@ -50,11 +50,15 @@ const tasks: Record<
       title: 'Learn about your condition',
       emoji: '📚',
       description: 'Have a go at explaining your condition in your own words - what is it and what does it mean for you?',
+      linkLabel: 'Start activity →',
+      linkHref: '/journey/learn-about-condition',
     },
     {
       title: 'Get to know your team',
       emoji: '👋',
       description: 'Start noticing who helps look after you - your nurse, doctor, therapist, or GP.',
+      linkLabel: 'Meet your team →',
+      linkHref: '/journey/my-team',
     },
   ],
   steady: [

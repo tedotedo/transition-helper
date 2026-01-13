@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
 import { Home } from './pages/Home'
+import { LearnAboutCondition } from './pages/LearnAboutCondition'
+import { MyTeam } from './pages/MyTeam'
 import { Consent16to17 } from './pages/Consent16to17'
 import { MyJourney } from './pages/MyJourney'
 import { RightsHub } from './pages/RightsHub'
@@ -17,6 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/journey" element={<MyJourney />} />
+          <Route path="/journey/learn-about-condition" element={<LearnAboutCondition />} />
+          <Route path="/journey/my-team" element={<MyTeam />} />
           <Route path="/rights" element={<RightsHub />} />
           <Route path="/rights/consent-16-17" element={<Consent16to17 />} />
           <Route path="/money" element={<MoneyPip />} />
