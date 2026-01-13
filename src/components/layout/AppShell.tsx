@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Search } from './Search'
 
 interface AppShellProps {
   children: ReactNode
@@ -43,14 +44,7 @@ export function AppShell({ children }: AppShellProps) {
             <p className="text-sm font-semibold text-warm-800">Transition Care</p>
           </div>
           <div className="flex-1 flex items-center max-w-md ml-2 md:ml-0">
-            <div className="relative w-full">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-warm-400">🔍</span>
-              <input
-                type="search"
-                className="w-full rounded-full bg-warm-50 border border-warm-200 pl-10 pr-4 py-2 text-sm placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 hover:border-warm-300 transition-colors"
-                placeholder="Search topics, e.g. 'consent' or 'PIP'"
-              />
-            </div>
+            <Search />
           </div>
           <div className="ml-3 flex items-center gap-3">
             <button className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-warm-200 bg-white hover:bg-warm-50 hover:border-primary-300 transition-all hover:shadow-card">
