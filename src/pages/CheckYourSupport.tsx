@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface SupportData {
   currentSituation: string
@@ -27,7 +28,7 @@ interface SupportData {
   keyContacts: { name: string; role: string; phone: string }[]
   emergencyContact: string
   notes: string
-  lastUpdated: string
+  lastUpdated?: string
 }
 
 const STORAGE_KEY = 'transition-care-support-check'
@@ -58,106 +59,81 @@ const benefitOptions = [
   { id: 'unsure', label: "I'm not sure what I receive" }
 ]
 
-function getStoredData(): SupportData | null {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return null
-    }
-  }
-  return null
-}
+const defaultSupport = { hasSupport: false, type: '', contactPerson: '', details: '' }
 
-function saveData(data: SupportData) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+const initialData: SupportData = {
+  currentSituation: '',
+  educationSupport: { ...defaultSupport },
+  workSupport: { ...defaultSupport },
+  homeSupport: { ...defaultSupport },
+  benefitsReceiving: [],
+  socialWorker: '',
+  socialWorkerContact: '',
+  keyContacts: [],
+  emergencyContact: '',
+  notes: ''
 }
 
 export function CheckYourSupport() {
-  const [currentSituation, setCurrentSituation] = useState('')
-  const [educationSupport, setEducationSupport] = useState({
-    hasSupport: false,
-    type: '',
-    contactPerson: '',
-    details: ''
-  })
-  const [workSupport, setWorkSupport] = useState({
-    hasSupport: false,
-    type: '',
-    contactPerson: '',
-    details: ''
-  })
-  const [homeSupport, setHomeSupport] = useState({
-    hasSupport: false,
-    type: '',
-    contactPerson: '',
-    details: ''
-  })
-  const [benefitsReceiving, setBenefitsReceiving] = useState<string[]>([])
-  const [socialWorker, setSocialWorker] = useState('')
-  const [socialWorkerContact, setSocialWorkerContact] = useState('')
-  const [keyContacts, setKeyContacts] = useState<{ name: string; role: string; phone: string }[]>([])
-  const [emergencyContact, setEmergencyContact] = useState('')
-  const [notes, setNotes] = useState('')
+  const [data, setData] = useLocalStorage<SupportData>(STORAGE_KEY, initialData)
   const [saved, setSaved] = useState(false)
   const [showAddContact, setShowAddContact] = useState(false)
   const [newContact, setNewContact] = useState({ name: '', role: '', phone: '' })
 
-  useEffect(() => {
-    const stored = getStoredData()
-    if (stored) {
-      setCurrentSituation(stored.currentSituation || '')
-      setEducationSupport(stored.educationSupport || { hasSupport: false, type: '', contactPerson: '', details: '' })
-      setWorkSupport(stored.workSupport || { hasSupport: false, type: '', contactPerson: '', details: '' })
-      setHomeSupport(stored.homeSupport || { hasSupport: false, type: '', contactPerson: '', details: '' })
-      setBenefitsReceiving(stored.benefitsReceiving || [])
-      setSocialWorker(stored.socialWorker || '')
-      setSocialWorkerContact(stored.socialWorkerContact || '')
-      setKeyContacts(stored.keyContacts || [])
-      setEmergencyContact(stored.emergencyContact || '')
-      setNotes(stored.notes || '')
-    }
-  }, [])
+  // Destructure for easier access
+  const {
+    currentSituation,
+    educationSupport,
+    workSupport,
+    homeSupport,
+    benefitsReceiving,
+    socialWorker,
+    socialWorkerContact,
+    keyContacts,
+    emergencyContact,
+    notes
+  } = data
 
-  const handleSave = () => {
-    const data: SupportData = {
-      currentSituation,
-      educationSupport,
-      workSupport,
-      homeSupport,
-      benefitsReceiving,
-      socialWorker,
-      socialWorkerContact,
-      keyContacts,
-      emergencyContact,
-      notes,
+  // Helper to update any field
+  const updateField = useCallback(<K extends keyof SupportData>(field: K, value: SupportData[K]) => {
+    setData(prev => ({ ...prev, [field]: value }))
+  }, [setData])
+
+  const handleSave = useCallback(() => {
+    setData(prev => ({
+      ...prev,
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
+    }))
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [setData])
 
-  const toggleBenefit = (id: string) => {
-    if (benefitsReceiving.includes(id)) {
-      setBenefitsReceiving(benefitsReceiving.filter(b => b !== id))
-    } else {
-      setBenefitsReceiving([...benefitsReceiving, id])
-    }
-  }
+  const toggleBenefit = useCallback((id: string) => {
+    setData(prev => ({
+      ...prev,
+      benefitsReceiving: prev.benefitsReceiving.includes(id)
+        ? prev.benefitsReceiving.filter(b => b !== id)
+        : [...prev.benefitsReceiving, id]
+    }))
+  }, [setData])
 
-  const addKeyContact = () => {
+  const addKeyContact = useCallback(() => {
     if (newContact.name.trim()) {
-      setKeyContacts([...keyContacts, newContact])
+      setData(prev => ({
+        ...prev,
+        keyContacts: [...prev.keyContacts, newContact]
+      }))
       setNewContact({ name: '', role: '', phone: '' })
       setShowAddContact(false)
     }
-  }
+  }, [newContact, setData])
 
-  const removeKeyContact = (index: number) => {
-    setKeyContacts(keyContacts.filter((_, i) => i !== index))
-  }
+  const removeKeyContact = useCallback((index: number) => {
+    setData(prev => ({
+      ...prev,
+      keyContacts: prev.keyContacts.filter((_, i) => i !== index)
+    }))
+  }, [setData])
 
   const showEducation = ['school', 'college', 'uni', 'apprentice'].includes(currentSituation)
   const showWork = ['working', 'apprentice'].includes(currentSituation)
@@ -205,7 +181,7 @@ export function CheckYourSupport() {
             <button
               key={option.id}
               type="button"
-              onClick={() => setCurrentSituation(option.id)}
+              onClick={() => updateField('currentSituation', option.id)}
               className={`flex items-center gap-3 p-3 rounded-xl text-left transition-all ${
                 currentSituation === option.id
                   ? 'bg-primary-50 border-2 border-primary-300 ring-1 ring-primary-200'
@@ -231,7 +207,7 @@ export function CheckYourSupport() {
             <input
               type="checkbox"
               checked={educationSupport.hasSupport}
-              onChange={(e) => setEducationSupport({ ...educationSupport, hasSupport: e.target.checked })}
+              onChange={(e) => updateField('educationSupport', { ...educationSupport, hasSupport: e.target.checked })}
               className="w-5 h-5 rounded border-warm-300 text-primary-600 focus:ring-primary-300"
             />
             <span className="text-sm text-warm-700">I have support in place at school/college/uni</span>
@@ -247,7 +223,7 @@ export function CheckYourSupport() {
                   id="edu-type"
                   type="text"
                   value={educationSupport.type}
-                  onChange={(e) => setEducationSupport({ ...educationSupport, type: e.target.value })}
+                  onChange={(e) => updateField('educationSupport', { ...educationSupport, type: e.target.value })}
                   placeholder="e.g. EHCP, Disabled Students' Allowance, exam adjustments"
                   className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
                 />
@@ -260,7 +236,7 @@ export function CheckYourSupport() {
                   id="edu-contact"
                   type="text"
                   value={educationSupport.contactPerson}
-                  onChange={(e) => setEducationSupport({ ...educationSupport, contactPerson: e.target.value })}
+                  onChange={(e) => updateField('educationSupport', { ...educationSupport, contactPerson: e.target.value })}
                   placeholder="Name and how to contact them"
                   className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
                 />
@@ -282,7 +258,7 @@ export function CheckYourSupport() {
             <input
               type="checkbox"
               checked={workSupport.hasSupport}
-              onChange={(e) => setWorkSupport({ ...workSupport, hasSupport: e.target.checked })}
+              onChange={(e) => updateField('workSupport', { ...workSupport, hasSupport: e.target.checked })}
               className="w-5 h-5 rounded border-warm-300 text-primary-600 focus:ring-primary-300"
             />
             <span className="text-sm text-warm-700">I have adjustments or support at work</span>
@@ -298,7 +274,7 @@ export function CheckYourSupport() {
                   id="work-type"
                   type="text"
                   value={workSupport.type}
-                  onChange={(e) => setWorkSupport({ ...workSupport, type: e.target.value })}
+                  onChange={(e) => updateField('workSupport', { ...workSupport, type: e.target.value })}
                   placeholder="e.g. Flexible hours, equipment, support worker"
                   className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
                 />
@@ -311,7 +287,7 @@ export function CheckYourSupport() {
                   id="work-contact"
                   type="text"
                   value={workSupport.contactPerson}
-                  onChange={(e) => setWorkSupport({ ...workSupport, contactPerson: e.target.value })}
+                  onChange={(e) => updateField('workSupport', { ...workSupport, contactPerson: e.target.value })}
                   placeholder="Name and how to contact them"
                   className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
                 />
@@ -332,7 +308,7 @@ export function CheckYourSupport() {
           <input
             type="checkbox"
             checked={homeSupport.hasSupport}
-            onChange={(e) => setHomeSupport({ ...homeSupport, hasSupport: e.target.checked })}
+            onChange={(e) => updateField('homeSupport', { ...homeSupport, hasSupport: e.target.checked })}
             className="w-5 h-5 rounded border-warm-300 text-primary-600 focus:ring-primary-300"
           />
           <span className="text-sm text-warm-700">I have care or support at home</span>
@@ -348,7 +324,7 @@ export function CheckYourSupport() {
                 id="home-type"
                 type="text"
                 value={homeSupport.type}
-                onChange={(e) => setHomeSupport({ ...homeSupport, type: e.target.value })}
+                onChange={(e) => updateField('homeSupport', { ...homeSupport, type: e.target.value })}
                 placeholder="e.g. Care package, personal assistant, family carer"
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
               />
@@ -361,7 +337,7 @@ export function CheckYourSupport() {
                 id="home-contact"
                 type="text"
                 value={homeSupport.contactPerson}
-                onChange={(e) => setHomeSupport({ ...homeSupport, contactPerson: e.target.value })}
+                onChange={(e) => updateField('homeSupport', { ...homeSupport, contactPerson: e.target.value })}
                 placeholder="e.g. Care agency name, social worker"
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
               />
@@ -415,7 +391,7 @@ export function CheckYourSupport() {
               id="social-worker"
               type="text"
               value={socialWorker}
-              onChange={(e) => setSocialWorker(e.target.value)}
+              onChange={(e) => updateField('socialWorker', e.target.value)}
               placeholder="If you have one"
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
             />
@@ -428,7 +404,7 @@ export function CheckYourSupport() {
               id="social-worker-contact"
               type="text"
               value={socialWorkerContact}
-              onChange={(e) => setSocialWorkerContact(e.target.value)}
+              onChange={(e) => updateField('socialWorkerContact', e.target.value)}
               placeholder="Phone or email"
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
             />
@@ -526,7 +502,7 @@ export function CheckYourSupport() {
             id="emergency-contact"
             type="text"
             value={emergencyContact}
-            onChange={(e) => setEmergencyContact(e.target.value)}
+            onChange={(e) => updateField('emergencyContact', e.target.value)}
             placeholder="Name and phone number"
             className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all"
           />
@@ -541,7 +517,7 @@ export function CheckYourSupport() {
         </h2>
         <textarea
           value={notes}
-          onChange={(e) => setNotes(e.target.value)}
+          onChange={(e) => updateField('notes', e.target.value)}
           placeholder="Anything else to remember about your support..."
           rows={3}
           className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all resize-none"

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface TeamMember {
   id: string
@@ -52,24 +53,8 @@ const roleExplanations = [
   }
 ]
 
-function getStoredTeam(): TeamMember[] {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return []
-    }
-  }
-  return []
-}
-
-function saveTeam(team: TeamMember[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(team))
-}
-
 export function MyTeam() {
-  const [team, setTeam] = useState<TeamMember[]>([])
+  const [team, setTeam] = useLocalStorage<TeamMember[]>(STORAGE_KEY, [])
   const [showAddForm, setShowAddForm] = useState(false)
   const [newMember, setNewMember] = useState<Omit<TeamMember, 'id'>>({
     name: '',
@@ -80,36 +65,27 @@ export function MyTeam() {
   const [saved, setSaved] = useState(false)
   const [expandedRole, setExpandedRole] = useState<string | null>(null)
 
-  useEffect(() => {
-    const stored = getStoredTeam()
-    setTeam(stored)
-  }, [])
-
-  const handleAddMember = () => {
+  const handleAddMember = useCallback(() => {
     if (!newMember.name.trim()) return
 
     const member: TeamMember = {
       id: Date.now().toString(),
       ...newMember
     }
-    const updatedTeam = [...team, member]
-    setTeam(updatedTeam)
-    saveTeam(updatedTeam)
+    setTeam(prev => [...prev, member])
     setNewMember({ name: '', role: '', helpsWithWhat: '', avatar: '👩‍⚕️' })
     setShowAddForm(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [newMember, setTeam])
 
-  const handleRemoveMember = (id: string) => {
-    const updatedTeam = team.filter(m => m.id !== id)
-    setTeam(updatedTeam)
-    saveTeam(updatedTeam)
-  }
+  const handleRemoveMember = useCallback((id: string) => {
+    setTeam(prev => prev.filter(m => m.id !== id))
+  }, [setTeam])
 
-  const toggleRoleExpand = (role: string) => {
-    setExpandedRole(expandedRole === role ? null : role)
-  }
+  const toggleRoleExpand = useCallback((role: string) => {
+    setExpandedRole(prev => prev === role ? null : role)
+  }, [])
 
   return (
     <div className="space-y-8 animate-fade-in max-w-4xl">

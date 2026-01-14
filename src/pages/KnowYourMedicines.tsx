@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface Medicine {
   id: string
@@ -14,7 +15,7 @@ interface MedicinesData {
   medicines: Medicine[]
   pharmacyName: string
   pharmacyPhone: string
-  lastUpdated: string
+  lastUpdated?: string
 }
 
 const STORAGE_KEY = 'transition-care-my-medicines'
@@ -39,26 +40,14 @@ const colourOptions = [
   { id: 'brown', class: 'bg-amber-700', label: 'Brown' },
 ]
 
-function getStoredData(): MedicinesData | null {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-function saveData(data: MedicinesData) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+const initialData: MedicinesData = {
+  medicines: [],
+  pharmacyName: '',
+  pharmacyPhone: ''
 }
 
 export function KnowYourMedicines() {
-  const [medicines, setMedicines] = useState<Medicine[]>([])
-  const [pharmacyName, setPharmacyName] = useState('')
-  const [pharmacyPhone, setPharmacyPhone] = useState('')
+  const [data, setData] = useLocalStorage<MedicinesData>(STORAGE_KEY, initialData)
   const [showAddForm, setShowAddForm] = useState(false)
   const [newMedicine, setNewMedicine] = useState<Omit<Medicine, 'id'>>({
     name: '',
@@ -69,65 +58,43 @@ export function KnowYourMedicines() {
   })
   const [saved, setSaved] = useState(false)
 
-  useEffect(() => {
-    const stored = getStoredData()
-    if (stored) {
-      setMedicines(stored.medicines)
-      setPharmacyName(stored.pharmacyName || '')
-      setPharmacyPhone(stored.pharmacyPhone || '')
-    }
-  }, [])
+  // Destructure for easier access
+  const { medicines, pharmacyName, pharmacyPhone } = data
 
-  const handleSave = () => {
-    const data: MedicinesData = {
-      medicines,
-      pharmacyName,
-      pharmacyPhone,
+  const handleSave = useCallback(() => {
+    setData(prev => ({
+      ...prev,
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
+    }))
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [setData])
 
-  const handleAddMedicine = () => {
+  const handleAddMedicine = useCallback(() => {
     if (!newMedicine.name.trim()) return
 
     const medicine: Medicine = {
       id: Date.now().toString(),
       ...newMedicine
     }
-    const updatedMedicines = [...medicines, medicine]
-    setMedicines(updatedMedicines)
-
-    // Auto-save when adding
-    const data: MedicinesData = {
-      medicines: updatedMedicines,
-      pharmacyName,
-      pharmacyPhone,
+    setData(prev => ({
+      ...prev,
+      medicines: [...prev.medicines, medicine],
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
-
+    }))
     setNewMedicine({ name: '', whatFor: '', dose: '', whenToTake: [], colour: 'blue' })
     setShowAddForm(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [newMedicine, setData])
 
-  const handleRemoveMedicine = (id: string) => {
-    const updatedMedicines = medicines.filter(m => m.id !== id)
-    setMedicines(updatedMedicines)
-
-    // Auto-save when removing
-    const data: MedicinesData = {
-      medicines: updatedMedicines,
-      pharmacyName,
-      pharmacyPhone,
+  const handleRemoveMedicine = useCallback((id: string) => {
+    setData(prev => ({
+      ...prev,
+      medicines: prev.medicines.filter(m => m.id !== id),
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
-  }
+    }))
+  }, [setData])
 
   const toggleTiming = (timingId: string) => {
     const newTiming = newMedicine.whenToTake.includes(timingId)
@@ -390,7 +357,7 @@ export function KnowYourMedicines() {
               id="pharmacy-name"
               type="text"
               value={pharmacyName}
-              onChange={(e) => setPharmacyName(e.target.value)}
+              onChange={(e) => setData(prev => ({ ...prev, pharmacyName: e.target.value }))}
               placeholder="e.g. Boots, Lloyds Pharmacy..."
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
             />
@@ -403,7 +370,7 @@ export function KnowYourMedicines() {
               id="pharmacy-phone"
               type="tel"
               value={pharmacyPhone}
-              onChange={(e) => setPharmacyPhone(e.target.value)}
+              onChange={(e) => setData(prev => ({ ...prev, pharmacyPhone: e.target.value }))}
               placeholder="e.g. 01onal 123 456 7890"
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
             />

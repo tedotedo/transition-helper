@@ -1,85 +1,71 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface ConditionData {
   conditionName: string
   myDescription: string
   healthyHabits: string[]
   questionsForDoctor: string[]
-  lastUpdated: string
+  lastUpdated?: string
 }
 
 const STORAGE_KEY = 'transition-care-my-condition'
 
-function getStoredData(): ConditionData | null {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-function saveData(data: ConditionData) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+const initialData: ConditionData = {
+  conditionName: '',
+  myDescription: '',
+  healthyHabits: ['', '', ''],
+  questionsForDoctor: ['', '', ''],
 }
 
 export function LearnAboutCondition() {
-  const [conditionName, setConditionName] = useState('')
-  const [myDescription, setMyDescription] = useState('')
-  const [healthyHabits, setHealthyHabits] = useState(['', '', ''])
-  const [questionsForDoctor, setQuestionsForDoctor] = useState(['', '', ''])
+  const [data, setData] = useLocalStorage<ConditionData>(STORAGE_KEY, initialData)
   const [saved, setSaved] = useState(false)
-  const [hasExistingData, setHasExistingData] = useState(false)
 
-  // Load saved data on mount
-  useEffect(() => {
-    const stored = getStoredData()
-    if (stored) {
-      setConditionName(stored.conditionName)
-      setMyDescription(stored.myDescription)
-      setHealthyHabits(stored.healthyHabits.length >= 3 ? stored.healthyHabits : [...stored.healthyHabits, '', '', ''].slice(0, 3))
-      setQuestionsForDoctor(stored.questionsForDoctor.length >= 3 ? stored.questionsForDoctor : [...stored.questionsForDoctor, '', '', ''].slice(0, 3))
-      setHasExistingData(true)
-    }
-  }, [])
+  // Destructure for easier access
+  const { conditionName, myDescription, healthyHabits, questionsForDoctor, lastUpdated } = data
+  const hasExistingData = Boolean(lastUpdated)
 
-  const handleSave = () => {
-    const data: ConditionData = {
+  // Ensure arrays have at least 3 items for display
+  const displayHabits = healthyHabits.length >= 3 ? healthyHabits : [...healthyHabits, '', '', ''].slice(0, 3)
+  const displayQuestions = questionsForDoctor.length >= 3 ? questionsForDoctor : [...questionsForDoctor, '', '', ''].slice(0, 3)
+
+  const handleSave = useCallback(() => {
+    setData({
       conditionName,
       myDescription,
       healthyHabits: healthyHabits.filter(h => h.trim() !== ''),
       questionsForDoctor: questionsForDoctor.filter(q => q.trim() !== ''),
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
+    })
     setSaved(true)
-    setHasExistingData(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [conditionName, myDescription, healthyHabits, questionsForDoctor, setData])
 
   const handlePrint = () => {
     window.print()
   }
 
-  const updateHealthyHabit = (index: number, value: string) => {
-    const newHabits = [...healthyHabits]
+  const updateField = useCallback(<K extends keyof ConditionData>(field: K, value: ConditionData[K]) => {
+    setData(prev => ({ ...prev, [field]: value }))
+  }, [setData])
+
+  const updateHealthyHabit = useCallback((index: number, value: string) => {
+    const newHabits = [...displayHabits]
     newHabits[index] = value
-    setHealthyHabits(newHabits)
-  }
+    setData(prev => ({ ...prev, healthyHabits: newHabits }))
+  }, [displayHabits, setData])
 
-  const updateQuestion = (index: number, value: string) => {
-    const newQuestions = [...questionsForDoctor]
+  const updateQuestion = useCallback((index: number, value: string) => {
+    const newQuestions = [...displayQuestions]
     newQuestions[index] = value
-    setQuestionsForDoctor(newQuestions)
-  }
+    setData(prev => ({ ...prev, questionsForDoctor: newQuestions }))
+  }, [displayQuestions, setData])
 
-  const addMoreQuestions = () => {
-    setQuestionsForDoctor([...questionsForDoctor, ''])
-  }
+  const addMoreQuestions = useCallback(() => {
+    setData(prev => ({ ...prev, questionsForDoctor: [...prev.questionsForDoctor, ''] }))
+  }, [setData])
 
   return (
     <div className="space-y-8 animate-fade-in max-w-3xl">
@@ -141,7 +127,7 @@ export function LearnAboutCondition() {
             id="condition-name"
             type="text"
             value={conditionName}
-            onChange={(e) => setConditionName(e.target.value)}
+            onChange={(e) => updateField('conditionName', e.target.value)}
             placeholder="e.g. Diabetes, Asthma, Epilepsy, Cerebral Palsy..."
             className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
           />
@@ -162,7 +148,7 @@ export function LearnAboutCondition() {
           <textarea
             id="my-description"
             value={myDescription}
-            onChange={(e) => setMyDescription(e.target.value)}
+            onChange={(e) => updateField('myDescription', e.target.value)}
             placeholder="My condition means that my body... / I need to... / Sometimes I feel..."
             rows={4}
             className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all resize-none"
@@ -179,7 +165,7 @@ export function LearnAboutCondition() {
             What do you do to look after yourself? This could be taking medicine, doing exercises, eating certain foods, or going to appointments.
           </p>
           <div className="space-y-3">
-            {healthyHabits.map((habit, index) => (
+            {displayHabits.map((habit, index) => (
               <div key={index} className="flex items-center gap-3">
                 <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-accent-100 to-accent-200 flex items-center justify-center text-sm font-bold text-accent-700">
                   {index + 1}
@@ -210,7 +196,7 @@ export function LearnAboutCondition() {
             Is there anything you're wondering about? Write your questions here so you don't forget them at your next appointment!
           </p>
           <div className="space-y-3">
-            {questionsForDoctor.map((question, index) => (
+            {displayQuestions.map((question, index) => (
               <div key={index} className="flex items-start gap-3">
                 <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center text-lg">
                   ?

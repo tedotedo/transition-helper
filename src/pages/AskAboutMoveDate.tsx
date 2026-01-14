@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface TransitionData {
   expectedMoveAge: string
@@ -10,7 +11,7 @@ interface TransitionData {
   firstMeetingDate: string
   questionsToAsk: string[]
   notes: string
-  lastUpdated: string
+  lastUpdated?: string
 }
 
 const STORAGE_KEY = 'transition-care-move-date'
@@ -26,79 +27,66 @@ const suggestedQuestions = [
   "How is adult care different from children's services?"
 ]
 
-function getStoredData(): TransitionData | null {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-function saveData(data: TransitionData) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+const initialData: TransitionData = {
+  expectedMoveAge: '',
+  expectedMoveDate: '',
+  adultServiceName: '',
+  adultServiceLocation: '',
+  namedContactPerson: '',
+  firstMeetingDate: '',
+  questionsToAsk: [],
+  notes: ''
 }
 
 export function AskAboutMoveDate() {
-  const [expectedMoveAge, setExpectedMoveAge] = useState('')
-  const [expectedMoveDate, setExpectedMoveDate] = useState('')
-  const [adultServiceName, setAdultServiceName] = useState('')
-  const [adultServiceLocation, setAdultServiceLocation] = useState('')
-  const [namedContactPerson, setNamedContactPerson] = useState('')
-  const [firstMeetingDate, setFirstMeetingDate] = useState('')
-  const [questionsToAsk, setQuestionsToAsk] = useState<string[]>([])
+  const [data, setData] = useLocalStorage<TransitionData>(STORAGE_KEY, initialData)
   const [customQuestion, setCustomQuestion] = useState('')
-  const [notes, setNotes] = useState('')
   const [saved, setSaved] = useState(false)
 
-  useEffect(() => {
-    const stored = getStoredData()
-    if (stored) {
-      setExpectedMoveAge(stored.expectedMoveAge || '')
-      setExpectedMoveDate(stored.expectedMoveDate || '')
-      setAdultServiceName(stored.adultServiceName || '')
-      setAdultServiceLocation(stored.adultServiceLocation || '')
-      setNamedContactPerson(stored.namedContactPerson || '')
-      setFirstMeetingDate(stored.firstMeetingDate || '')
-      setQuestionsToAsk(stored.questionsToAsk || [])
-      setNotes(stored.notes || '')
-    }
-  }, [])
+  // Destructure for easier access
+  const {
+    expectedMoveAge,
+    expectedMoveDate,
+    adultServiceName,
+    adultServiceLocation,
+    namedContactPerson,
+    firstMeetingDate,
+    questionsToAsk,
+    notes
+  } = data
 
-  const handleSave = () => {
-    const data: TransitionData = {
-      expectedMoveAge,
-      expectedMoveDate,
-      adultServiceName,
-      adultServiceLocation,
-      namedContactPerson,
-      firstMeetingDate,
-      questionsToAsk,
-      notes,
+  // Helper to update any field
+  const updateField = useCallback(<K extends keyof TransitionData>(field: K, value: TransitionData[K]) => {
+    setData(prev => ({ ...prev, [field]: value }))
+  }, [setData])
+
+  const handleSave = useCallback(() => {
+    setData(prev => ({
+      ...prev,
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
+    }))
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [setData])
 
-  const toggleQuestion = (question: string) => {
-    if (questionsToAsk.includes(question)) {
-      setQuestionsToAsk(questionsToAsk.filter(q => q !== question))
-    } else {
-      setQuestionsToAsk([...questionsToAsk, question])
-    }
-  }
+  const toggleQuestion = useCallback((question: string) => {
+    setData(prev => ({
+      ...prev,
+      questionsToAsk: prev.questionsToAsk.includes(question)
+        ? prev.questionsToAsk.filter(q => q !== question)
+        : [...prev.questionsToAsk, question]
+    }))
+  }, [setData])
 
-  const addCustomQuestion = () => {
+  const addCustomQuestion = useCallback(() => {
     if (customQuestion.trim() && !questionsToAsk.includes(customQuestion.trim())) {
-      setQuestionsToAsk([...questionsToAsk, customQuestion.trim()])
+      setData(prev => ({
+        ...prev,
+        questionsToAsk: [...prev.questionsToAsk, customQuestion.trim()]
+      }))
       setCustomQuestion('')
     }
-  }
+  }, [customQuestion, questionsToAsk, setData])
 
   return (
     <div className="space-y-8 animate-fade-in max-w-3xl">
@@ -148,7 +136,7 @@ export function AskAboutMoveDate() {
               <select
                 id="move-age"
                 value={expectedMoveAge}
-                onChange={(e) => setExpectedMoveAge(e.target.value)}
+                onChange={(e) => updateField('expectedMoveAge', e.target.value)}
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
               >
                 <option value="">Select age...</option>
@@ -167,7 +155,7 @@ export function AskAboutMoveDate() {
                 id="move-date"
                 type="month"
                 value={expectedMoveDate}
-                onChange={(e) => setExpectedMoveDate(e.target.value)}
+                onChange={(e) => updateField('expectedMoveDate', e.target.value)}
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
               />
             </div>
@@ -181,7 +169,7 @@ export function AskAboutMoveDate() {
               id="adult-service"
               type="text"
               value={adultServiceName}
-              onChange={(e) => setAdultServiceName(e.target.value)}
+              onChange={(e) => updateField('adultServiceName', e.target.value)}
               placeholder="e.g. Adult Diabetes Service, Adult Neurology..."
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
             />
@@ -195,7 +183,7 @@ export function AskAboutMoveDate() {
               id="adult-location"
               type="text"
               value={adultServiceLocation}
-              onChange={(e) => setAdultServiceLocation(e.target.value)}
+              onChange={(e) => updateField('adultServiceLocation', e.target.value)}
               placeholder="e.g. St Mary's Hospital, City Health Centre..."
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
             />
@@ -210,7 +198,7 @@ export function AskAboutMoveDate() {
                 id="contact-person"
                 type="text"
                 value={namedContactPerson}
-                onChange={(e) => setNamedContactPerson(e.target.value)}
+                onChange={(e) => updateField('namedContactPerson', e.target.value)}
                 placeholder="e.g. Nurse Sarah, Dr. Smith..."
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
               />
@@ -223,7 +211,7 @@ export function AskAboutMoveDate() {
                 id="first-meeting"
                 type="date"
                 value={firstMeetingDate}
-                onChange={(e) => setFirstMeetingDate(e.target.value)}
+                onChange={(e) => updateField('firstMeetingDate', e.target.value)}
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
               />
             </div>
@@ -289,7 +277,7 @@ export function AskAboutMoveDate() {
         </h2>
         <textarea
           value={notes}
-          onChange={(e) => setNotes(e.target.value)}
+          onChange={(e) => updateField('notes', e.target.value)}
           placeholder="Write down anything else you want to remember about your transition..."
           rows={4}
           className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all resize-none"

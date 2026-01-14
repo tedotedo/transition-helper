@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface TeamMember {
   id: string
@@ -18,7 +19,7 @@ interface NewTeamData {
   appointmentBooking: string
   prescriptionProcess: string
   notes: string
-  lastUpdated: string
+  lastUpdated?: string
 }
 
 const STORAGE_KEY = 'transition-care-new-adult-team'
@@ -38,30 +39,18 @@ const roleOptions = [
   'Other'
 ]
 
-function getStoredData(): NewTeamData | null {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-function saveData(data: NewTeamData) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+const initialData: NewTeamData = {
+  team: [],
+  mainContactNumber: '',
+  emergencyNumber: '',
+  clinicAddress: '',
+  appointmentBooking: '',
+  prescriptionProcess: '',
+  notes: ''
 }
 
 export function HelloNewTeam() {
-  const [team, setTeam] = useState<TeamMember[]>([])
-  const [mainContactNumber, setMainContactNumber] = useState('')
-  const [emergencyNumber, setEmergencyNumber] = useState('')
-  const [clinicAddress, setClinicAddress] = useState('')
-  const [appointmentBooking, setAppointmentBooking] = useState('')
-  const [prescriptionProcess, setPrescriptionProcess] = useState('')
-  const [notes, setNotes] = useState('')
+  const [data, setData] = useLocalStorage<NewTeamData>(STORAGE_KEY, initialData)
   const [showAddForm, setShowAddForm] = useState(false)
   const [newMember, setNewMember] = useState({
     name: '',
@@ -72,50 +61,52 @@ export function HelloNewTeam() {
   })
   const [saved, setSaved] = useState(false)
 
-  useEffect(() => {
-    const stored = getStoredData()
-    if (stored) {
-      setTeam(stored.team || [])
-      setMainContactNumber(stored.mainContactNumber || '')
-      setEmergencyNumber(stored.emergencyNumber || '')
-      setClinicAddress(stored.clinicAddress || '')
-      setAppointmentBooking(stored.appointmentBooking || '')
-      setPrescriptionProcess(stored.prescriptionProcess || '')
-      setNotes(stored.notes || '')
-    }
-  }, [])
+  // Destructure for easier access
+  const {
+    team,
+    mainContactNumber,
+    emergencyNumber,
+    clinicAddress,
+    appointmentBooking,
+    prescriptionProcess,
+    notes
+  } = data
 
-  const handleSave = () => {
-    const data: NewTeamData = {
-      team,
-      mainContactNumber,
-      emergencyNumber,
-      clinicAddress,
-      appointmentBooking,
-      prescriptionProcess,
-      notes,
+  // Helper to update any field
+  const updateField = useCallback(<K extends keyof NewTeamData>(field: K, value: NewTeamData[K]) => {
+    setData(prev => ({ ...prev, [field]: value }))
+  }, [setData])
+
+  const handleSave = useCallback(() => {
+    setData(prev => ({
+      ...prev,
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
+    }))
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [setData])
 
-  const handleAddMember = () => {
+  const handleAddMember = useCallback(() => {
     if (!newMember.name.trim()) return
 
     const member: TeamMember = {
       id: Date.now().toString(),
       ...newMember
     }
-    setTeam([...team, member])
+    setData(prev => ({
+      ...prev,
+      team: [...prev.team, member]
+    }))
     setNewMember({ name: '', role: '', contactInfo: '', whenToContact: '', notes: '' })
     setShowAddForm(false)
-  }
+  }, [newMember, setData])
 
-  const handleRemoveMember = (id: string) => {
-    setTeam(team.filter(m => m.id !== id))
-  }
+  const handleRemoveMember = useCallback((id: string) => {
+    setData(prev => ({
+      ...prev,
+      team: prev.team.filter(m => m.id !== id)
+    }))
+  }, [setData])
 
   return (
     <div className="space-y-8 animate-fade-in max-w-3xl">
@@ -187,7 +178,7 @@ export function HelloNewTeam() {
               id="main-contact"
               type="tel"
               value={mainContactNumber}
-              onChange={(e) => setMainContactNumber(e.target.value)}
+              onChange={(e) => updateField('mainContactNumber', e.target.value)}
               placeholder="e.g. 020 1234 5678"
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
             />
@@ -200,7 +191,7 @@ export function HelloNewTeam() {
               id="emergency-number"
               type="tel"
               value={emergencyNumber}
-              onChange={(e) => setEmergencyNumber(e.target.value)}
+              onChange={(e) => updateField('emergencyNumber', e.target.value)}
               placeholder="e.g. 111 or hospital switchboard"
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
             />
@@ -214,7 +205,7 @@ export function HelloNewTeam() {
             id="clinic-address"
             type="text"
             value={clinicAddress}
-            onChange={(e) => setClinicAddress(e.target.value)}
+            onChange={(e) => updateField('clinicAddress', e.target.value)}
             placeholder="e.g. Adult Diabetes Clinic, St Mary's Hospital, London W2 1NY"
             className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
           />
@@ -379,7 +370,7 @@ export function HelloNewTeam() {
           <textarea
             id="appointment-booking"
             value={appointmentBooking}
-            onChange={(e) => setAppointmentBooking(e.target.value)}
+            onChange={(e) => updateField('appointmentBooking', e.target.value)}
             placeholder="e.g. Call the appointments line, use NHS app, email admin..."
             rows={2}
             className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all resize-none"
@@ -393,7 +384,7 @@ export function HelloNewTeam() {
           <textarea
             id="prescription-process"
             value={prescriptionProcess}
-            onChange={(e) => setPrescriptionProcess(e.target.value)}
+            onChange={(e) => updateField('prescriptionProcess', e.target.value)}
             placeholder="e.g. Request via GP, hospital pharmacy, online..."
             rows={2}
             className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all resize-none"
@@ -407,7 +398,7 @@ export function HelloNewTeam() {
           <textarea
             id="general-notes"
             value={notes}
-            onChange={(e) => setNotes(e.target.value)}
+            onChange={(e) => updateField('notes', e.target.value)}
             placeholder="e.g. Parking info, best times to call, patient portal login..."
             rows={3}
             className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 transition-all resize-none"

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface PIPData {
   currentlyGetsDLA: string
@@ -11,7 +12,7 @@ interface PIPData {
   helpWithDaily: string[]
   helpWithMobility: string[]
   notes: string
-  lastUpdated: string
+  lastUpdated?: string
 }
 
 const STORAGE_KEY = 'transition-care-pip-info'
@@ -34,82 +35,66 @@ const mobilityActivities = [
   { id: 'moving-around', label: 'Moving around', description: 'e.g. walking, standing, physical fatigue, pain, breathlessness' },
 ]
 
-function getStoredData(): PIPData | null {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-function saveData(data: PIPData) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+const initialData: PIPData = {
+  currentlyGetsDLA: '',
+  dlaCareComponent: '',
+  dlaMobilityComponent: '',
+  pipLetterReceived: false,
+  pipApplicationStarted: false,
+  assessmentDate: '',
+  helpWithDaily: [],
+  helpWithMobility: [],
+  notes: ''
 }
 
 export function LookIntoPIP() {
-  const [currentlyGetsDLA, setCurrentlyGetsDLA] = useState('')
-  const [dlaCareComponent, setDlaCareComponent] = useState('')
-  const [dlaMobilityComponent, setDlaMobilityComponent] = useState('')
-  const [pipLetterReceived, setPipLetterReceived] = useState(false)
-  const [pipApplicationStarted, setPipApplicationStarted] = useState(false)
-  const [assessmentDate, setAssessmentDate] = useState('')
-  const [helpWithDaily, setHelpWithDaily] = useState<string[]>([])
-  const [helpWithMobility, setHelpWithMobility] = useState<string[]>([])
-  const [notes, setNotes] = useState('')
+  const [data, setData] = useLocalStorage<PIPData>(STORAGE_KEY, initialData)
   const [saved, setSaved] = useState(false)
 
-  useEffect(() => {
-    const stored = getStoredData()
-    if (stored) {
-      setCurrentlyGetsDLA(stored.currentlyGetsDLA || '')
-      setDlaCareComponent(stored.dlaCareComponent || '')
-      setDlaMobilityComponent(stored.dlaMobilityComponent || '')
-      setPipLetterReceived(stored.pipLetterReceived || false)
-      setPipApplicationStarted(stored.pipApplicationStarted || false)
-      setAssessmentDate(stored.assessmentDate || '')
-      setHelpWithDaily(stored.helpWithDaily || [])
-      setHelpWithMobility(stored.helpWithMobility || [])
-      setNotes(stored.notes || '')
-    }
-  }, [])
+  // Destructure for easier access
+  const {
+    currentlyGetsDLA,
+    dlaCareComponent,
+    dlaMobilityComponent,
+    pipLetterReceived,
+    pipApplicationStarted,
+    assessmentDate,
+    helpWithDaily,
+    helpWithMobility,
+    notes
+  } = data
 
-  const handleSave = () => {
-    const data: PIPData = {
-      currentlyGetsDLA,
-      dlaCareComponent,
-      dlaMobilityComponent,
-      pipLetterReceived,
-      pipApplicationStarted,
-      assessmentDate,
-      helpWithDaily,
-      helpWithMobility,
-      notes,
+  // Helper to update any field
+  const updateField = useCallback(<K extends keyof PIPData>(field: K, value: PIPData[K]) => {
+    setData(prev => ({ ...prev, [field]: value }))
+  }, [setData])
+
+  const handleSave = useCallback(() => {
+    setData(prev => ({
+      ...prev,
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
+    }))
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [setData])
 
-  const toggleDailyActivity = (id: string) => {
-    if (helpWithDaily.includes(id)) {
-      setHelpWithDaily(helpWithDaily.filter(a => a !== id))
-    } else {
-      setHelpWithDaily([...helpWithDaily, id])
-    }
-  }
+  const toggleDailyActivity = useCallback((id: string) => {
+    setData(prev => ({
+      ...prev,
+      helpWithDaily: prev.helpWithDaily.includes(id)
+        ? prev.helpWithDaily.filter(a => a !== id)
+        : [...prev.helpWithDaily, id]
+    }))
+  }, [setData])
 
-  const toggleMobilityActivity = (id: string) => {
-    if (helpWithMobility.includes(id)) {
-      setHelpWithMobility(helpWithMobility.filter(a => a !== id))
-    } else {
-      setHelpWithMobility([...helpWithMobility, id])
-    }
-  }
+  const toggleMobilityActivity = useCallback((id: string) => {
+    setData(prev => ({
+      ...prev,
+      helpWithMobility: prev.helpWithMobility.includes(id)
+        ? prev.helpWithMobility.filter(a => a !== id)
+        : [...prev.helpWithMobility, id]
+    }))
+  }, [setData])
 
   return (
     <div className="space-y-8 animate-fade-in max-w-3xl">
@@ -164,7 +149,7 @@ export function LookIntoPIP() {
             <select
               id="currently-gets-dla"
               value={currentlyGetsDLA}
-              onChange={(e) => setCurrentlyGetsDLA(e.target.value)}
+              onChange={(e) => updateField('currentlyGetsDLA', e.target.value)}
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
             >
               <option value="">Select...</option>
@@ -183,7 +168,7 @@ export function LookIntoPIP() {
                 <select
                   id="dla-care"
                   value={dlaCareComponent}
-                  onChange={(e) => setDlaCareComponent(e.target.value)}
+                  onChange={(e) => updateField('dlaCareComponent', e.target.value)}
                   className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
                 >
                   <option value="">Select...</option>
@@ -200,7 +185,7 @@ export function LookIntoPIP() {
                 <select
                   id="dla-mobility"
                   value={dlaMobilityComponent}
-                  onChange={(e) => setDlaMobilityComponent(e.target.value)}
+                  onChange={(e) => updateField('dlaMobilityComponent', e.target.value)}
                   className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
                 >
                   <option value="">Select...</option>
@@ -217,7 +202,7 @@ export function LookIntoPIP() {
               <input
                 type="checkbox"
                 checked={pipLetterReceived}
-                onChange={(e) => setPipLetterReceived(e.target.checked)}
+                onChange={(e) => updateField('pipLetterReceived', e.target.checked)}
                 className="w-5 h-5 rounded border-warm-300 text-primary-600 focus:ring-primary-300"
               />
               <span className="text-sm text-warm-700">I&apos;ve received a letter about applying for PIP</span>
@@ -226,7 +211,7 @@ export function LookIntoPIP() {
               <input
                 type="checkbox"
                 checked={pipApplicationStarted}
-                onChange={(e) => setPipApplicationStarted(e.target.checked)}
+                onChange={(e) => updateField('pipApplicationStarted', e.target.checked)}
                 className="w-5 h-5 rounded border-warm-300 text-primary-600 focus:ring-primary-300"
               />
               <span className="text-sm text-warm-700">I&apos;ve started my PIP application</span>
@@ -242,7 +227,7 @@ export function LookIntoPIP() {
                 id="assessment-date"
                 type="date"
                 value={assessmentDate}
-                onChange={(e) => setAssessmentDate(e.target.value)}
+                onChange={(e) => updateField('assessmentDate', e.target.value)}
                 className="w-full md:w-1/2 px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all"
               />
             </div>
@@ -332,7 +317,7 @@ export function LookIntoPIP() {
         </p>
         <textarea
           value={notes}
-          onChange={(e) => setNotes(e.target.value)}
+          onChange={(e) => updateField('notes', e.target.value)}
           placeholder="e.g. On bad days I can't... I need help with... My condition makes it hard to..."
           rows={4}
           className="w-full px-4 py-3 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all resize-none"

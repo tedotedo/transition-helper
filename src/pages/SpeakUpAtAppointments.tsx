@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from '../hooks'
 
 interface SpeakUpData {
   practiceAnswers: string[]
   questionsToAsk: string[]
   confidenceLevel: number
-  lastUpdated: string
+  lastUpdated?: string
 }
 
 const STORAGE_KEY = 'transition-care-speak-up'
@@ -43,61 +44,48 @@ const conversationStarters = [
   "I've been wondering about..."
 ]
 
-function getStoredData(): SpeakUpData | null {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-function saveData(data: SpeakUpData) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+const initialData: SpeakUpData = {
+  practiceAnswers: ['', '', '', ''],
+  questionsToAsk: ['', '', ''],
+  confidenceLevel: 3
 }
 
 export function SpeakUpAtAppointments() {
-  const [practiceAnswers, setPracticeAnswers] = useState<string[]>(['', '', '', ''])
-  const [questionsToAsk, setQuestionsToAsk] = useState<string[]>(['', '', ''])
-  const [confidenceLevel, setConfidenceLevel] = useState(3)
+  const [data, setData] = useLocalStorage<SpeakUpData>(STORAGE_KEY, initialData)
   const [saved, setSaved] = useState(false)
   const [activeQuestion, setActiveQuestion] = useState<number | null>(null)
 
-  useEffect(() => {
-    const stored = getStoredData()
-    if (stored) {
-      setPracticeAnswers(stored.practiceAnswers.length >= 4 ? stored.practiceAnswers : [...stored.practiceAnswers, '', '', '', ''].slice(0, 4))
-      setQuestionsToAsk(stored.questionsToAsk.length >= 3 ? stored.questionsToAsk : [...stored.questionsToAsk, '', '', ''].slice(0, 3))
-      setConfidenceLevel(stored.confidenceLevel || 3)
-    }
-  }, [])
+  // Ensure arrays have the right length for display
+  const practiceAnswers = data.practiceAnswers.length >= 4
+    ? data.practiceAnswers
+    : [...data.practiceAnswers, '', '', '', ''].slice(0, 4)
+  const questionsToAsk = data.questionsToAsk.length >= 3
+    ? data.questionsToAsk
+    : [...data.questionsToAsk, '', '', ''].slice(0, 3)
+  const confidenceLevel = data.confidenceLevel || 3
 
-  const handleSave = () => {
-    const data: SpeakUpData = {
+  const handleSave = useCallback(() => {
+    setData({
       practiceAnswers,
       questionsToAsk: questionsToAsk.filter(q => q.trim() !== ''),
       confidenceLevel,
       lastUpdated: new Date().toISOString()
-    }
-    saveData(data)
+    })
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
-  }
+  }, [practiceAnswers, questionsToAsk, confidenceLevel, setData])
 
-  const updateAnswer = (index: number, value: string) => {
+  const updateAnswer = useCallback((index: number, value: string) => {
     const newAnswers = [...practiceAnswers]
     newAnswers[index] = value
-    setPracticeAnswers(newAnswers)
-  }
+    setData(prev => ({ ...prev, practiceAnswers: newAnswers }))
+  }, [practiceAnswers, setData])
 
-  const updateQuestion = (index: number, value: string) => {
+  const updateQuestion = useCallback((index: number, value: string) => {
     const newQuestions = [...questionsToAsk]
     newQuestions[index] = value
-    setQuestionsToAsk(newQuestions)
-  }
+    setData(prev => ({ ...prev, questionsToAsk: newQuestions }))
+  }, [questionsToAsk, setData])
 
   const confidenceEmojis = ['😰', '😟', '😐', '🙂', '😊']
   const confidenceLabels = ['Very nervous', 'A bit nervous', 'Okay', 'Quite confident', 'Very confident']
@@ -250,7 +238,7 @@ export function SpeakUpAtAppointments() {
             min="1"
             max="5"
             value={confidenceLevel}
-            onChange={(e) => setConfidenceLevel(parseInt(e.target.value))}
+            onChange={(e) => setData(prev => ({ ...prev, confidenceLevel: parseInt(e.target.value) }))}
             className="w-full h-3 bg-warm-200 rounded-lg appearance-none cursor-pointer accent-primary-500"
           />
           <div className="flex justify-between text-2xl">
