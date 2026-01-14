@@ -1,6 +1,68 @@
-import { useCallback } from 'react'
+import { useCallback, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+
+type SectionId = 'about' | 'conditions' | 'medications' | 'allergies' | 'preferences' | 'emergency' | 'goals' | 'notes'
+
+interface AccordionSectionProps {
+  id: SectionId
+  emoji: string
+  title: string
+  summary: string
+  isExpanded: boolean
+  onToggle: () => void
+  children: ReactNode
+  hasData?: boolean
+}
+
+function AccordionSection({ id, emoji, title, summary, isExpanded, onToggle, children, hasData }: AccordionSectionProps) {
+  return (
+    <section
+      id={id}
+      className="bg-white rounded-2xl border border-warm-200 shadow-card print:shadow-none print:border-gray-300 overflow-hidden"
+    >
+      {/* Accordion Header - clickable */}
+      <button
+        onClick={onToggle}
+        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-warm-50/50 transition-colors print:hidden"
+        aria-expanded={isExpanded}
+        aria-controls={`${id}-content`}
+      >
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="text-2xl flex-shrink-0">{emoji}</span>
+          <div className="min-w-0">
+            <h2 className="text-base font-semibold text-warm-800">{title}</h2>
+            {!isExpanded && (
+              <p className="text-sm text-warm-500 truncate">{summary}</p>
+            )}
+          </div>
+        </div>
+        <div className="flex items-center gap-2 flex-shrink-0 ml-3">
+          {hasData && !isExpanded && (
+            <span className="w-2 h-2 rounded-full bg-accent-400" title="Has data" />
+          )}
+          <span className={`text-warm-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+            ▼
+          </span>
+        </div>
+      </button>
+
+      {/* Print-only header (non-interactive) */}
+      <div className="hidden print:flex px-5 py-4 items-center gap-2">
+        <span className="text-xl">{emoji}</span>
+        <h2 className="text-lg font-semibold text-warm-800">{title}</h2>
+      </div>
+
+      {/* Accordion Content */}
+      <div
+        id={`${id}-content`}
+        className={`px-5 pb-5 print:block ${isExpanded ? 'block' : 'hidden'}`}
+      >
+        {children}
+      </div>
+    </section>
+  )
+}
 
 interface Medication {
   name: string
@@ -74,6 +136,62 @@ const initialData: CarePlanData = {
 
 export function CarePlan() {
   const [data, setData] = useLocalStorage<CarePlanData>(CARE_PLAN_STORAGE_KEY, initialData)
+  const [expandedSections, setExpandedSections] = useState<Set<SectionId>>(new Set(['about']))
+
+  const toggleSection = useCallback((sectionId: SectionId) => {
+    setExpandedSections(prev => {
+      const next = new Set(prev)
+      if (next.has(sectionId)) {
+        next.delete(sectionId)
+      } else {
+        // Close other sections on mobile for cleaner UX (optional: remove this to allow multiple open)
+        next.clear()
+        next.add(sectionId)
+      }
+      return next
+    })
+  }, [])
+
+  // Helper functions to check if sections have data and generate summaries
+  const hasAboutData = data.name || data.dateOfBirth || data.nhsNumber
+  const aboutSummary = hasAboutData
+    ? [data.name, data.dateOfBirth && `DOB: ${data.dateOfBirth}`].filter(Boolean).join(' • ') || 'Tap to add your details'
+    : 'Tap to add your details'
+
+  const hasConditionsData = data.conditions.some(c => c.trim()) || data.conditionDescription
+  const conditionsSummary = hasConditionsData
+    ? data.conditions.filter(c => c.trim()).join(', ') || 'Description added'
+    : 'Tap to add your conditions'
+
+  const hasMedicationsData = data.medications.some(m => m.name.trim())
+  const medicationsSummary = hasMedicationsData
+    ? `${data.medications.filter(m => m.name.trim()).length} medication(s) listed`
+    : 'Tap to add medications'
+
+  const hasAllergiesData = data.allergies.some(a => a.trim())
+  const allergiesSummary = hasAllergiesData
+    ? data.allergies.filter(a => a.trim()).join(', ')
+    : 'Tap to add allergies'
+
+  const hasPreferencesData = data.appointmentPreferences.length > 0 || !!data.customPreference
+  const preferencesSummary = hasPreferencesData
+    ? `${data.appointmentPreferences.length} preference(s) selected`
+    : 'Tap to set preferences'
+
+  const hasEmergencyData = data.emergencyContact.name || data.emergencyContact.phone
+  const emergencySummary = hasEmergencyData
+    ? [data.emergencyContact.name, data.emergencyContact.relationship].filter(Boolean).join(' • ')
+    : 'Tap to add emergency contact'
+
+  const hasGoalsData = data.healthGoals.some(g => g.trim())
+  const goalsSummary = hasGoalsData
+    ? `${data.healthGoals.filter(g => g.trim()).length} goal(s) set`
+    : 'Tap to set your goals'
+
+  const hasNotesData = !!data.additionalNotes.trim()
+  const notesSummary = hasNotesData
+    ? data.additionalNotes.slice(0, 50) + (data.additionalNotes.length > 50 ? '...' : '')
+    : 'Tap to add notes'
 
   const updateField = useCallback(<K extends keyof CarePlanData>(field: K, value: CarePlanData[K]) => {
     setData(prev => ({ ...prev, [field]: value, lastUpdated: new Date().toISOString() }))
@@ -190,11 +308,15 @@ export function CarePlan() {
       </div>
 
       {/* Personal Information */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-4 flex items-center gap-2">
-          <span>👤</span>
-          <span>About Me</span>
-        </h2>
+      <AccordionSection
+        id="about"
+        emoji="👤"
+        title="About Me"
+        summary={aboutSummary}
+        isExpanded={expandedSections.has('about')}
+        onToggle={() => toggleSection('about')}
+        hasData={!!hasAboutData}
+      >
         <div className="grid gap-4 md:grid-cols-3">
           <div>
             <label htmlFor="cp-name" className="block text-sm font-medium text-warm-700 mb-1">Name</label>
@@ -229,15 +351,18 @@ export function CarePlan() {
             />
           </div>
         </div>
-      </section>
+      </AccordionSection>
 
       {/* My Conditions */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-4 flex items-center gap-2">
-          <span>🏥</span>
-          <span>My Condition(s)</span>
-        </h2>
-
+      <AccordionSection
+        id="conditions"
+        emoji="🏥"
+        title="My Condition(s)"
+        summary={conditionsSummary}
+        isExpanded={expandedSections.has('conditions')}
+        onToggle={() => toggleSection('conditions')}
+        hasData={!!hasConditionsData}
+      >
         <div className="space-y-3 mb-4">
           {data.conditions.map((condition, idx) => (
             <input
@@ -270,15 +395,18 @@ export function CarePlan() {
             className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 resize-none"
           />
         </div>
-      </section>
+      </AccordionSection>
 
       {/* Medications */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-4 flex items-center gap-2">
-          <span>💊</span>
-          <span>My Medications</span>
-        </h2>
-
+      <AccordionSection
+        id="medications"
+        emoji="💊"
+        title="My Medications"
+        summary={medicationsSummary}
+        isExpanded={expandedSections.has('medications')}
+        onToggle={() => toggleSection('medications')}
+        hasData={hasMedicationsData}
+      >
         <div className="space-y-4">
           {data.medications.map((med, idx) => (
             <div key={idx} className="p-4 bg-warm-50 rounded-xl border border-warm-100 relative">
@@ -329,15 +457,18 @@ export function CarePlan() {
             + Add another medication
           </button>
         </div>
-      </section>
+      </AccordionSection>
 
       {/* Allergies */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-4 flex items-center gap-2">
-          <span>⚠️</span>
-          <span>My Allergies</span>
-        </h2>
-
+      <AccordionSection
+        id="allergies"
+        emoji="⚠️"
+        title="My Allergies"
+        summary={allergiesSummary}
+        isExpanded={expandedSections.has('allergies')}
+        onToggle={() => toggleSection('allergies')}
+        hasData={hasAllergiesData}
+      >
         <div className="space-y-2">
           {data.allergies.map((allergy, idx) => (
             <input
@@ -356,14 +487,18 @@ export function CarePlan() {
             + Add another allergy
           </button>
         </div>
-      </section>
+      </AccordionSection>
 
       {/* Appointment Preferences */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-2 flex items-center gap-2">
-          <span>🤝</span>
-          <span>Things That Help Me at Appointments</span>
-        </h2>
+      <AccordionSection
+        id="preferences"
+        emoji="🤝"
+        title="Things That Help Me at Appointments"
+        summary={preferencesSummary}
+        isExpanded={expandedSections.has('preferences')}
+        onToggle={() => toggleSection('preferences')}
+        hasData={hasPreferencesData}
+      >
         <p className="text-sm text-warm-500 mb-4">Select any that apply to you:</p>
 
         <div className="space-y-2">
@@ -396,15 +531,18 @@ export function CarePlan() {
             className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300"
           />
         </div>
-      </section>
+      </AccordionSection>
 
       {/* Emergency Contact */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-4 flex items-center gap-2">
-          <span>📞</span>
-          <span>Emergency Contact</span>
-        </h2>
-
+      <AccordionSection
+        id="emergency"
+        emoji="📞"
+        title="Emergency Contact"
+        summary={emergencySummary}
+        isExpanded={expandedSections.has('emergency')}
+        onToggle={() => toggleSection('emergency')}
+        hasData={!!hasEmergencyData}
+      >
         <div className="grid gap-4 md:grid-cols-3">
           <div>
             <label htmlFor="ec-name" className="block text-sm font-medium text-warm-700 mb-1">Name</label>
@@ -440,14 +578,18 @@ export function CarePlan() {
             />
           </div>
         </div>
-      </section>
+      </AccordionSection>
 
       {/* Health Goals */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-2 flex items-center gap-2">
-          <span>🎯</span>
-          <span>My Health Goals</span>
-        </h2>
+      <AccordionSection
+        id="goals"
+        emoji="🎯"
+        title="My Health Goals"
+        summary={goalsSummary}
+        isExpanded={expandedSections.has('goals')}
+        onToggle={() => toggleSection('goals')}
+        hasData={hasGoalsData}
+      >
         <p className="text-sm text-warm-500 mb-4">What do you want to achieve with your health?</p>
 
         <div className="space-y-3">
@@ -470,14 +612,18 @@ export function CarePlan() {
             </div>
           ))}
         </div>
-      </section>
+      </AccordionSection>
 
       {/* Additional Notes */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card print:shadow-none print:border-gray-300">
-        <h2 className="text-lg font-semibold text-warm-800 mb-4 flex items-center gap-2">
-          <span>📝</span>
-          <span>Additional Notes</span>
-        </h2>
+      <AccordionSection
+        id="notes"
+        emoji="📝"
+        title="Additional Notes"
+        summary={notesSummary}
+        isExpanded={expandedSections.has('notes')}
+        onToggle={() => toggleSection('notes')}
+        hasData={hasNotesData}
+      >
         <textarea
           value={data.additionalNotes}
           onChange={(e) => updateField('additionalNotes', e.target.value)}
@@ -485,7 +631,7 @@ export function CarePlan() {
           rows={4}
           className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 resize-none"
         />
-      </section>
+      </AccordionSection>
 
       {/* Print Button (bottom) */}
       <div className="flex justify-center print:hidden">
