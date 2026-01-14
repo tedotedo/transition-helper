@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { RoleToggle, type UserRole } from '../components/home/RoleToggle'
 import { QuickActionTile } from '../components/home/QuickActionTile'
 import { ProgressTracker } from '../components/home/ProgressTracker'
@@ -9,6 +9,89 @@ import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
 
 const ROLE_STORAGE_KEY = 'transition-app-role'
+const LAST_BACKUP_KEY = 'transition-last-backup'
+const BACKUP_REMINDER_DAYS = 7
+
+// All localStorage keys used by the app
+const ALL_STORAGE_KEYS = [
+  'transition-app-role',
+  'transition-care-checklist',
+  'transition-care-appointments',
+  'transition-care-plan',
+  'transition-care-team',
+  'transition-named-worker',
+  'transition-care-my-team',
+  'transition-last-backup',
+]
+
+function getLastBackupDate(): Date | null {
+  const stored = localStorage.getItem(LAST_BACKUP_KEY)
+  if (!stored) return null
+  const date = new Date(stored)
+  return isNaN(date.getTime()) ? null : date
+}
+
+function shouldShowBackupReminder(): boolean {
+  const lastBackup = getLastBackupDate()
+  if (!lastBackup) return true // Never backed up
+  const daysSinceBackup = (Date.now() - lastBackup.getTime()) / (1000 * 60 * 60 * 24)
+  return daysSinceBackup >= BACKUP_REMINDER_DAYS
+}
+
+function exportBackup(): void {
+  const backup: Record<string, unknown> = {
+    _exportDate: new Date().toISOString(),
+    _appVersion: '1.0',
+  }
+
+  ALL_STORAGE_KEYS.forEach(key => {
+    const value = localStorage.getItem(key)
+    if (value) {
+      try {
+        backup[key] = JSON.parse(value)
+      } catch {
+        backup[key] = value
+      }
+    }
+  })
+
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `transition-care-backup-${new Date().toISOString().split('T')[0]}.json`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+
+  localStorage.setItem(LAST_BACKUP_KEY, new Date().toISOString())
+}
+
+function importBackup(file: File): Promise<boolean> {
+  return new Promise((resolve) => {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target?.result as string)
+
+        // Restore each key
+        ALL_STORAGE_KEYS.forEach(key => {
+          if (data[key] !== undefined) {
+            localStorage.setItem(key, typeof data[key] === 'string' ? data[key] : JSON.stringify(data[key]))
+          }
+        })
+
+        localStorage.setItem(LAST_BACKUP_KEY, new Date().toISOString())
+        resolve(true)
+      } catch {
+        resolve(false)
+      }
+    }
+    reader.onerror = () => resolve(false)
+    reader.readAsText(file)
+  })
+}
 
 const stageNames: Record<string, string> = {
   ready: 'Ready',
@@ -45,6 +128,32 @@ export function Home() {
   const [checklistData, setChecklistData] = useState(() => getChecklistProgress())
   const [appointmentsCount, setAppointmentsCount] = useState(() => getUpcomingAppointmentsCount())
   const [teamCount, setTeamCount] = useState(() => getCareTeamCount())
+
+  // Backup state
+  const [showBackupReminder, setShowBackupReminder] = useState(() => shouldShowBackupReminder())
+  const [backupMessage, setBackupMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+
+  const handleBackup = useCallback(() => {
+    exportBackup()
+    setShowBackupReminder(false)
+    setBackupMessage({ type: 'success', text: 'Backup downloaded! Keep it somewhere safe.' })
+    setTimeout(() => setBackupMessage(null), 5000)
+  }, [])
+
+  const handleRestore = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const success = await importBackup(file)
+    if (success) {
+      setBackupMessage({ type: 'success', text: 'Data restored successfully! Refreshing...' })
+      setTimeout(() => window.location.reload(), 1500)
+    } else {
+      setBackupMessage({ type: 'error', text: 'Could not restore backup. Is the file valid?' })
+      setTimeout(() => setBackupMessage(null), 5000)
+    }
+    e.target.value = '' // Reset input
+  }, [])
 
   useEffect(() => {
     localStorage.setItem(ROLE_STORAGE_KEY, role)
@@ -85,6 +194,37 @@ export function Home() {
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {/* Backup reminder banner */}
+      {showBackupReminder && (
+        <div className="rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 px-4 py-3 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">💾</span>
+            <div>
+              <p className="font-medium text-amber-800 text-sm">Time to back up your data!</p>
+              <p className="text-xs text-amber-600">Keep your info safe - back up weekly</p>
+            </div>
+          </div>
+          <button
+            onClick={handleBackup}
+            className="px-3 py-1.5 rounded-lg bg-amber-500 text-white text-sm font-medium hover:bg-amber-600 transition-colors flex-shrink-0"
+          >
+            Back up now
+          </button>
+        </div>
+      )}
+
+      {/* Backup message toast */}
+      {backupMessage && (
+        <div className={`rounded-xl px-4 py-3 flex items-center gap-2 text-sm ${
+          backupMessage.type === 'success'
+            ? 'bg-green-50 border border-green-200 text-green-700'
+            : 'bg-red-50 border border-red-200 text-red-700'
+        }`}>
+          <span>{backupMessage.type === 'success' ? '✓' : '!'}</span>
+          <span>{backupMessage.text}</span>
+        </div>
+      )}
+
       {/* Hero with role toggle */}
       <section className="rounded-3xl bg-gradient-to-br from-primary-50 via-white to-accent-50/30 border border-primary-100 px-6 py-6 md:px-10 md:py-8 shadow-card hover:shadow-card-hover transition-shadow duration-300">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
@@ -179,6 +319,41 @@ export function Home() {
 
       {/* Tip */}
       <TipCallout tip={tip} />
+
+      {/* Backup section */}
+      <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
+        <div className="flex items-start gap-3">
+          <span className="text-2xl">💾</span>
+          <div className="flex-1">
+            <h2 className="font-semibold text-warm-800">Back up your data</h2>
+            <p className="text-sm text-warm-500 mt-1">
+              Your data is stored on this device. Back it up regularly to keep it safe!
+            </p>
+            <div className="flex flex-wrap gap-3 mt-3">
+              <button
+                onClick={handleBackup}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-semibold shadow-card hover:shadow-card-hover transition-all"
+              >
+                Download backup
+              </button>
+              <label className="px-4 py-2 rounded-xl border border-warm-200 text-warm-600 text-sm font-medium hover:border-warm-300 cursor-pointer transition-all">
+                Restore from backup
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={handleRestore}
+                  className="hidden"
+                />
+              </label>
+            </div>
+            {getLastBackupDate() && (
+              <p className="text-xs text-warm-400 mt-3">
+                Last backup: {getLastBackupDate()?.toLocaleDateString()}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
