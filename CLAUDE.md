@@ -89,8 +89,18 @@ All user data is stored in localStorage using these keys:
 | `transition-care-plan` | CarePlan | Personal health info (name, conditions, meds, etc.) |
 | `transition-care-team` | CareTeam | `{ teamMembers: TeamMember[] }` |
 | `transition-named-worker` | NamedWorkerCard | `{ name, role, phone, email }` |
+| `transition-care-my-team` | MyTeam | `TeamMember[]` (activity page) |
+| `transition-last-backup` | Home | ISO date string of last backup |
 
 The `useLocalStorage` hook handles persistence with automatic JSON serialization.
+
+### Backup/Restore
+
+Home page includes backup functionality (`src/pages/Home.tsx`):
+- **Weekly reminder banner** appears when no backup in 7+ days
+- **Download backup** exports all localStorage data as JSON
+- **Restore from backup** imports JSON file and reloads page
+- Backup includes all keys listed above
 
 ## Styling Patterns
 
@@ -155,6 +165,23 @@ Most pages follow this structure:
 4. Main content in white cards
 5. Tips/encouragement section at bottom
 
+### Mobile Navigation
+
+`AppShell.tsx` provides different navigation for mobile vs desktop:
+- **Desktop:** Sidebar with full navigation + header with search
+- **Mobile:** No header, fixed bottom navigation bar with 5 items:
+  - Home, Checklist, Care Plan, Team, More
+  - "More" button opens slide-up panel with additional pages
+- Main content has `pb-20 md:pb-8` to account for bottom nav
+
+### Accordion Sections
+
+CarePlan uses collapsible accordion pattern (`AccordionSection` component):
+- Only one section open at a time on mobile
+- Shows summary text when collapsed (e.g., "2 medication(s) listed")
+- Green dot indicator for sections with data
+- All sections expand for printing (`print:block`)
+
 ### Data Entry Cards
 
 Appointments and CareTeam use expandable card patterns:
@@ -170,16 +197,18 @@ Home page toggles between "young-person" and "parent-carer" views:
 - Different tips
 - Role stored in localStorage
 
-## Known Mobile UX Issues
+## Mobile UX Status
 
-Areas identified for potential improvement:
+### Fixed
+- ✅ **Care Plan:** Now uses collapsible accordion sections
+- ✅ **Navigation:** Bottom nav bar replaces hidden sidebar
+- ✅ **Header:** Removed redundant mobile header for more screen space
 
-1. **Home page:** 7 stacked sections create long scroll depth
-2. **Care Plan:** 9 sections always visible; could use accordions
-3. **Appointments/CareTeam:** Inline add forms push content down; could use bottom sheets
-4. **Checklist:** 4-column stage selector cramped on small phones
-5. **Rights Hub:** Very long expanded content sections (100+ lines each)
-6. **Global:** Cards have heavy styling (gradients + borders + shadows)
+### Remaining improvements to consider
+1. **Appointments/CareTeam:** Inline add forms push content down; could use bottom sheets
+2. **Checklist:** 4-column stage selector cramped on small phones
+3. **Rights Hub:** Very long expanded content sections (100+ lines each)
+4. **Home page:** Still has multiple stacked sections (could consolidate)
 
 ## Key Files for Common Tasks
 
