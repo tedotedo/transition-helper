@@ -40,27 +40,19 @@ export function AppShell({ children }: AppShellProps) {
       </aside>
 
       <div className="flex-1 flex flex-col">
-        {/* Header - simplified on mobile */}
-        <header className="h-14 md:h-16 flex items-center justify-between px-4 md:px-8 border-b border-warm-100 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
-          {/* Mobile: Just the app name */}
-          <div className="flex items-center gap-2 md:hidden">
-            <NavLink to="/" className="text-base font-semibold text-warm-800">
-              Transition Care
-            </NavLink>
-          </div>
-          {/* Desktop: Search bar */}
-          <div className="hidden md:flex flex-1 items-center max-w-md">
+        {/* Header - desktop only */}
+        <header className="hidden md:flex h-16 items-center justify-between px-8 border-b border-warm-100 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+          <div className="flex-1 flex items-center max-w-md">
             <Search />
           </div>
-          {/* Desktop only: avatar */}
-          <div className="hidden md:flex ml-3 items-center gap-3">
+          <div className="ml-3 flex items-center gap-3">
             <div className="h-9 w-9 rounded-full bg-gradient-to-br from-accent-400 to-accent-500 flex items-center justify-center text-xs font-bold text-white shadow-card">
               YP
             </div>
           </div>
         </header>
 
-        <main className="flex-1 px-4 md:px-8 py-6 md:py-8 pb-24 md:pb-8 animate-fade-in">
+        <main className="flex-1 px-4 md:px-8 py-4 md:py-8 pb-20 md:pb-8 animate-fade-in">
           <div className="max-w-6xl mx-auto">{children}</div>
         </main>
 
