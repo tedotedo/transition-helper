@@ -65,12 +65,23 @@ test.describe('Button Audit - Home Page', () => {
     await expect(page.locator('a[href="/care-team"]').filter({ hasText: 'Care Team' })).toBeVisible();
   });
 
-  test('named worker contact links have correct href', async ({ page }) => {
-    // Phone link should have tel: href
+  test('named worker card shows empty state and can add contact', async ({ page }) => {
+    // Should show empty state initially
+    await expect(page.getByText('Add your named worker')).toBeVisible();
+
+    // Click add contact
+    await page.getByRole('button', { name: /add contact/i }).click();
+
+    // Fill in the form
+    await page.getByLabel(/^name/i).fill('Sarah Johnson');
+    await page.getByLabel(/phone/i).fill('0123456789');
+    await page.getByLabel(/email/i).fill('sarah@nhs.uk');
+    await page.getByRole('button', { name: /save/i }).click();
+
+    // Should now show the contact with call/email links
+    await expect(page.getByText('Sarah Johnson')).toBeVisible();
     const phoneLink = page.getByRole('link', { name: /call/i });
     await expect(phoneLink).toHaveAttribute('href', /^tel:/);
-
-    // Email link should have mailto: href
     const emailLink = page.getByRole('link', { name: /email/i });
     await expect(emailLink).toHaveAttribute('href', /^mailto:/);
   });

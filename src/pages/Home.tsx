@@ -17,13 +17,6 @@ const stageNames: Record<string, string> = {
   adult: 'Hello Adult Services',
 }
 
-const mockNamedWorker = {
-  name: 'Sarah Johnson',
-  role: 'Transition Coordinator',
-  phone: '0123 456 7890',
-  email: 'sarah.johnson@nhs.example',
-}
-
 const youngPersonNextSteps = [
   { number: 1, text: 'Fill in the Go questionnaire before your next visit.', href: '/resources/ready-steady-go/go-questionnaire', emoji: '📋' },
   { number: 2, text: 'Check out the consent guide - it explains who makes decisions about your care.', href: '/rights/consent-16-17', emoji: '✨' },
@@ -140,7 +133,7 @@ export function Home() {
 
       {/* Two-column layout: Named worker + Next steps */}
       <section className="grid gap-4 md:grid-cols-2">
-        <NamedWorkerCard {...mockNamedWorker} />
+        <NamedWorkerCard />
 
         <div className="rounded-2xl border border-warm-200 bg-white px-5 py-5 shadow-card hover:shadow-card-hover transition-shadow duration-300">
           <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Your next steps</p>
