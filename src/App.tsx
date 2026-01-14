@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
 import { Home } from './pages/Home'
+import { Checklist } from './pages/Checklist'
+import { Appointments } from './pages/Appointments'
+import { CarePlan } from './pages/CarePlan'
+import { CareTeam } from './pages/CareTeam'
 import { LearnAboutCondition } from './pages/LearnAboutCondition'
 import { MyTeam } from './pages/MyTeam'
 import { SpeakUpAtAppointments } from './pages/SpeakUpAtAppointments'
@@ -24,6 +28,10 @@ function App() {
       <AppShell>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/checklist" element={<Checklist />} />
+          <Route path="/appointments" element={<Appointments />} />
+          <Route path="/care-plan" element={<CarePlan />} />
+          <Route path="/care-team" element={<CareTeam />} />
           <Route path="/journey" element={<MyJourney />} />
           <Route path="/journey/learn-about-condition" element={<LearnAboutCondition />} />
           <Route path="/journey/my-team" element={<MyTeam />} />

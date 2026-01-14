@@ -4,21 +4,18 @@ import { QuickActionTile } from '../components/home/QuickActionTile'
 import { ProgressTracker } from '../components/home/ProgressTracker'
 import { NamedWorkerCard } from '../components/home/NamedWorkerCard'
 import { TipCallout } from '../components/home/TipCallout'
+import { getChecklistProgress, CHECKLIST_STORAGE_KEY } from './Checklist'
+import { getUpcomingAppointmentsCount, APPOINTMENTS_STORAGE_KEY } from './Appointments'
+import { CARE_TEAM_STORAGE_KEY, getCareTeamCount } from './CareTeam'
 
 const ROLE_STORAGE_KEY = 'transition-app-role'
 
-// Mock data - in future this could come from an API or local storage
-const mockChecklist = [
-  { id: '1', title: 'Read consent at 16–17 guide', done: true },
-  { id: '2', title: 'Fill in Go questionnaire', done: true },
-  { id: '3', title: 'Ask about transfer date', done: false },
-  { id: '4', title: 'Check if PIP applies', done: false },
-  { id: '5', title: 'Meet adult team', done: false },
-]
-
-const mockAppointments = [
-  { id: '1', title: 'Transition clinic', date: '12 Feb 2026' },
-]
+const stageNames: Record<string, string> = {
+  ready: 'Ready',
+  steady: 'Steady',
+  go: 'Go',
+  adult: 'Hello Adult Services',
+}
 
 const mockNamedWorker = {
   name: 'Sarah Johnson',
@@ -51,13 +48,34 @@ export function Home() {
     return 'young-person'
   })
 
+  // Dynamic data from localStorage
+  const [checklistData, setChecklistData] = useState(() => getChecklistProgress())
+  const [appointmentsCount, setAppointmentsCount] = useState(() => getUpcomingAppointmentsCount())
+  const [teamCount, setTeamCount] = useState(() => getCareTeamCount())
+
   useEffect(() => {
     localStorage.setItem(ROLE_STORAGE_KEY, role)
   }, [role])
 
-  const checklistDone = mockChecklist.filter((t) => t.done).length
-  const checklistTotal = mockChecklist.length
-  const progressPercent = Math.round((checklistDone / checklistTotal) * 100)
+  // Update data when localStorage changes (e.g., when returning from another page)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setChecklistData(getChecklistProgress())
+      setAppointmentsCount(getUpcomingAppointmentsCount())
+      setTeamCount(getCareTeamCount())
+    }
+
+    // Also update on focus (when user comes back to the page)
+    window.addEventListener('focus', handleStorageChange)
+    window.addEventListener('storage', handleStorageChange)
+
+    return () => {
+      window.removeEventListener('focus', handleStorageChange)
+      window.removeEventListener('storage', handleStorageChange)
+    }
+  }, [])
+
+  const { completed: checklistDone, total: checklistTotal, stage: currentStage, percent: progressPercent } = checklistData
 
   const nextSteps = role === 'young-person' ? youngPersonNextSteps : parentNextSteps
   const tip = role === 'young-person' ? youngPersonTip : parentTip
@@ -94,22 +112,31 @@ export function Home() {
         <QuickActionTile
           icon="✅"
           title="Checklist"
-          href="/journey"
+          href="/checklist"
           badge={`${checklistDone}/${checklistTotal}`}
           progress={progressPercent}
         />
         <QuickActionTile
           icon="📅"
           title="Appointments"
-          badge={mockAppointments.length}
-          disabled
+          href="/appointments"
+          badge={appointmentsCount > 0 ? appointmentsCount : undefined}
         />
-        <QuickActionTile icon="📋" title="Care Plan" disabled />
-        <QuickActionTile icon="👥" title="Care Team" disabled />
+        <QuickActionTile
+          icon="📋"
+          title="Care Plan"
+          href="/care-plan"
+        />
+        <QuickActionTile
+          icon="👥"
+          title="Care Team"
+          href="/care-team"
+          badge={teamCount > 0 ? teamCount : undefined}
+        />
       </section>
 
       {/* Progress tracker */}
-      <ProgressTracker stageName="Go" percent={progressPercent} />
+      <ProgressTracker stageName={stageNames[currentStage] || 'Go'} percent={progressPercent} />
 
       {/* Two-column layout: Named worker + Next steps */}
       <section className="grid gap-4 md:grid-cols-2">

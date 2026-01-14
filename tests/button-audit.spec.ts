@@ -52,20 +52,17 @@ test.describe('Button Audit - Home Page', () => {
     await expect(parentBtn).toHaveClass(/from-primary-500/);
   });
 
-  test('checklist quick action tile navigates to journey', async ({ page }) => {
+  test('checklist quick action tile navigates to checklist', async ({ page }) => {
     await page.getByRole('link', { name: /checklist/i }).click();
-    await expect(page).toHaveURL('/journey');
+    await expect(page).toHaveURL('/checklist');
   });
 
-  test('disabled quick action tiles exist but are not clickable', async ({ page }) => {
-    // Verify disabled tiles exist - they should be visible
-    await expect(page.getByText('Appointments', { exact: true })).toBeVisible();
-    await expect(page.getByText('Care Plan', { exact: true })).toBeVisible();
-    await expect(page.getByText('Care Team', { exact: true })).toBeVisible();
-
-    // Only Checklist should be a link (not disabled)
-    const checklistLink = page.locator('a[href="/journey"]').filter({ hasText: 'Checklist' });
-    await expect(checklistLink).toBeVisible();
+  test('all quick action tiles are functional links', async ({ page }) => {
+    // Verify all tiles are visible and are links
+    await expect(page.locator('a[href="/checklist"]').filter({ hasText: 'Checklist' })).toBeVisible();
+    await expect(page.locator('a[href="/appointments"]').filter({ hasText: 'Appointments' })).toBeVisible();
+    await expect(page.locator('a[href="/care-plan"]').filter({ hasText: 'Care Plan' })).toBeVisible();
+    await expect(page.locator('a[href="/care-team"]').filter({ hasText: 'Care Team' })).toBeVisible();
   });
 
   test('named worker contact links have correct href', async ({ page }) => {

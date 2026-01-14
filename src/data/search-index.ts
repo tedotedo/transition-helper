@@ -66,6 +66,38 @@ export const searchIndex: SearchItem[] = [
     href: '/resources',
     category: 'page',
   },
+  {
+    id: 'checklist',
+    title: 'My Transition Checklist',
+    description: 'Track your progress with stage-specific transition tasks',
+    keywords: ['checklist', 'tasks', 'progress', 'ready', 'steady', 'go', 'adult', 'transition', 'goals'],
+    href: '/checklist',
+    category: 'page',
+  },
+  {
+    id: 'appointments',
+    title: 'My Appointments',
+    description: 'Manage your healthcare appointments and questions to ask',
+    keywords: ['appointments', 'clinic', 'hospital', 'visit', 'questions', 'doctor', 'schedule', 'calendar'],
+    href: '/appointments',
+    category: 'page',
+  },
+  {
+    id: 'care-plan',
+    title: 'My Care Plan',
+    description: 'Your personal health record with conditions, medications, and preferences',
+    keywords: ['care plan', 'health record', 'medications', 'allergies', 'conditions', 'preferences', 'emergency', 'goals'],
+    href: '/care-plan',
+    category: 'page',
+  },
+  {
+    id: 'care-team',
+    title: 'My Care Team',
+    description: 'List of healthcare professionals involved in your care',
+    keywords: ['care team', 'doctor', 'nurse', 'consultant', 'healthcare', 'professionals', 'contacts', 'team'],
+    href: '/care-team',
+    category: 'page',
+  },
 
   // Journey Activities - Ready Stage
   {
