@@ -1,16 +1,20 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Search } from './Search'
-import { Notifications } from './Notifications'
 
 interface AppShellProps {
   children: ReactNode
 }
 
 export function AppShell({ children }: AppShellProps) {
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false)
+
+  // Close more menu when route changes
+  const closeMoreMenu = () => setMoreMenuOpen(false)
+
   return (
     <div className="min-h-screen bg-background text-warm-800 flex">
-      {/* Sidebar - warm and welcoming */}
+      {/* Sidebar - desktop only */}
       <aside className="hidden md:flex w-64 flex-col border-r border-warm-200 bg-white/80 backdrop-blur-sm">
         <div className="h-16 flex items-center px-5 border-b border-warm-100">
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-400 to-primary-500 text-sm font-bold text-white shadow-card">
@@ -36,28 +40,68 @@ export function AppShell({ children }: AppShellProps) {
       </aside>
 
       <div className="flex-1 flex flex-col">
-        {/* Header - clean and friendly */}
-        <header className="h-16 flex items-center justify-between px-4 md:px-8 border-b border-warm-100 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+        {/* Header - simplified on mobile */}
+        <header className="h-14 md:h-16 flex items-center justify-between px-4 md:px-8 border-b border-warm-100 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+          {/* Mobile: Just the app name */}
           <div className="flex items-center gap-2 md:hidden">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-400 to-primary-500 text-xs font-bold text-white shadow-card">
-              TC
-            </span>
-            <p className="text-sm font-semibold text-warm-800">Transition Care</p>
+            <NavLink to="/" className="text-base font-semibold text-warm-800">
+              Transition Care
+            </NavLink>
           </div>
-          <div className="flex-1 flex items-center max-w-md ml-2 md:ml-0">
+          {/* Desktop: Search bar */}
+          <div className="hidden md:flex flex-1 items-center max-w-md">
             <Search />
           </div>
-          <div className="ml-3 flex items-center gap-3">
-            <Notifications />
+          {/* Desktop only: avatar */}
+          <div className="hidden md:flex ml-3 items-center gap-3">
             <div className="h-9 w-9 rounded-full bg-gradient-to-br from-accent-400 to-accent-500 flex items-center justify-center text-xs font-bold text-white shadow-card">
               YP
             </div>
           </div>
         </header>
 
-        <main className="flex-1 px-4 md:px-8 py-6 md:py-8 animate-fade-in">
+        <main className="flex-1 px-4 md:px-8 py-6 md:py-8 pb-24 md:pb-8 animate-fade-in">
           <div className="max-w-6xl mx-auto">{children}</div>
         </main>
+
+        {/* Bottom Navigation - Mobile only */}
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-warm-200 px-2 py-2 z-20">
+          <div className="flex items-center justify-around">
+            <BottomNavItem to="/" icon="🏠" label="Home" />
+            <BottomNavItem to="/checklist" icon="✅" label="Checklist" />
+            <BottomNavItem to="/care-plan" icon="📋" label="Care Plan" />
+            <BottomNavItem to="/care-team" icon="👥" label="Team" />
+            <button
+              onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+              className={`flex flex-col items-center justify-center px-3 py-1 rounded-xl transition-all ${
+                moreMenuOpen ? 'text-primary-600' : 'text-warm-500'
+              }`}
+            >
+              <span className="text-xl">☰</span>
+              <span className="text-[10px] mt-0.5 font-medium">More</span>
+            </button>
+          </div>
+
+          {/* More menu overlay */}
+          {moreMenuOpen && (
+            <>
+              <div
+                className="fixed inset-0 bg-black/20 z-10"
+                onClick={closeMoreMenu}
+              />
+              <div className="absolute bottom-full left-0 right-0 bg-white border-t border-warm-200 rounded-t-2xl shadow-lg z-20 p-4 mb-0">
+                <div className="grid grid-cols-3 gap-3">
+                  <MoreMenuItem to="/journey" icon="🚀" label="My Journey" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/appointments" icon="📅" label="Appointments" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/rights" icon="⚖️" label="Rights" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/money" icon="💰" label="Money & PIP" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/resources" icon="📚" label="Resources" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/videos" icon="🎬" label="Videos" onClick={closeMoreMenu} />
+                </div>
+              </div>
+            </>
+          )}
+        </nav>
       </div>
     </div>
   )
@@ -95,6 +139,52 @@ function NavItem({ to, label, icon, disabled }: NavItemProps) {
     >
       <span className="text-base">{icon}</span>
       <span>{label}</span>
+    </NavLink>
+  )
+}
+
+// Bottom navigation item for mobile
+interface BottomNavItemProps {
+  to: string
+  icon: string
+  label: string
+}
+
+function BottomNavItem({ to, icon, label }: BottomNavItemProps) {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `flex flex-col items-center justify-center px-3 py-1 rounded-xl transition-all ${
+          isActive
+            ? 'text-primary-600'
+            : 'text-warm-500'
+        }`
+      }
+    >
+      <span className="text-xl">{icon}</span>
+      <span className="text-[10px] mt-0.5 font-medium">{label}</span>
+    </NavLink>
+  )
+}
+
+// More menu item for the expanded menu
+interface MoreMenuItemProps {
+  to: string
+  icon: string
+  label: string
+  onClick: () => void
+}
+
+function MoreMenuItem({ to, icon, label, onClick }: MoreMenuItemProps) {
+  return (
+    <NavLink
+      to={to}
+      onClick={onClick}
+      className="flex flex-col items-center justify-center p-3 rounded-xl bg-warm-50 hover:bg-primary-50 transition-all"
+    >
+      <span className="text-2xl">{icon}</span>
+      <span className="text-xs mt-1 font-medium text-warm-700">{label}</span>
     </NavLink>
   )
 }
