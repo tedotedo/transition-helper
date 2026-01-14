@@ -351,7 +351,6 @@ export function Appointments() {
                 onUpdateQuestion={(idx, val) => handleUpdateQuestion(apt.id, idx, val)}
                 onAddQuestion={() => handleAddQuestion(apt.id)}
                 formatDate={formatDate}
-                isPast
               />
             ))}
           </div>
@@ -381,7 +380,6 @@ interface AppointmentCardProps {
   onUpdateQuestion: (index: number, value: string) => void
   onAddQuestion: () => void
   formatDate: (date: string) => string
-  isPast?: boolean
 }
 
 function AppointmentCard({
@@ -393,7 +391,6 @@ function AppointmentCard({
   onUpdateQuestion,
   onAddQuestion,
   formatDate,
-  isPast
 }: AppointmentCardProps) {
   return (
     <div className={`bg-white rounded-2xl border p-4 shadow-card transition-all ${

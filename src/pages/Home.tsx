@@ -4,9 +4,9 @@ import { QuickActionTile } from '../components/home/QuickActionTile'
 import { ProgressTracker } from '../components/home/ProgressTracker'
 import { NamedWorkerCard } from '../components/home/NamedWorkerCard'
 import { TipCallout } from '../components/home/TipCallout'
-import { getChecklistProgress, CHECKLIST_STORAGE_KEY } from './Checklist'
-import { getUpcomingAppointmentsCount, APPOINTMENTS_STORAGE_KEY } from './Appointments'
-import { CARE_TEAM_STORAGE_KEY, getCareTeamCount } from './CareTeam'
+import { getChecklistProgress } from './Checklist'
+import { getUpcomingAppointmentsCount } from './Appointments'
+import { getCareTeamCount } from './CareTeam'
 
 const ROLE_STORAGE_KEY = 'transition-app-role'
 
