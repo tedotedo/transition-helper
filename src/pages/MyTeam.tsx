@@ -34,16 +34,34 @@ const roleExplanations = [
     examples: ['Checking your health', 'Giving injections or medicines', 'Answering your questions']
   },
   {
-    role: 'Therapist',
+    role: 'Physiotherapist (Physio)',
     emoji: '🤸',
-    description: "Therapists help you move, communicate, or do everyday things better. There are different types: physios help with moving and exercises, occupational therapists (OTs) help with daily activities, and speech therapists help with talking and swallowing.",
-    examples: ['Physio exercises', 'Help with handwriting', 'Speech practice']
+    description: "Physios are movement experts! They help you get stronger, move better, and manage pain. They might give you exercises to do at home, use their hands to help loosen tight muscles, or teach you how to move in ways that won't hurt.",
+    examples: ['Exercises to build strength', 'Stretches to improve flexibility', 'Help recovering after surgery or injury', 'Managing long-term pain', 'Improving balance and coordination']
+  },
+  {
+    role: 'Occupational Therapist (OT)',
+    emoji: '🎯',
+    description: "OTs help you do everyday activities more easily - things like getting dressed, cooking, writing, or managing at school or work. They look at what's tricky for you and find clever solutions, like special equipment or different ways of doing things.",
+    examples: ['Help with handwriting or typing', 'Finding tools to make daily tasks easier', 'Advice on managing energy levels', 'Help with getting dressed or showering', 'Making your home or school work better for you']
+  },
+  {
+    role: 'Speech & Language Therapist (SLT)',
+    emoji: '💬',
+    description: "SLTs help with talking, understanding language, and swallowing. They work with people who find it hard to say words clearly, struggle to find the right words, have stammers, or have difficulty eating and drinking safely.",
+    examples: ['Help with speaking more clearly', 'Exercises for stammering', 'Support with understanding others', 'Help with eating and swallowing safely', 'Communication aids and devices']
   },
   {
     role: 'Pharmacist',
     emoji: '💊',
     description: "Pharmacists are medicine experts! They work at the pharmacy (chemist) and can answer questions about your medicines, check they're working well together, and give advice on minor health problems too.",
     examples: ['Explaining your medicines', 'Checking for side effects', 'Giving health advice']
+  },
+  {
+    role: 'Psychologist / Counsellor',
+    emoji: '💭',
+    description: "Psychologists and counsellors help with your mental health and emotions. They're great to talk to if you're feeling worried, sad, stressed, or just need someone to listen. They can teach you ways to cope with difficult feelings.",
+    examples: ['Talking through worries', 'Help with anxiety or low mood', 'Learning coping strategies', 'Support during tough times']
   },
   {
     role: 'Receptionist / Admin Staff',
