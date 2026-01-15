@@ -21,6 +21,10 @@ import { PdfViewer } from './pages/PdfViewer'
 import { MoneyPip } from './pages/MoneyPip'
 import { PlanningTools } from './pages/PlanningTools'
 import { VideosStories } from './pages/VideosStories'
+import LevelUpHome from './pages/level-up/LevelUpHome'
+import MythBusters from './pages/level-up/MythBusters'
+import PowerUpsGuide from './pages/level-up/PowerUpsGuide'
+import MyBadges from './pages/level-up/MyBadges'
 
 function App() {
   return (
@@ -80,6 +84,11 @@ function App() {
               />
             }
           />
+          {/* Level Up Game */}
+          <Route path="/level-up" element={<LevelUpHome />} />
+          <Route path="/level-up/myths" element={<MythBusters />} />
+          <Route path="/level-up/powers" element={<PowerUpsGuide />} />
+          <Route path="/level-up/badges" element={<MyBadges />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AppShell>
