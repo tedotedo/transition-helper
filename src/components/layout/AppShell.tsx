@@ -27,6 +27,7 @@ export function AppShell({ children }: AppShellProps) {
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1 text-sm">
           <NavItem to="/" label="Home" icon="🏠" />
+          <NavItem to="/level-up" label="Level Up Game" icon="🎮" />
           <NavItem to="/journey" label="My journey" icon="🚀" />
           <NavItem to="/rights" label="Know your rights" icon="⚖️" />
           <NavItem to="/money" label="Money & PIP" icon="💰" />
@@ -83,6 +84,7 @@ export function AppShell({ children }: AppShellProps) {
               />
               <div className="absolute bottom-full left-0 right-0 bg-white border-t border-warm-200 rounded-t-2xl shadow-lg z-20 p-4 mb-0">
                 <div className="grid grid-cols-3 gap-3">
+                  <MoreMenuItem to="/level-up" icon="🎮" label="Level Up" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/journey" icon="🚀" label="My Journey" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/appointments" icon="📅" label="Appointments" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/rights" icon="⚖️" label="Rights" onClick={closeMoreMenu} />
