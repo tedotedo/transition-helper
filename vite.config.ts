@@ -11,26 +11,32 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon.svg'],
       manifest: {
-        name: 'Transition Care Companion',
-        short_name: 'TransitionCare',
+        name: 'Transition Ready',
+        short_name: 'Transition',
         description:
-          'A calm, clear guide to help young people and families move from children\'s to adult healthcare.',
-        theme_color: '#020617',
-        background_color: '#020617',
+          'Helping young people prepare for the move from children\'s to adult healthcare services.',
+        theme_color: '#f97316',
+        background_color: '#fffbf5',
         display: 'standalone',
         start_url: '/',
         icons: [
           {
-            src: '/pwa-192x192.png',
+            src: '/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/pwa-512x512.png',
+            src: '/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
+          },
+          {
+            src: '/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
       },
