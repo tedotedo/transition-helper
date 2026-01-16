@@ -7,7 +7,7 @@ import { TipCallout } from '../components/home/TipCallout'
 import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
-// import { useEasyRead } from '../hooks' // DEBUG: commented out for testing
+import { useEasyRead } from '../hooks'
 
 const ROLE_STORAGE_KEY = 'transition-app-role'
 const LAST_BACKUP_KEY = 'transition-last-backup'
@@ -399,18 +399,10 @@ function ResourceCard({ title, description, href, disabled }: ResourceCardProps)
 }
 
 function EasyReadToggle() {
-  // DEBUG: Simplified to test rendering
-  return (
-    <section className="rounded-2xl border-4 border-red-500 bg-yellow-300 p-8 shadow-card">
-      <h2 className="text-2xl font-bold text-red-600">DEBUG: EASY READ TOGGLE HERE</h2>
-    </section>
-  )
-
-  /* Original code - commented out for debugging
   const { easyRead, toggleEasyRead } = useEasyRead()
 
   return (
-    <section className="rounded-2xl border-4 border-red-500 bg-yellow-100 p-5 shadow-card">
+    <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <span className="text-2xl">👁️</span>
@@ -447,5 +439,4 @@ function EasyReadToggle() {
       )}
     </section>
   )
-  */
 }
