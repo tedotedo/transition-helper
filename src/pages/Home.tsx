@@ -241,6 +241,9 @@ export function Home() {
         </div>
       </section>
 
+      {/* Easy Read / Accessibility toggle */}
+      <EasyReadToggle />
+
       {/* Quick actions */}
       <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <QuickActionTile
@@ -320,9 +323,6 @@ export function Home() {
 
       {/* Tip */}
       <TipCallout tip={tip} />
-
-      {/* Easy Read / Accessibility section */}
-      <EasyReadToggle />
 
       {/* Backup section */}
       <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
