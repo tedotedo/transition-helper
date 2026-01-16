@@ -1,8 +1,8 @@
-# CLAUDE.md - WARP Transition Helper
+# CLAUDE.md - Transition Ready
 
 ## Project Overview
 
-**WARP Transition Helper** is a React-based Progressive Web App (PWA) designed to help young people (ages 11-18+) and their parents/carers prepare for transitioning from children's healthcare to adult healthcare services. It follows the NHS "Ready Steady Go" transition framework.
+**Transition Ready** (https://transitionready.app) is a React-based Progressive Web App (PWA) designed to help young people (ages 11-18+) and their parents/carers prepare for transitioning from children's healthcare to adult healthcare services. It follows the NHS "Ready Steady Go" transition framework.
 
 ## Tech Stack
 
@@ -38,17 +38,31 @@ src/
 │   │   ├── NamedWorkerCard.tsx
 │   │   └── TipCallout.tsx
 │   └── layout/
-│       ├── AppShell.tsx    # Main layout wrapper (sidebar + header)
+│       ├── AppShell.tsx    # Main layout wrapper (sidebar + bottom nav)
 │       ├── Notifications.tsx
 │       └── Search.tsx
-├── pages/                  # All route pages (see Routes section)
+├── pages/
+│   ├── level-up/           # Level Up game pages
+│   │   ├── LevelUpHome.tsx # Game hub with progress
+│   │   ├── MythBusters.tsx # Flip-card myth vs fact game
+│   │   ├── PowerUpsGuide.tsx # Browse abilities by age
+│   │   └── MyBadges.tsx    # Achievement collection
+│   └── ...                 # Other route pages (see Routes section)
 ├── hooks/
 │   ├── index.ts
-│   └── useLocalStorage.ts  # Custom hook for persisted state
-└── data/                   # Static data files
+│   ├── useLocalStorage.ts  # Custom hook for persisted state
+│   └── useLevelUpProgress.ts # Level Up game progress tracking
+└── data/
+    ├── level-up/           # Level Up game data
+    │   ├── powers.ts       # 8 power-up abilities by age
+    │   ├── myths.ts        # 8 fear vs fact cards
+    │   └── badges.ts       # 12 earnable achievements
     ├── notifications.ts
     ├── search-index.ts
     └── success-stories.ts
+
+docs/
+└── level-up-game-design.md # Full game design specification
 ```
 
 ## Routes
@@ -76,6 +90,10 @@ src/
 | `/videos` | VideosStories | Video/story content hub |
 | `/resources` | Resources | Ready Steady Go PDF downloads |
 | `/resources/ready-steady-go/*` | PdfViewer | PDF viewer for questionnaires |
+| `/level-up` | LevelUpHome | Game hub with progress tracking |
+| `/level-up/myths` | MythBusters | Flip-card game: fears vs facts |
+| `/level-up/powers` | PowerUpsGuide | Browse abilities unlocked by age |
+| `/level-up/badges` | MyBadges | Achievement collection display |
 
 ## Data Persistence
 
@@ -91,6 +109,7 @@ All user data is stored in localStorage using these keys:
 | `transition-named-worker` | NamedWorkerCard | `{ name, role, phone, email }` |
 | `transition-care-my-team` | MyTeam | `TeamMember[]` (activity page) |
 | `transition-last-backup` | Home | ISO date string of last backup |
+| `transition-level-up-progress` | Level Up | `{ powersViewed, mythsFlipped, badgesEarned, visitDates }` |
 
 The `useLocalStorage` hook handles persistence with automatic JSON serialization.
 
@@ -230,3 +249,67 @@ CarePlan page has print-specific styles:
 - `print:hidden` - Hide interactive elements
 - `print:shadow-none` - Remove shadows
 - `print:border-gray-300` - Simpler borders
+
+## Level Up Game
+
+Interactive game to help young people understand transition as empowering, not scary.
+
+### Game Sections (MVP)
+
+| Section | Description | Badge Earned |
+|---------|-------------|--------------|
+| **Myth Busters** | 8 flip cards turning fears into facts | `myth-buster` |
+| **Power-Ups Guide** | 8 abilities unlocked at different ages | `power-collector` |
+| **My Badges** | 12 achievements to collect | Various |
+
+### Badge System
+
+Badges are auto-awarded when conditions are met:
+- `first-steps` - Complete any activity
+- `myth-buster` - Flip all 8 myth cards
+- `power-collector` - View all 8 power-ups
+- `comeback-kid` - Visit on 3 different days
+- `level-up-champion` - Earn all other badges
+
+### Future Phases (see `docs/level-up-game-design.md`)
+
+- Practice Zone: Interactive scenarios (booking appointments, asking questions)
+- Journey Map: Visual timeline of transition stages
+- Real Stories: Testimonials from transitioned young people
+
+## PWA & Meta Tags
+
+### Manifest (`vite.config.ts`)
+
+```typescript
+VitePWA({
+  manifest: {
+    name: 'Transition Ready',
+    short_name: 'Transition',
+    theme_color: '#f97316',
+    background_color: '#fffbf5',
+    icons: [
+      { src: '/android-chrome-192x192.png', sizes: '192x192' },
+      { src: '/android-chrome-512x512.png', sizes: '512x512' },
+    ],
+  },
+})
+```
+
+### Open Graph (`index.html`)
+
+Social sharing previews configured for WhatsApp, Facebook, Twitter:
+- `og:title` - "Transition Ready"
+- `og:description` - "Helping young people prepare..."
+- `og:image` - `/og-image.png` (1200x630)
+
+### Favicon Files (`public/`)
+
+| File | Purpose |
+|------|---------|
+| `favicon.ico` | Browser tabs |
+| `icon.svg` | Modern browsers |
+| `apple-touch-icon.png` | iOS home screen |
+| `android-chrome-192x192.png` | Android small |
+| `android-chrome-512x512.png` | Android large + PWA |
+| `og-image.png` | Social sharing preview |
