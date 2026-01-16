@@ -14,6 +14,8 @@ import { LookIntoPIP } from './pages/LookIntoPIP'
 import { HelloNewTeam } from './pages/HelloNewTeam'
 import { CheckYourSupport } from './pages/CheckYourSupport'
 import { Consent16to17 } from './pages/Consent16to17'
+import { ConsentUnder16 } from './pages/ConsentUnder16'
+import { Consent18Plus } from './pages/Consent18Plus'
 import { MyJourney } from './pages/MyJourney'
 import { RightsHub } from './pages/RightsHub'
 import { Resources } from './pages/Resources'
@@ -46,7 +48,9 @@ function App() {
           <Route path="/journey/new-team" element={<HelloNewTeam />} />
           <Route path="/journey/check-support" element={<CheckYourSupport />} />
           <Route path="/rights" element={<RightsHub />} />
+          <Route path="/rights/consent-under-16" element={<ConsentUnder16 />} />
           <Route path="/rights/consent-16-17" element={<Consent16to17 />} />
+          <Route path="/rights/consent-18-plus" element={<Consent18Plus />} />
           <Route path="/money" element={<MoneyPip />} />
           <Route path="/planning" element={<PlanningTools />} />
           <Route path="/videos" element={<VideosStories />} />

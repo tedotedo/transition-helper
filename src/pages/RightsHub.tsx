@@ -24,6 +24,7 @@ export function RightsHub() {
           label="Under 16"
           emoji="🌱"
           description="Find out how consent works for under 16s - including when staff check if you understand enough to make your own decisions."
+          href="/rights/consent-under-16"
         />
         <AgeCard
           label="Age 16–17"
@@ -36,6 +37,7 @@ export function RightsHub() {
           label="Age 18+"
           emoji="🎓"
           description="Discover what changes when you become an adult, including how the Mental Capacity Act helps people who need support with decisions."
+          href="/rights/consent-18-plus"
         />
       </section>
 
