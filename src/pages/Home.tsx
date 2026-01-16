@@ -402,7 +402,7 @@ function EasyReadToggle() {
   const { easyRead, toggleEasyRead } = useEasyRead()
 
   return (
-    <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
+    <section className="rounded-2xl border-4 border-red-500 bg-yellow-100 p-5 shadow-card">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <span className="text-2xl">👁️</span>
