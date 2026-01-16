@@ -7,6 +7,7 @@ import { TipCallout } from '../components/home/TipCallout'
 import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
+import { useEasyRead } from '../hooks'
 
 const ROLE_STORAGE_KEY = 'transition-app-role'
 const LAST_BACKUP_KEY = 'transition-last-backup'
@@ -320,6 +321,9 @@ export function Home() {
       {/* Tip */}
       <TipCallout tip={tip} />
 
+      {/* Easy Read / Accessibility section */}
+      <EasyReadToggle />
+
       {/* Backup section */}
       <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
         <div className="flex items-start gap-3">
@@ -391,5 +395,48 @@ function ResourceCard({ title, description, href, disabled }: ResourceCardProps)
     <a href={href} className="block group">
       {content}
     </a>
+  )
+}
+
+function EasyReadToggle() {
+  const { easyRead, toggleEasyRead } = useEasyRead()
+
+  return (
+    <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <span className="text-2xl">👁️</span>
+          <div>
+            <h2 className="font-semibold text-warm-800">Easy Read Mode</h2>
+            <p className="text-sm text-warm-500 mt-1">
+              Simpler words, bigger buttons, more pictures
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={toggleEasyRead}
+          className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors ${
+            easyRead ? 'bg-accent-500' : 'bg-warm-300'
+          }`}
+          role="switch"
+          aria-checked={easyRead}
+          aria-label="Toggle Easy Read mode"
+        >
+          <span
+            className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-md transition-transform ${
+              easyRead ? 'translate-x-7' : 'translate-x-1'
+            }`}
+          />
+        </button>
+      </div>
+      {easyRead && (
+        <div className="mt-3 rounded-xl bg-accent-50 border border-accent-200 px-4 py-3">
+          <p className="text-sm text-accent-700 flex items-center gap-2">
+            <span>✓</span>
+            Easy Read is ON - content will be simpler
+          </p>
+        </div>
+      )}
+    </section>
   )
 }

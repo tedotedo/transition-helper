@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { myths } from '../../data/level-up/myths'
-import { useLevelUpProgress } from '../../hooks'
+import { useLevelUpProgress, useEasyRead } from '../../hooks'
 
 export default function MythBusters() {
   const { progress, flipMyth, hasBadge } = useLevelUpProgress()
+  const { easyRead } = useEasyRead()
   const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set())
 
   const handleFlip = (mythId: string) => {
@@ -38,11 +39,11 @@ export default function MythBusters() {
         <div className="flex items-center gap-3">
           <span className="text-3xl">🔍</span>
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-warm-800">
-              Myth Busters
+            <h1 className={`font-bold text-warm-800 ${easyRead ? 'text-3xl' : 'text-2xl md:text-3xl'}`}>
+              {easyRead ? 'True or False?' : 'Myth Busters'}
             </h1>
-            <p className="text-sm text-warm-500">
-              Tap cards to flip fears into facts!
+            <p className={`text-warm-500 ${easyRead ? 'text-base' : 'text-sm'}`}>
+              {easyRead ? 'Tap to see what is TRUE!' : 'Tap cards to flip fears into facts!'}
             </p>
           </div>
         </div>
@@ -68,11 +69,13 @@ export default function MythBusters() {
 
       {/* Success message */}
       {allFlipped && (
-        <div className="bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl border border-accent-200 p-5 text-center">
-          <span className="text-3xl mb-2 block">🎉</span>
-          <p className="font-semibold text-warm-800">You've busted all the myths!</p>
-          <p className="text-sm text-warm-600 mt-1">
-            Now you know the truth about transition.
+        <div className={`bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl border border-accent-200 ${easyRead ? 'p-6' : 'p-5'} text-center`}>
+          <span className={`mb-2 block ${easyRead ? 'text-5xl' : 'text-3xl'}`}>🎉</span>
+          <p className={`font-semibold text-warm-800 ${easyRead ? 'text-xl' : ''}`}>
+            {easyRead ? 'Well done! You found all the answers!' : "You've busted all the myths!"}
+          </p>
+          <p className={`text-warm-600 mt-1 ${easyRead ? 'text-base' : 'text-sm'}`}>
+            {easyRead ? 'Now you know what is TRUE!' : 'Now you know the truth about transition.'}
           </p>
         </div>
       )}
@@ -99,7 +102,7 @@ export default function MythBusters() {
               >
                 {/* Front - Fear side */}
                 <div
-                  className={`bg-white rounded-2xl border-2 shadow-card p-5 ${
+                  className={`bg-white rounded-2xl border-2 shadow-card ${easyRead ? 'p-6' : 'p-5'} ${
                     wasEverFlipped ? 'border-accent-200' : 'border-warm-200'
                   }`}
                   style={{
@@ -107,45 +110,49 @@ export default function MythBusters() {
                   }}
                 >
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl">{myth.fearEmoji}</span>
+                    <span className={easyRead ? 'text-4xl' : 'text-2xl'}>{myth.fearEmoji}</span>
                     <div className="flex-1">
-                      <div className="text-xs font-medium text-red-500 uppercase tracking-wide mb-1">
-                        Fear
+                      <div className={`font-medium text-red-500 uppercase tracking-wide mb-1 ${easyRead ? 'text-sm' : 'text-xs'}`}>
+                        {easyRead ? 'Not True!' : 'Fear'}
                       </div>
-                      <p className="text-warm-800 font-medium">
-                        "{myth.fear}"
+                      <p className={`text-warm-800 font-medium ${easyRead ? 'text-lg' : ''}`}>
+                        "{easyRead ? myth.easyFear : myth.fear}"
                       </p>
                     </div>
                     {wasEverFlipped && (
-                      <span className="text-accent-500 text-sm">✓</span>
+                      <span className={`text-accent-500 ${easyRead ? 'text-xl' : 'text-sm'}`}>✓</span>
                     )}
                   </div>
                   <div className="mt-3 text-center">
-                    <span className="text-xs text-warm-400">tap to reveal the truth</span>
+                    <span className={`text-warm-400 ${easyRead ? 'text-sm font-medium' : 'text-xs'}`}>
+                      {easyRead ? '👆 TAP ME!' : 'tap to reveal the truth'}
+                    </span>
                   </div>
                 </div>
 
                 {/* Back - Fact side */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-br from-accent-50 to-primary-50 rounded-2xl border-2 border-accent-300 shadow-card p-5"
+                  className={`absolute inset-0 bg-gradient-to-br from-accent-50 to-primary-50 rounded-2xl border-2 border-accent-300 shadow-card ${easyRead ? 'p-6' : 'p-5'}`}
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(180deg)',
                   }}
                 >
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl">{myth.factEmoji}</span>
+                    <span className={easyRead ? 'text-4xl' : 'text-2xl'}>{myth.factEmoji}</span>
                     <div className="flex-1">
-                      <div className="text-xs font-medium text-accent-600 uppercase tracking-wide mb-1">
-                        Fact
+                      <div className={`font-medium text-accent-600 uppercase tracking-wide mb-1 ${easyRead ? 'text-sm' : 'text-xs'}`}>
+                        {easyRead ? 'TRUE! ✓' : 'Fact'}
                       </div>
-                      <p className="text-warm-800 font-medium">
-                        {myth.fact}
+                      <p className={`text-warm-800 font-medium ${easyRead ? 'text-lg' : ''}`}>
+                        {easyRead ? myth.easyFact : myth.fact}
                       </p>
                     </div>
                   </div>
                   <div className="mt-3 text-center">
-                    <span className="text-xs text-warm-500">tap to flip back</span>
+                    <span className={`text-warm-500 ${easyRead ? 'text-sm' : 'text-xs'}`}>
+                      {easyRead ? '👆 Tap again' : 'tap to flip back'}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -155,9 +162,9 @@ export default function MythBusters() {
       </div>
 
       {/* Tip */}
-      <div className="bg-warm-50 rounded-xl p-4 text-center">
-        <p className="text-sm text-warm-600">
-          💡 Feeling worried is normal - but now you know the facts!
+      <div className={`bg-warm-50 rounded-xl ${easyRead ? 'p-5' : 'p-4'} text-center`}>
+        <p className={`text-warm-600 ${easyRead ? 'text-base' : 'text-sm'}`}>
+          {easyRead ? '💡 It is OK to feel worried. Now you know what is true!' : '💡 Feeling worried is normal - but now you know the facts!'}
         </p>
       </div>
     </div>

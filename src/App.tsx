@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { EasyReadProvider } from './hooks'
 import { AppShell } from './components/layout/AppShell'
 import { Home } from './pages/Home'
 import { Checklist } from './pages/Checklist'
@@ -30,8 +31,9 @@ import MyBadges from './pages/level-up/MyBadges'
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppShell>
+    <EasyReadProvider>
+      <BrowserRouter>
+        <AppShell>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checklist" element={<Checklist />} />
@@ -95,8 +97,9 @@ function App() {
           <Route path="/level-up/badges" element={<MyBadges />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </AppShell>
-    </BrowserRouter>
+        </AppShell>
+      </BrowserRouter>
+    </EasyReadProvider>
   )
 }
 
