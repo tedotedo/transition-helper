@@ -11,6 +11,7 @@ import { useEasyRead } from '../hooks'
 
 const ROLE_STORAGE_KEY = 'transition-app-role'
 const LAST_BACKUP_KEY = 'transition-last-backup'
+const USER_NAME_KEY = 'transition-user-name'
 const BACKUP_REMINDER_DAYS = 7
 
 // All localStorage keys used by the app
@@ -23,6 +24,8 @@ const ALL_STORAGE_KEYS = [
   'transition-named-worker',
   'transition-care-my-team',
   'transition-last-backup',
+  'transition-user-name',
+  'transition-easy-read',
 ]
 
 function getLastBackupDate(): Date | null {
@@ -125,6 +128,16 @@ export function Home() {
     return 'young-person'
   })
 
+  // User name state
+  const [userName, setUserName] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem(USER_NAME_KEY) || ''
+    }
+    return ''
+  })
+  const [isEditingName, setIsEditingName] = useState(false)
+  const [nameInput, setNameInput] = useState('')
+
   // Dynamic data from localStorage
   const [checklistData, setChecklistData] = useState(() => getChecklistProgress())
   const [appointmentsCount, setAppointmentsCount] = useState(() => getUpcomingAppointmentsCount())
@@ -160,6 +173,24 @@ export function Home() {
     localStorage.setItem(ROLE_STORAGE_KEY, role)
   }, [role])
 
+  const handleSaveName = useCallback(() => {
+    const trimmedName = nameInput.trim()
+    setUserName(trimmedName)
+    localStorage.setItem(USER_NAME_KEY, trimmedName)
+    setIsEditingName(false)
+  }, [nameInput])
+
+  const handleStartEditingName = useCallback(() => {
+    setNameInput(userName)
+    setIsEditingName(true)
+  }, [userName])
+
+  const handleClearName = useCallback(() => {
+    setUserName('')
+    localStorage.removeItem(USER_NAME_KEY)
+    setIsEditingName(false)
+  }, [])
+
   // Update data when localStorage changes (e.g., when returning from another page)
   useEffect(() => {
     const handleStorageChange = () => {
@@ -185,7 +216,7 @@ export function Home() {
 
   const heroHeading =
     role === 'young-person'
-      ? "Hey, welcome back! 👋"
+      ? userName ? `Hey, ${userName}! 👋` : "Hey, welcome back! 👋"
       : "Supporting your young person's journey"
 
   const heroBody =
@@ -235,6 +266,66 @@ export function Home() {
               Getting ready for adult care
             </p>
             <h1 className="text-2xl md:text-3xl font-bold text-warm-800">{heroHeading}</h1>
+
+            {/* Name input/display for young person */}
+            {role === 'young-person' && (
+              <div className="flex items-center gap-2">
+                {isEditingName ? (
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={nameInput}
+                      onChange={(e) => setNameInput(e.target.value)}
+                      placeholder="Enter your name"
+                      className="px-3 py-1.5 rounded-lg border border-warm-200 bg-white text-warm-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-300 w-40"
+                      autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleSaveName()
+                        if (e.key === 'Escape') setIsEditingName(false)
+                      }}
+                    />
+                    <button
+                      onClick={handleSaveName}
+                      className="px-2 py-1 rounded-lg bg-accent-500 text-white text-xs font-medium hover:bg-accent-600 transition-colors"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setIsEditingName(false)}
+                      className="px-2 py-1 rounded-lg text-warm-500 text-xs hover:text-warm-700 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : userName ? (
+                  <button
+                    onClick={handleStartEditingName}
+                    className="inline-flex items-center gap-1.5 text-xs text-warm-500 hover:text-primary-600 transition-colors"
+                  >
+                    <span>✏️</span>
+                    <span>Change name</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleStartEditingName}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-dashed border-warm-300 text-xs text-warm-500 hover:border-primary-300 hover:text-primary-600 transition-colors"
+                  >
+                    <span>👤</span>
+                    <span>Add your name for a personal greeting</span>
+                  </button>
+                )}
+                {userName && !isEditingName && (
+                  <button
+                    onClick={handleClearName}
+                    className="text-xs text-warm-400 hover:text-red-500 transition-colors"
+                    title="Remove name"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            )}
+
             <p className="text-sm md:text-base text-warm-600 leading-relaxed">{heroBody}</p>
           </div>
           <RoleToggle value={role} onChange={setRole} />
