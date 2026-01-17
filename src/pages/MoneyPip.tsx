@@ -194,9 +194,9 @@ export function MoneyPip() {
                 <div className="flex items-start gap-2">
                   <span className="text-lg">💚</span>
                   <div>
-                    <h4 className="font-semibold text-warm-800 text-sm">Talk to Your GP</h4>
+                    <h4 className="font-semibold text-warm-800 text-sm">Talk to Your GP and your community paediatrician</h4>
                     <p className="text-sm text-warm-600 mt-1">
-                      Your GP can provide supporting evidence for PIP applications and help explain how
+                      Your GP and community paediatrician can provide supporting evidence for PIP applications and help explain how
                       your child's condition affects their daily life. They know your family's situation
                       and can help ensure the application accurately reflects your child's needs.
                     </p>
