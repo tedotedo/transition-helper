@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { EasyReadProvider } from './hooks'
+import { EasyReadProvider, RoleProvider, useRole } from './hooks'
 import { AppShell } from './components/layout/AppShell'
 import { Home } from './pages/Home'
 import { Checklist } from './pages/Checklist'
@@ -29,11 +29,13 @@ import MythBusters from './pages/level-up/MythBusters'
 import PowerUpsGuide from './pages/level-up/PowerUpsGuide'
 import MyBadges from './pages/level-up/MyBadges'
 
-function App() {
+// Wrapper to apply role-based styling
+function AppContent() {
+  const { isYoungPerson } = useRole()
+
   return (
-    <EasyReadProvider>
-      <BrowserRouter>
-        <AppShell>
+    <div className={isYoungPerson ? 'font-friendly' : 'font-sans'}>
+      <AppShell>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checklist" element={<Checklist />} />
@@ -97,9 +99,20 @@ function App() {
           <Route path="/level-up/badges" element={<MyBadges />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        </AppShell>
-      </BrowserRouter>
-    </EasyReadProvider>
+      </AppShell>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <RoleProvider>
+      <EasyReadProvider>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </EasyReadProvider>
+    </RoleProvider>
   )
 }
 
