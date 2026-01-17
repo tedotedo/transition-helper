@@ -74,3 +74,86 @@ button, a, input {
   background-color: rgba(249, 115, 22, 0.2);
   color: #292524;
 }
+
+/* ===== Young Person View - Fun Background ===== */
+.font-friendly {
+  position: relative;
+}
+
+/* Animated gradient background for young person view */
+.font-friendly::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(20, 184, 166, 0.10) 0%, transparent 35%),
+    radial-gradient(circle at 40% 80%, rgba(251, 146, 60, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(45, 212, 191, 0.08) 0%, transparent 35%),
+    linear-gradient(135deg, #fffbf5 0%, #fff7ed 50%, #f0fdfa 100%);
+  animation: gradientShift 15s ease-in-out infinite alternate;
+}
+
+/* Floating decorative shapes */
+.font-friendly::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(249, 115, 22, 0.06) 0%, rgba(249, 115, 22, 0.06) 8px, transparent 8px),
+    radial-gradient(circle at 90% 20%, rgba(20, 184, 166, 0.05) 0%, rgba(20, 184, 166, 0.05) 12px, transparent 12px),
+    radial-gradient(circle at 15% 60%, rgba(251, 146, 60, 0.04) 0%, rgba(251, 146, 60, 0.04) 6px, transparent 6px),
+    radial-gradient(circle at 85% 70%, rgba(45, 212, 191, 0.05) 0%, rgba(45, 212, 191, 0.05) 10px, transparent 10px),
+    radial-gradient(circle at 50% 90%, rgba(249, 115, 22, 0.04) 0%, rgba(249, 115, 22, 0.04) 8px, transparent 8px),
+    radial-gradient(circle at 30% 30%, rgba(20, 184, 166, 0.03) 0%, rgba(20, 184, 166, 0.03) 14px, transparent 14px);
+  animation: floatBubbles 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes floatBubbles {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-10px) scale(1.02);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(5px) scale(0.98);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(-5px) scale(1.01);
+    opacity: 1;
+  }
+}
+
+/* Make cards slightly more playful in young person view */
+.font-friendly .shadow-card {
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.font-friendly .shadow-card:hover {
+  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
