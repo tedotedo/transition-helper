@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { RoleToggle, type UserRole } from '../components/home/RoleToggle'
+import { RoleToggle } from '../components/home/RoleToggle'
 import { QuickActionTile } from '../components/home/QuickActionTile'
 import { ProgressTracker } from '../components/home/ProgressTracker'
 import { NamedWorkerCard } from '../components/home/NamedWorkerCard'
@@ -7,9 +7,8 @@ import { TipCallout } from '../components/home/TipCallout'
 import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
-import { useEasyRead } from '../hooks'
+import { useEasyRead, useRole } from '../hooks'
 
-const ROLE_STORAGE_KEY = 'transition-app-role'
 const LAST_BACKUP_KEY = 'transition-last-backup'
 const USER_NAME_KEY = 'transition-user-name'
 const BACKUP_REMINDER_DAYS = 7
@@ -120,13 +119,7 @@ const youngPersonTip = 'Try explaining your condition in your own words before y
 const parentTip = "Let your child have a go at answering the first question at their next appointment. Small steps make a big difference!"
 
 export function Home() {
-  const [role, setRole] = useState<UserRole>(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(ROLE_STORAGE_KEY)
-      if (stored === 'young-person' || stored === 'parent-carer') return stored
-    }
-    return 'young-person'
-  })
+  const { role, setRole } = useRole()
 
   // User name state
   const [userName, setUserName] = useState<string>(() => {
@@ -168,10 +161,6 @@ export function Home() {
     }
     e.target.value = '' // Reset input
   }, [])
-
-  useEffect(() => {
-    localStorage.setItem(ROLE_STORAGE_KEY, role)
-  }, [role])
 
   const handleSaveName = useCallback(() => {
     const trimmedName = nameInput.trim()
