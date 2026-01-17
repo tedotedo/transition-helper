@@ -75,12 +75,12 @@ button, a, input {
   color: #292524;
 }
 
-/* ===== Young Person View - Fun Background ===== */
+/* ===== Young Person View - Urban Brick Background ===== */
 .font-friendly {
   position: relative;
 }
 
-/* Animated gradient background for young person view */
+/* Brick wall base with warm, slightly dark tones */
 .font-friendly::before {
   content: '';
   position: fixed;
@@ -88,17 +88,19 @@ button, a, input {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(20, 184, 166, 0.10) 0%, transparent 35%),
-    radial-gradient(circle at 40% 80%, rgba(251, 146, 60, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(45, 212, 191, 0.08) 0%, transparent 35%),
-    linear-gradient(135deg, #fffbf5 0%, #fff7ed 50%, #f0fdfa 100%);
-  animation: gradientShift 15s ease-in-out infinite alternate;
+  z-index: -2;
+  background-color: #f5ebe0;
+  background-image:
+    /* Brick pattern */
+    linear-gradient(to right, rgba(180, 140, 110, 0.15) 0px, rgba(180, 140, 110, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(180, 140, 110, 0.2) 0px, rgba(180, 140, 110, 0.2) 1px, transparent 1px),
+    /* Offset brick rows */
+    linear-gradient(to right, rgba(160, 120, 90, 0.1) 0px, transparent 50%);
+  background-size: 60px 30px, 60px 30px, 120px 60px;
+  background-position: 0 0, 0 0, 30px 30px;
 }
 
-/* Floating decorative shapes */
+/* Grunge texture overlay */
 .font-friendly::after {
   content: '';
   position: fixed;
@@ -108,52 +110,56 @@ button, a, input {
   bottom: 0;
   z-index: -1;
   background-image:
-    radial-gradient(circle at 10% 10%, rgba(249, 115, 22, 0.06) 0%, rgba(249, 115, 22, 0.06) 8px, transparent 8px),
-    radial-gradient(circle at 90% 20%, rgba(20, 184, 166, 0.05) 0%, rgba(20, 184, 166, 0.05) 12px, transparent 12px),
-    radial-gradient(circle at 15% 60%, rgba(251, 146, 60, 0.04) 0%, rgba(251, 146, 60, 0.04) 6px, transparent 6px),
-    radial-gradient(circle at 85% 70%, rgba(45, 212, 191, 0.05) 0%, rgba(45, 212, 191, 0.05) 10px, transparent 10px),
-    radial-gradient(circle at 50% 90%, rgba(249, 115, 22, 0.04) 0%, rgba(249, 115, 22, 0.04) 8px, transparent 8px),
-    radial-gradient(circle at 30% 30%, rgba(20, 184, 166, 0.03) 0%, rgba(20, 184, 166, 0.03) 14px, transparent 14px);
-  animation: floatBubbles 20s ease-in-out infinite;
+    /* Subtle noise/grunge texture */
+    radial-gradient(circle at 20% 80%, rgba(139, 90, 43, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(180, 140, 110, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 40% 40%, rgba(100, 70, 50, 0.04) 0%, transparent 30%),
+    radial-gradient(circle at 90% 90%, rgba(249, 115, 22, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 10% 30%, rgba(20, 184, 166, 0.05) 0%, transparent 35%),
+    /* Scattered darker spots for grunge effect */
+    radial-gradient(ellipse at 15% 15%, rgba(80, 50, 30, 0.06) 0%, transparent 20%),
+    radial-gradient(ellipse at 85% 45%, rgba(80, 50, 30, 0.05) 0%, transparent 25%),
+    radial-gradient(ellipse at 45% 85%, rgba(80, 50, 30, 0.04) 0%, transparent 20%),
+    radial-gradient(ellipse at 70% 70%, rgba(80, 50, 30, 0.05) 0%, transparent 30%);
+  /* Warm gradient overlay to keep it inviting */
+  background-color: rgba(255, 250, 245, 0.4);
   pointer-events: none;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 0%;
+/* Warm glow accents for reassurance */
+@keyframes warmGlow {
+  0%, 100% {
+    opacity: 0.6;
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 100%;
-  }
-}
-
-@keyframes floatBubbles {
-  0%, 100% {
-    transform: translateY(0) scale(1);
     opacity: 0.8;
   }
-  25% {
-    transform: translateY(-10px) scale(1.02);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(5px) scale(0.98);
-    opacity: 0.9;
-  }
-  75% {
-    transform: translateY(-5px) scale(1.01);
-    opacity: 1;
-  }
 }
 
-/* Make cards slightly more playful in young person view */
+/* Make cards pop against the darker background */
 .font-friendly .shadow-card {
-  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .font-friendly .shadow-card:hover {
-  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 0 20px rgba(249, 115, 22, 0.1);
+}
+
+/* Ensure text remains readable */
+.font-friendly .bg-white {
+  background-color: rgba(255, 255, 255, 0.97);
+}
+
+/* Add subtle inner glow to main content areas */
+.font-friendly .rounded-2xl,
+.font-friendly .rounded-3xl {
+  backdrop-filter: blur(1px);
 }
