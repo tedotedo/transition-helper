@@ -46,11 +46,59 @@ export function MoneyPip() {
           <span className="text-xl">⚠️</span>
           <div>
             <h3 className="font-semibold text-warm-800 mb-1">For Parents, Guardians & Carers</h3>
-            <p className="text-sm text-warm-600">
-              This section contains important information about legal and financial matters. Please
-              discuss relevant topics with your GP, who can provide guidance and help coordinate support
-              tailored to your family's needs.
+            <p className="text-sm text-warm-600 mb-4">
+              This section contains important information about legal and financial matters.
             </p>
+
+            <h4 className="font-semibold text-warm-800 mb-3 flex items-center gap-2">
+              <span>🎯</span> Who Can Help
+            </h4>
+
+            <div className="space-y-4 text-sm">
+              <div>
+                <p className="font-medium text-warm-700">Benefits & Financial Support</p>
+                <p className="text-warm-600">
+                  <strong>Citizens Advice</strong> - Free, expert advice on disability benefits (PIP, DLA, ESA, Universal Credit)
+                </p>
+                <p className="text-warm-500">
+                  Website: <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.citizensadvice.org.uk</a>
+                  <br />Phone: 0800 144 8848
+                </p>
+              </div>
+
+              <div>
+                <p className="font-medium text-warm-700">Education Rights & Support</p>
+                <p className="text-warm-600">
+                  <strong>IPSEA</strong> (Independent Provider of Special Education Advice) - Free legal advice on EHCPs, SEN support, and education rights
+                </p>
+                <p className="text-warm-500">
+                  Website: <a href="https://www.ipsea.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.ipsea.org.uk</a>
+                  <br />Helpline: 0800 018 4016
+                </p>
+              </div>
+
+              <div>
+                <p className="font-medium text-warm-700">General Support & Guidance</p>
+                <p className="text-warm-600">
+                  <strong>Contact</strong> (for families with disabled children) - Parent helpline covering benefits, education, health, and local services
+                </p>
+                <p className="text-warm-500">
+                  Website: <a href="https://www.contact.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.contact.org.uk</a>
+                  <br />Helpline: 0808 808 3555
+                </p>
+              </div>
+
+              <div>
+                <p className="font-medium text-warm-700">Legal Capacity & Decision-Making</p>
+                <p className="text-warm-600">
+                  <strong>Mencap</strong> - Guidance on Court of Protection, Lasting Powers of Attorney, and mental capacity
+                </p>
+                <p className="text-warm-500">
+                  Website: <a href="https://www.mencap.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.mencap.org.uk</a>
+                  <br />Helpline: 0808 808 1111
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
