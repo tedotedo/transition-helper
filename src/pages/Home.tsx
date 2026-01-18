@@ -248,7 +248,7 @@ export function Home() {
 
       {/* Hero with role toggle */}
       {role === 'young-person' ? (
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500 via-primary-400 to-accent-400 px-6 py-8 md:px-10 md:py-10 shadow-card">
+        <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary-500 via-primary-400 to-accent-400 px-4 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10 shadow-card">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse-soft" />
@@ -261,21 +261,21 @@ export function Home() {
           </div>
 
           <div className="relative flex flex-col items-center text-center">
-            {/* Role toggle at top right */}
-            <div className="absolute top-0 right-0">
-              <RoleToggle value={role} onChange={setRole} />
-            </div>
+            <div className="space-y-5 md:space-y-6 max-w-2xl">
+              {/* Role toggle - centered at top */}
+              <div className="flex justify-center">
+                <RoleToggle value={role} onChange={setRole} />
+              </div>
 
-            <div className="space-y-6 max-w-2xl pt-8 md:pt-4">
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-6xl">🚀</span>
-                <p className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-5 py-2.5 text-base font-bold text-white shadow-lg">
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2 animate-pulse" />
+              <div className="flex flex-col md:flex-row items-center justify-center gap-3">
+                <span className="text-5xl md:text-6xl">🚀</span>
+                <p className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 md:px-5 py-2 md:py-2.5 text-sm md:text-base font-bold text-white shadow-lg">
+                  <span className="h-2 md:h-2.5 w-2 md:w-2.5 rounded-full bg-green-400 mr-2 animate-pulse" />
                   Your Journey to Independence
                 </p>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-lg leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-lg leading-tight px-2">
                 {userName ? (
                   <>Hey {userName}! <span className="inline-block animate-bounce">👋</span></>
                 ) : (
@@ -284,15 +284,15 @@ export function Home() {
               </h1>
 
               {/* Name input/display for young person */}
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 px-2">
                 {isEditingName ? (
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center justify-center gap-2">
                     <input
                       type="text"
                       value={nameInput}
                       onChange={(e) => setNameInput(e.target.value)}
                       placeholder="What's your name?"
-                      className="px-4 py-2.5 rounded-xl border-2 border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/60 text-base font-medium focus:outline-none focus:ring-2 focus:ring-white/50 w-48"
+                      className="px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border-2 border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/60 text-sm sm:text-base font-medium focus:outline-none focus:ring-2 focus:ring-white/50 w-40 sm:w-48"
                       autoFocus
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') handleSaveName()
@@ -301,13 +301,13 @@ export function Home() {
                     />
                     <button
                       onClick={handleSaveName}
-                      className="px-4 py-2.5 rounded-xl bg-white text-primary-600 text-base font-bold hover:bg-white/90 transition-colors shadow-lg"
+                      className="px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white text-primary-600 text-sm sm:text-base font-bold hover:bg-white/90 transition-colors shadow-lg"
                     >
                       Save
                     </button>
                     <button
                       onClick={() => setIsEditingName(false)}
-                      className="px-3 py-2.5 rounded-xl text-white/70 text-base hover:text-white transition-colors"
+                      className="px-2 sm:px-3 py-2 sm:py-2.5 rounded-xl text-white/70 text-sm sm:text-base hover:text-white transition-colors"
                     >
                       ✕
                     </button>
@@ -315,7 +315,7 @@ export function Home() {
                 ) : userName ? (
                   <button
                     onClick={handleStartEditingName}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-base text-white/80 hover:bg-white/20 hover:text-white transition-all"
+                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-white/10 text-sm sm:text-base text-white/80 hover:bg-white/20 hover:text-white transition-all"
                   >
                     <span>✏️</span>
                     <span>Change name</span>
@@ -323,7 +323,7 @@ export function Home() {
                 ) : (
                   <button
                     onClick={handleStartEditingName}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border-2 border-dashed border-white/40 text-base text-white/80 hover:border-white/60 hover:text-white hover:bg-white/10 transition-all"
+                    className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl border-2 border-dashed border-white/40 text-sm sm:text-base text-white/80 hover:border-white/60 hover:text-white hover:bg-white/10 transition-all"
                   >
                     <span>🏷️</span>
                     <span>Add your name - make it personal!</span>
@@ -332,7 +332,7 @@ export function Home() {
                 {userName && !isEditingName && (
                   <button
                     onClick={handleClearName}
-                    className="text-base text-white/50 hover:text-white/80 transition-colors"
+                    className="text-sm sm:text-base text-white/50 hover:text-white/80 transition-colors"
                     title="Remove name"
                   >
                     ✕
@@ -340,24 +340,24 @@ export function Home() {
                 )}
               </div>
 
-              <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-semibold">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-semibold px-2">
                 Moving to adult services is a <span className="text-yellow-300 font-bold">big step</span> — and you're ready for it!
-                <br className="hidden md:block" />
+                <br className="hidden sm:block" />
                 Learn what changes at 16 & 18, understand your rights, and take charge of your own healthcare.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 pt-4 px-2">
                 <a
                   href="/journey"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-primary-600 text-lg font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-white text-primary-600 text-base sm:text-lg font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
                 >
-                  <span className="text-2xl">🗺️</span> Start Your Journey
+                  <span className="text-xl sm:text-2xl">🗺️</span> Start Your Journey
                 </a>
                 <a
                   href="/rights"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/20 backdrop-blur-sm text-white text-lg font-bold border-2 border-white/30 hover:bg-white/30 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-white/20 backdrop-blur-sm text-white text-base sm:text-lg font-bold border-2 border-white/30 hover:bg-white/30 transition-all"
                 >
-                  <span className="text-2xl">⚖️</span> Know Your Rights
+                  <span className="text-xl sm:text-2xl">⚖️</span> Know Your Rights
                 </a>
               </div>
             </div>
