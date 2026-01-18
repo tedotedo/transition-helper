@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Search } from './Search'
+import { useRole } from '../../hooks'
 
 interface AppShellProps {
   children: ReactNode
@@ -8,12 +9,13 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
+  const { isYoungPerson } = useRole()
 
   // Close more menu when route changes
   const closeMoreMenu = () => setMoreMenuOpen(false)
 
   return (
-    <div className="min-h-screen bg-background text-warm-800 flex">
+    <div className={`min-h-screen text-warm-800 flex ${isYoungPerson ? 'young-person-gradient' : 'bg-background'}`}>
       {/* Sidebar - desktop only */}
       <aside className="hidden md:flex w-64 flex-col border-r border-warm-200 bg-white/80 backdrop-blur-sm">
         <div className="h-16 flex items-center px-5 border-b border-warm-100">

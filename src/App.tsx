@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { EasyReadProvider, RoleProvider, useRole } from './hooks'
 import { AppShell } from './components/layout/AppShell'
@@ -33,21 +32,6 @@ import MyBadges from './pages/level-up/MyBadges'
 // Wrapper to apply role-based styling
 function AppContent() {
   const { isYoungPerson } = useRole()
-
-  // Apply vibrant gradient directly to html and body for young person view
-  useEffect(() => {
-    if (isYoungPerson) {
-      document.documentElement.classList.add('young-person-bg')
-      document.body.classList.add('young-person-bg')
-    } else {
-      document.documentElement.classList.remove('young-person-bg')
-      document.body.classList.remove('young-person-bg')
-    }
-    return () => {
-      document.documentElement.classList.remove('young-person-bg')
-      document.body.classList.remove('young-person-bg')
-    }
-  }, [isYoungPerson])
 
   return (
     <div className={isYoungPerson ? 'font-friendly' : 'font-sans'}>
