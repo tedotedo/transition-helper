@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { Search } from './Search'
 import { useRole } from '../../hooks'
 import { CompactRoleToggle } from '../home/CompactRoleToggle'
+import { FeedbackButton } from './FeedbackButton'
 
 interface AppShellProps {
   children: ReactNode
@@ -160,6 +161,9 @@ export function AppShell({ children }: AppShellProps) {
             </>
           )}
         </nav>
+
+        {/* Floating Feedback Button */}
+        <FeedbackButton />
       </div>
     </div>
   )
