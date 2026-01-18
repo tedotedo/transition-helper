@@ -42,7 +42,7 @@ export function RightsHub() {
           label="Under 16"
           emoji="🌱"
           tagline="Growing & Learning"
-          description="You might be able to make your own healthcare decisions - even without your parents knowing!"
+          description="Learn how you can start having a say in your healthcare decisions as you grow and develop!"
           bgGradient="from-green-50 to-emerald-50/80 border-green-200/60 hover:border-green-300"
           accentColor="text-green-600"
           href="/rights/consent-under-16"
@@ -192,21 +192,21 @@ function AgeCard({ label, tagline, description, emoji, highlight, href, bgGradie
       )}
 
       <div className="flex items-center gap-3 mb-3">
-        <span className="text-3xl sm:text-4xl">{emoji}</span>
+        <span className="text-4xl sm:text-5xl">{emoji}</span>
         <div>
-          <p className={`text-xs sm:text-sm font-bold uppercase tracking-wide ${accentColor}`}>{label}</p>
-          <p className="text-xs text-warm-500 font-medium">{tagline}</p>
+          <p className={`text-sm sm:text-base font-bold uppercase tracking-wide ${accentColor}`}>{label}</p>
+          <p className="text-sm sm:text-xs text-warm-500 font-medium">{tagline}</p>
         </div>
       </div>
 
-      <p className="text-sm sm:text-base text-warm-700 leading-relaxed flex-1">{description}</p>
+      <p className="text-base sm:text-lg text-warm-700 leading-relaxed flex-1">{description}</p>
 
       <div className="mt-4 pt-3 border-t border-warm-200/50">
-        <span className={`inline-flex items-center gap-1 text-sm font-semibold ${isDisabled ? 'text-warm-400' : accentColor}`}>
+        <span className={`inline-flex items-center gap-1 text-base sm:text-lg font-semibold ${isDisabled ? 'text-warm-400' : accentColor}`}>
           {isDisabled ? (
             <>🔜 Coming soon</>
           ) : (
-            <>Learn more <span className="text-lg">→</span></>
+            <>Learn more <span className="text-xl">→</span></>
           )}
         </span>
       </div>
@@ -247,17 +247,17 @@ function TopicCard({ title, emoji, description, active, onClick, gradient, bgCol
       }`}
     >
       <div className="flex items-start gap-3">
-        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-md shrink-0`}>
-          <span className="text-xl sm:text-2xl">{emoji}</span>
+        <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-md shrink-0`}>
+          <span className="text-2xl sm:text-3xl">{emoji}</span>
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-2">
-            <h3 className="font-bold text-warm-800 text-sm sm:text-base">{title}</h3>
-            <span className={`text-lg transition-transform duration-300 ${active ? 'rotate-180' : ''}`}>
+            <h3 className="font-bold text-warm-800 text-base sm:text-lg">{title}</h3>
+            <span className={`text-xl transition-transform duration-300 ${active ? 'rotate-180' : ''}`}>
               {active ? '▲' : '▼'}
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-warm-600 mt-1 leading-relaxed">{description}</p>
+          <p className="text-sm sm:text-base text-warm-600 mt-1 leading-relaxed">{description}</p>
         </div>
       </div>
     </button>
