@@ -185,12 +185,6 @@ function AgeCard({ label, tagline, description, emoji, highlight, href, bgGradie
             : 'hover:shadow-card-hover hover:-translate-y-1'
       }`}
     >
-      {highlight && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-xs font-bold rounded-full shadow-md">
-          Most Popular
-        </div>
-      )}
-
       <div className="flex items-center gap-3 mb-3">
         <span className="text-4xl sm:text-5xl">{emoji}</span>
         <div>
