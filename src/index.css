@@ -117,6 +117,13 @@ body.young-person-bg {
   animation: gradientFlow 8s ease-in-out infinite alternate;
 }
 
+/* Make the main wrapper transparent so gradient shows through */
+.font-friendly .bg-background,
+.font-friendly > .min-h-screen {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
 /* Make cards pop against the vibrant background */
 .font-friendly .shadow-card {
   box-shadow:
