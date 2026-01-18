@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(tree:*)",
+      "Bash(npm run build:*)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "Skill(ralph-wiggum:cancel-ralph)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright install:*)",
+      "Bash(npx playwright test:*)",
+      "Bash(git clone:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh repo list:*)",
+      "Bash(git remote set-url:*)",
+      "mcp__plugin_playwright_playwright__browser_type",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "Bash(npm test:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(wc:*)",
+      "Bash(npm run lint:*)",
+      "Bash(git tag:*)",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm run build:*)"
+    ]
+  }
+}

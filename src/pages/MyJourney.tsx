@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { TransitionTimeline } from '../components/home/TransitionTimeline'
 
 type StageKey = 'ready' | 'steady' | 'go' | 'adult'
 
@@ -156,6 +157,11 @@ export function MyJourney() {
           You're on your way to taking charge of your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready.
         </p>
       </header>
+
+      {/* Visual progress timeline */}
+      <section className="max-w-4xl mx-auto">
+        <TransitionTimeline currentStage={activeStage} onStageClick={setActiveStage} />
+      </section>
 
       <section className="space-y-5">
         {/* Stage selector cards */}

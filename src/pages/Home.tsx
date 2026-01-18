@@ -1,9 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { RoleToggle } from '../components/home/RoleToggle'
 import { QuickActionTile } from '../components/home/QuickActionTile'
 import { ProgressTracker } from '../components/home/ProgressTracker'
 import { NamedWorkerCard } from '../components/home/NamedWorkerCard'
 import { TipCallout } from '../components/home/TipCallout'
+import { JourneyQuiz } from '../components/home/JourneyQuiz'
+import { getRecommendedRoute, getWelcomeMessage } from '../components/home/journeyQuizHelpers'
 import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
@@ -11,7 +14,15 @@ import { useEasyRead, useRole } from '../hooks'
 
 const LAST_BACKUP_KEY = 'transition-last-backup'
 const USER_NAME_KEY = 'transition-user-name'
-const BACKUP_REMINDER_DAYS = 7
+const FIRST_VISIT_KEY = 'transition-has-visited'
+
+function isFirstTimeVisitor(): boolean {
+  return !localStorage.getItem(FIRST_VISIT_KEY)
+}
+
+function markAsReturningVisitor(): void {
+  localStorage.setItem(FIRST_VISIT_KEY, 'true')
+}
 
 // All localStorage keys used by the app
 const ALL_STORAGE_KEYS = [
@@ -25,6 +36,7 @@ const ALL_STORAGE_KEYS = [
   'transition-last-backup',
   'transition-user-name',
   'transition-easy-read',
+  'transition-has-visited',
 ]
 
 function getLastBackupDate(): Date | null {
@@ -32,13 +44,6 @@ function getLastBackupDate(): Date | null {
   if (!stored) return null
   const date = new Date(stored)
   return isNaN(date.getTime()) ? null : date
-}
-
-function shouldShowBackupReminder(): boolean {
-  const lastBackup = getLastBackupDate()
-  if (!lastBackup) return true // Never backed up
-  const daysSinceBackup = (Date.now() - lastBackup.getTime()) / (1000 * 60 * 60 * 24)
-  return daysSinceBackup >= BACKUP_REMINDER_DAYS
 }
 
 function exportBackup(): void {
@@ -108,6 +113,7 @@ const parentTip = "Let your child have a go at answering the first question at t
 
 export function Home() {
   const { role, setRole } = useRole()
+  const navigate = useNavigate()
 
   // User name state
   const [userName, setUserName] = useState<string>(() => {
@@ -125,12 +131,37 @@ export function Home() {
   const [teamCount, setTeamCount] = useState(() => getCareTeamCount())
 
   // Backup state
-  const [showBackupReminder, setShowBackupReminder] = useState(() => shouldShowBackupReminder())
   const [backupMessage, setBackupMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+
+  // First-time visitor state
+  const [isFirstVisit, setIsFirstVisit] = useState(() => isFirstTimeVisitor())
+  const [showQuiz, setShowQuiz] = useState(false)
+  const [quizComplete, setQuizComplete] = useState(false)
+  const [welcomeMessage, setWelcomeMessage] = useState('')
+
+  const handleStartQuiz = useCallback(() => {
+    setShowQuiz(true)
+  }, [])
+
+  const handleQuizComplete = useCallback((answers: Parameters<typeof getRecommendedRoute>[0]) => {
+    markAsReturningVisitor()
+    setQuizComplete(true)
+    setWelcomeMessage(getWelcomeMessage(answers))
+
+    // Brief delay to show the completion message, then navigate
+    setTimeout(() => {
+      const route = getRecommendedRoute(answers)
+      navigate(route)
+    }, 1500)
+  }, [navigate])
+
+  const handleDismissWelcome = useCallback(() => {
+    markAsReturningVisitor()
+    setIsFirstVisit(false)
+  }, [])
 
   const handleBackup = useCallback(() => {
     exportBackup()
-    setShowBackupReminder(false)
     setBackupMessage({ type: 'success', text: 'Backup downloaded! Keep it somewhere safe.' })
     setTimeout(() => setBackupMessage(null), 5000)
   }, [])
@@ -202,25 +233,6 @@ export function Home() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Backup reminder banner */}
-      {showBackupReminder && (
-        <div className="rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 px-4 py-3 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">💾</span>
-            <div>
-              <p className="font-medium text-amber-800 text-sm">Time to back up your data!</p>
-              <p className="text-xs text-amber-600">Keep your info safe - back up weekly</p>
-            </div>
-          </div>
-          <button
-            onClick={handleBackup}
-            className="px-3 py-1.5 rounded-lg bg-amber-500 text-white text-sm font-medium hover:bg-amber-600 transition-colors flex-shrink-0"
-          >
-            Back up now
-          </button>
-        </div>
-      )}
-
       {/* Backup message toast */}
       {backupMessage && (
         <div className={`rounded-xl px-4 py-3 flex items-center gap-2 text-sm ${
@@ -233,6 +245,68 @@ export function Home() {
         </div>
       )}
 
+      {/* First-time visitor welcome with quiz */}
+      {isFirstVisit && (
+        <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-accent-500 via-accent-400 to-primary-400 px-4 py-6 sm:px-6 sm:py-8 shadow-card">
+          {/* Background decoration */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-xl" />
+          </div>
+
+          <div className="relative">
+            {/* Quiz completion state */}
+            {quizComplete ? (
+              <div className="text-center space-y-4 animate-fade-in py-8">
+                <div className="text-6xl animate-bounce">🎉</div>
+                <h2 className="text-2xl sm:text-3xl font-black text-white">
+                  Perfect! Taking you there now...
+                </h2>
+                <p className="text-lg text-white/90">{welcomeMessage}</p>
+              </div>
+            ) : showQuiz ? (
+              /* Quiz mode */
+              <JourneyQuiz
+                onComplete={handleQuizComplete}
+                onSkip={handleDismissWelcome}
+              />
+            ) : (
+              /* Initial welcome with quiz option */
+              <div className="text-center space-y-4">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2">
+                  <span className="text-2xl">👋</span>
+                  <span className="text-sm font-bold text-white">Welcome!</span>
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
+                  First time here? Let's find your path
+                </h2>
+
+                <p className="max-w-xl mx-auto text-base sm:text-lg text-white/90 leading-relaxed">
+                  Answer 3 quick questions and we'll show you exactly where to start.
+                  Takes less than 30 seconds!
+                </p>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+                  <button
+                    onClick={handleStartQuiz}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-accent-600 font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                  >
+                    <span>🎯</span> Find My Starting Point
+                  </button>
+                  <button
+                    onClick={handleDismissWelcome}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/20 backdrop-blur-sm text-white font-bold border border-white/30 hover:bg-white/30 transition-all"
+                  >
+                    I'll explore on my own
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Hero with role toggle */}
       {role === 'young-person' ? (
         <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary-500 via-primary-400 to-accent-400 px-4 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10 shadow-card">
@@ -241,10 +315,8 @@ export function Home() {
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse-soft" />
             <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-accent-300/20 rounded-full blur-xl" />
             <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-white/5 rounded-full" />
-            {/* Floating icons */}
-            <span className="absolute top-4 right-8 text-4xl opacity-20 animate-bounce" style={{ animationDelay: '0s' }}>🚀</span>
-            <span className="absolute bottom-6 right-20 text-3xl opacity-20 animate-bounce" style={{ animationDelay: '0.5s' }}>⭐</span>
-            <span className="absolute top-1/2 right-12 text-2xl opacity-15 animate-bounce" style={{ animationDelay: '1s' }}>💪</span>
+            {/* Floating icon */}
+            <span className="absolute top-4 right-8 text-4xl opacity-20 animate-bounce">🚀</span>
           </div>
 
           <div className="relative flex flex-col items-center text-center">
@@ -365,9 +437,6 @@ export function Home() {
         </section>
       )}
 
-      {/* Easy Read / Accessibility toggle */}
-      <EasyReadToggle />
-
       {/* Quick actions */}
       <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <QuickActionTile
@@ -399,9 +468,6 @@ export function Home() {
       {/* Progress tracker */}
       <ProgressTracker stageName={stageNames[currentStage] || 'Go'} percent={progressPercent} />
 
-      {/* Named worker */}
-      <NamedWorkerCard />
-
       {/* Resources */}
       <section className="grid gap-4 md:grid-cols-3">
         <ResourceCard
@@ -423,6 +489,12 @@ export function Home() {
 
       {/* Tip */}
       <TipCallout tip={tip} />
+
+      {/* Named worker */}
+      <NamedWorkerCard />
+
+      {/* Easy Read / Accessibility toggle */}
+      <EasyReadToggle />
 
       {/* Backup section */}
       <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
