@@ -49,8 +49,8 @@ export function RightsHub() {
         />
         <AgeCard
           label="Age 16–17"
-          emoji="🚀"
-          tagline="Nearly There!"
+          emoji="🔑"
+          tagline="Unlocking Your Rights"
           description="Big news: at 16, you can usually say yes to your own treatment. Let's unpack what that means!"
           bgGradient="from-primary-50 to-orange-50/80 border-primary-200/60 hover:border-primary-300"
           accentColor="text-primary-600"
