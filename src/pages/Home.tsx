@@ -247,17 +247,38 @@ export function Home() {
       )}
 
       {/* Hero with role toggle */}
-      <section className="rounded-3xl bg-gradient-to-br from-primary-50 via-white to-accent-50/30 border border-primary-100 px-6 py-6 md:px-10 md:py-8 shadow-card hover:shadow-card-hover transition-shadow duration-300">
-        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <div className="max-w-xl space-y-3">
-            <p className="inline-flex items-center rounded-full bg-white border border-accent-200 px-3 py-1.5 text-xs font-medium text-accent-700 shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-accent-400 mr-2 animate-pulse-soft" />
-              Getting ready for adult care
-            </p>
-            <h1 className="text-2xl md:text-3xl font-bold text-warm-800">{heroHeading}</h1>
+      {role === 'young-person' ? (
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500 via-primary-400 to-accent-400 px-6 py-8 md:px-10 md:py-10 shadow-card">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse-soft" />
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-accent-300/20 rounded-full blur-xl" />
+            <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-white/5 rounded-full" />
+            {/* Floating icons */}
+            <span className="absolute top-4 right-8 text-4xl opacity-20 animate-bounce" style={{ animationDelay: '0s' }}>🚀</span>
+            <span className="absolute bottom-6 right-20 text-3xl opacity-20 animate-bounce" style={{ animationDelay: '0.5s' }}>⭐</span>
+            <span className="absolute top-1/2 right-12 text-2xl opacity-15 animate-bounce" style={{ animationDelay: '1s' }}>💪</span>
+          </div>
 
-            {/* Name input/display for young person */}
-            {role === 'young-person' && (
+          <div className="relative flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div className="max-w-xl space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="text-5xl">🎮</span>
+                <p className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-bold text-white shadow-lg">
+                  <span className="h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse" />
+                  Level Up Your Life!
+                </p>
+              </div>
+
+              <h1 className="text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">
+                {userName ? (
+                  <>Yo {userName}! <span className="inline-block animate-bounce">👋</span></>
+                ) : (
+                  <>Ready to level up? <span className="inline-block animate-bounce">🔥</span></>
+                )}
+              </h1>
+
+              {/* Name input/display for young person */}
               <div className="flex items-center gap-2">
                 {isEditingName ? (
                   <div className="flex items-center gap-2">
@@ -265,8 +286,8 @@ export function Home() {
                       type="text"
                       value={nameInput}
                       onChange={(e) => setNameInput(e.target.value)}
-                      placeholder="Enter your name"
-                      className="px-3 py-1.5 rounded-lg border border-warm-200 bg-white text-warm-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-300 w-40"
+                      placeholder="What's your name?"
+                      className="px-4 py-2 rounded-xl border-2 border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder-white/60 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/50 w-44"
                       autoFocus
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') handleSaveName()
@@ -275,21 +296,21 @@ export function Home() {
                     />
                     <button
                       onClick={handleSaveName}
-                      className="px-2 py-1 rounded-lg bg-accent-500 text-white text-xs font-medium hover:bg-accent-600 transition-colors"
+                      className="px-3 py-2 rounded-xl bg-white text-primary-600 text-sm font-bold hover:bg-white/90 transition-colors shadow-lg"
                     >
                       Save
                     </button>
                     <button
                       onClick={() => setIsEditingName(false)}
-                      className="px-2 py-1 rounded-lg text-warm-500 text-xs hover:text-warm-700 transition-colors"
+                      className="px-2 py-2 rounded-xl text-white/70 text-sm hover:text-white transition-colors"
                     >
-                      Cancel
+                      ✕
                     </button>
                   </div>
                 ) : userName ? (
                   <button
                     onClick={handleStartEditingName}
-                    className="inline-flex items-center gap-1.5 text-xs text-warm-500 hover:text-primary-600 transition-colors"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 text-sm text-white/80 hover:bg-white/20 hover:text-white transition-all"
                   >
                     <span>✏️</span>
                     <span>Change name</span>
@@ -297,29 +318,64 @@ export function Home() {
                 ) : (
                   <button
                     onClick={handleStartEditingName}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-dashed border-warm-300 text-xs text-warm-500 hover:border-primary-300 hover:text-primary-600 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-dashed border-white/40 text-sm text-white/80 hover:border-white/60 hover:text-white hover:bg-white/10 transition-all"
                   >
-                    <span>👤</span>
-                    <span>Add your name for a personal greeting</span>
+                    <span>🏷️</span>
+                    <span>Add your name - make it personal!</span>
                   </button>
                 )}
                 {userName && !isEditingName && (
                   <button
                     onClick={handleClearName}
-                    className="text-xs text-warm-400 hover:text-red-500 transition-colors"
+                    className="text-sm text-white/50 hover:text-white/80 transition-colors"
                     title="Remove name"
                   >
                     ✕
                   </button>
                 )}
               </div>
-            )}
 
-            <p className="text-sm md:text-base text-warm-600 leading-relaxed">{heroBody}</p>
+              <p className="text-base md:text-lg text-white/90 leading-relaxed font-medium">
+                You're about to unlock some <span className="text-yellow-300 font-bold">serious superpowers</span> 💪
+                Learn what changes at 16 & 18, take control of your health, and become the boss of your own care!
+              </p>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <a
+                  href="/level-up"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-primary-600 font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                >
+                  <span>🎯</span> Start Your Adventure
+                </a>
+                <a
+                  href="/rights"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm text-white font-bold border-2 border-white/30 hover:bg-white/30 transition-all"
+                >
+                  <span>⚡</span> Know Your Powers
+                </a>
+              </div>
+            </div>
+
+            <div className="flex-shrink-0">
+              <RoleToggle value={role} onChange={setRole} />
+            </div>
           </div>
-          <RoleToggle value={role} onChange={setRole} />
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="rounded-3xl bg-gradient-to-br from-primary-50 via-white to-accent-50/30 border border-primary-100 px-6 py-6 md:px-10 md:py-8 shadow-card hover:shadow-card-hover transition-shadow duration-300">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div className="max-w-xl space-y-3">
+              <p className="inline-flex items-center rounded-full bg-white border border-accent-200 px-3 py-1.5 text-xs font-medium text-accent-700 shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-accent-400 mr-2 animate-pulse-soft" />
+                Getting ready for adult care
+              </p>
+              <h1 className="text-2xl md:text-3xl font-bold text-warm-800">{heroHeading}</h1>
+              <p className="text-sm md:text-base text-warm-600 leading-relaxed">{heroBody}</p>
+            </div>
+            <RoleToggle value={role} onChange={setRole} />
+          </div>
+        </section>
+      )}
 
       {/* Easy Read / Accessibility toggle */}
       <EasyReadToggle />
