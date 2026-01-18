@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import type { AgeGroup, Familiarity, Goal, QuizAnswers } from './journeyQuizHelpers'
+import type { AgeGroup, ParentFamiliarity, ParentGoal, ParentQuizAnswers } from './journeyQuizHelpers'
 
-interface JourneyQuizProps {
-  onComplete: (answers: QuizAnswers) => void
+interface ParentQuizProps {
+  onComplete: (answers: ParentQuizAnswers) => void
   onSkip: () => void
-  onBack?: () => void // Go back to role selection
+  onBack: () => void // Go back to role selection
 }
 
 const ageOptions: { value: AgeGroup; label: string; emoji: string }[] = [
@@ -14,41 +14,42 @@ const ageOptions: { value: AgeGroup; label: string; emoji: string }[] = [
   { value: '18+', label: '18+', emoji: '🎓' },
 ]
 
-const familiarOptions: { value: Familiarity; label: string; emoji: string }[] = [
-  { value: 'yes', label: 'Yes, I know about it', emoji: '👍' },
-  { value: 'no', label: 'No, this is new to me', emoji: '🆕' },
-  { value: 'not-sure', label: 'I\'ve heard of it but not sure', emoji: '🤔' },
+const familiarOptions: { value: ParentFamiliarity; label: string; emoji: string }[] = [
+  { value: 'not-started', label: "We haven't really talked about it yet", emoji: '🆕' },
+  { value: 'talked-a-bit', label: "We've discussed it a bit", emoji: '💬' },
+  { value: 'they-know-more', label: 'They know more than me!', emoji: '😅' },
+  { value: 'actively-planning', label: "We're actively planning together", emoji: '📋' },
 ]
 
-const goalOptions: { value: Goal; label: string; emoji: string; description: string }[] = [
-  { value: 'understand', label: 'Understand what\'s changing', emoji: '📚', description: 'Learn what happens at 16 and 18' },
-  { value: 'plan', label: 'Plan my transition', emoji: '📝', description: 'Get ready step by step' },
-  { value: 'stories', label: 'Hear from others', emoji: '💬', description: 'Watch videos from young people' },
-  { value: 'rights', label: 'Know my rights', emoji: '⚖️', description: 'Understand consent and decisions' },
+const goalOptions: { value: ParentGoal; label: string; emoji: string; description: string }[] = [
+  { value: 'understand', label: "Understand what's changing for them", emoji: '📚', description: 'Learn what happens at 16 and 18' },
+  { value: 'role-change', label: 'Know how my role changes', emoji: '🤝', description: "Navigate the 'letting go' journey" },
+  { value: 'worries', label: 'Manage my own worries', emoji: '💙', description: 'Hear from other parents' },
+  { value: 'consent', label: 'Understand consent & my involvement', emoji: '⚖️', description: 'Know where you stand legally' },
 ]
 
-export function JourneyQuiz({ onComplete, onSkip, onBack }: JourneyQuizProps) {
+export function ParentQuiz({ onComplete, onSkip, onBack }: ParentQuizProps) {
   const [step, setStep] = useState(1)
-  const [answers, setAnswers] = useState<QuizAnswers>({})
+  const [answers, setAnswers] = useState<ParentQuizAnswers>({})
 
-  const handleAgeSelect = (age: AgeGroup) => {
-    setAnswers(prev => ({ ...prev, age }))
+  const handleAgeSelect = (childAge: AgeGroup) => {
+    setAnswers(prev => ({ ...prev, childAge }))
     setStep(2)
   }
 
-  const handleFamiliarSelect = (familiar: Familiarity) => {
-    setAnswers(prev => ({ ...prev, familiar }))
+  const handleFamiliarSelect = (familiarity: ParentFamiliarity) => {
+    setAnswers(prev => ({ ...prev, familiarity }))
     setStep(3)
   }
 
-  const handleGoalSelect = (goal: Goal) => {
+  const handleGoalSelect = (goal: ParentGoal) => {
     const finalAnswers = { ...answers, goal }
     setAnswers(finalAnswers)
     onComplete(finalAnswers)
   }
 
   const handleBack = () => {
-    if (step === 1 && onBack) {
+    if (step === 1) {
       onBack() // Go back to role selection
     } else {
       setStep(prev => Math.max(1, prev - 1))
@@ -73,11 +74,11 @@ export function JourneyQuiz({ onComplete, onSkip, onBack }: JourneyQuizProps) {
         ))}
       </div>
 
-      {/* Question 1: Age */}
+      {/* Question 1: Child's Age */}
       {step === 1 && (
         <div className="space-y-4 animate-fade-in">
           <h3 className="text-xl sm:text-2xl font-bold text-white text-center">
-            How old are you? 🎂
+            How old is your young person? 🎂
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {ageOptions.map(option => (
@@ -91,14 +92,12 @@ export function JourneyQuiz({ onComplete, onSkip, onBack }: JourneyQuizProps) {
               </button>
             ))}
           </div>
-          {onBack && (
-            <button
-              onClick={handleBack}
-              className="text-white/70 hover:text-white text-sm flex items-center gap-1 mx-auto"
-            >
-              ← Change who I am
-            </button>
-          )}
+          <button
+            onClick={handleBack}
+            className="text-white/70 hover:text-white text-sm flex items-center gap-1 mx-auto"
+          >
+            ← Change who I am
+          </button>
         </div>
       )}
 
@@ -106,7 +105,7 @@ export function JourneyQuiz({ onComplete, onSkip, onBack }: JourneyQuizProps) {
       {step === 2 && (
         <div className="space-y-4 animate-fade-in">
           <h3 className="text-xl sm:text-2xl font-bold text-white text-center">
-            Have you heard of "transition to adult care"? 🏥
+            Have you talked about moving to adult care together? 💬
           </h3>
           <div className="flex flex-col gap-3 max-w-md mx-auto">
             {familiarOptions.map(option => (
@@ -133,7 +132,7 @@ export function JourneyQuiz({ onComplete, onSkip, onBack }: JourneyQuizProps) {
       {step === 3 && (
         <div className="space-y-4 animate-fade-in">
           <h3 className="text-xl sm:text-2xl font-bold text-white text-center">
-            What would help you most right now? 🎯
+            What would help YOU most right now? 🎯
           </h3>
           <div className="grid sm:grid-cols-2 gap-3 max-w-lg mx-auto">
             {goalOptions.map(option => (

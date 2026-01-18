@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Search } from './Search'
 import { useRole } from '../../hooks'
+import { CompactRoleToggle } from '../home/CompactRoleToggle'
 
 interface AppShellProps {
   children: ReactNode
@@ -9,7 +10,7 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
-  const { isYoungPerson } = useRole()
+  const { role, setRole, isYoungPerson } = useRole()
 
   // Close more menu when route changes
   const closeMoreMenu = () => setMoreMenuOpen(false)
@@ -37,6 +38,34 @@ export function AppShell({ children }: AppShellProps) {
           <NavItem to="/resources" label="Resources" icon="📚" />
           <NavItem to="/level-up" label="Level Up Game" icon="🎮" />
         </nav>
+        {/* Role toggle in sidebar */}
+        <div className="px-4 py-3 border-t border-warm-100">
+          <p className="text-xs text-warm-500 mb-2">Viewing as:</p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setRole('young-person')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                isYoungPerson
+                  ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-sm'
+                  : 'bg-warm-50 text-warm-600 hover:bg-warm-100'
+              }`}
+            >
+              <span>🧑</span>
+              <span>Young person</span>
+            </button>
+            <button
+              onClick={() => setRole('parent-carer')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                !isYoungPerson
+                  ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-sm'
+                  : 'bg-warm-50 text-warm-600 hover:bg-warm-100'
+              }`}
+            >
+              <span>👨‍👩‍👧</span>
+              <span>Parent</span>
+            </button>
+          </div>
+        </div>
         <div className="px-4 py-4 text-xs text-warm-400 border-t border-warm-100">
           <p>This app gives general information for the UK. It does not replace medical or legal advice.</p>
         </div>
@@ -48,9 +77,14 @@ export function AppShell({ children }: AppShellProps) {
           <div className="flex-1 flex items-center max-w-md">
             <Search />
           </div>
-          <div className="ml-3 flex items-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-accent-400 to-accent-500 flex items-center justify-center text-xs font-bold text-white shadow-card">
-              YP
+          <div className="ml-3 flex items-center gap-4">
+            <CompactRoleToggle value={role} onChange={setRole} />
+            <div className={`h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-card ${
+              isYoungPerson
+                ? 'bg-gradient-to-br from-accent-400 to-accent-500'
+                : 'bg-gradient-to-br from-primary-400 to-primary-500'
+            }`}>
+              {isYoungPerson ? 'YP' : 'PC'}
             </div>
           </div>
         </header>
@@ -85,6 +119,34 @@ export function AppShell({ children }: AppShellProps) {
                 onClick={closeMoreMenu}
               />
               <div className="absolute bottom-full left-0 right-0 bg-white border-t border-warm-200 rounded-t-2xl shadow-lg z-20 p-4 mb-0">
+                {/* Role toggle for mobile */}
+                <div className="mb-4 pb-3 border-b border-warm-100">
+                  <p className="text-xs text-warm-500 mb-2 text-center">Viewing as:</p>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => { setRole('young-person'); closeMoreMenu(); }}
+                      className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                        isYoungPerson
+                          ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-sm'
+                          : 'bg-warm-50 text-warm-600'
+                      }`}
+                    >
+                      <span>🧑</span>
+                      <span>Young person</span>
+                    </button>
+                    <button
+                      onClick={() => { setRole('parent-carer'); closeMoreMenu(); }}
+                      className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                        !isYoungPerson
+                          ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-sm'
+                          : 'bg-warm-50 text-warm-600'
+                      }`}
+                    >
+                      <span>👨‍👩‍👧</span>
+                      <span>Parent</span>
+                    </button>
+                  </div>
+                </div>
                 <div className="grid grid-cols-3 gap-3">
                   <MoreMenuItem to="/journey" icon="🚀" label="My Journey" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/rights" icon="⚖️" label="Rights" onClick={closeMoreMenu} />

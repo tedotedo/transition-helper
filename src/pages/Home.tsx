@@ -1,12 +1,21 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RoleToggle } from '../components/home/RoleToggle'
+import { RoleSelector } from '../components/home/RoleSelector'
 import { QuickActionTile } from '../components/home/QuickActionTile'
 import { ProgressTracker } from '../components/home/ProgressTracker'
 import { NamedWorkerCard } from '../components/home/NamedWorkerCard'
 import { TipCallout } from '../components/home/TipCallout'
 import { JourneyQuiz } from '../components/home/JourneyQuiz'
-import { getRecommendedRoute, getWelcomeMessage } from '../components/home/journeyQuizHelpers'
+import { ParentQuiz } from '../components/home/ParentQuiz'
+import {
+  getRouteForAnswers,
+  getMessageForAnswers,
+  type QuizAnswers,
+  type ParentQuizAnswers,
+  type CombinedQuizAnswers
+} from '../components/home/journeyQuizHelpers'
+import type { UserRole } from '../hooks/useRole'
 import { FloatingShapes, ConfettiCelebration } from '../components/illustrations'
 import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
@@ -134,24 +143,45 @@ export function Home() {
   // Backup state
   const [backupMessage, setBackupMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
-  // First-time visitor state
+  // First-time visitor state - now with role selection step
   const [isFirstVisit, setIsFirstVisit] = useState(() => isFirstTimeVisitor())
-  const [showQuiz, setShowQuiz] = useState(false)
-  const [quizComplete, setQuizComplete] = useState(false)
+  const [onboardingStep, setOnboardingStep] = useState<'role' | 'quiz' | 'complete'>('role')
+  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null)
   const [welcomeMessage, setWelcomeMessage] = useState('')
 
-  const handleStartQuiz = useCallback(() => {
-    setShowQuiz(true)
+  const handleRoleSelect = useCallback((selectedRole: UserRole) => {
+    setSelectedRole(selectedRole)
+    setRole(selectedRole) // Persist to context
+    setOnboardingStep('quiz')
+  }, [setRole])
+
+  const handleBackToRoleSelect = useCallback(() => {
+    setOnboardingStep('role')
+    setSelectedRole(null)
   }, [])
 
-  const handleQuizComplete = useCallback((answers: Parameters<typeof getRecommendedRoute>[0]) => {
+  const handleYoungPersonQuizComplete = useCallback((answers: QuizAnswers) => {
     markAsReturningVisitor()
-    setQuizComplete(true)
-    setWelcomeMessage(getWelcomeMessage(answers))
+    const combined: CombinedQuizAnswers = { role: 'young-person', youngPerson: answers }
+    setWelcomeMessage(getMessageForAnswers(combined))
+    setOnboardingStep('complete')
 
     // Brief delay to show the completion message, then navigate
     setTimeout(() => {
-      const route = getRecommendedRoute(answers)
+      const route = getRouteForAnswers(combined)
+      navigate(route)
+    }, 1500)
+  }, [navigate])
+
+  const handleParentQuizComplete = useCallback((answers: ParentQuizAnswers) => {
+    markAsReturningVisitor()
+    const combined: CombinedQuizAnswers = { role: 'parent-carer', parent: answers }
+    setWelcomeMessage(getMessageForAnswers(combined))
+    setOnboardingStep('complete')
+
+    // Brief delay to show the completion message, then navigate
+    setTimeout(() => {
+      const route = getRouteForAnswers(combined)
       navigate(route)
     }, 1500)
   }, [navigate])
@@ -246,7 +276,7 @@ export function Home() {
         </div>
       )}
 
-      {/* First-time visitor welcome with quiz */}
+      {/* First-time visitor welcome - now starts with role selection */}
       {isFirstVisit && (
         <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-accent-500 via-accent-400 to-primary-400 px-4 py-6 sm:px-6 sm:py-8 shadow-card">
           {/* Background decoration */}
@@ -256,8 +286,30 @@ export function Home() {
           </div>
 
           <div className="relative">
-            {/* Quiz completion state */}
-            {quizComplete ? (
+            {/* Step 1: Role Selection */}
+            {onboardingStep === 'role' && (
+              <RoleSelector onSelect={handleRoleSelect} />
+            )}
+
+            {/* Step 2: Quiz (different for each role) */}
+            {onboardingStep === 'quiz' && selectedRole === 'young-person' && (
+              <JourneyQuiz
+                onComplete={handleYoungPersonQuizComplete}
+                onSkip={handleDismissWelcome}
+                onBack={handleBackToRoleSelect}
+              />
+            )}
+
+            {onboardingStep === 'quiz' && selectedRole === 'parent-carer' && (
+              <ParentQuiz
+                onComplete={handleParentQuizComplete}
+                onSkip={handleDismissWelcome}
+                onBack={handleBackToRoleSelect}
+              />
+            )}
+
+            {/* Step 3: Completion */}
+            {onboardingStep === 'complete' && (
               <div className="text-center space-y-4 animate-fade-in py-8">
                 <ConfettiCelebration active={true} density="heavy" />
                 <div className="text-6xl animate-bounce">🎉</div>
@@ -265,44 +317,6 @@ export function Home() {
                   Perfect! Taking you there now...
                 </h2>
                 <p className="text-lg text-white/90">{welcomeMessage}</p>
-              </div>
-            ) : showQuiz ? (
-              /* Quiz mode */
-              <JourneyQuiz
-                onComplete={handleQuizComplete}
-                onSkip={handleDismissWelcome}
-              />
-            ) : (
-              /* Initial welcome with quiz option */
-              <div className="text-center space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2">
-                  <span className="text-2xl">👋</span>
-                  <span className="text-sm font-bold text-white">Welcome!</span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
-                  First time here? Let's find your path
-                </h2>
-
-                <p className="max-w-xl mx-auto text-base sm:text-lg text-white/90 leading-relaxed">
-                  Answer 3 quick questions and we'll show you exactly where to start.
-                  Takes less than 30 seconds!
-                </p>
-
-                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
-                  <button
-                    onClick={handleStartQuiz}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-accent-600 font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-                  >
-                    <span>🎯</span> Find My Starting Point
-                  </button>
-                  <button
-                    onClick={handleDismissWelcome}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/20 backdrop-blur-sm text-white font-bold border border-white/30 hover:bg-white/30 transition-all"
-                  >
-                    I'll explore on my own
-                  </button>
-                </div>
               </div>
             )}
           </div>
