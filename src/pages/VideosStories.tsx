@@ -135,7 +135,7 @@ export function VideosStories() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             to="/journey"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-primary-500 text-white font-medium hover:bg-primary-600 transition-colors shadow-card"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 transition-all shadow-card border border-primary-400"
           >
             View My Journey
           </Link>
