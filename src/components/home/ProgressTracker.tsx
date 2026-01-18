@@ -31,6 +31,13 @@ export function ProgressTracker({ stageName, percent }: ProgressTrackerProps) {
           style={{ width: `${clamped}%` }}
         />
       </div>
+      <p className="mt-3 text-sm text-warm-500">
+        <span className="font-medium">How to reach 100%:</span> Complete the tasks in your{' '}
+        <a href="/checklist" className="text-primary-600 hover:text-primary-700 font-semibold underline underline-offset-2">
+          Checklist
+        </a>{' '}
+        — tick off each activity as you go!
+      </p>
     </section>
   )
 }
