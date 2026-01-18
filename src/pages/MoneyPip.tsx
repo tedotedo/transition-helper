@@ -14,10 +14,9 @@ export function MoneyPip() {
       {/* Header */}
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Money & Support</p>
-        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Benefits, legal rights & support 💰</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Money help & your rights 💰</h1>
         <p className="max-w-2xl text-sm md:text-base text-warm-600 leading-relaxed">
-          Essential guidance on benefits, legal rights, and support services for young people
-          transitioning to adult care in the UK.
+          Info about benefits you might be able to get, important legal stuff, and support as you move to adult services.
         </p>
       </header>
 
@@ -26,15 +25,13 @@ export function MoneyPip() {
         <div className="flex items-start gap-3">
           <span className="text-xl">💚</span>
           <div>
-            <h3 className="font-semibold text-warm-800 mb-1">Every Family's Journey is Different</h3>
+            <h3 className="font-semibold text-warm-800 mb-1">Not everyone needs all this stuff!</h3>
             <p className="text-sm text-warm-600 mb-2">
-              Not all the information on this page will apply to your situation, and that's completely
-              normal. Many young people transition to adult care without needing benefits, legal capacity
-              arrangements, or education support plans.
+              This page has lots of info, but you probably won't need all of it. Most young people moving
+              to adult care don't need benefits or special legal arrangements - and that's totally fine!
             </p>
             <p className="text-sm font-medium text-warm-700">
-              Read through the sections to identify what's relevant to your family. When in doubt, your
-              GP is always there to help guide you.
+              Have a look through and see what applies to you. If you're not sure, your GP can help.
             </p>
           </div>
         </div>
@@ -43,59 +40,59 @@ export function MoneyPip() {
       {/* Parent Focus Alert */}
       <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4">
         <div className="flex items-start gap-3">
-          <span className="text-xl">⚠️</span>
+          <span className="text-xl">👨‍👩‍👧</span>
           <div>
-            <h3 className="font-semibold text-warm-800 mb-1">For Parents, Guardians & Carers</h3>
+            <h3 className="font-semibold text-warm-800 mb-1">For parents and carers</h3>
             <p className="text-sm text-warm-600 mb-4">
-              This section contains important information about legal and financial matters.
+              Some of this stuff is a bit complicated - here are people who can help you out.
             </p>
 
             <h4 className="font-semibold text-warm-800 mb-3 flex items-center gap-2">
-              <span>🎯</span> Who Can Help
+              <span>🎯</span> People who can help
             </h4>
 
             <div className="space-y-4 text-sm">
               <div>
-                <p className="font-medium text-warm-700">Benefits & Financial Support</p>
+                <p className="font-medium text-warm-700">💷 Money and benefits help</p>
                 <p className="text-warm-600">
-                  <strong>Citizens Advice</strong> - Free, expert advice on disability benefits (PIP, DLA, ESA, Universal Credit)
+                  <strong>Citizens Advice</strong> - Free help with benefits like PIP, DLA, and Universal Credit
                 </p>
                 <p className="text-warm-500">
                   Website: <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.citizensadvice.org.uk</a>
-                  <br />Phone: 0800 144 8848
+                  <br />Phone: 0800 144 8848 (free)
                 </p>
               </div>
 
               <div>
-                <p className="font-medium text-warm-700">Education Rights & Support</p>
+                <p className="font-medium text-warm-700">🎓 School and college support</p>
                 <p className="text-warm-600">
-                  <strong>IPSEA</strong> (Independent Provider of Special Education Advice) - Free legal advice on EHCPs, SEN support, and education rights
+                  <strong>IPSEA</strong> - Free advice about EHCPs and getting support at school or college
                 </p>
                 <p className="text-warm-500">
                   Website: <a href="https://www.ipsea.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.ipsea.org.uk</a>
-                  <br />Helpline: 0800 018 4016
+                  <br />Helpline: 0800 018 4016 (free)
                 </p>
               </div>
 
               <div>
-                <p className="font-medium text-warm-700">General Support & Guidance</p>
+                <p className="font-medium text-warm-700">📞 General family support</p>
                 <p className="text-warm-600">
-                  <strong>Contact</strong> (for families with disabled children) - Parent helpline covering benefits, education, health, and local services
+                  <strong>Contact</strong> - Helpline for families covering benefits, education, health and local services
                 </p>
                 <p className="text-warm-500">
                   Website: <a href="https://www.contact.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.contact.org.uk</a>
-                  <br />Helpline: 0808 808 3555
+                  <br />Helpline: 0808 808 3555 (free)
                 </p>
               </div>
 
               <div>
-                <p className="font-medium text-warm-700">Legal Capacity & Decision-Making</p>
+                <p className="font-medium text-warm-700">⚖️ Legal stuff and decision-making</p>
                 <p className="text-warm-600">
-                  <strong>Mencap</strong> - Guidance on Court of Protection, Lasting Powers of Attorney, and mental capacity
+                  <strong>Mencap</strong> - Help understanding legal things like Power of Attorney and making decisions
                 </p>
                 <p className="text-warm-500">
                   Website: <a href="https://www.mencap.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">www.mencap.org.uk</a>
-                  <br />Helpline: 0808 808 1111
+                  <br />Helpline: 0808 808 1111 (free)
                 </p>
               </div>
             </div>
@@ -116,12 +113,12 @@ export function MoneyPip() {
                   <span className="text-lg">💷</span>
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-warm-800">Benefits & Financial Support</h2>
+                  <h2 className="text-lg font-bold text-warm-800">PIP and benefits 💷</h2>
                   <p className="text-sm text-warm-500 mt-1">
-                    Understanding Personal Independence Payment (PIP) and the transition from DLA
+                    Money you might be able to get if you have a disability or health condition
                   </p>
                   <span className="inline-flex mt-2 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">
-                    Only if your child receives DLA
+                    Only if you get DLA now
                   </span>
                 </div>
               </div>
@@ -134,14 +131,12 @@ export function MoneyPip() {
               {/* Who This Is For */}
               <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
                 <div className="flex items-start gap-2">
-                  <span className="text-lg">⚠️</span>
+                  <span className="text-lg">👀</span>
                   <div>
-                    <h4 className="font-semibold text-warm-800 text-sm">Who This Section Is For</h4>
+                    <h4 className="font-semibold text-warm-800 text-sm">Is this section for me?</h4>
                     <p className="text-sm text-warm-600 mt-1">
-                      This information is specifically for families whose child currently receives
-                      Disability Living Allowance (DLA). If your child doesn't receive DLA, you can skip
-                      this section. Most young people transitioning to adult care do not need to apply for
-                      PIP.
+                      This is mainly for people who already get DLA (Disability Living Allowance).
+                      If you don't get DLA, you can probably skip this bit. Most young people don't need PIP!
                     </p>
                   </div>
                 </div>
@@ -150,40 +145,40 @@ export function MoneyPip() {
               {/* What is PIP */}
               <div>
                 <h3 className="font-semibold text-warm-800 mb-2">
-                  What is Personal Independence Payment (PIP)?
+                  What's PIP?
                 </h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
-                  PIP is a benefit that helps with the extra costs of living with a long-term health
-                  condition or disability. It's not means-tested (your income doesn't matter) and it
-                  doesn't depend on whether you're working or not. PIP is for people aged 16 to State
-                  Pension age.
+                  PIP (Personal Independence Payment) is money from the government that helps with
+                  extra costs if you have a health condition or disability. It doesn't matter how
+                  much money you earn or whether you're working - it's based on how your condition
+                  affects you. It's for people aged 16 and over.
                 </p>
               </div>
 
               {/* Transitioning from DLA */}
               <div className="rounded-xl border border-primary-200 bg-primary-50 px-4 py-4 space-y-3">
                 <h3 className="font-semibold text-warm-800 flex items-center gap-2">
-                  <span>⚠️</span>
-                  Important: Transitioning from DLA at Age 16
+                  <span>📬</span>
+                  Switching from DLA to PIP at 16
                 </h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
-                  If your child receives Disability Living Allowance (DLA), they will need to apply for
-                  PIP when they turn 16. This transition is not automatic. The Department for Work and
-                  Pensions (DWP) will send an invitation letter shortly after their 16th birthday.
+                  If you get DLA, you'll need to apply for PIP when you turn 16. It doesn't happen
+                  automatically! You'll get a letter from the DWP (Department for Work and Pensions)
+                  shortly after your 16th birthday.
                 </p>
                 <ul className="space-y-2 text-sm text-warm-600">
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
-                    <span>Apply within 28 days of the invitation to keep DLA payments during assessment</span>
+                    <span><strong>Apply within 28 days</strong> of getting the letter to keep your DLA payments while they decide</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
-                    <span>The assessment can take 13-14 weeks on average</span>
+                    <span>It usually takes about <strong>3-4 months</strong> to process</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
                     <span>
-                      If you were an appointee for DLA, you'll need to reapply for PIP appointee status
+                      If a parent managed your DLA, they'll need to apply again to manage your PIP
                     </span>
                   </li>
                 </ul>
@@ -194,11 +189,10 @@ export function MoneyPip() {
                 <div className="flex items-start gap-2">
                   <span className="text-lg">💚</span>
                   <div>
-                    <h4 className="font-semibold text-warm-800 text-sm">Talk to Your GP and your community paediatrician</h4>
+                    <h4 className="font-semibold text-warm-800 text-sm">Your GP can help!</h4>
                     <p className="text-sm text-warm-600 mt-1">
-                      Your GP and community paediatrician can provide supporting evidence for PIP applications and help explain how
-                      your child's condition affects their daily life. They know your family's situation
-                      and can help ensure the application accurately reflects your child's needs.
+                      Your GP or children's doctor can write a letter to support your PIP application.
+                      They can explain how your condition affects your everyday life - this really helps!
                     </p>
                   </div>
                 </div>
@@ -206,7 +200,7 @@ export function MoneyPip() {
 
               {/* Official Resources */}
               <div>
-                <h3 className="font-semibold text-warm-800 mb-3">Official Resources & Support</h3>
+                <h3 className="font-semibold text-warm-800 mb-3">Helpful links</h3>
                 <div className="space-y-2">
                   {[
                     {
@@ -267,9 +261,9 @@ export function MoneyPip() {
                   <span className="text-lg">⚖️</span>
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-warm-800">Legal Capacity & Decision-Making</h2>
+                  <h2 className="text-lg font-bold text-warm-800">Making decisions at 18 ⚖️</h2>
                   <p className="text-sm text-warm-500 mt-1">
-                    Understanding Lasting Power of Attorney and Court of Protection
+                    What happens when you turn 18 and who can help make decisions
                   </p>
                 </div>
               </div>
@@ -285,13 +279,12 @@ export function MoneyPip() {
                   <span className="text-lg">🚨</span>
                   <div>
                     <h4 className="font-semibold text-warm-800 text-sm">
-                      Critical: Action Required Before 18th Birthday
+                      Important: Sort this out before you're 18!
                     </h4>
                     <p className="text-sm text-warm-600 mt-1">
-                      At age 18, parents automatically lose the legal right to make decisions for their
-                      child, even if the young person lacks capacity to make certain decisions themselves.
-                      Legal arrangements must be in place BEFORE the 18th birthday to ensure continuity of
-                      care and treatment.
+                      When you turn 18, your parents can't automatically make decisions for you anymore -
+                      even if you need help with some decisions. If you might need help, it's best to
+                      sort out the legal stuff BEFORE your 18th birthday.
                     </p>
                   </div>
                 </div>
@@ -299,79 +292,73 @@ export function MoneyPip() {
 
               {/* What Changes at 18 */}
               <div>
-                <h3 className="font-semibold text-warm-800 mb-2">What Changes at Age 18?</h3>
+                <h3 className="font-semibold text-warm-800 mb-2">What changes at 18?</h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
-                  When a young person turns 18, they become a legal adult. This means that even if they
-                  have a learning disability or other condition that affects their ability to make
-                  decisions, parents can no longer automatically make medical, financial, or legal
-                  decisions on their behalf. Proper legal arrangements are essential for maintaining
-                  continuity of care.
+                  At 18, you're legally an adult. This means YOU make decisions about your health, money,
+                  and life - not your parents. This is great for most people! But if you have a condition
+                  that makes some decisions tricky, there are legal ways to get help from people you trust.
                 </p>
               </div>
 
               {/* Lasting Power of Attorney */}
               <div className="rounded-xl border border-accent-200 bg-accent-50 px-4 py-4 space-y-3">
-                <h3 className="font-semibold text-warm-800">Lasting Power of Attorney (LPA)</h3>
+                <h3 className="font-semibold text-warm-800">Power of Attorney (LPA)</h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
-                  An LPA is a legal document that allows a young person (aged 18+) to appoint trusted
-                  people (attorneys) to make decisions on their behalf if they lose mental capacity.
-                  There are two types:
+                  An LPA is a legal document where you choose someone you trust to help make decisions
+                  if you can't. You set it up yourself when you're 18+. There are two types:
                 </p>
                 <div className="space-y-3 ml-2">
                   <div>
-                    <p className="font-medium text-sm text-warm-800">Health and Welfare LPA</p>
+                    <p className="font-medium text-sm text-warm-800">🏥 Health and Welfare LPA</p>
                     <p className="text-xs text-warm-600">
-                      Covers daily care, medical treatment, moving into a care home, and life-sustaining
-                      treatment decisions
+                      For decisions about your care, medical treatment, and where you live
                     </p>
                   </div>
                   <div>
-                    <p className="font-medium text-sm text-warm-800">Property and Financial Affairs LPA</p>
+                    <p className="font-medium text-sm text-warm-800">💰 Money LPA</p>
                     <p className="text-xs text-warm-600">
-                      Covers managing bank accounts, paying bills, and handling financial matters
+                      For decisions about your bank accounts, bills, and money stuff
                     </p>
                   </div>
                 </div>
                 <p className="text-xs text-warm-600 mt-3">
-                  Important: The young person must have sufficient mental capacity at the time of making
-                  an LPA. This means they need to understand what an LPA is, who they're appointing, and
-                  what powers those people will have.
+                  <strong>Note:</strong> To make an LPA, you need to understand what you're doing and
+                  who you're choosing. If this is tricky, there's another option below.
                 </p>
               </div>
 
               {/* Court of Protection */}
               <div>
-                <h3 className="font-semibold text-warm-800 mb-2">Court of Protection Deputyship</h3>
+                <h3 className="font-semibold text-warm-800 mb-2">If you need more support: Deputyship</h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
-                  If a young person does not have the mental capacity to make an LPA, family members or
-                  friends can apply to the Court of Protection to become a Deputy. A Deputy has similar
-                  powers to an attorney but is appointed by the court and must follow the court's
-                  supervision. This process should ideally begin well before the 18th birthday.
+                  If making an LPA yourself is too tricky, someone who cares about you (like a parent)
+                  can apply to the Court to become your "Deputy". This means they can officially help
+                  you with decisions. It's best to start this process well before you turn 18.
                 </p>
               </div>
 
               {/* Timeline */}
               <div className="rounded-xl border border-primary-200 bg-primary-50 px-4 py-3">
-                <h4 className="font-semibold text-warm-800 text-sm mb-2">Recommended Timeline</h4>
+                <h4 className="font-semibold text-warm-800 text-sm mb-2">📅 When to do what</h4>
                 <ul className="space-y-2 text-sm text-warm-600">
                   <li className="flex items-start gap-2">
                     <span className="font-semibold text-primary-600 shrink-0">Age 16-17:</span>
-                    <span>Start discussions with your GP and legal advisors about capacity and options</span>
+                    <span>Chat with your GP about whether you might need help with decisions</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-semibold text-primary-600 shrink-0">6 months before 18:</span>
-                    <span>Begin LPA or deputyship application process</span>
+                    <span>Start the LPA or deputyship paperwork</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="font-semibold text-primary-600 shrink-0">Before 18th birthday:</span>
-                    <span>Ensure all legal documents are registered and in place</span>
+                    <span className="font-semibold text-primary-600 shrink-0">Before you're 18:</span>
+                    <span>Make sure everything is signed and sorted</span>
                   </li>
                 </ul>
               </div>
 
               {/* Official Resources */}
               <div>
-                <h3 className="font-semibold text-warm-800 mb-3">Official Resources & Guidance</h3>
+                <h3 className="font-semibold text-warm-800 mb-3">Helpful links</h3>
                 <div className="space-y-2">
                   {[
                     {
@@ -432,9 +419,9 @@ export function MoneyPip() {
                   <span className="text-lg">🎓</span>
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-warm-800">Education & Training Support</h2>
+                  <h2 className="text-lg font-bold text-warm-800">School & college support 🎓</h2>
                   <p className="text-sm text-warm-500 mt-1">
-                    Understanding Education, Health and Care Plans (EHCPs) and support until age 25
+                    About EHCPs and getting help with learning until you're 25
                   </p>
                 </div>
               </div>
@@ -447,53 +434,50 @@ export function MoneyPip() {
               {/* What is an EHCP */}
               <div>
                 <h3 className="font-semibold text-warm-800 mb-2">
-                  What is an Education, Health and Care Plan (EHCP)?
+                  What's an EHCP?
                 </h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
-                  An EHCP is a legal document for children and young people with special educational
-                  needs (SEN). It describes their educational, health and social care needs, and sets out
-                  the additional support they should receive. EHCPs are designed to help young people
-                  achieve their goals and prepare for adulthood.
+                  An EHCP (Education, Health and Care Plan) is a document that describes what extra help
+                  you need at school or college. If you have one, it lists your needs and what support
+                  you should get. It's there to help you do your best!
                 </p>
               </div>
 
               {/* Key Highlight */}
               <div className="rounded-xl border border-accent-200 bg-accent-50 px-4 py-4">
                 <h3 className="font-semibold text-warm-800 flex items-center gap-2 mb-2">
-                  <span>ℹ️</span>
-                  Important: Support Can Continue Until Age 25
+                  <span>🎉</span>
+                  Good news: Support can carry on until you're 25!
                 </h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
-                  Unlike many other services that end at 18, EHCPs can continue until the end of the
-                  academic year in which a young person turns 25, as long as they remain in education or
-                  training. This is not automatic - the local authority will review whether continued
-                  support is needed.
+                  Unlike lots of other support that stops at 18, your EHCP can carry on until you're 25
+                  if you're still in education or training. It's not automatic though - they'll check
+                  each year if you still need it.
                 </p>
               </div>
 
               {/* When EHCPs Continue */}
               <div>
-                <h3 className="font-semibold text-warm-800 mb-2">When Can an EHCP Continue Past 18?</h3>
+                <h3 className="font-semibold text-warm-800 mb-2">When can my EHCP carry on after 18?</h3>
                 <p className="text-sm text-warm-600 mb-2">
-                  An EHCP can be maintained up to age 25 if the young person is in:
+                  Your EHCP can keep going until 25 if you're doing:
                 </p>
                 <ul className="space-y-1 text-sm text-warm-600 ml-4">
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
-                    <span>Further education (college, sixth form)</span>
+                    <span>College or sixth form</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
-                    <span>Apprenticeships (not level 4 or above)</span>
+                    <span>An apprenticeship</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
-                    <span>Other approved education or training courses</span>
+                    <span>Other training courses</span>
                   </li>
                 </ul>
                 <p className="text-xs text-warm-500 mt-3">
-                  Note: EHCPs are not available for higher education (university), though universities
-                  have their own disability support services.
+                  Note: EHCPs don't cover university, but unis have their own support services you can use!
                 </p>
               </div>
 
@@ -502,11 +486,10 @@ export function MoneyPip() {
                 <div className="flex items-start gap-2">
                   <span className="text-lg">💚</span>
                   <div>
-                    <h4 className="font-semibold text-warm-800 text-sm">Your GP's Support</h4>
+                    <h4 className="font-semibold text-warm-800 text-sm">Your GP can help here too</h4>
                     <p className="text-sm text-warm-600 mt-1">
-                      Your GP can provide medical evidence for EHCP applications and reviews, help
-                      coordinate health services mentioned in the plan, and support transition planning by
-                      explaining how health needs might affect education and training.
+                      Your GP can write letters to support your EHCP applications and reviews. They can
+                      explain how your health affects your learning and help make sure you get the right support.
                     </p>
                   </div>
                 </div>
@@ -514,7 +497,7 @@ export function MoneyPip() {
 
               {/* Official Resources */}
               <div>
-                <h3 className="font-semibold text-warm-800 mb-3">Official Resources & Support</h3>
+                <h3 className="font-semibold text-warm-800 mb-3">Helpful links</h3>
                 <div className="space-y-2">
                   {[
                     {
