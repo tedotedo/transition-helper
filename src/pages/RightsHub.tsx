@@ -91,7 +91,7 @@ export function RightsHub() {
             borderColor="border-green-200"
           />
           <TopicCard
-            title="Privacy & Secrets"
+            title="Privacy"
             emoji="🔒"
             description="Your health info is YOUR business. Find out what stays private and when staff might need to share."
             active={activeTopic === 'privacy'}
