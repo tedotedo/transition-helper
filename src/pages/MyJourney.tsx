@@ -2,13 +2,15 @@ import { useState } from 'react'
 
 type StageKey = 'ready' | 'steady' | 'go' | 'adult'
 
-const stages: { key: StageKey; name: string; ages: string; tagline: string; description: string; emoji: string }[] = [
+const stages: { key: StageKey; name: string; ages: string; tagline: string; description: string; emoji: string; color: string; bgGradient: string }[] = [
   {
     key: 'ready',
     name: 'Ready',
     ages: 'Age 11–13',
     tagline: 'Start learning about your health',
     emoji: '🌱',
+    color: 'text-green-600',
+    bgGradient: 'from-green-50 to-emerald-50 border-green-200 hover:border-green-300',
     description:
       "This is where it all begins! You're starting to learn more about your condition and getting to know the people who help look after you.",
   },
@@ -18,6 +20,8 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
     ages: 'Age 14–15',
     tagline: 'Building your confidence',
     emoji: '💪',
+    color: 'text-blue-600',
+    bgGradient: 'from-blue-50 to-sky-50 border-blue-200 hover:border-blue-300',
     description:
       "You're practising small steps towards independence - like speaking up about how you feel, knowing your medicines, and asking questions.",
   },
@@ -27,6 +31,8 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
     ages: 'Age 16–17',
     tagline: 'Getting ready for the move',
     emoji: '🚀',
+    color: 'text-primary-600',
+    bgGradient: 'from-primary-50 to-orange-50 border-primary-200 hover:border-primary-300',
     description:
       "You're usually old enough now to make decisions about your own care. This is the time to plan your move to adult services!",
   },
@@ -36,6 +42,8 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
     ages: 'Age 18+',
     tagline: 'Welcome to your new team',
     emoji: '🎉',
+    color: 'text-purple-600',
+    bgGradient: 'from-purple-50 to-pink-50 border-purple-200 hover:border-purple-300',
     description:
       "You've made it to adult services! Now it's about getting to know how your new team works and what support is out there for you.",
   },
@@ -134,36 +142,43 @@ export function MyJourney() {
   const [activeStage, setActiveStage] = useState<StageKey>('go')
 
   return (
-    <div className="space-y-8 animate-fade-in">
-      <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">My journey</p>
-        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Your journey to adult care 🗺️</h1>
-        <p className="max-w-2xl text-sm md:text-base text-warm-600 leading-relaxed">
-          Small steps over time make a big difference! Here are the main stages and some things you can do to feel more ready and confident.
+    <div className="space-y-6 sm:space-y-8 animate-fade-in">
+      {/* Friendly header */}
+      <header className="text-center space-y-4 py-4">
+        <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary-100 to-accent-100 px-4 py-2 text-sm font-bold text-primary-700">
+          <span className="text-xl">🗺️</span>
+          <span>Your Adventure Map</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-warm-800 leading-tight">
+          Every step counts! ✨
+        </h1>
+        <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-warm-600 leading-relaxed font-medium">
+          Growing up is an adventure — tap a stage below to see what's coming up and discover things you can try!
         </p>
       </header>
 
-      <section className="space-y-4">
-        <div className="grid gap-3 md:grid-cols-4">
+      <section className="space-y-5">
+        {/* Stage selector cards */}
+        <div className="grid gap-3 grid-cols-2 md:grid-cols-4">
           {stages.map((stage) => (
             <button
               key={stage.key}
               type="button"
               onClick={() => setActiveStage(stage.key)}
-              className={`flex flex-col rounded-2xl border px-4 py-4 text-left text-sm transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-300 ${
+              className={`flex flex-col rounded-2xl border-2 px-4 py-4 text-left transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-300 bg-gradient-to-br ${stage.bgGradient} ${
                 stage.key === activeStage
-                  ? 'border-primary-300 bg-gradient-to-br from-primary-50 to-white shadow-card-hover ring-2 ring-primary-200'
-                  : 'border-warm-200 bg-white hover:border-primary-200 hover:shadow-card hover:-translate-y-0.5'
+                  ? 'shadow-lg ring-2 ring-primary-300 scale-[1.02]'
+                  : 'hover:shadow-card hover:-translate-y-1'
               }`}
             >
               <div className="flex items-center gap-2">
-                <span className="text-lg">{stage.emoji}</span>
-                <span className="text-[0.7rem] font-semibold uppercase tracking-wider text-warm-500">{stage.ages}</span>
+                <span className="text-2xl sm:text-3xl">{stage.emoji}</span>
+                <span className="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider text-warm-500">{stage.ages}</span>
               </div>
-              <span className={`mt-2 text-base font-semibold ${stage.key === activeStage ? 'text-primary-700' : 'text-warm-800'}`}>
+              <span className={`mt-2 text-base sm:text-lg font-bold ${stage.key === activeStage ? stage.color : 'text-warm-800'}`}>
                 {stage.name}
               </span>
-              <span className="mt-1 text-xs text-warm-500">{stage.tagline}</span>
+              <span className="mt-1 text-xs sm:text-sm text-warm-500 font-medium">{stage.tagline}</span>
             </button>
           ))}
         </div>
@@ -183,41 +198,56 @@ function JourneyStageDetail({ stageKey }: JourneyStageDetailProps) {
   const items = tasks[stageKey]
 
   return (
-    <section className="mt-4 rounded-2xl border border-warm-200 bg-white px-5 py-5 shadow-card">
-      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">{stage.emoji}</span>
-            <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">{stage.ages}</p>
-          </div>
-          <h2 className="mt-1 text-lg md:text-xl font-bold text-warm-800">{stage.name}</h2>
-        </div>
-        <p className="max-w-xl text-sm text-warm-600 leading-relaxed bg-warm-50 px-4 py-3 rounded-xl border border-warm-100">{stage.description}</p>
+    <section className={`relative mt-4 rounded-3xl border-2 overflow-hidden px-5 py-6 sm:px-6 sm:py-8 shadow-lg bg-gradient-to-br ${stage.bgGradient}`}>
+      {/* Subtle animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/30 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute -bottom-20 -left-20 w-32 h-32 bg-white/20 rounded-full blur-2xl" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse-soft" style={{ animationDelay: '2s' }} />
       </div>
 
-      <div className="mt-5 grid gap-3 md:grid-cols-2">
-        {items.map((item) => (
-          <div
-            key={item.title}
-            className="group flex flex-col rounded-2xl border border-warm-200 bg-gradient-to-br from-white to-warm-50/50 px-5 py-4 text-sm transition-all duration-300 hover:border-primary-200 hover:shadow-card hover:-translate-y-0.5"
-          >
-            <div className="flex items-start gap-3">
-              <span className="text-xl">{item.emoji}</span>
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-warm-800">{item.title}</p>
-                <p className="mt-1 text-warm-600 leading-relaxed">{item.description}</p>
-                {item.linkHref && item.linkLabel && (
-                  <a
-                    href={item.linkHref}
-                    className="mt-3 inline-flex text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
-                  >
-                    {item.linkLabel}
-                  </a>
-                )}
-              </div>
+      <div className="relative">
+        {/* Header */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <span className="text-4xl sm:text-5xl">{stage.emoji}</span>
+            <div>
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-warm-500">{stage.ages}</p>
+              <h2 className={`text-2xl sm:text-3xl font-black ${stage.color}`}>{stage.name}</h2>
             </div>
           </div>
-        ))}
+          <div className="bg-white/80 backdrop-blur-sm px-4 py-3 rounded-2xl border border-white/50 shadow-sm max-w-md">
+            <p className="text-sm sm:text-base text-warm-700 leading-relaxed font-medium">{stage.description}</p>
+          </div>
+        </div>
+
+        {/* Task cards */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {items.map((item, index) => (
+            <div
+              key={item.title}
+              className="group flex flex-col rounded-2xl border-2 border-white/60 bg-white/90 backdrop-blur-sm px-5 py-5 transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1 hover:border-primary-200"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="flex items-start gap-4">
+                <span className="text-3xl sm:text-4xl flex-shrink-0">{item.emoji}</span>
+                <div className="flex-1">
+                  <p className="text-base sm:text-lg font-bold text-warm-800">{item.title}</p>
+                  <p className="mt-2 text-sm sm:text-base text-warm-600 leading-relaxed">{item.description}</p>
+                  {item.linkHref && item.linkLabel && (
+                    <a
+                      href={item.linkHref}
+                      className="mt-4 inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all"
+                    >
+                      {item.linkLabel.replace(' →', '')}
+                      <span className="ml-1">→</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
