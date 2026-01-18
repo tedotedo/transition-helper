@@ -122,25 +122,6 @@ export default function LevelUpHome() {
         </div>
       </div>
 
-      {/* Coming soon placeholder */}
-      <div className="bg-warm-50 rounded-2xl border border-warm-200 border-dashed p-5">
-        <h3 className="font-medium text-warm-600 mb-2">Coming Soon</h3>
-        <div className="grid grid-cols-2 gap-3 text-sm text-warm-500">
-          <div className="flex items-center gap-2">
-            <span>🗺️</span>
-            <span>Journey Map</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>🎮</span>
-            <span>Practice Zone</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>💬</span>
-            <span>Real Stories</span>
-          </div>
-        </div>
-      </div>
-
       {/* Encouragement */}
       <div className="text-center py-4">
         <p className="text-warm-500 text-sm">
