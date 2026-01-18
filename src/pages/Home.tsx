@@ -267,8 +267,7 @@ export function Home() {
                 <RoleToggle value={role} onChange={setRole} />
               </div>
 
-              <div className="flex flex-col md:flex-row items-center justify-center gap-3">
-                <span className="text-5xl md:text-6xl">🚀</span>
+              <div className="flex items-center justify-center">
                 <p className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 md:px-5 py-2 md:py-2.5 text-sm md:text-base font-bold text-white shadow-lg">
                   <span className="h-2 md:h-2.5 w-2 md:w-2.5 rounded-full bg-green-400 mr-2 animate-pulse" />
                   Your Journey to Independence
