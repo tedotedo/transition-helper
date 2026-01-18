@@ -28,6 +28,8 @@ import LevelUpHome from './pages/level-up/LevelUpHome'
 import MythBusters from './pages/level-up/MythBusters'
 import PowerUpsGuide from './pages/level-up/PowerUpsGuide'
 import MyBadges from './pages/level-up/MyBadges'
+import { SkillsBuilder } from './pages/SkillsBuilder'
+import { QuestionsAnswers } from './pages/QuestionsAnswers'
 
 // Wrapper to apply role-based styling
 function AppContent() {
@@ -58,6 +60,8 @@ function AppContent() {
           <Route path="/money" element={<MoneyPip />} />
           <Route path="/planning" element={<PlanningTools />} />
           <Route path="/videos" element={<VideosStories />} />
+          <Route path="/skills" element={<SkillsBuilder />} />
+          <Route path="/questions" element={<QuestionsAnswers />} />
           <Route path="/resources" element={<Resources />} />
           <Route
             path="/resources/ready-steady-go/ready-questionnaire"

@@ -449,12 +449,12 @@ export function Home() {
         <ResourceCard
           title="Skills builder"
           description="Practise the skills that help you take more control of your care."
-          disabled
+          href="/skills"
         />
         <ResourceCard
           title="Questions & answers"
           description="Common questions from young people and families about transition."
-          disabled
+          href="/questions"
         />
       </section>
 
