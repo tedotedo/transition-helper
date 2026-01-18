@@ -103,18 +103,6 @@ const stageNames: Record<string, string> = {
   adult: 'Hello Adult Services',
 }
 
-const youngPersonNextSteps = [
-  { number: 1, text: 'Fill in the Go questionnaire before your next visit.', href: '/resources/ready-steady-go/go-questionnaire', emoji: '📋' },
-  { number: 2, text: 'Check out the consent guide - it explains who makes decisions about your care.', href: '/rights/consent-16-17', emoji: '✨' },
-  { number: 3, text: 'Ask your team when you\'ll be moving to adult services.', emoji: '💬' },
-]
-
-const parentNextSteps = [
-  { number: 1, text: 'Encourage your child to fill in their Go questionnaire.', href: '/resources/ready-steady-go/go-questionnaire', emoji: '📋' },
-  { number: 2, text: 'Read through the parent info sheet together.', href: '/resources', emoji: '📖' },
-  { number: 3, text: 'Chat with the team about how you can stay involved after 18.', emoji: '💬' },
-]
-
 const youngPersonTip = 'Try explaining your condition in your own words before your next appointment - it really helps your new team get to know you!'
 const parentTip = "Let your child have a go at answering the first question at their next appointment. Small steps make a big difference!"
 
@@ -200,7 +188,6 @@ export function Home() {
 
   const { completed: checklistDone, total: checklistTotal, stage: currentStage, percent: progressPercent } = checklistData
 
-  const nextSteps = role === 'young-person' ? youngPersonNextSteps : parentNextSteps
   const tip = role === 'young-person' ? youngPersonTip : parentTip
 
   const heroHeading =
@@ -412,32 +399,8 @@ export function Home() {
       {/* Progress tracker */}
       <ProgressTracker stageName={stageNames[currentStage] || 'Go'} percent={progressPercent} />
 
-      {/* Two-column layout: Named worker + Next steps */}
-      <section className="grid gap-4 md:grid-cols-2">
-        <NamedWorkerCard />
-
-        <div className="rounded-2xl border border-warm-200 bg-white px-5 py-5 shadow-card hover:shadow-card-hover transition-shadow duration-300">
-          <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Your next steps</p>
-          <ol className="mt-4 space-y-4">
-            {nextSteps.map((step) => (
-              <li key={step.number} className="flex items-start gap-3 text-sm group">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-100 to-primary-200 text-sm font-semibold text-primary-700 group-hover:from-primary-200 group-hover:to-primary-300 transition-all">
-                  {step.number}
-                </span>
-                <span className="text-warm-700 pt-0.5">
-                  <span className="mr-1">{step.emoji}</span>
-                  {step.text}
-                  {step.href && (
-                    <a href={step.href} className="ml-1 text-primary-600 hover:text-primary-700 font-medium hover:underline">
-                      Open →
-                    </a>
-                  )}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* Named worker */}
+      <NamedWorkerCard />
 
       {/* Resources */}
       <section className="grid gap-4 md:grid-cols-3">
