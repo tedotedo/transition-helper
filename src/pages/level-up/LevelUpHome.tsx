@@ -73,7 +73,7 @@ export default function LevelUpHome() {
           Transition isn't about losing support...
         </p>
         <p className="text-xl font-bold text-primary-600 mt-2">
-          It's about gaining superpowers! 💪
+          It's about becoming the expert on YOU! 🌟
         </p>
       </div>
 
