@@ -151,8 +151,8 @@ export function RightsHub() {
               to="/care-team"
               className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white text-accent-700 font-semibold hover:bg-white/90 transition-all shadow-lg"
             >
-              <span>👋</span>
-              Talk to your team
+              <span>📋</span>
+              View my care team
             </Link>
           </div>
         </div>
