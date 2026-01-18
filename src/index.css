@@ -90,9 +90,8 @@ button, a, input {
   }
 }
 
-/* Apply gradient directly to html and body when young person view is active */
-html.young-person-bg,
-body.young-person-bg {
+/* Vibrant gradient applied directly to main wrapper in young person view */
+.young-person-gradient {
   background:
     /* Glowing orbs overlay */
     radial-gradient(circle at 20% 30%, rgba(251, 146, 60, 0.6) 0%, transparent 40%),
@@ -110,18 +109,10 @@ body.young-person-bg {
       #2dd4bf 70%,
       #14b8a6 85%,
       #0d9488 100%
-    ) !important;
-  background-color: #f97316 !important;
-  background-size: 200% 200% !important;
-  background-attachment: fixed !important;
+    );
+  background-size: 200% 200%;
+  background-attachment: fixed;
   animation: gradientFlow 8s ease-in-out infinite alternate;
-}
-
-/* Make the main wrapper transparent so gradient shows through */
-.font-friendly .bg-background,
-.font-friendly > .min-h-screen {
-  background-color: transparent !important;
-  background: transparent !important;
 }
 
 /* Make cards pop against the vibrant background */
