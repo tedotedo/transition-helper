@@ -90,7 +90,8 @@ button, a, input {
   }
 }
 
-/* Apply gradient directly to body when young person view is active */
+/* Apply gradient directly to html and body when young person view is active */
+html.young-person-bg,
 body.young-person-bg {
   background:
     /* Glowing orbs overlay */
@@ -110,6 +111,7 @@ body.young-person-bg {
       #14b8a6 85%,
       #0d9488 100%
     ) !important;
+  background-color: #f97316 !important;
   background-size: 200% 200% !important;
   background-attachment: fixed !important;
   animation: gradientFlow 8s ease-in-out infinite alternate;
