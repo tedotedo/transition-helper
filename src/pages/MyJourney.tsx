@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TransitionTimeline } from '../components/home/TransitionTimeline'
+import { JourneyIllustration, FloatingShapes } from '../components/illustrations'
 
 type StageKey = 'ready' | 'steady' | 'go' | 'adult'
 
@@ -206,17 +207,22 @@ function JourneyStageDetail({ stageKey }: JourneyStageDetailProps) {
   return (
     <section className={`relative mt-4 rounded-3xl border-2 overflow-hidden px-5 py-6 sm:px-6 sm:py-8 shadow-lg bg-gradient-to-br ${stage.bgGradient}`}>
       {/* Subtle animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/30 rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute -bottom-20 -left-20 w-32 h-32 bg-white/20 rounded-full blur-2xl" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse-soft" style={{ animationDelay: '2s' }} />
+      <FloatingShapes variant="subtle" />
+
+      {/* Stage illustration - hidden on mobile, shown on larger screens */}
+      <div className="hidden lg:block absolute top-4 right-4 opacity-30">
+        <JourneyIllustration stage={stageKey} size="lg" />
       </div>
 
       <div className="relative">
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
           <div className="flex items-center gap-3">
-            <span className="text-4xl sm:text-5xl">{stage.emoji}</span>
+            {/* Show small illustration on mobile instead of emoji */}
+            <div className="sm:hidden">
+              <JourneyIllustration stage={stageKey} size="sm" />
+            </div>
+            <span className="hidden sm:block text-4xl sm:text-5xl">{stage.emoji}</span>
             <div>
               <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-warm-500">{stage.ages}</p>
               <h2 className={`text-2xl sm:text-3xl font-black ${stage.color}`}>{stage.name}</h2>

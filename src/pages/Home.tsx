@@ -7,6 +7,7 @@ import { NamedWorkerCard } from '../components/home/NamedWorkerCard'
 import { TipCallout } from '../components/home/TipCallout'
 import { JourneyQuiz } from '../components/home/JourneyQuiz'
 import { getRecommendedRoute, getWelcomeMessage } from '../components/home/journeyQuizHelpers'
+import { FloatingShapes, ConfettiCelebration } from '../components/illustrations'
 import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
@@ -258,6 +259,7 @@ export function Home() {
             {/* Quiz completion state */}
             {quizComplete ? (
               <div className="text-center space-y-4 animate-fade-in py-8">
+                <ConfettiCelebration active={true} density="heavy" />
                 <div className="text-6xl animate-bounce">🎉</div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white">
                   Perfect! Taking you there now...
@@ -311,12 +313,12 @@ export function Home() {
       {role === 'young-person' ? (
         <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary-500 via-primary-400 to-accent-400 px-4 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10 shadow-card">
           {/* Animated background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse-soft" />
-            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-accent-300/20 rounded-full blur-xl" />
-            <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-white/5 rounded-full" />
-            {/* Floating icon */}
-            <span className="absolute top-4 right-8 text-4xl opacity-20 animate-bounce">🚀</span>
+          <FloatingShapes variant="hero" />
+          {/* Floating icons */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <span className="absolute top-4 right-8 text-4xl opacity-20 animate-bounce" style={{ animationDuration: '2s' }}>🚀</span>
+            <span className="absolute bottom-8 left-12 text-3xl opacity-15 animate-bounce" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }}>💪</span>
+            <span className="absolute top-1/3 right-1/4 text-2xl opacity-10 animate-bounce" style={{ animationDuration: '3s', animationDelay: '1s' }}>⭐</span>
           </div>
 
           <div className="relative flex flex-col items-center text-center">
