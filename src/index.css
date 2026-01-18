@@ -76,44 +76,8 @@ button, a, input {
 }
 
 /* ===== Young Person View - Vibrant Orange & Teal Background ===== */
-.font-friendly {
-  position: relative;
-}
 
-/* Override default backgrounds for young person view */
-.font-friendly,
-.font-friendly body,
-body:has(.font-friendly) {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Bold vibrant gradient base */
-.font-friendly::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -2;
-  background:
-    /* Main vibrant gradient */
-    linear-gradient(
-      135deg,
-      #f97316 0%,
-      #fb923c 20%,
-      #fdba74 35%,
-      #99f6e4 50%,
-      #2dd4bf 70%,
-      #14b8a6 85%,
-      #0d9488 100%
-    );
-  animation: gradientFlow 8s ease-in-out infinite alternate;
-  background-size: 200% 200%;
-}
-
-/* Animated flowing gradient */
+/* Animated flowing gradient keyframes */
 @keyframes gradientFlow {
   0% {
     background-position: 0% 0%;
@@ -126,44 +90,38 @@ body:has(.font-friendly) {
   }
 }
 
-/* Glowing orbs overlay for extra pop */
-.font-friendly::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background-image:
-    /* Large glowing orange orb */
+/* Apply gradient directly to html and body when young person view is active */
+html.young-person-bg,
+body.young-person-bg {
+  background:
+    /* Glowing orbs overlay */
     radial-gradient(circle at 20% 30%, rgba(251, 146, 60, 0.6) 0%, transparent 40%),
-    /* Large glowing teal orb */
     radial-gradient(circle at 80% 70%, rgba(45, 212, 191, 0.5) 0%, transparent 40%),
-    /* Medium accent orbs */
     radial-gradient(circle at 70% 20%, rgba(249, 115, 22, 0.4) 0%, transparent 30%),
     radial-gradient(circle at 30% 80%, rgba(20, 184, 166, 0.4) 0%, transparent 30%),
-    /* Small bright spots */
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 25%),
-    radial-gradient(circle at 10% 60%, rgba(255, 255, 255, 0.15) 0%, transparent 20%),
-    radial-gradient(circle at 90% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 20%);
-  animation: orbFloat 12s ease-in-out infinite;
-  pointer-events: none;
+    /* Main vibrant gradient */
+    linear-gradient(
+      135deg,
+      #f97316 0%,
+      #fb923c 20%,
+      #fdba74 35%,
+      #99f6e4 50%,
+      #2dd4bf 70%,
+      #14b8a6 85%,
+      #0d9488 100%
+    ) !important;
+  background-color: #f97316 !important;
+  background-size: 200% 200% !important;
+  background-attachment: fixed !important;
+  animation: gradientFlow 8s ease-in-out infinite alternate;
 }
 
-@keyframes orbFloat {
-  0%, 100% {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-  33% {
-    transform: scale(1.05) translateY(-10px);
-    opacity: 0.9;
-  }
-  66% {
-    transform: scale(0.98) translateY(5px);
-    opacity: 1;
-  }
+/* Make the main wrapper transparent so gradient shows through */
+.font-friendly .bg-background,
+.font-friendly > .min-h-screen {
+  background-color: transparent !important;
+  background: transparent !important;
 }
 
 /* Make cards pop against the vibrant background */
