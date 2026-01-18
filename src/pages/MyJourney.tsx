@@ -153,7 +153,7 @@ export function MyJourney() {
           Every step counts! ✨
         </h1>
         <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-warm-600 leading-relaxed font-medium">
-          Growing up is an adventure — tap a stage below to see what's coming up and discover things you can try!
+          You're on your way to taking charge of your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready.
         </p>
       </header>
 
