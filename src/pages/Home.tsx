@@ -263,18 +263,18 @@ export function Home() {
           <div className="relative flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div className="max-w-xl space-y-4">
               <div className="flex items-center gap-3">
-                <span className="text-5xl">🎮</span>
+                <span className="text-5xl">🚀</span>
                 <p className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-bold text-white shadow-lg">
                   <span className="h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse" />
-                  Level Up Your Life!
+                  Your Journey to Independence
                 </p>
               </div>
 
               <h1 className="text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">
                 {userName ? (
-                  <>Yo {userName}! <span className="inline-block animate-bounce">👋</span></>
+                  <>Hey {userName}! <span className="inline-block animate-bounce">👋</span></>
                 ) : (
-                  <>Ready to level up? <span className="inline-block animate-bounce">🔥</span></>
+                  <>Your health, your way <span className="inline-block animate-bounce">✨</span></>
                 )}
               </h1>
 
@@ -336,22 +336,22 @@ export function Home() {
               </div>
 
               <p className="text-base md:text-lg text-white/90 leading-relaxed font-medium">
-                You're about to unlock some <span className="text-yellow-300 font-bold">serious superpowers</span> 💪
-                Learn what changes at 16 & 18, take control of your health, and become the boss of your own care!
+                Moving to adult services is a <span className="text-yellow-300 font-bold">big step</span> — and you're ready for it!
+                Learn what changes at 16 & 18, understand your rights, and take charge of your own healthcare.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
                 <a
-                  href="/level-up"
+                  href="/journey"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-primary-600 font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
                 >
-                  <span>🎯</span> Start Your Adventure
+                  <span>🗺️</span> Start Your Journey
                 </a>
                 <a
                   href="/rights"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm text-white font-bold border-2 border-white/30 hover:bg-white/30 transition-all"
                 >
-                  <span>⚡</span> Know Your Powers
+                  <span>⚖️</span> Know Your Rights
                 </a>
               </div>
             </div>
