@@ -80,6 +80,14 @@ button, a, input {
   position: relative;
 }
 
+/* Override default backgrounds for young person view */
+.font-friendly,
+.font-friendly body,
+body:has(.font-friendly) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 /* Bold vibrant gradient base */
 .font-friendly::before {
   content: '';
