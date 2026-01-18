@@ -84,10 +84,14 @@ docs/
 | `/journey/new-team` | HelloNewTeam | Guide for meeting adult services |
 | `/journey/check-support` | CheckYourSupport | Support system review |
 | `/rights` | RightsHub | Consent, privacy, decision-making info |
+| `/rights/consent-under-16` | ConsentUnder16 | Consent guide for under 16s |
 | `/rights/consent-16-17` | Consent16to17 | Detailed consent guide for 16-17 |
+| `/rights/consent-18-plus` | Consent18Plus | Adult decision-making guide |
 | `/money` | MoneyPip | Financial independence info |
 | `/planning` | PlanningTools | Planning resources |
 | `/videos` | VideosStories | Video/story content hub |
+| `/skills` | SkillsBuilder | Interactive skills practice (9 skills) |
+| `/questions` | QuestionsAnswers | FAQ page (16 questions in 4 categories) |
 | `/resources` | Resources | Ready Steady Go PDF downloads |
 | `/resources/ready-steady-go/*` | PdfViewer | PDF viewer for questionnaires |
 | `/level-up` | LevelUpHome | Game hub with progress tracking |
@@ -110,6 +114,7 @@ All user data is stored in localStorage using these keys:
 | `transition-care-my-team` | MyTeam | `TeamMember[]` (activity page) |
 | `transition-last-backup` | Home | ISO date string of last backup |
 | `transition-level-up-progress` | Level Up | `{ powersViewed, mythsFlipped, badgesEarned, visitDates }` |
+| `transition-skills-completed` | SkillsBuilder | `string[]` (array of completed skill IDs) |
 
 The `useLocalStorage` hook handles persistence with automatic JSON serialization.
 
@@ -222,12 +227,12 @@ Home page toggles between "young-person" and "parent-carer" views:
 - ✅ **Care Plan:** Now uses collapsible accordion sections
 - ✅ **Navigation:** Bottom nav bar replaces hidden sidebar
 - ✅ **Header:** Removed redundant mobile header for more screen space
+- ✅ **Rights Hub:** Redesigned with young-person friendly UI, colorful cards, mobile-first fonts
+- ✅ **Home Hero:** Vibrant gradient background for young person view, centered layout
 
 ### Remaining improvements to consider
 1. **Appointments/CareTeam:** Inline add forms push content down; could use bottom sheets
 2. **Checklist:** 4-column stage selector cramped on small phones
-3. **Rights Hub:** Very long expanded content sections (100+ lines each)
-4. **Home page:** Still has multiple stacked sections (could consolidate)
 
 ## Key Files for Common Tasks
 
@@ -271,11 +276,45 @@ Badges are auto-awarded when conditions are met:
 - `comeback-kid` - Visit on 3 different days
 - `level-up-champion` - Earn all other badges
 
-### Future Phases (see `docs/level-up-game-design.md`)
+### Related Pages (Now Implemented)
 
-- Practice Zone: Interactive scenarios (booking appointments, asking questions)
-- Journey Map: Visual timeline of transition stages
-- Real Stories: Testimonials from transitioned young people
+- **Skills Builder** (`/skills`): Interactive practice for healthcare skills
+- **My Journey** (`/journey`): Visual timeline of transition stages
+- **Videos & Stories** (`/videos`): Real testimonials from young people
+
+## Skills Builder
+
+Interactive page for practicing real-life healthcare skills (`src/pages/SkillsBuilder.tsx`).
+
+### Skills by Difficulty
+
+| Level | Skills |
+|-------|--------|
+| **Getting Started** | Introduce yourself, Describe how you feel, Ask questions |
+| **Building Confidence** | Know your medications, Book appointments, Collect prescriptions, Speak alone |
+| **Ready for Anything** | Share your opinion, Handle emergencies |
+
+### Features
+- Expandable skill cards with tips and practice prompts
+- Example responses for each skill
+- Progress tracking with localStorage
+- "I've practiced this!" checkboxes
+
+## Questions & Answers
+
+FAQ page with common transition questions (`src/pages/QuestionsAnswers.tsx`).
+
+### Categories
+- **The Basics** - What is transition, when does it happen, who decides
+- **Appointments & Care** - First adult appointment, can parents come
+- **Your Rights** - Confidentiality, saying no, seeing records
+- **Common Worries** - Fear of change, not feeling ready
+
+### Features
+- 16 questions answered in plain English
+- Filterable by category
+- Expandable question cards
+- Young-person friendly tone
 
 ## PWA & Meta Tags
 
