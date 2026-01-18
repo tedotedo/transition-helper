@@ -59,11 +59,11 @@ export function FeedbackButton() {
         onMouseLeave={() => setIsExpanded(false)}
         onFocus={() => setIsExpanded(true)}
         onBlur={() => setIsExpanded(false)}
-        className="fixed right-4 bottom-24 md:bottom-6 z-30 flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-accent-500 to-accent-600 text-white font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+        className="fixed right-4 bottom-24 md:bottom-6 z-30 flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-primary-500 via-primary-600 to-accent-500 text-white font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group animate-pulse-subtle"
         aria-label="Give feedback to help make the app even better"
       >
-        {/* Speech bubble icon */}
-        <span className="text-lg flex-shrink-0">💬</span>
+        {/* Speech bubble icon with bounce */}
+        <span className="text-lg flex-shrink-0 animate-bounce-gentle">💬</span>
 
         {/* Sliding text */}
         <span
