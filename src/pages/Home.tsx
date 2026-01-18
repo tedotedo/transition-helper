@@ -340,7 +340,7 @@ export function Home() {
               </div>
 
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-semibold px-2">
-                Moving to adult services is a <span className="text-yellow-300 font-bold">big step</span> — and you're ready for it!
+                Moving to adult services is a <span className="text-yellow-300 font-bold">big step</span> — and you're ready for it!{' '}
                 <br className="hidden sm:block" />
                 Learn what changes at 16 & 18, understand your rights, and take charge of your own healthcare.
               </p>
