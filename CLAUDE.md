@@ -403,15 +403,10 @@ Located at `/about` (`src/pages/About.tsx`):
 - Acknowledgements section including Ready Steady Go attribution
 - Disclaimer with link to Privacy page
 - Feedback call-to-action
-- Books section with Amazon UK links:
+- Children's books section (helpful healthcare resources):
   - Zak's Blood Test
   - Zak's Operation
-  - Leucovorin
-- Other Resources section linking to Dr Aszkenasy's other apps:
-  - Sleep Spectrum (sleepspectrum.co.uk)
-  - Practical Autism Research (practical-autism-research.co.uk)
-  - ARFID Wellness Tracker (arfidwellnesstracker.com)
-  - NF1 Care Companion (WIP - deploy preview)
+  - Available in Italian, French, German, Portuguese and Spanish
 
 ## Privacy & Disclaimer Page
 
