@@ -153,7 +153,7 @@ export function AppShell({ children }: AppShellProps) {
                     </button>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-3 pb-16">
                   <MoreMenuItem to="/journey" icon="🚀" label="My Journey" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/rights" icon="⚖️" label="Rights" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/money" icon="💰" label="Money & PIP" onClick={closeMoreMenu} />
