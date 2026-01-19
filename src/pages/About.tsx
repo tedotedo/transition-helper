@@ -117,7 +117,7 @@ export default function About() {
       <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
         <h2 className="text-xl font-bold text-warm-800 mb-4">Helpful Books for Young People</h2>
         <p className="text-warm-600 mb-6">
-          Dr Aszkenasy has authored children's books (available in several different languages) to help young people understand medical procedures:
+          These children's books by Dr Aszkenasy are written to help young people understand and prepare for medical procedures (also available in Italian, French, German, Portuguese and Spanish):
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-md mx-auto">
           <a
