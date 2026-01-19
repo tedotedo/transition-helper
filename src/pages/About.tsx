@@ -115,9 +115,9 @@ export default function About() {
 
       {/* Books section */}
       <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
-        <h2 className="text-xl font-bold text-warm-800 mb-4">Books by Dr Aszkenasy</h2>
+        <h2 className="text-xl font-bold text-warm-800 mb-4">Helpful Books for Young People</h2>
         <p className="text-warm-600 mb-6">
-          Dr Aszkenasy has authored several children's books to help young people understand medical procedures:
+          These children's books help young people understand and prepare for medical procedures:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <a
@@ -167,75 +167,6 @@ export default function About() {
               <h3 className="font-semibold text-warm-800 text-sm group-hover:text-primary-600 transition-colors">Leucovorin</h3>
               <p className="text-warm-500 text-xs">Understanding leucovorin treatment</p>
             </div>
-          </a>
-        </div>
-      </section>
-
-      {/* Other Resources section */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
-        <h2 className="text-xl font-bold text-warm-800 mb-4">Other Resources by Dr Aszkenasy</h2>
-        <p className="text-warm-500 text-sm mb-4">
-          Explore more apps and resources designed to support families and healthcare professionals:
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <a
-            href="https://www.sleepspectrum.co.uk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl border border-warm-100 hover:border-primary-200 hover:bg-primary-50/50 transition-all group"
-          >
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">😴</span>
-              <h3 className="font-semibold text-warm-800 text-sm group-hover:text-primary-600 transition-colors">Sleep Spectrum</h3>
-            </div>
-            <p className="text-warm-500 text-xs leading-relaxed">
-              Sleep support and guidance for neurodivergent children and their families.
-            </p>
-          </a>
-          <a
-            href="https://www.practical-autism-research.co.uk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl border border-warm-100 hover:border-accent-200 hover:bg-accent-50/50 transition-all group"
-          >
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">🔬</span>
-              <h3 className="font-semibold text-warm-800 text-sm group-hover:text-accent-600 transition-colors">Practical Autism Research</h3>
-            </div>
-            <p className="text-warm-500 text-xs leading-relaxed">
-              Evidence-based resources and research insights for autism support.
-            </p>
-          </a>
-          <a
-            href="https://arfidwellnesstracker.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl border border-warm-100 hover:border-primary-200 hover:bg-primary-50/50 transition-all group"
-          >
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">🍎</span>
-              <h3 className="font-semibold text-warm-800 text-sm group-hover:text-primary-600 transition-colors">ARFID Wellness Tracker</h3>
-            </div>
-            <p className="text-warm-500 text-xs leading-relaxed">
-              Support for families navigating Avoidant/Restrictive Food Intake Disorder.
-            </p>
-          </a>
-          <a
-            href="https://deploy-preview-1--nf1-care-companion.netlify.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-xl border border-amber-100 hover:border-amber-300 hover:bg-amber-50/50 transition-all group relative"
-          >
-            <div className="absolute -top-2 -right-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-              WIP
-            </div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xl">🧬</span>
-              <h3 className="font-semibold text-warm-800 text-sm group-hover:text-amber-600 transition-colors">NF1 Care Companion</h3>
-            </div>
-            <p className="text-warm-500 text-xs leading-relaxed">
-              Support and resources for families affected by Neurofibromatosis Type 1.
-            </p>
           </a>
         </div>
       </section>

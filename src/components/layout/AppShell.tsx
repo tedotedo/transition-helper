@@ -162,6 +162,7 @@ export function AppShell({ children }: AppShellProps) {
                   <MoreMenuItem to="/resources" icon="📚" label="Resources" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/level-up" icon="🎮" label="Level Up" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/about" icon="ℹ️" label="About" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/privacy" icon="🔒" label="Privacy" onClick={closeMoreMenu} />
                 </div>
               </div>
             </>

@@ -101,7 +101,8 @@ docs/
 | `/level-up/myths` | MythBusters | Flip-card game: fears vs facts |
 | `/level-up/powers` | PowerUpsGuide | Browse abilities unlocked by age |
 | `/level-up/badges` | MyBadges | Achievement collection display |
-| `/about` | About | About page with creator info and credits |
+| `/about` | About | About page with creator info, books, other apps |
+| `/privacy` | Privacy | Privacy notice, medical disclaimer, cookie policy |
 
 ## Data Persistence
 
@@ -400,12 +401,38 @@ Located at `/about` (`src/pages/About.tsx`):
 - Creator profile (Dr Mark Aszkenasy) with photo
 - Mission statement
 - Acknowledgements section including Ready Steady Go attribution
-- Disclaimer
+- Disclaimer with link to Privacy page
 - Feedback call-to-action
+- Books section with Amazon UK links:
+  - Zak's Blood Test
+  - Zak's Operation
+  - Leucovorin
+- Other Resources section linking to Dr Aszkenasy's other apps:
+  - Sleep Spectrum (sleepspectrum.co.uk)
+  - Practical Autism Research (practical-autism-research.co.uk)
+  - ARFID Wellness Tracker (arfidwellnesstracker.com)
+  - NF1 Care Companion (WIP - deploy preview)
+
+## Privacy & Disclaimer Page
+
+Located at `/privacy` (`src/pages/Privacy.tsx`):
+- **Medical Disclaimer**: Educational purposes only, not medical advice, emergency guidance
+- **Privacy Notice**:
+  - All data stored locally on device only (no remote servers)
+  - Warning about data loss if device is lost/cleared
+  - User responsibility for backups (Google Drive, iCloud, Dropbox)
+  - Feedback submission via Resend email service
+  - What we do NOT collect (health info, tracking, analytics)
+- **Cookie Notice**: No cookies used, uses localStorage instead
+- **Your Rights**: UK GDPR rights explained
+- **Information for Young Users**: Age-appropriate guidance
+- **Terms of Use**: Basic usage terms
+- **Contact**: Last updated date and contact info
 
 ## Attribution
 
 The app includes attribution to the Ready Steady Go programme:
 - Displayed in sidebar footer (desktop)
 - Full details on About page
+- Link to Privacy & Disclaimer page in sidebar footer
 - Original creators: Dr Arvind Nagra and the Transition Steering Group, University Hospital Southampton NHS Foundation Trust
