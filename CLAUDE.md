@@ -13,6 +13,8 @@
 - **PWA:** vite-plugin-pwa
 - **Testing:** Playwright
 - **Data Persistence:** localStorage (no backend)
+- **Serverless Functions:** Netlify Functions (for feedback emails)
+- **Email Service:** Resend API
 
 ## Commands
 
@@ -39,6 +41,7 @@ src/
 │   │   └── TipCallout.tsx
 │   └── layout/
 │       ├── AppShell.tsx    # Main layout wrapper (sidebar + bottom nav)
+│       ├── FeedbackButton.tsx # Floating feedback button with modal
 │       ├── Notifications.tsx
 │       └── Search.tsx
 ├── pages/
@@ -98,6 +101,7 @@ docs/
 | `/level-up/myths` | MythBusters | Flip-card game: fears vs facts |
 | `/level-up/powers` | PowerUpsGuide | Browse abilities unlocked by age |
 | `/level-up/badges` | MyBadges | Achievement collection display |
+| `/about` | About | About page with creator info and credits |
 
 ## Data Persistence
 
@@ -136,7 +140,7 @@ Located in `tailwind.config.js`:
 - **Accent color:** Soft teal (`accent-50` to `accent-700`) - `#14b8a6` base
 - **Neutrals:** Warm grays (`warm-50` to `warm-900`) instead of cold slate
 - **Shadows:** `shadow-card`, `shadow-card-hover`, `shadow-glow`
-- **Animations:** `animate-fade-in`, `animate-slide-up`, `animate-pulse-soft`
+- **Animations:** `animate-fade-in`, `animate-slide-up`, `animate-pulse-soft`, `animate-pulse-subtle`, `animate-bounce-gentle`, `animate-float-slow`, `animate-float-medium`, `animate-float-fast`
 
 ### Common Patterns
 
@@ -352,3 +356,56 @@ Social sharing previews configured for WhatsApp, Facebook, Twitter:
 | `android-chrome-192x192.png` | Android small |
 | `android-chrome-512x512.png` | Android large + PWA |
 | `og-image.png` | Social sharing preview |
+| `dr-mark-aszkenasy.jpg` | Creator photo for About page |
+| `Friendly_Doctor_Chatting_With_Youth_compressed.mp4` | Background video for role selector |
+
+## Feedback System
+
+### Floating Feedback Button
+
+Located in `src/components/layout/FeedbackButton.tsx`:
+- Floating button fixed to bottom-right corner
+- Slide-out text on hover: "Help make the app even better!"
+- Opens modal form with message (required) and email (optional)
+- Coral-to-teal gradient with pulsing glow animation
+- Bouncing speech bubble emoji
+
+### Netlify Serverless Function
+
+Located in `netlify/functions/send-feedback.ts`:
+- Receives POST requests with feedback data
+- Sends emails via Resend API
+- Includes message, optional reply-to email, and page context
+
+### Environment Variables (Netlify)
+
+| Variable | Purpose |
+|----------|---------|
+| `RESEND_API_KEY` | API key for Resend email service |
+
+Email is sent to: `aszkenasy@gmail.com`
+
+## Role Selector Hero
+
+The first-time visitor welcome screen (`src/pages/Home.tsx`) includes:
+- Background video silhouette of healthcare workers (10% opacity)
+- Role selection cards with hover effects:
+  - Young person card: coral tint on hover
+  - Parent/carer card: teal tint on hover
+- Video file: `/Friendly_Doctor_Chatting_With_Youth_compressed.mp4`
+
+## About Page
+
+Located at `/about` (`src/pages/About.tsx`):
+- Creator profile (Dr Mark Aszkenasy) with photo
+- Mission statement
+- Acknowledgements section including Ready Steady Go attribution
+- Disclaimer
+- Feedback call-to-action
+
+## Attribution
+
+The app includes attribution to the Ready Steady Go programme:
+- Displayed in sidebar footer (desktop)
+- Full details on About page
+- Original creators: Dr Arvind Nagra and the Transition Steering Group, University Hospital Southampton NHS Foundation Trust

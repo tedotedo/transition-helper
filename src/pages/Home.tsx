@@ -283,6 +283,16 @@ export function Home() {
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
             <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-xl" />
+            {/* Background video silhouette */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-10"
+            >
+              <source src="/Friendly_Doctor_Chatting_With_Youth_compressed.mp4" type="video/mp4" />
+            </video>
           </div>
 
           <div className="relative">

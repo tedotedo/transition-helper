@@ -30,6 +30,8 @@ import PowerUpsGuide from './pages/level-up/PowerUpsGuide'
 import MyBadges from './pages/level-up/MyBadges'
 import { SkillsBuilder } from './pages/SkillsBuilder'
 import { QuestionsAnswers } from './pages/QuestionsAnswers'
+import About from './pages/About'
+import Privacy from './pages/Privacy'
 
 // Wrapper to apply role-based styling
 function AppContent() {
@@ -101,6 +103,9 @@ function AppContent() {
           <Route path="/level-up/myths" element={<MythBusters />} />
           <Route path="/level-up/powers" element={<PowerUpsGuide />} />
           <Route path="/level-up/badges" element={<MyBadges />} />
+          {/* About & Legal */}
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AppShell>

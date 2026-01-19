@@ -38,6 +38,7 @@ export function AppShell({ children }: AppShellProps) {
           <NavItem to="/videos" label="Videos & stories" icon="🎬" />
           <NavItem to="/resources" label="Resources" icon="📚" />
           <NavItem to="/level-up" label="Level Up Game" icon="🎮" />
+          <NavItem to="/about" label="About" icon="ℹ️" />
         </nav>
         {/* Role toggle in sidebar */}
         <div className="px-4 py-3 border-t border-warm-100">
@@ -67,8 +68,12 @@ export function AppShell({ children }: AppShellProps) {
             </button>
           </div>
         </div>
-        <div className="px-4 py-4 text-xs text-warm-400 border-t border-warm-100">
-          <p>This app gives general information for the UK. It does not replace medical or legal advice.</p>
+        <div className="px-4 py-4 text-xs border-t border-warm-100 space-y-3">
+          <p className="text-warm-500">This app gives general information for the UK. It does not replace medical or legal advice.</p>
+          <p className="text-warm-500">Transition checklist adapted from <a href="https://www.uhs.nhs.uk/health-professionals/transition-from-child-to-adult-services" target="_blank" rel="noopener noreferrer" className="text-warm-600 underline hover:text-primary-600">Ready Steady Go</a> by Dr Arvind Nagra, University Hospital Southampton NHS Foundation Trust.</p>
+          <NavLink to="/privacy" className="text-warm-500 hover:text-primary-600 underline transition-colors">
+            Privacy & Disclaimer
+          </NavLink>
         </div>
       </aside>
 
@@ -156,6 +161,7 @@ export function AppShell({ children }: AppShellProps) {
                   <MoreMenuItem to="/videos" icon="🎬" label="Videos" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/resources" icon="📚" label="Resources" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/level-up" icon="🎮" label="Level Up" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/about" icon="ℹ️" label="About" onClick={closeMoreMenu} />
                 </div>
               </div>
             </>
