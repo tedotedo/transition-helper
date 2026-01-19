@@ -117,9 +117,9 @@ export default function About() {
       <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
         <h2 className="text-xl font-bold text-warm-800 mb-4">Helpful Books for Young People</h2>
         <p className="text-warm-600 mb-6">
-          These children's books help young people understand and prepare for medical procedures:
+          Dr Aszkenasy has authored children's books (available in several different languages) to help young people understand medical procedures:
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-md mx-auto">
           <a
             href="https://amzn.eu/d/9ltdp8A"
             target="_blank"
@@ -150,22 +150,6 @@ export default function About() {
             <div>
               <h3 className="font-semibold text-warm-800 text-sm group-hover:text-primary-600 transition-colors">Zak's Operation</h3>
               <p className="text-warm-500 text-xs">Preparing children for surgery</p>
-            </div>
-          </a>
-          <a
-            href="https://amzn.eu/d/1X2Oq76"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-center space-y-3 group"
-          >
-            <img
-              src="/leucovorin_book_cover.jpg"
-              alt="Leucovorin book cover"
-              className="w-full max-w-[140px] mx-auto rounded-xl shadow-card group-hover:shadow-card-hover group-hover:scale-105 transition-all"
-            />
-            <div>
-              <h3 className="font-semibold text-warm-800 text-sm group-hover:text-primary-600 transition-colors">Leucovorin</h3>
-              <p className="text-warm-500 text-xs">Understanding leucovorin treatment</p>
             </div>
           </a>
         </div>
