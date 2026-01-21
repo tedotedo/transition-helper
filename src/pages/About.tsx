@@ -55,6 +55,46 @@ export default function About() {
         </p>
       </section>
 
+      {/* Install App section */}
+      <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
+        <h2 className="text-xl font-bold text-warm-800 mb-4 flex items-center gap-2">
+          <span>📲</span> Add to Your Home Screen
+        </h2>
+        <p className="text-warm-600 mb-4">
+          You can add Transition Ready to your phone's home screen for quick access — it works just like an app!
+        </p>
+
+        <div className="space-y-4">
+          {/* iPhone/iPad */}
+          <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <h3 className="font-semibold text-warm-800 mb-2 flex items-center gap-2">
+              <span>🍎</span> iPhone or iPad (Safari)
+            </h3>
+            <ol className="list-decimal list-inside space-y-1 text-warm-600 text-sm">
+              <li>Tap the <strong>Share</strong> button (the square with an arrow pointing up)</li>
+              <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+              <li>Tap <strong>"Add"</strong> in the top right corner</li>
+            </ol>
+          </div>
+
+          {/* Android */}
+          <div className="p-4 bg-green-50 rounded-xl border border-green-200">
+            <h3 className="font-semibold text-warm-800 mb-2 flex items-center gap-2">
+              <span>🤖</span> Android (Chrome)
+            </h3>
+            <ol className="list-decimal list-inside space-y-1 text-warm-600 text-sm">
+              <li>Tap the <strong>three dots menu</strong> (⋮) in the top right</li>
+              <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
+              <li>Tap <strong>"Add"</strong> to confirm</li>
+            </ol>
+          </div>
+        </div>
+
+        <p className="text-warm-500 text-xs mt-4">
+          Once added, you can open the app directly from your home screen without needing to open your browser first.
+        </p>
+      </section>
+
       {/* Acknowledgements section */}
       <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
         <h2 className="text-xl font-bold text-warm-800 mb-4">Acknowledgements</h2>
