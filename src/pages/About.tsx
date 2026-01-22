@@ -56,33 +56,33 @@ export default function About() {
       </section>
 
       {/* Install App section */}
-      <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
-        <h2 className="text-xl font-bold text-warm-800 mb-4 flex items-center gap-2">
+      <section className="bg-gradient-to-r from-accent-500 to-primary-500 rounded-2xl p-6 text-white shadow-card">
+        <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
           <span>📲</span> Add to Your Home Screen
         </h2>
-        <p className="text-warm-600 mb-4">
-          You can add Transition Ready to your phone's home screen for quick access — it works just like an app!
+        <p className="text-white/90 mb-4">
+          Install Transition Ready on your phone for quick access — it works just like an app!
         </p>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {/* iPhone/iPad */}
-          <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-            <h3 className="font-semibold text-warm-800 mb-2 flex items-center gap-2">
+          <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+            <h3 className="font-semibold mb-2 flex items-center gap-2">
               <span>🍎</span> iPhone or iPad (Safari)
             </h3>
-            <ol className="list-decimal list-inside space-y-1 text-warm-600 text-sm">
-              <li>Tap the <strong>Share</strong> button (the square with an arrow pointing up)</li>
+            <ol className="list-decimal list-inside space-y-1 text-white/90 text-sm">
+              <li>Tap the <strong>Share</strong> button (square with arrow pointing up)</li>
               <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
               <li>Tap <strong>"Add"</strong> in the top right corner</li>
             </ol>
           </div>
 
           {/* Android */}
-          <div className="p-4 bg-green-50 rounded-xl border border-green-200">
-            <h3 className="font-semibold text-warm-800 mb-2 flex items-center gap-2">
+          <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+            <h3 className="font-semibold mb-2 flex items-center gap-2">
               <span>🤖</span> Android (Chrome)
             </h3>
-            <ol className="list-decimal list-inside space-y-1 text-warm-600 text-sm">
+            <ol className="list-decimal list-inside space-y-1 text-white/90 text-sm">
               <li>Tap the <strong>three dots menu</strong> (⋮) in the top right</li>
               <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
               <li>Tap <strong>"Add"</strong> to confirm</li>
@@ -90,8 +90,8 @@ export default function About() {
           </div>
         </div>
 
-        <p className="text-warm-500 text-xs mt-4">
-          Once added, you can open the app directly from your home screen without needing to open your browser first.
+        <p className="text-white/70 text-xs mt-4">
+          ✨ Once added, open the app directly from your home screen — no browser needed!
         </p>
       </section>
 

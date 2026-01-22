@@ -31,6 +31,7 @@ import MyBadges from './pages/level-up/MyBadges'
 import { SkillsBuilder } from './pages/SkillsBuilder'
 import { QuestionsAnswers } from './pages/QuestionsAnswers'
 import About from './pages/About'
+import Install from './pages/Install'
 import Privacy from './pages/Privacy'
 
 // Wrapper to apply role-based styling
@@ -105,6 +106,7 @@ function AppContent() {
           <Route path="/level-up/badges" element={<MyBadges />} />
           {/* About & Legal */}
           <Route path="/about" element={<About />} />
+          <Route path="/install" element={<Install />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
