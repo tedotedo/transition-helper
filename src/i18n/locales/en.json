@@ -1,0 +1,280 @@
+{
+  "nav": {
+    "home": "Home",
+    "checklist": "Checklist",
+    "appointments": "Appointments",
+    "carePlan": "Care Plan",
+    "careTeam": "Care Team",
+    "journey": "My Journey",
+    "rights": "Know Your Rights",
+    "levelUp": "Level Up",
+    "skills": "Skills Builder",
+    "questions": "Q&A",
+    "resources": "Resources",
+    "videos": "Videos & Stories",
+    "about": "About",
+    "privacy": "Privacy",
+    "install": "Install App",
+    "more": "More"
+  },
+  "search": {
+    "placeholder": "Search pages, topics...",
+    "noResults": "No results found"
+  },
+  "role": {
+    "viewingAs": "Viewing as:",
+    "youngPerson": "Young person",
+    "parentCarer": "Parent/Carer",
+    "iAmYoungPerson": "I'm a young person",
+    "iAmParent": "I'm a parent or carer",
+    "youngPersonDesc": "I'm getting ready for adult healthcare",
+    "parentDesc": "I'm supporting someone through transition"
+  },
+  "home": {
+    "welcome": "Welcome to Transition Ready",
+    "tagline": "Your move to adult healthcare",
+    "heroYoung": {
+      "title": "Your Health, Your Future",
+      "greeting": "Hey, welcome back!",
+      "greetingWithName": "Hey {{name}}!",
+      "subtitle": "Take charge of your healthcare journey",
+      "journeyLabel": "Your Journey to Independence",
+      "mainMessage": "Moving to adult services is a big step — and you're ready for it! Learn what changes at 16 & 18, understand your rights, and take charge of your own healthcare.",
+      "addName": "Add your name - make it personal!",
+      "changeName": "Change name"
+    },
+    "heroParent": {
+      "title": "Supporting Their Journey",
+      "subtitle": "Helping your young person become healthcare independent",
+      "statusLabel": "Getting ready for adult care"
+    },
+    "quickActions": "Quick Actions",
+    "startJourney": "Start Your Journey",
+    "knowRights": "Know Your Rights",
+    "progress": {
+      "title": "Your Progress",
+      "stage": "Current Stage",
+      "tasksCompleted": "tasks completed",
+      "keepGoing": "Keep going!",
+      "greatProgress": "Great progress!"
+    },
+    "resources": {
+      "learnAdult": "Learn about adult services",
+      "learnAdultDesc": "See what changes and what stays the same when you move to an adult team.",
+      "skillsBuilder": "Skills builder",
+      "skillsBuilderDesc": "Practise the skills that help you take more control of your care.",
+      "questions": "Questions & answers",
+      "questionsDesc": "Common questions from young people and families about transition."
+    },
+    "tip": {
+      "title": "Tip of the Day",
+      "youngPerson": "Try explaining your condition in your own words before your next appointment - it really helps your new team get to know you!",
+      "parent": "Let your child have a go at answering the first question at their next appointment. Small steps make a big difference!"
+    },
+    "namedWorker": {
+      "title": "Your Named Worker",
+      "description": "Your main contact for transition support",
+      "add": "Add your named worker",
+      "none": "No named worker added yet"
+    },
+    "backup": {
+      "title": "Back up your data",
+      "description": "Your data is stored on this device. Back it up regularly to keep it safe!",
+      "download": "Download backup",
+      "restore": "Restore from backup",
+      "lastBackup": "Last backup:",
+      "success": "Backup downloaded! Keep it somewhere safe.",
+      "restoreSuccess": "Data restored successfully! Refreshing...",
+      "restoreError": "Could not restore backup. Is the file valid?"
+    },
+    "easyRead": {
+      "title": "Easy Read Mode",
+      "description": "Simpler words, bigger buttons, more pictures",
+      "on": "Easy Read is ON - content will be simpler"
+    }
+  },
+  "stages": {
+    "ready": "Ready",
+    "steady": "Steady",
+    "go": "Go",
+    "adult": "Hello Adult Services",
+    "ready11to13": "Ready (11-13)",
+    "steady14to15": "Steady (14-15)",
+    "go16to17": "Go (16-17)",
+    "adult18plus": "Adult (18+)"
+  },
+  "buttons": {
+    "back": "Back",
+    "backToHome": "Back to Home",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "remove": "Remove",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "done": "Done",
+    "start": "Start",
+    "continue": "Continue",
+    "learnMore": "Learn more",
+    "seeAll": "See all",
+    "explore": "Explore",
+    "comingSoon": "Coming soon",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "skip": "Skip",
+    "print": "Print"
+  },
+  "checklist": {
+    "title": "Transition Checklist",
+    "subtitle": "Track your progress",
+    "markComplete": "Mark as complete",
+    "completed": "Completed"
+  },
+  "carePlan": {
+    "title": "My Care Plan",
+    "print": "Print my care plan",
+    "personal": {
+      "title": "Personal details",
+      "name": "Name",
+      "dob": "Date of birth",
+      "nhs": "NHS number",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "conditions": {
+      "title": "My conditions",
+      "add": "Add condition"
+    },
+    "medications": {
+      "title": "My medications",
+      "add": "Add medication"
+    },
+    "allergies": {
+      "title": "Allergies",
+      "add": "Add allergy"
+    },
+    "emergency": {
+      "title": "Emergency contacts",
+      "add": "Add contact"
+    }
+  },
+  "careTeam": {
+    "title": "My Care Team",
+    "add": "Add team member",
+    "role": "Role",
+    "hospital": "Hospital/Clinic",
+    "contact": "Contact details"
+  },
+  "appointments": {
+    "title": "My Appointments",
+    "add": "Add appointment",
+    "date": "Date",
+    "time": "Time",
+    "location": "Location",
+    "questions": "Questions to ask",
+    "notes": "Notes",
+    "upcoming": "Upcoming",
+    "past": "Past"
+  },
+  "rights": {
+    "title": "Know Your Rights",
+    "subtitle": "Your body, your choices",
+    "consent": "Consent",
+    "confidentiality": "Confidentiality",
+    "decisions": "Making decisions",
+    "under16": "Under 16",
+    "age16to17": "16-17 years",
+    "age18plus": "18 and over"
+  },
+  "levelUp": {
+    "title": "Level Up",
+    "subtitle": "Your transition superpowers",
+    "mythBusters": "Myth Busters",
+    "powerUps": "Power-Ups",
+    "badges": "My Badges",
+    "flip": "Flip to reveal",
+    "myth": "Myth",
+    "fact": "Fact",
+    "badgeEarned": "Badge earned!",
+    "keepGoing": "Keep going!"
+  },
+  "skills": {
+    "title": "Skills Builder",
+    "subtitle": "Practice real-life skills",
+    "gettingStarted": "Getting Started",
+    "buildingConfidence": "Building Confidence",
+    "readyForAnything": "Ready for Anything",
+    "practiced": "I've practiced this!",
+    "tips": "Tips",
+    "example": "Example"
+  },
+  "questions": {
+    "title": "Questions & Answers",
+    "subtitle": "Common questions about transition",
+    "theBasics": "The Basics",
+    "appointmentsCare": "Appointments & Care",
+    "yourRights": "Your Rights",
+    "commonWorries": "Common Worries"
+  },
+  "resources": {
+    "title": "Resources",
+    "rsgTitle": "Ready Steady Go questionnaires",
+    "downloadPdf": "Download PDF",
+    "viewOnline": "View online",
+    "easyRead": "Easy Read version"
+  },
+  "about": {
+    "title": "About Transition Ready",
+    "createdBy": "Created by",
+    "mission": "Our mission",
+    "acknowledgements": "Acknowledgements",
+    "contact": "Contact us"
+  },
+  "feedback": {
+    "title": "Send Feedback",
+    "button": "Feedback",
+    "prompt": "Help make the app even better!",
+    "messagePlaceholder": "Your message",
+    "emailPlaceholder": "Your email (optional)",
+    "send": "Send",
+    "success": "Thank you for your feedback!",
+    "error": "Failed to send. Please try again."
+  },
+  "footer": {
+    "disclaimer": "This app gives general information for the UK. It does not replace medical or legal advice.",
+    "privacyLink": "Privacy & Disclaimer",
+    "attribution": "Transition checklist adapted from Ready Steady Go by Dr Arvind Nagra, University Hospital Southampton NHS Foundation Trust."
+  },
+  "privacy": {
+    "title": "Privacy & Disclaimer",
+    "medicalDisclaimer": "Medical Disclaimer",
+    "educationalOnly": "This app is for educational purposes only",
+    "notMedicalAdvice": "Not medical advice",
+    "consultDoctor": "Always consult your doctor",
+    "emergency": "In an emergency, call 999",
+    "privacyNotice": "Privacy Notice",
+    "dataOnDevice": "Your data stays on your device",
+    "noCollection": "We don't collect personal information",
+    "cookieNotice": "Cookie Notice",
+    "noCookies": "We don't use cookies",
+    "yourRights": "Your Rights",
+    "ukGdpr": "UK GDPR"
+  },
+  "status": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "tryAgain": "Please try again",
+    "saved": "Saved!",
+    "deleted": "Deleted"
+  },
+  "language": {
+    "select": "Language",
+    "english": "English",
+    "urdu": "اردو"
+  }
+}

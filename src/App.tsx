@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { EasyReadProvider, RoleProvider, useRole } from './hooks'
+import { isRTL } from './i18n'
 import { AppShell } from './components/layout/AppShell'
 import { Home } from './pages/Home'
 import { Checklist } from './pages/Checklist'
@@ -34,9 +37,19 @@ import About from './pages/About'
 import Install from './pages/Install'
 import Privacy from './pages/Privacy'
 
-// Wrapper to apply role-based styling
+// Wrapper to apply role-based styling and handle RTL
 function AppContent() {
   const { isYoungPerson } = useRole()
+  const { i18n } = useTranslation()
+
+  // Update document direction and language when language changes
+  useEffect(() => {
+    const lang = i18n.language || 'en'
+    const dir = isRTL(lang) ? 'rtl' : 'ltr'
+
+    document.documentElement.setAttribute('dir', dir)
+    document.documentElement.setAttribute('lang', lang)
+  }, [i18n.language])
 
   return (
     <div className={isYoungPerson ? 'font-friendly' : 'font-sans'}>

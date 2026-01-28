@@ -1,9 +1,11 @@
 import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Search } from './Search'
 import { useRole } from '../../hooks'
 import { CompactRoleToggle } from '../home/CompactRoleToggle'
 import { FeedbackButton } from './FeedbackButton'
+import { LanguageSwitcher, LanguageSwitcherCompact } from './LanguageSwitcher'
 
 interface AppShellProps {
   children: ReactNode
@@ -12,6 +14,7 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   const { role, setRole, isYoungPerson } = useRole()
+  const { t } = useTranslation()
 
   // Close more menu when route changes
   const closeMoreMenu = () => setMoreMenuOpen(false)
@@ -25,24 +28,29 @@ export function AppShell({ children }: AppShellProps) {
             TC
           </span>
           <div className="ml-3 leading-tight">
-            <p className="text-sm font-semibold text-warm-800">Transition Care</p>
-            <p className="text-xs text-warm-500">Your move to adult care</p>
+            <p className="text-sm font-semibold text-warm-800">{t('home.welcome', 'Transition Ready')}</p>
+            <p className="text-xs text-warm-500">{t('home.tagline')}</p>
           </div>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1 text-sm">
-          <NavItem to="/" label="Home" icon="🏠" />
-          <NavItem to="/journey" label="My journey" icon="🚀" />
-          <NavItem to="/rights" label="Know your rights" icon="⚖️" />
+          <NavItem to="/" label={t('nav.home')} icon="🏠" />
+          <NavItem to="/journey" label={t('nav.journey')} icon="🚀" />
+          <NavItem to="/rights" label={t('nav.rights')} icon="⚖️" />
           <NavItem to="/money" label="Money & PIP" icon="💰" />
           <NavItem to="/planning" label="Planning tools" icon="📝" />
-          <NavItem to="/videos" label="Videos & stories" icon="🎬" />
-          <NavItem to="/resources" label="Resources" icon="📚" />
-          <NavItem to="/level-up" label="Level Up Game" icon="🎮" />
-          <NavItem to="/about" label="About" icon="ℹ️" />
+          <NavItem to="/videos" label={t('nav.videos')} icon="🎬" />
+          <NavItem to="/resources" label={t('nav.resources')} icon="📚" />
+          <NavItem to="/level-up" label={t('nav.levelUp')} icon="🎮" />
+          <NavItem to="/about" label={t('nav.about')} icon="ℹ️" />
         </nav>
+        {/* Language switcher in sidebar */}
+        <div className="px-4 py-3 border-t border-warm-100">
+          <p className="text-xs text-warm-500 mb-2">{t('language.select')}:</p>
+          <LanguageSwitcher />
+        </div>
         {/* Role toggle in sidebar */}
         <div className="px-4 py-3 border-t border-warm-100">
-          <p className="text-xs text-warm-500 mb-2">Viewing as:</p>
+          <p className="text-xs text-warm-500 mb-2">{t('role.viewingAs')}</p>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setRole('young-person')}
@@ -53,7 +61,7 @@ export function AppShell({ children }: AppShellProps) {
               }`}
             >
               <span>🧑</span>
-              <span>Young person</span>
+              <span>{t('role.youngPerson')}</span>
             </button>
             <button
               onClick={() => setRole('parent-carer')}
@@ -64,15 +72,15 @@ export function AppShell({ children }: AppShellProps) {
               }`}
             >
               <span>👨‍👩‍👧</span>
-              <span>Parent</span>
+              <span>{t('role.parentCarer')}</span>
             </button>
           </div>
         </div>
         <div className="px-4 py-4 text-xs border-t border-warm-100 space-y-3">
-          <p className="text-warm-500">This app gives general information for the UK. It does not replace medical or legal advice.</p>
-          <p className="text-warm-500">Transition checklist adapted from <a href="https://www.uhs.nhs.uk/health-professionals/transition-from-child-to-adult-services" target="_blank" rel="noopener noreferrer" className="text-warm-600 underline hover:text-primary-600">Ready Steady Go</a> by Dr Arvind Nagra, University Hospital Southampton NHS Foundation Trust.</p>
+          <p className="text-warm-500">{t('footer.disclaimer')}</p>
+          <p className="text-warm-500">{t('footer.attribution')}</p>
           <NavLink to="/privacy" className="text-warm-500 hover:text-primary-600 underline transition-colors">
-            Privacy & Disclaimer
+            {t('footer.privacyLink')}
           </NavLink>
         </div>
       </aside>
@@ -102,10 +110,10 @@ export function AppShell({ children }: AppShellProps) {
         {/* Bottom Navigation - Mobile only */}
         <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-warm-200 px-2 py-2 z-20">
           <div className="flex items-center justify-around">
-            <BottomNavItem to="/" icon="🏠" label="Home" />
-            <BottomNavItem to="/checklist" icon="✅" label="Checklist" />
-            <BottomNavItem to="/care-plan" icon="📋" label="Care Plan" />
-            <BottomNavItem to="/care-team" icon="👥" label="Team" />
+            <BottomNavItem to="/" icon="🏠" label={t('nav.home')} />
+            <BottomNavItem to="/checklist" icon="✅" label={t('nav.checklist')} />
+            <BottomNavItem to="/care-plan" icon="📋" label={t('nav.carePlan')} />
+            <BottomNavItem to="/care-team" icon="👥" label={t('nav.careTeam')} />
             <button
               onClick={() => setMoreMenuOpen(!moreMenuOpen)}
               className={`flex flex-col items-center justify-center px-3 py-1 rounded-xl transition-all ${
@@ -113,7 +121,7 @@ export function AppShell({ children }: AppShellProps) {
               }`}
             >
               <span className="text-xl">☰</span>
-              <span className="text-[10px] mt-0.5 font-medium">More</span>
+              <span className="text-[10px] mt-0.5 font-medium">{t('nav.more')}</span>
             </button>
           </div>
 
@@ -125,9 +133,13 @@ export function AppShell({ children }: AppShellProps) {
                 onClick={closeMoreMenu}
               />
               <div className="absolute bottom-full left-0 right-0 bg-white border-t border-warm-200 rounded-t-2xl shadow-lg z-20 p-4 mb-0">
+                {/* Language switcher for mobile */}
+                <div className="mb-3 pb-3 border-b border-warm-100 flex justify-center">
+                  <LanguageSwitcherCompact />
+                </div>
                 {/* Role toggle for mobile */}
                 <div className="mb-4 pb-3 border-b border-warm-100">
-                  <p className="text-xs text-warm-500 mb-2 text-center">Viewing as:</p>
+                  <p className="text-xs text-warm-500 mb-2 text-center">{t('role.viewingAs')}</p>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => { setRole('young-person'); closeMoreMenu(); }}
@@ -138,7 +150,7 @@ export function AppShell({ children }: AppShellProps) {
                       }`}
                     >
                       <span>🧑</span>
-                      <span>Young person</span>
+                      <span>{t('role.youngPerson')}</span>
                     </button>
                     <button
                       onClick={() => { setRole('parent-carer'); closeMoreMenu(); }}
@@ -149,21 +161,21 @@ export function AppShell({ children }: AppShellProps) {
                       }`}
                     >
                       <span>👨‍👩‍👧</span>
-                      <span>Parent</span>
+                      <span>{t('role.parentCarer')}</span>
                     </button>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-3 pb-16">
-                  <MoreMenuItem to="/journey" icon="🚀" label="My Journey" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/rights" icon="⚖️" label="Rights" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/journey" icon="🚀" label={t('nav.journey')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/rights" icon="⚖️" label={t('nav.rights')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/money" icon="💰" label="Money & PIP" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/appointments" icon="📅" label="Appointments" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/videos" icon="🎬" label="Videos" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/resources" icon="📚" label="Resources" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/level-up" icon="🎮" label="Level Up" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/about" icon="ℹ️" label="About" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/install" icon="📲" label="Install App" onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/privacy" icon="🔒" label="Privacy" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/appointments" icon="📅" label={t('nav.appointments')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/videos" icon="🎬" label={t('nav.videos')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/resources" icon="📚" label={t('nav.resources')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/level-up" icon="🎮" label={t('nav.levelUp')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/about" icon="ℹ️" label={t('nav.about')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/install" icon="📲" label={t('nav.install')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/privacy" icon="🔒" label={t('nav.privacy')} onClick={closeMoreMenu} />
                 </div>
               </div>
             </>
