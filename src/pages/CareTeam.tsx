@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useLocalStorage } from '../hooks'
 
 interface TeamMember {
@@ -19,64 +20,53 @@ interface CareTeamData {
 
 export const CARE_TEAM_STORAGE_KEY = 'transition-care-team'
 
-const roleOptions = [
-  'GP (General Practitioner)',
-  'Hospital Doctor / Consultant',
-  'Specialist Nurse',
-  'Practice Nurse',
-  'Transition Coordinator',
-  'Physiotherapist',
-  'Occupational Therapist',
-  'Speech Therapist',
-  'Psychologist / Counsellor',
-  'Social Worker',
-  'Pharmacist',
-  'Dietitian',
-  'Care Coordinator',
-  'Admin / Appointments',
-  'Other'
+// Role keys for translation lookup
+const roleKeys = [
+  'gp',
+  'consultant',
+  'specialistNurse',
+  'practiceNurse',
+  'transitionCoordinator',
+  'physio',
+  'ot',
+  'speechTherapist',
+  'psychologist',
+  'socialWorker',
+  'pharmacist',
+  'dietitian',
+  'careCoordinator',
+  'admin',
+  'other'
 ]
 
-const roleExplanations: Record<string, { emoji: string; description: string }> = {
-  'GP (General Practitioner)': {
-    emoji: '🏥',
-    description: 'Your main doctor in the community who can refer you to specialists'
-  },
-  'Hospital Doctor / Consultant': {
-    emoji: '👨‍⚕️',
-    description: 'A specialist doctor who knows a lot about your specific condition'
-  },
-  'Specialist Nurse': {
-    emoji: '👩‍⚕️',
-    description: 'A nurse with extra training in your condition who can give advice and support'
-  },
-  'Transition Coordinator': {
-    emoji: '🌉',
-    description: 'Helps plan your move from children\'s to adult services'
-  },
-  'Physiotherapist': {
-    emoji: '🤸',
-    description: 'Helps with movement, exercises, and physical recovery'
-  },
-  'Psychologist / Counsellor': {
-    emoji: '💭',
-    description: 'Helps with mental health, emotions, and coping strategies'
-  },
-  'Social Worker': {
-    emoji: '🤝',
-    description: 'Helps with social care, benefits, and support services'
-  },
-  'Pharmacist': {
-    emoji: '💊',
-    description: 'Medicine expert who can answer questions about your prescriptions'
-  },
+// Role emojis (static, don't need translation)
+const roleEmojis: Record<string, string> = {
+  gp: '🏥',
+  consultant: '👨‍⚕️',
+  specialistNurse: '👩‍⚕️',
+  practiceNurse: '👩‍⚕️',
+  transitionCoordinator: '🌉',
+  physio: '🤸',
+  ot: '🧩',
+  speechTherapist: '🗣️',
+  psychologist: '💭',
+  socialWorker: '🤝',
+  pharmacist: '💊',
+  dietitian: '🥗',
+  careCoordinator: '📋',
+  admin: '📞',
+  other: '👤'
 }
+
+// Roles with descriptions
+const rolesWithDescriptions = ['gp', 'consultant', 'specialistNurse', 'transitionCoordinator', 'physio', 'psychologist', 'socialWorker', 'pharmacist']
 
 const initialData: CareTeamData = {
   teamMembers: []
 }
 
 export function CareTeam() {
+  const { t } = useTranslation()
   const [data, setData] = useLocalStorage<CareTeamData>(CARE_TEAM_STORAGE_KEY, initialData)
   const [showAddForm, setShowAddForm] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
@@ -148,15 +138,15 @@ export function CareTeam() {
       <header className="space-y-3">
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-warm-500 hover:text-primary-600 transition-colors">
           <span>←</span>
-          <span>Back to Home</span>
+          <span>{t('buttons.backToHome')}</span>
         </Link>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-3xl">👥</span>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-warm-800">My Care Team</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-warm-800">{t('careTeam.title')}</h1>
               <p className="text-sm text-warm-500">
-                {teamMembers.length} team member{teamMembers.length !== 1 ? 's' : ''}
+                {t('careTeam.teamMemberCount', { count: teamMembers.length })}
               </p>
             </div>
           </div>
@@ -165,7 +155,7 @@ export function CareTeam() {
               onClick={() => setShowAddForm(true)}
               className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-semibold shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all"
             >
-              + Add Team Member
+              + {t('careTeam.add')}
             </button>
           )}
         </div>
@@ -176,14 +166,14 @@ export function CareTeam() {
         <div className="flex items-center gap-3">
           <span className="text-2xl">📖</span>
           <div className="flex-1">
-            <p className="font-medium text-warm-800">Not sure what different roles do?</p>
-            <p className="text-sm text-warm-600">Learn about healthcare professionals in our guide.</p>
+            <p className="font-medium text-warm-800">{t('careTeam.learnRoles')}</p>
+            <p className="text-sm text-warm-600">{t('careTeam.learnRolesDesc')}</p>
           </div>
           <Link
             to="/journey/my-team"
             className="px-4 py-2 rounded-xl bg-white border border-primary-200 text-primary-600 text-sm font-medium hover:bg-primary-50 transition-all"
           >
-            Learn more →
+            {t('buttons.learnMore')} →
           </Link>
         </div>
       </div>
@@ -193,26 +183,26 @@ export function CareTeam() {
         <section className="bg-gradient-to-br from-accent-50 to-white rounded-2xl border border-accent-200 p-5 shadow-card space-y-4">
           <h2 className="font-semibold text-warm-800 flex items-center gap-2">
             <span>➕</span>
-            <span>Add Team Member</span>
+            <span>{t('careTeam.add')}</span>
           </h2>
 
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <label htmlFor="tm-name" className="block text-sm font-medium text-warm-700 mb-1">
-                Name *
+                {t('careTeam.nameRequired')}
               </label>
               <input
                 id="tm-name"
                 type="text"
                 value={newMember.name}
                 onChange={(e) => updateNewMemberField('name', e.target.value)}
-                placeholder="e.g. Dr. Smith, Nurse Sarah..."
+                placeholder={t('careTeam.namePlaceholder')}
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-white text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300"
               />
             </div>
             <div>
               <label htmlFor="tm-role" className="block text-sm font-medium text-warm-700 mb-1">
-                Role
+                {t('careTeam.role')}
               </label>
               <select
                 id="tm-role"
@@ -220,9 +210,9 @@ export function CareTeam() {
                 onChange={(e) => updateNewMemberField('role', e.target.value)}
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-white text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300"
               >
-                <option value="">Select a role...</option>
-                {roleOptions.map(role => (
-                  <option key={role} value={role}>{role}</option>
+                <option value="">{t('careTeam.selectRole')}</option>
+                {roleKeys.map(roleKey => (
+                  <option key={roleKey} value={roleKey}>{t(`careTeam.roles.${roleKey}`)}</option>
                 ))}
               </select>
             </div>
@@ -231,27 +221,27 @@ export function CareTeam() {
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <label htmlFor="tm-workplace" className="block text-sm font-medium text-warm-700 mb-1">
-                Where they work
+                {t('careTeam.workplace')}
               </label>
               <input
                 id="tm-workplace"
                 type="text"
                 value={newMember.workplace}
                 onChange={(e) => updateNewMemberField('workplace', e.target.value)}
-                placeholder="e.g. City Hospital, GP Surgery..."
+                placeholder={t('careTeam.workplacePlaceholder')}
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-white text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300"
               />
             </div>
             <div>
               <label htmlFor="tm-contact" className="block text-sm font-medium text-warm-700 mb-1">
-                Contact info
+                {t('careTeam.contactInfo')}
               </label>
               <input
                 id="tm-contact"
                 type="text"
                 value={newMember.contactInfo}
                 onChange={(e) => updateNewMemberField('contactInfo', e.target.value)}
-                placeholder="e.g. Phone, email..."
+                placeholder={t('careTeam.contactPlaceholder')}
                 className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-white text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300"
               />
             </div>
@@ -259,27 +249,27 @@ export function CareTeam() {
 
           <div>
             <label htmlFor="tm-helps" className="block text-sm font-medium text-warm-700 mb-1">
-              What they help you with
+              {t('careTeam.whatTheyHelpWith')}
             </label>
             <input
               id="tm-helps"
               type="text"
               value={newMember.whatTheyHelpWith}
               onChange={(e) => updateNewMemberField('whatTheyHelpWith', e.target.value)}
-              placeholder="e.g. My diabetes check-ups, mental health support..."
+              placeholder={t('careTeam.helpsPlaceholder')}
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-white text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300"
             />
           </div>
 
           <div>
             <label htmlFor="tm-notes" className="block text-sm font-medium text-warm-700 mb-1">
-              Notes
+              {t('careTeam.notes')}
             </label>
             <textarea
               id="tm-notes"
               value={newMember.notes}
               onChange={(e) => updateNewMemberField('notes', e.target.value)}
-              placeholder="Any other info about this person..."
+              placeholder={t('careTeam.notesPlaceholder')}
               rows={2}
               className="w-full px-4 py-2 rounded-xl border border-warm-200 bg-white text-warm-800 placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 resize-none"
             />
@@ -291,7 +281,7 @@ export function CareTeam() {
               disabled={!newMember.name.trim()}
               className="px-5 py-2 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold shadow-card hover:shadow-card-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Add to Team
+              {t('careTeam.addToTeam')}
             </button>
             <button
               onClick={() => {
@@ -307,7 +297,7 @@ export function CareTeam() {
               }}
               className="px-5 py-2 rounded-xl border border-warm-200 text-warm-600 font-medium hover:border-warm-300"
             >
-              Cancel
+              {t('buttons.cancel')}
             </button>
           </div>
         </section>
@@ -317,9 +307,9 @@ export function CareTeam() {
       {teamMembers.length === 0 ? (
         <div className="bg-warm-50 rounded-2xl border border-warm-200 border-dashed p-8 text-center">
           <span className="text-4xl">👥</span>
-          <p className="mt-3 text-warm-600 font-medium">Your care team is empty!</p>
+          <p className="mt-3 text-warm-600 font-medium">{t('careTeam.emptyTitle')}</p>
           <p className="text-sm text-warm-500 mt-1">
-            Add the healthcare professionals who look after you.
+            {t('careTeam.emptyDescription')}
           </p>
         </div>
       ) : (
@@ -332,7 +322,7 @@ export function CareTeam() {
               onToggleEdit={() => setEditingId(editingId === member.id ? null : member.id)}
               onUpdate={(updates) => handleUpdateMember(member.id, updates)}
               onDelete={() => handleDeleteMember(member.id)}
-              roleExplanation={roleExplanations[member.role]}
+              roleKey={member.role}
             />
           ))}
         </div>
@@ -343,10 +333,9 @@ export function CareTeam() {
         <div className="flex items-start gap-3">
           <span className="text-xl">💡</span>
           <div className="text-sm text-warm-600">
-            <p className="font-semibold text-warm-800">Top tip!</p>
+            <p className="font-semibold text-warm-800">{t('careTeam.tipTitle')}</p>
             <p>
-              Keep your care team list updated. When you move to adult services, you can add your new team members here too.
-              It's really helpful to have everyone's contact details in one place!
+              {t('careTeam.tipContent')}
             </p>
           </div>
         </div>
@@ -361,7 +350,7 @@ interface TeamMemberCardProps {
   onToggleEdit: () => void
   onUpdate: (updates: Partial<TeamMember>) => void
   onDelete: () => void
-  roleExplanation?: { emoji: string; description: string }
+  roleKey: string
 }
 
 function TeamMemberCard({
@@ -370,17 +359,21 @@ function TeamMemberCard({
   onToggleEdit,
   onUpdate,
   onDelete,
-  roleExplanation
+  roleKey
 }: TeamMemberCardProps) {
+  const { t } = useTranslation()
+  const emoji = roleEmojis[roleKey] || '👤'
+  const hasDescription = rolesWithDescriptions.includes(roleKey)
+
   return (
     <div className="bg-white rounded-2xl border border-warm-200 p-4 shadow-card hover:shadow-card-hover transition-all">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-4 flex-1">
-          <span className="text-3xl">{roleExplanation?.emoji || '👤'}</span>
+          <span className="text-3xl">{emoji}</span>
           <div className="flex-1 min-w-0">
             <h3 className="font-semibold text-warm-800">{member.name}</h3>
             {member.role && (
-              <p className="text-sm text-primary-600 font-medium">{member.role}</p>
+              <p className="text-sm text-primary-600 font-medium">{t(`careTeam.roles.${roleKey}`)}</p>
             )}
             {member.workplace && (
               <p className="text-sm text-warm-500">📍 {member.workplace}</p>
@@ -394,14 +387,14 @@ function TeamMemberCard({
           <button
             onClick={onToggleEdit}
             className="p-2 rounded-lg bg-warm-100 text-warm-500 hover:bg-primary-100 hover:text-primary-600 transition-all"
-            title="Edit"
+            title={t('buttons.edit')}
           >
             {isEditing ? '▲' : '▼'}
           </button>
           <button
             onClick={onDelete}
             className="p-2 rounded-lg bg-warm-100 text-warm-400 hover:bg-red-100 hover:text-red-500 transition-all"
-            title="Delete"
+            title={t('buttons.delete')}
           >
             ×
           </button>
@@ -412,7 +405,7 @@ function TeamMemberCard({
         <div className="mt-4 pt-4 border-t border-warm-200 space-y-3">
           {member.contactInfo && (
             <div>
-              <p className="text-xs font-medium text-warm-500 mb-1">Contact Info</p>
+              <p className="text-xs font-medium text-warm-500 mb-1">{t('careTeam.contactInfo')}</p>
               <input
                 type="text"
                 value={member.contactInfo}
@@ -423,10 +416,10 @@ function TeamMemberCard({
           )}
           {!member.contactInfo && (
             <div>
-              <p className="text-xs font-medium text-warm-500 mb-1">Add Contact Info</p>
+              <p className="text-xs font-medium text-warm-500 mb-1">{t('careTeam.addContact')}</p>
               <input
                 type="text"
-                placeholder="Phone, email, etc."
+                placeholder={t('careTeam.phonePlaceholder')}
                 onChange={(e) => onUpdate({ contactInfo: e.target.value })}
                 className="w-full px-3 py-2 rounded-lg border border-warm-200 bg-warm-50/50 text-sm text-warm-700 focus:outline-none focus:ring-2 focus:ring-primary-300"
               />
@@ -434,14 +427,14 @@ function TeamMemberCard({
           )}
           {member.notes && (
             <div>
-              <p className="text-xs font-medium text-warm-500 mb-1">Notes</p>
+              <p className="text-xs font-medium text-warm-500 mb-1">{t('careTeam.notes')}</p>
               <p className="text-sm text-warm-600 bg-warm-50 rounded-lg p-2">{member.notes}</p>
             </div>
           )}
-          {roleExplanation && (
+          {hasDescription && (
             <div className="bg-primary-50 rounded-lg p-3">
-              <p className="text-xs font-medium text-primary-700">About this role:</p>
-              <p className="text-sm text-primary-600">{roleExplanation.description}</p>
+              <p className="text-xs font-medium text-primary-700">{t('careTeam.aboutRole')}</p>
+              <p className="text-sm text-primary-600">{t(`careTeam.roles.${roleKey}Desc`)}</p>
             </div>
           )}
         </div>
