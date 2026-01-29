@@ -36,8 +36,8 @@ export function AppShell({ children }: AppShellProps) {
           <NavItem to="/" label={t('nav.home')} icon="🏠" />
           <NavItem to="/journey" label={t('nav.journey')} icon="🚀" />
           <NavItem to="/rights" label={t('nav.rights')} icon="⚖️" />
-          <NavItem to="/money" label="Money & PIP" icon="💰" />
-          <NavItem to="/planning" label="Planning tools" icon="📝" />
+          <NavItem to="/money" label={t('nav.money')} icon="💰" />
+          <NavItem to="/planning" label={t('nav.planning')} icon="📝" />
           <NavItem to="/videos" label={t('nav.videos')} icon="🎬" />
           <NavItem to="/resources" label={t('nav.resources')} icon="📚" />
           <NavItem to="/level-up" label={t('nav.levelUp')} icon="🎮" />
@@ -168,7 +168,7 @@ export function AppShell({ children }: AppShellProps) {
                 <div className="grid grid-cols-3 gap-3 pb-16">
                   <MoreMenuItem to="/journey" icon="🚀" label={t('nav.journey')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/rights" icon="⚖️" label={t('nav.rights')} onClick={closeMoreMenu} />
-                  <MoreMenuItem to="/money" icon="💰" label="Money & PIP" onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/money" icon="💰" label={t('nav.money')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/appointments" icon="📅" label={t('nav.appointments')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/videos" icon="🎬" label={t('nav.videos')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/resources" icon="📚" label={t('nav.resources')} onClick={closeMoreMenu} />

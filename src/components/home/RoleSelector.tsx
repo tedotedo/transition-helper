@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { UserRole } from '../../hooks/useRole'
 
 interface RoleSelectorProps {
@@ -5,20 +6,22 @@ interface RoleSelectorProps {
 }
 
 export function RoleSelector({ onSelect }: RoleSelectorProps) {
+  const { t } = useTranslation()
+
   return (
     <div className="space-y-6 text-center">
       <div className="space-y-3">
         <div className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2">
           <span className="text-2xl">👋</span>
-          <span className="text-sm font-bold text-white">Welcome to Transition Ready!</span>
+          <span className="text-sm font-bold text-white">{t('home.welcome')}</span>
         </div>
 
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
-          Who's visiting today?
+          {t('roleSelector.whoVisiting', "Who's visiting today?")}
         </h2>
 
         <p className="max-w-lg mx-auto text-base sm:text-lg text-white/80 leading-relaxed">
-          We'll personalise your experience based on your answer
+          {t('roleSelector.personalise', "We'll personalise your experience based on your answer")}
         </p>
       </div>
 
@@ -29,8 +32,8 @@ export function RoleSelector({ onSelect }: RoleSelectorProps) {
         >
           <span className="text-5xl group-hover:scale-110 transition-transform">🧑</span>
           <div>
-            <p className="text-lg font-bold text-warm-800 group-hover:text-primary-600 transition-colors">I'm a young person</p>
-            <p className="text-sm text-warm-500 mt-1">Moving to adult healthcare</p>
+            <p className="text-lg font-bold text-warm-800 group-hover:text-primary-600 transition-colors">{t('role.iAmYoungPerson')}</p>
+            <p className="text-sm text-warm-500 mt-1">{t('roleSelector.youngPersonDesc', 'Moving to adult healthcare')}</p>
           </div>
         </button>
 
@@ -40,14 +43,14 @@ export function RoleSelector({ onSelect }: RoleSelectorProps) {
         >
           <span className="text-5xl group-hover:scale-110 transition-transform">👨‍👩‍👧</span>
           <div>
-            <p className="text-lg font-bold text-warm-800 group-hover:text-accent-600 transition-colors">I'm a parent or carer</p>
-            <p className="text-sm text-warm-500 mt-1">Supporting someone through transition</p>
+            <p className="text-lg font-bold text-warm-800 group-hover:text-accent-600 transition-colors">{t('role.iAmParent')}</p>
+            <p className="text-sm text-warm-500 mt-1">{t('roleSelector.parentDesc', 'Supporting someone through transition')}</p>
           </div>
         </button>
       </div>
 
       <p className="text-white/60 text-sm">
-        You can change this anytime using the toggle at the top of the page
+        {t('roleSelector.canChange', 'You can change this anytime using the toggle at the top of the page')}
       </p>
     </div>
   )

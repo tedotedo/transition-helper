@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { searchContent, type SearchItem } from '../../data/search-index'
 
 const categoryLabels: Record<SearchItem['category'], string> = {
@@ -24,6 +25,7 @@ export function Search() {
   const inputRef = useRef<HTMLInputElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   // Update search results when query changes
   useEffect(() => {
@@ -115,7 +117,7 @@ export function Search() {
         onFocus={() => query.length >= 2 && results.length > 0 && setIsOpen(true)}
         onKeyDown={handleKeyDown}
         className="w-full rounded-full bg-warm-50 border border-warm-200 pl-10 pr-4 py-2 text-sm placeholder:text-warm-400 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-300 hover:border-warm-300 transition-colors"
-        placeholder="Search topics, e.g. 'consent' or 'PIP'"
+        placeholder={t('search.placeholder')}
         aria-label="Search"
         aria-expanded={isOpen}
         aria-haspopup="listbox"

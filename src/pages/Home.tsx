@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { RoleToggle } from '../components/home/RoleToggle'
 import { RoleSelector } from '../components/home/RoleSelector'
 import { QuickActionTile } from '../components/home/QuickActionTile'
@@ -111,19 +112,12 @@ function importBackup(file: File): Promise<boolean> {
   })
 }
 
-const stageNames: Record<string, string> = {
-  ready: 'Ready',
-  steady: 'Steady',
-  go: 'Go',
-  adult: 'Hello Adult Services',
-}
-
-const youngPersonTip = 'Try explaining your condition in your own words before your next appointment - it really helps your new team get to know you!'
-const parentTip = "Let your child have a go at answering the first question at their next appointment. Small steps make a big difference!"
+// Stage names now use translations (see getStageNames function below)
 
 export function Home() {
   const { role, setRole } = useRole()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   // User name state
   const [userName, setUserName] = useState<string>(() => {
@@ -250,17 +244,25 @@ export function Home() {
 
   const { completed: checklistDone, total: checklistTotal, stage: currentStage, percent: progressPercent } = checklistData
 
-  const tip = role === 'young-person' ? youngPersonTip : parentTip
+  // Get translated stage names
+  const stageNames: Record<string, string> = {
+    ready: t('stages.ready'),
+    steady: t('stages.steady'),
+    go: t('stages.go'),
+    adult: t('stages.adult'),
+  }
+
+  const tip = role === 'young-person' ? t('home.tip.youngPerson') : t('home.tip.parent')
 
   const heroHeading =
     role === 'young-person'
-      ? userName ? `Hey, ${userName}! 👋` : "Hey, welcome back! 👋"
-      : "Supporting your young person's journey"
+      ? userName ? t('home.heroYoung.greetingWithName', { name: userName }) + ' 👋' : t('home.heroYoung.greeting') + ' 👋'
+      : t('home.heroParent.title')
 
   const heroBody =
     role === 'young-person'
-      ? "We're here to help you understand what happens at 16 and 18, who makes decisions about your care, and how to feel more confident at appointments. You've got this!"
-      : "This app helps you and your child get ready for adult services, understand how your role is changing, and find the support you both need."
+      ? t('home.heroYoung.mainMessage')
+      : t('home.heroParent.subtitle')
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -355,15 +357,15 @@ export function Home() {
               <div className="flex items-center justify-center">
                 <p className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 md:px-5 py-2 md:py-2.5 text-sm md:text-base font-bold text-white shadow-lg">
                   <span className="h-2 md:h-2.5 w-2 md:w-2.5 rounded-full bg-green-400 mr-2 animate-pulse" />
-                  Your Journey to Independence
+                  {t('home.heroYoung.journeyLabel')}
                 </p>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-lg leading-tight px-2">
                 {userName ? (
-                  <>Hey {userName}! <span className="inline-block animate-bounce">👋</span></>
+                  <>{t('home.heroYoung.greetingWithName', { name: userName })} <span className="inline-block animate-bounce">👋</span></>
                 ) : (
-                  <>Your health, your way <span className="inline-block animate-bounce">✨</span></>
+                  <>{t('home.heroYoung.title')} <span className="inline-block animate-bounce">✨</span></>
                 )}
               </h1>
 
@@ -402,7 +404,7 @@ export function Home() {
                     className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-white/10 text-sm sm:text-base text-white/80 hover:bg-white/20 hover:text-white transition-all"
                   >
                     <span>✏️</span>
-                    <span>Change name</span>
+                    <span>{t('home.heroYoung.changeName')}</span>
                   </button>
                 ) : (
                   <button
@@ -410,7 +412,7 @@ export function Home() {
                     className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl border-2 border-dashed border-white/40 text-sm sm:text-base text-white/80 hover:border-white/60 hover:text-white hover:bg-white/10 transition-all"
                   >
                     <span>🏷️</span>
-                    <span>Add your name - make it personal!</span>
+                    <span>{t('home.heroYoung.addName')}</span>
                   </button>
                 )}
                 {userName && !isEditingName && (
@@ -425,9 +427,7 @@ export function Home() {
               </div>
 
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-semibold px-2">
-                Moving to adult services is a <span className="text-yellow-300 font-bold">big step</span> — and you're ready for it!{' '}
-                <br className="hidden sm:block" />
-                Learn what changes at 16 & 18, understand your rights, and take charge of your own healthcare.
+                {t('home.heroYoung.mainMessage')}
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 pt-4 px-2">
@@ -435,13 +435,13 @@ export function Home() {
                   href="/journey"
                   className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-white text-primary-600 text-base sm:text-lg font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
                 >
-                  <span className="text-xl sm:text-2xl">🗺️</span> Start Your Journey
+                  <span className="text-xl sm:text-2xl">🗺️</span> {t('home.startJourney')}
                 </a>
                 <a
                   href="/rights"
                   className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-white/20 backdrop-blur-sm text-white text-base sm:text-lg font-bold border-2 border-white/30 hover:bg-white/30 transition-all"
                 >
-                  <span className="text-xl sm:text-2xl">⚖️</span> Know Your Rights
+                  <span className="text-xl sm:text-2xl">⚖️</span> {t('home.knowRights')}
                 </a>
               </div>
             </div>

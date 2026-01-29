@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 export type UserRole = 'young-person' | 'parent-carer'
 
 interface RoleToggleProps {
@@ -6,6 +8,8 @@ interface RoleToggleProps {
 }
 
 export function RoleToggle({ value, onChange }: RoleToggleProps) {
+  const { t } = useTranslation()
+
   return (
     <div className="inline-flex rounded-full border border-warm-200 bg-white p-1 text-xs font-medium shadow-sm">
       <button
@@ -17,7 +21,7 @@ export function RoleToggle({ value, onChange }: RoleToggleProps) {
             : 'text-warm-600 hover:text-warm-800 hover:bg-warm-50'
         }`}
       >
-        🧑 I'm a young person
+        🧑 {t('role.iAmYoungPerson')}
       </button>
       <button
         type="button"
@@ -28,7 +32,7 @@ export function RoleToggle({ value, onChange }: RoleToggleProps) {
             : 'text-warm-600 hover:text-warm-800 hover:bg-warm-50'
         }`}
       >
-        👨‍👩‍👧 Parent / Carer
+        👨‍👩‍👧 {t('role.parentCarer')}
       </button>
     </div>
   )

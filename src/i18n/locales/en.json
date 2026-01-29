@@ -15,7 +15,9 @@
     "about": "About",
     "privacy": "Privacy",
     "install": "Install App",
-    "more": "More"
+    "more": "More",
+    "money": "Money & PIP",
+    "planning": "Planning tools"
   },
   "search": {
     "placeholder": "Search pages, topics...",
@@ -29,6 +31,13 @@
     "iAmParent": "I'm a parent or carer",
     "youngPersonDesc": "I'm getting ready for adult healthcare",
     "parentDesc": "I'm supporting someone through transition"
+  },
+  "roleSelector": {
+    "whoVisiting": "Who's visiting today?",
+    "personalise": "We'll personalise your experience based on your answer",
+    "youngPersonDesc": "Moving to adult healthcare",
+    "parentDesc": "Supporting someone through transition",
+    "canChange": "You can change this anytime using the toggle at the top of the page"
   },
   "home": {
     "welcome": "Welcome to Transition Ready",
