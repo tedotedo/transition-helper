@@ -60,7 +60,7 @@ export function FloatingLanguageToggle() {
   )
 }
 
-// Compact version for mobile menu
+// Compact version for hero/inline use - white pill style
 export function LanguageSwitcherCompact() {
   const { i18n } = useTranslation()
   const currentLang = (i18n.language || 'en') as LanguageCode
@@ -75,11 +75,11 @@ export function LanguageSwitcherCompact() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-primary-50 to-accent-50 border-2 border-primary-200 hover:border-primary-400 text-warm-800 font-semibold transition-all"
+      className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm border border-white/50 shadow-lg hover:bg-white hover:shadow-xl hover:scale-105 transition-all"
       aria-label={`Switch to ${languages[otherLang].name}`}
     >
-      <span className="text-2xl">{languages[otherLang].flag}</span>
-      <span>Switch to {languages[otherLang].nativeName}</span>
+      <span className="text-xl">{languages[otherLang].flag}</span>
+      <span className="font-semibold text-sm text-warm-800">{languages[otherLang].nativeName}</span>
     </button>
   )
 }
