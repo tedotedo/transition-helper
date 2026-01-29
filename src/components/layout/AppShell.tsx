@@ -5,7 +5,7 @@ import { Search } from './Search'
 import { useRole } from '../../hooks'
 import { CompactRoleToggle } from '../home/CompactRoleToggle'
 import { FeedbackButton } from './FeedbackButton'
-import { LanguageSwitcher, LanguageSwitcherCompact } from './LanguageSwitcher'
+import { LanguageSwitcher, LanguageSwitcherCompact, FloatingLanguageToggle } from './LanguageSwitcher'
 
 interface AppShellProps {
   children: ReactNode
@@ -181,6 +181,9 @@ export function AppShell({ children }: AppShellProps) {
             </>
           )}
         </nav>
+
+        {/* Floating Language Toggle - always visible */}
+        <FloatingLanguageToggle />
 
         {/* Floating Feedback Button */}
         <FeedbackButton />

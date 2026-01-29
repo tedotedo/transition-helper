@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { languages, type LanguageCode } from '../../i18n'
 
+// Prominent language switcher with flags - for header/visible position
 export function LanguageSwitcher() {
   const { i18n } = useTranslation()
   const currentLang = (i18n.language || 'en') as LanguageCode
@@ -10,19 +11,20 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1 bg-warm-100 rounded-xl p-1">
+    <div className="flex items-center gap-2">
       {(Object.keys(languages) as LanguageCode[]).map((lang) => (
         <button
           key={lang}
           onClick={() => handleChange(lang)}
-          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
             currentLang === lang
-              ? 'bg-white text-primary-600 shadow-sm'
-              : 'text-warm-600 hover:text-warm-800 hover:bg-warm-50'
+              ? 'bg-primary-500 text-white shadow-md scale-105'
+              : 'bg-white border-2 border-warm-200 text-warm-700 hover:border-primary-300 hover:bg-primary-50'
           }`}
           aria-label={`Switch to ${languages[lang].name}`}
+          aria-pressed={currentLang === lang}
         >
-          <span className="mr-1">{languages[lang].flag}</span>
+          <span className="text-xl">{languages[lang].flag}</span>
           <span>{languages[lang].nativeName}</span>
         </button>
       ))}
@@ -30,7 +32,32 @@ export function LanguageSwitcher() {
   )
 }
 
-// Compact version for mobile
+// Floating language toggle button - fixed position, always visible
+export function FloatingLanguageToggle() {
+  const { i18n } = useTranslation()
+  const currentLang = (i18n.language || 'en') as LanguageCode
+
+  const toggleLanguage = () => {
+    const newLang = currentLang === 'en' ? 'ur' : 'en'
+    i18n.changeLanguage(newLang)
+  }
+
+  const otherLang = currentLang === 'en' ? 'ur' : 'en'
+
+  return (
+    <button
+      onClick={toggleLanguage}
+      className="fixed top-4 right-4 md:top-6 md:right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white border-2 border-primary-200 shadow-lg hover:shadow-xl hover:border-primary-400 hover:scale-105 transition-all"
+      aria-label={`Switch to ${languages[otherLang].name}`}
+      title={`Switch to ${languages[otherLang].name}`}
+    >
+      <span className="text-2xl">{languages[otherLang].flag}</span>
+      <span className="font-bold text-warm-800">{languages[otherLang].nativeName}</span>
+    </button>
+  )
+}
+
+// Compact version for mobile menu
 export function LanguageSwitcherCompact() {
   const { i18n } = useTranslation()
   const currentLang = (i18n.language || 'en') as LanguageCode
@@ -45,11 +72,11 @@ export function LanguageSwitcherCompact() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-warm-100 hover:bg-warm-200 text-warm-700 text-sm font-medium transition-all"
+      className="flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-primary-50 to-accent-50 border-2 border-primary-200 hover:border-primary-400 text-warm-800 font-semibold transition-all"
       aria-label={`Switch to ${languages[otherLang].name}`}
     >
-      <span>{languages[otherLang].flag}</span>
-      <span>{languages[otherLang].nativeName}</span>
+      <span className="text-2xl">{languages[otherLang].flag}</span>
+      <span>Switch to {languages[otherLang].nativeName}</span>
     </button>
   )
 }
