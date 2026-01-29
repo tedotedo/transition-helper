@@ -342,7 +342,7 @@ export function Home() {
           {/* Animated background elements */}
           <FloatingShapes variant="hero" />
           {/* Floating icons */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
             <span className="absolute top-4 right-8 text-4xl opacity-20 animate-bounce" style={{ animationDuration: '2s' }}>🚀</span>
             <span className="absolute bottom-8 left-12 text-3xl opacity-15 animate-bounce" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }}>💪</span>
             <span className="absolute top-1/3 right-1/4 text-2xl opacity-10 animate-bounce" style={{ animationDuration: '3s', animationDelay: '1s' }}>⭐</span>
