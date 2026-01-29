@@ -57,15 +57,28 @@
       "subtitle": "اپنے نوجوان کو صحت کی دیکھ بھال میں خود مختار بننے میں مدد کرنا",
       "statusLabel": "بالغ دیکھ بھال کے لیے تیاری"
     },
-    "quickActions": "فوری اقدامات",
+    "quickActions": {
+      "title": "فوری اقدامات",
+      "checklist": "چیک لسٹ",
+      "appointments": "ملاقاتیں",
+      "carePlan": "نگہداشت کا منصوبہ",
+      "careTeam": "نگہداشت ٹیم"
+    },
     "startJourney": "اپنا سفر شروع کریں",
     "knowRights": "اپنے حقوق جانیں",
     "progress": {
       "title": "آپ کی پیشرفت",
-      "stage": "موجودہ مرحلہ",
-      "tasksCompleted": "کام مکمل",
-      "keepGoing": "جاری رکھیں!",
-      "greatProgress": "بہترین پیشرفت!"
+      "label": "آپ کی پیشرفت",
+      "throughStage": "{{stage}} مرحلے میں {{percent}}%",
+      "howToReach": "100% تک کیسے پہنچیں:",
+      "completeTasksIn": "اپنی",
+      "tickOff": "میں کام مکمل کریں — ہر سرگرمی کو ٹک کریں!",
+      "motivational": {
+        "start": "شروع کریں - آپ کر سکتے ہیں!",
+        "quarter": "بہترین شروعات - ہر قدم اہم ہے!",
+        "half": "آپ بہت اچھا کر رہے ہیں!",
+        "threeQuarter": "شاندار! آپ تقریباً وہاں ہیں!"
+      }
     },
     "resources": {
       "learnAdult": "بالغ خدمات کے بارے میں جانیں",

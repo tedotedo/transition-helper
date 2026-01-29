@@ -467,25 +467,25 @@ export function Home() {
       <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <QuickActionTile
           icon="✅"
-          title="Checklist"
+          title={t('home.quickActions.checklist')}
           href="/checklist"
           badge={`${checklistDone}/${checklistTotal}`}
           progress={progressPercent}
         />
         <QuickActionTile
           icon="📅"
-          title="Appointments"
+          title={t('home.quickActions.appointments')}
           href="/appointments"
           badge={appointmentsCount > 0 ? appointmentsCount : undefined}
         />
         <QuickActionTile
           icon="📋"
-          title="Care Plan"
+          title={t('home.quickActions.carePlan')}
           href="/care-plan"
         />
         <QuickActionTile
           icon="👥"
-          title="Care Team"
+          title={t('home.quickActions.careTeam')}
           href="/care-team"
           badge={teamCount > 0 ? teamCount : undefined}
         />
@@ -497,19 +497,22 @@ export function Home() {
       {/* Resources */}
       <section className="grid gap-4 md:grid-cols-3">
         <ResourceCard
-          title="Learn about adult services"
-          description="See what changes and what stays the same when you move to an adult team."
+          title={t('home.resources.learnAdult')}
+          description={t('home.resources.learnAdultDesc')}
           href="/rights"
+          exploreText={t('buttons.explore')}
         />
         <ResourceCard
-          title="Skills builder"
-          description="Practise the skills that help you take more control of your care."
+          title={t('home.resources.skillsBuilder')}
+          description={t('home.resources.skillsBuilderDesc')}
           href="/skills"
+          exploreText={t('buttons.explore')}
         />
         <ResourceCard
-          title="Questions & answers"
-          description="Common questions from young people and families about transition."
+          title={t('home.resources.questions')}
+          description={t('home.resources.questionsDesc')}
           href="/questions"
+          exploreText={t('buttons.explore')}
         />
       </section>
 
@@ -527,19 +530,19 @@ export function Home() {
         <div className="flex items-start gap-3">
           <span className="text-2xl">💾</span>
           <div className="flex-1">
-            <h2 className="font-semibold text-warm-800">Back up your data</h2>
+            <h2 className="font-semibold text-warm-800">{t('home.backup.title')}</h2>
             <p className="text-sm text-warm-500 mt-1">
-              Your data is stored on this device. Back it up regularly to keep it safe!
+              {t('home.backup.description')}
             </p>
             <div className="flex flex-wrap gap-3 mt-3">
               <button
                 onClick={handleBackup}
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-semibold shadow-card hover:shadow-card-hover transition-all"
               >
-                Download backup
+                {t('home.backup.download')}
               </button>
               <label className="px-4 py-2 rounded-xl border border-warm-200 text-warm-600 text-sm font-medium hover:border-warm-300 cursor-pointer transition-all">
-                Restore from backup
+                {t('home.backup.restore')}
                 <input
                   type="file"
                   accept=".json"
@@ -550,7 +553,7 @@ export function Home() {
             </div>
             {getLastBackupDate() && (
               <p className="text-xs text-warm-400 mt-3">
-                Last backup: {getLastBackupDate()?.toLocaleDateString()}
+                {t('home.backup.lastBackup')} {getLastBackupDate()?.toLocaleDateString()}
               </p>
             )}
           </div>
@@ -565,9 +568,11 @@ interface ResourceCardProps {
   description: string
   href?: string
   disabled?: boolean
+  exploreText?: string
+  comingSoonText?: string
 }
 
-function ResourceCard({ title, description, href, disabled }: ResourceCardProps) {
+function ResourceCard({ title, description, href, disabled, exploreText = 'Explore', comingSoonText = 'Coming soon' }: ResourceCardProps) {
   const content = (
     <div
       className={`flex h-full flex-col rounded-2xl border bg-white px-5 py-5 shadow-card text-sm transition-all duration-300 ${
@@ -579,7 +584,7 @@ function ResourceCard({ title, description, href, disabled }: ResourceCardProps)
       <h2 className="text-base font-semibold text-warm-800">{title}</h2>
       <p className="mt-2 text-warm-600 flex-1 leading-relaxed">{description}</p>
       <span className={`mt-4 inline-flex items-center text-sm font-medium ${disabled ? 'text-warm-400' : 'text-primary-600'}`}>
-        {disabled ? '🔜 Coming soon' : 'Explore'}
+        {disabled ? `🔜 ${comingSoonText}` : exploreText}
         {!disabled && <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>}
       </span>
     </div>
@@ -598,6 +603,7 @@ function ResourceCard({ title, description, href, disabled }: ResourceCardProps)
 
 function EasyReadToggle() {
   const { easyRead, toggleEasyRead } = useEasyRead()
+  const { t } = useTranslation()
 
   return (
     <section className="rounded-2xl border border-warm-200 bg-white p-5 shadow-card">
@@ -605,9 +611,9 @@ function EasyReadToggle() {
         <div className="flex items-start gap-3">
           <span className="text-2xl">👁️</span>
           <div>
-            <h2 className="font-semibold text-warm-800">Easy Read Mode</h2>
+            <h2 className="font-semibold text-warm-800">{t('home.easyRead.title')}</h2>
             <p className="text-sm text-warm-500 mt-1">
-              Simpler words, bigger buttons, more pictures
+              {t('home.easyRead.description')}
             </p>
           </div>
         </div>
@@ -618,7 +624,7 @@ function EasyReadToggle() {
           }`}
           role="switch"
           aria-checked={easyRead}
-          aria-label="Toggle Easy Read mode"
+          aria-label={t('home.easyRead.title')}
         >
           <span
             className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-md transition-transform ${
@@ -631,7 +637,7 @@ function EasyReadToggle() {
         <div className="mt-3 rounded-xl bg-accent-50 border border-accent-200 px-4 py-3">
           <p className="text-sm text-accent-700 flex items-center gap-2">
             <span>✓</span>
-            Easy Read is ON - content will be simpler
+            {t('home.easyRead.on')}
           </p>
         </div>
       )}

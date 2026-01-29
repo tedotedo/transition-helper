@@ -57,15 +57,28 @@
       "subtitle": "Helping your young person become healthcare independent",
       "statusLabel": "Getting ready for adult care"
     },
-    "quickActions": "Quick Actions",
+    "quickActions": {
+      "title": "Quick Actions",
+      "checklist": "Checklist",
+      "appointments": "Appointments",
+      "carePlan": "Care Plan",
+      "careTeam": "Care Team"
+    },
     "startJourney": "Start Your Journey",
     "knowRights": "Know Your Rights",
     "progress": {
       "title": "Your Progress",
-      "stage": "Current Stage",
-      "tasksCompleted": "tasks completed",
-      "keepGoing": "Keep going!",
-      "greatProgress": "Great progress!"
+      "label": "YOUR PROGRESS",
+      "throughStage": "{{percent}}% through the {{stage}} stage",
+      "howToReach": "How to reach 100%:",
+      "completeTasksIn": "Complete the tasks in your",
+      "tickOff": "— tick off each activity as you go!",
+      "motivational": {
+        "start": "Let's get started - you've got this!",
+        "quarter": "Great start - every step counts!",
+        "half": "You're doing brilliantly!",
+        "threeQuarter": "Amazing! You're nearly there!"
+      }
     },
     "resources": {
       "learnAdult": "Learn about adult services",
