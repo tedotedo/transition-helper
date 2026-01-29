@@ -32,8 +32,8 @@ export function LanguageSwitcher() {
   )
 }
 
-// Floating language toggle button - fixed position, always visible
-// Positioned bottom-left to avoid overlapping with content and feedback button
+// Floating language toggle button - fixed position at top center
+// Positioned as a prominent bar at the very top of the page
 export function FloatingLanguageToggle() {
   const { i18n } = useTranslation()
   const currentLang = (i18n.language || 'en') as LanguageCode
@@ -46,15 +46,17 @@ export function FloatingLanguageToggle() {
   const otherLang = currentLang === 'en' ? 'ur' : 'en'
 
   return (
-    <button
-      onClick={toggleLanguage}
-      className="fixed bottom-24 md:bottom-6 left-4 md:left-6 z-50 flex items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-xl md:rounded-2xl bg-white border-2 border-warm-200 shadow-lg hover:shadow-xl hover:border-primary-400 hover:scale-105 transition-all"
-      aria-label={`Switch to ${languages[otherLang].name}`}
-      title={`Switch to ${languages[otherLang].name}`}
-    >
-      <span className="text-xl md:text-2xl">{languages[otherLang].flag}</span>
-      <span className="font-semibold md:font-bold text-sm md:text-base text-warm-800">{languages[otherLang].nativeName}</span>
-    </button>
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none">
+      <button
+        onClick={toggleLanguage}
+        className="pointer-events-auto mt-2 flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur-sm border border-warm-200 shadow-lg hover:shadow-xl hover:border-primary-400 hover:scale-105 transition-all"
+        aria-label={`Switch to ${languages[otherLang].name}`}
+        title={`Switch to ${languages[otherLang].name}`}
+      >
+        <span className="text-lg">{languages[otherLang].flag}</span>
+        <span className="font-semibold text-sm text-warm-800">{languages[otherLang].nativeName}</span>
+      </button>
+    </div>
   )
 }
 
