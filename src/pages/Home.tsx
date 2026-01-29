@@ -341,6 +341,16 @@ export function Home() {
         <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary-500 via-primary-400 to-accent-400 px-4 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10 shadow-card">
           {/* Animated background elements */}
           <FloatingShapes variant="hero" />
+          {/* Background video silhouette */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
+          >
+            <source src="/Friendly_Doctor_Chatting_With_Youth_compressed.mp4" type="video/mp4" />
+          </video>
           {/* Floating icons */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
             <span className="absolute top-4 right-8 text-4xl opacity-20 animate-bounce" style={{ animationDuration: '2s' }}>🚀</span>
