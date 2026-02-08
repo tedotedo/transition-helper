@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ReadAloud from '../components/ReadAloud'
 import { successStories } from '../data/success-stories'
 
 const stageColors: Record<string, string> = {
@@ -22,6 +23,7 @@ export function VideosStories() {
           Watch and listen to real young people sharing their experiences of transitioning to adult care.
           Every journey is unique, and these stories show there's no single "right way" to transition.
         </p>
+        <div className="mt-2"><ReadAloud text="Watch and listen to real young people sharing their experiences of transitioning to adult care. Every journey is unique, and these stories show there's no single right way to transition." /></div>
       </header>
 
       {/* Info Banners */}
@@ -37,6 +39,7 @@ export function VideosStories() {
                 paediatrician or general practitioner if you have particular questions about your local
                 transition process.
               </p>
+              <div className="mt-2"><ReadAloud text="Although some of the information in these videos relates to different parts of the country, much of the information may be relevant to your local health services. Please speak to your paediatrician or general practitioner if you have particular questions about your local transition process." /></div>
             </div>
           </div>
         </div>
@@ -51,6 +54,7 @@ export function VideosStories() {
                 have been changed to protect privacy. These young people wanted to share their experiences
                 to help others feel less alone.
               </p>
+              <div className="mt-2"><ReadAloud text="All videos have been created with consent and professional safeguarding oversight. Names may have been changed to protect privacy. These young people wanted to share their experiences to help others feel less alone." /></div>
             </div>
           </div>
         </div>
@@ -132,6 +136,7 @@ export function VideosStories() {
           These stories show that transition is possible and you're not alone. Check out the journey
           stages to see where you are in your transition.
         </p>
+        <div className="mt-2"><ReadAloud text="These stories show that transition is possible and you are not alone. Check out the journey stages to see where you are in your transition." /></div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             to="/journey"

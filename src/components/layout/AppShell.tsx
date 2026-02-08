@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Search } from './Search'
 import { useRole, useEasyRead } from '../../hooks'
+import VoicePicker from '../VoicePicker'
 import { CompactRoleToggle } from '../home/CompactRoleToggle'
 import { FeedbackButton } from './FeedbackButton'
-import { LanguageSwitcher, LanguageSwitcherCompact } from './LanguageSwitcher'
 
 interface AppShellProps {
   children: ReactNode
@@ -24,51 +24,12 @@ export function AppShell({ children }: AppShellProps) {
     <div className={`min-h-screen text-warm-800 flex ${isYoungPerson ? 'young-person-gradient' : 'bg-background'}`}>
       {/* Sidebar - desktop only */}
       <aside className="hidden md:flex w-64 flex-col border-r border-warm-200 bg-white/80 backdrop-blur-sm">
-        <div className="h-16 flex items-center px-5 border-b border-warm-100">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-400 to-primary-500 text-sm font-bold text-white shadow-card">
-            TC
-          </span>
-          <div className="ml-3 leading-tight">
-            <p className="text-sm font-semibold text-warm-800">{t('home.welcome', 'Transition Ready')}</p>
-            <p className="text-xs text-warm-500">{t('home.tagline')}</p>
-          </div>
+        <div className="pt-6 pb-3 px-5 border-b border-warm-100">
+          <p className="text-sm font-semibold text-warm-800">{t('home.welcome', 'Transition Ready')}</p>
+          <p className="text-xs text-warm-500">{t('home.tagline')}</p>
         </div>
-        <nav className="flex-1 px-3 py-4 space-y-1 text-sm">
-          <NavItem to="/" label={t('nav.home')} icon="🏠" />
-          <NavItem to="/journey" label={t('nav.journey')} icon="🚀" />
-          <NavItem to="/rights" label={t('nav.rights')} icon="⚖️" />
-          <NavItem to="/money" label={t('nav.money')} icon="💰" />
-          <NavItem to="/planning" label={t('nav.planning')} icon="📝" />
-          <NavItem to="/videos" label={t('nav.videos')} icon="🎬" />
-          <NavItem to="/resources" label={t('nav.resources')} icon="📚" />
-          <NavItem to="/level-up" label={t('nav.levelUp')} icon="🎮" />
-          <NavItem to="/about" label={t('nav.about')} icon="ℹ️" />
-        </nav>
-        {/* Language switcher in sidebar */}
-        <div className="px-4 py-3 border-t border-warm-100">
-          <p className="text-xs text-warm-500 mb-2">{t('language.select')}:</p>
-          <LanguageSwitcher />
-        </div>
-        {/* Easy Read toggle in sidebar */}
-        {isYoungPerson && (
-          <div className="px-4 py-3 border-t border-warm-100">
-            <button
-              onClick={toggleEasyRead}
-              aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
-              aria-pressed={easyRead}
-              className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                easyRead
-                  ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-sm'
-                  : 'bg-warm-50 text-warm-600 hover:bg-warm-100'
-              }`}
-            >
-              <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
-              <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
-            </button>
-          </div>
-        )}
-        {/* Role toggle in sidebar */}
-        <div className="px-4 py-3 border-t border-warm-100">
+        {/* Role toggle in sidebar - above nav */}
+        <div className="px-4 py-3 border-b border-warm-100">
           <p className="text-xs text-warm-500 mb-2">{t('role.viewingAs')}</p>
           <div className="flex items-center gap-2">
             <button
@@ -95,6 +56,38 @@ export function AppShell({ children }: AppShellProps) {
             </button>
           </div>
         </div>
+        {/* Easy Read toggle + Voice picker in sidebar - above nav */}
+        {isYoungPerson && (
+          <div className="px-4 py-3 border-b border-warm-100 space-y-2">
+            <button
+              onClick={toggleEasyRead}
+              aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
+              aria-pressed={easyRead}
+              className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                easyRead
+                  ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
+                  : 'bg-primary-50 text-primary-700 border-2 border-primary-200 hover:bg-primary-100'
+              }`}
+            >
+              <span className="text-lg">{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
+              <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+            </button>
+            <div className="flex justify-center">
+              <VoicePicker />
+            </div>
+          </div>
+        )}
+        <nav className="flex-1 px-3 py-4 space-y-1 text-sm overflow-y-auto">
+          <NavItem to="/" label={t('nav.home')} icon="🏠" />
+          <NavItem to="/journey" label={t('nav.journey')} icon="🚀" />
+          <NavItem to="/rights" label={t('nav.rights')} icon="⚖️" />
+          <NavItem to="/money" label={t('nav.money')} icon="💰" />
+          <NavItem to="/planning" label={t('nav.planning')} icon="📝" />
+          <NavItem to="/videos" label={t('nav.videos')} icon="🎬" />
+          <NavItem to="/resources" label={t('nav.resources')} icon="📚" />
+          <NavItem to="/level-up" label={t('nav.levelUp')} icon="🎮" />
+          <NavItem to="/about" label={t('nav.about')} icon="ℹ️" />
+        </nav>
         <div className="px-4 py-4 text-xs border-t border-warm-100 space-y-3">
           <p className="text-warm-500">{t('footer.disclaimer')}</p>
           <p className="text-warm-500">{t('footer.attribution')}</p>
@@ -152,30 +145,8 @@ export function AppShell({ children }: AppShellProps) {
                 onClick={closeMoreMenu}
               />
               <div className="absolute bottom-full left-0 right-0 bg-white border-t border-warm-200 rounded-t-2xl shadow-lg z-20 p-4 mb-0">
-                {/* Language switcher for mobile */}
-                <div className="mb-3 pb-3 border-b border-warm-100 flex justify-center">
-                  <LanguageSwitcherCompact />
-                </div>
-                {/* Easy Read toggle for mobile */}
-                {isYoungPerson && (
-                  <div className="mb-3 pb-3 border-b border-warm-100 flex justify-center">
-                    <button
-                      onClick={toggleEasyRead}
-                      aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
-                      aria-pressed={easyRead}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                        easyRead
-                          ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-sm'
-                          : 'bg-warm-50 text-warm-600'
-                      }`}
-                    >
-                      <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
-                      <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
-                    </button>
-                  </div>
-                )}
                 {/* Role toggle for mobile */}
-                <div className="mb-4 pb-3 border-b border-warm-100">
+                <div className="mb-3 pb-3 border-b border-warm-100">
                   <p className="text-xs text-warm-500 mb-2 text-center">{t('role.viewingAs')}</p>
                   <div className="flex items-center gap-2">
                     <button
@@ -202,6 +173,27 @@ export function AppShell({ children }: AppShellProps) {
                     </button>
                   </div>
                 </div>
+                {/* Easy Read toggle + Voice picker for mobile */}
+                {isYoungPerson && (
+                  <div className="mb-4 pb-3 border-b border-warm-100 space-y-2">
+                    <button
+                      onClick={toggleEasyRead}
+                      aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
+                      aria-pressed={easyRead}
+                      className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                        easyRead
+                          ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
+                          : 'bg-primary-50 text-primary-700 border-2 border-primary-200'
+                      }`}
+                    >
+                      <span className="text-lg">{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
+                      <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+                    </button>
+                    <div className="flex justify-center">
+                      <VoicePicker />
+                    </div>
+                  </div>
+                )}
                 <div className="grid grid-cols-3 gap-3 pb-16">
                   <MoreMenuItem to="/journey" icon="🚀" label={t('nav.journey')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/rights" icon="⚖️" label={t('nav.rights')} onClick={closeMoreMenu} />

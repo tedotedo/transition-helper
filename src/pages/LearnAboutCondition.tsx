@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface ConditionData {
   conditionName: string
@@ -112,6 +113,9 @@ export function LearnAboutCondition() {
           <p className="mt-3 text-warm-500 italic">
             Don't worry if you don't know all the answers yet - that's okay! You can ask your family or care team to help, and come back to update this anytime.
           </p>
+        </div>
+        <div className="mt-4">
+          <ReadAloud text="Understanding your own health condition is like having a superpower! When you know what's going on with your body, you can help your doctors and nurses look after you better, feel more confident at appointments, explain to friends or teachers what you need, and take charge of your own health as you grow up. Don't worry if you don't know all the answers yet - that's okay! You can ask your family or care team to help, and come back to update this anytime." />
         </div>
       </section>
 

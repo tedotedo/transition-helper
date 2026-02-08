@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ReadAloud from '../components/ReadAloud'
 
 type TopicKey = 'consent' | 'privacy' | 'decision-making' | null
 
@@ -34,6 +35,9 @@ export function RightsHub() {
           Understanding your rights helps you feel confident about your healthcare.
           Let's explore what you can decide and who can help!
         </p>
+        <div className="mt-2">
+          <ReadAloud text="Understanding your rights helps you feel confident about your healthcare. Let's explore what you can decide and who can help!" />
+        </div>
       </header>
 
       {/* Age Stage Cards */}
@@ -147,6 +151,7 @@ export function RightsHub() {
               It's totally normal to have questions about your rights. Talk to your healthcare team -
               they want to help you understand and feel confident!
             </p>
+            <div className="mt-2"><ReadAloud text="It is totally normal to have questions about your rights. Talk to your healthcare team. They want to help you understand and feel confident." /></div>
             <Link
               to="/care-team"
               className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white text-accent-700 font-semibold hover:bg-white/90 transition-all shadow-lg"
@@ -285,6 +290,7 @@ function ConsentContent() {
           this means agreeing to treatment, tests, or sharing your information. For your consent to be valid,
           you need to:
         </p>
+        <div className="mt-2"><ReadAloud text="Consent means agreeing to something after you have understood what it involves. In healthcare, this means agreeing to treatment, tests, or sharing your information. For your consent to be valid, you need to understand what is being proposed and why, be able to weigh up the pros and cons, communicate your decision, and give it freely with nobody pressuring you." /></div>
         <ul className="space-y-2 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="text-green-500 mt-1">•</span>
@@ -319,6 +325,7 @@ function ConsentContent() {
           Being "Gillick competent" means you understand enough about the treatment to make your own choice,
           even without your parents' permission. Staff will consider:
         </p>
+        <div className="mt-2"><ReadAloud text="You might hear staff talk about Gillick competence. This is a way of checking if someone under 16 can make their own decisions about treatment. Being Gillick competent means you understand enough about the treatment to make your own choice, even without your parents permission. Staff will consider how well you understand the treatment and its effects, whether you understand what could happen without treatment, and your maturity and ability to weigh up options." /></div>
         <ul className="space-y-1 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="text-accent-600">✓</span>
@@ -345,6 +352,7 @@ function ConsentContent() {
           Fraser guidelines are similar but specifically about contraception and sexual health advice for under-16s.
           They help staff decide if they can give this advice without telling your parents.
         </p>
+        <div className="mt-2"><ReadAloud text="Fraser guidelines are similar but specifically about contraception and sexual health advice for under-16s. They help staff decide if they can give this advice without telling your parents. Even if you are under 16, you might be able to consent to treatment yourself if staff believe you are mature enough to understand what is involved." /></div>
         <div className="bg-white/60 rounded-xl p-3 sm:p-4 border border-purple-100">
           <p className="text-sm sm:text-base text-warm-700">
             <strong>Key point:</strong> Even if you're under 16, you might be able to consent to treatment yourself
@@ -362,6 +370,7 @@ function ConsentContent() {
         <p className="text-sm sm:text-base text-warm-600 leading-relaxed">
           When healthcare staff check if you can make a decision, they're looking at whether you can:
         </p>
+        <div className="mt-2"><ReadAloud text="When healthcare staff check if you can make a decision, they look at four things. Can you understand the information they are telling you? Can you remember it long enough to decide? Can you think about the pros and cons? And can you share what you have decided? Capacity is assessed for each decision separately. You might be able to consent to some things but need support with others, and that is totally okay." /></div>
         <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 mt-3">
           <div className="bg-white/70 backdrop-blur-sm rounded-xl border border-green-200 p-3 sm:p-4">
             <p className="font-semibold text-sm sm:text-base text-warm-800">1. Understand the info</p>
@@ -417,6 +426,7 @@ function PrivacyContent() {
           Confidentiality means keeping your personal information private. When you talk to doctors, nurses,
           or other healthcare staff, what you tell them is confidential. This includes:
         </p>
+        <div className="mt-2"><ReadAloud text="Confidentiality means keeping your personal information private. When you talk to doctors, nurses, or other healthcare staff, what you tell them is confidential. This includes what you tell them about your health and life, results from tests and examinations, notes written about your appointments, and letters and reports about you. Even if you are under 16, you have a right to privacy. Staff will not automatically share everything with your parents, especially if you ask them not to." /></div>
         <ul className="space-y-2 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="text-blue-500 mt-1">•</span>
@@ -456,6 +466,7 @@ function PrivacyContent() {
         <p className="text-sm sm:text-base text-warm-600 leading-relaxed">
           They might share information if they believe:
         </p>
+        <div className="mt-2"><ReadAloud text="Sometimes staff need to share information without your permission. This usually only happens when there is a serious concern about safety, yours or someone else's. This is called safeguarding. They might share information if they believe you are at risk of serious harm, someone else is at risk of serious harm, or there is a legal requirement like certain infections. Staff will usually try to talk to you first and explain why they need to share information." /></div>
         <ul className="space-y-1 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="text-amber-600">•</span>
@@ -485,6 +496,7 @@ function PrivacyContent() {
           You have the right to see your own medical records. This is called a "Subject Access Request" (SAR).
           You can ask for:
         </p>
+        <div className="mt-2"><ReadAloud text="You have the right to see your own medical records. This is called a Subject Access Request or SAR. You can ask for a copy of your GP records, hospital notes and letters, and test results and scan images. To request them, ask your GP surgery or hospital medical records department. They must respond within one month and it is usually free." /></div>
         <ul className="space-y-1 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="text-blue-500">✓</span>
@@ -516,6 +528,7 @@ function PrivacyContent() {
         <p className="text-sm sm:text-base text-warm-600 leading-relaxed">
           You can have a say in who sees your health information:
         </p>
+        <div className="mt-2"><ReadAloud text="You can have a say in who sees your health information. You can ask for private time to speak to staff alone without parents in the room. You can set preferences and tell your team who you are happy for them to share information with. From age 16, you can register to view your records online using the NHS App. You can also give permission for someone like a parent to access your records." /></div>
         <ul className="space-y-2 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="text-accent-600">✓</span>
@@ -564,6 +577,7 @@ function DecisionMakingContent() {
         <p className="text-sm sm:text-base text-warm-600 leading-relaxed">
           When you turn 18, you become a legal adult. This means some important things change:
         </p>
+        <div className="mt-2"><ReadAloud text="When you turn 18, you become a legal adult. This means important things change. Staff assume you can make decisions unless there is reason not to. Your parents no longer automatically decide for you. Staff need your permission to share with family. And you will consent to treatment yourself." /></div>
         <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 mt-3">
           <div className="bg-white/70 backdrop-blur-sm rounded-xl border border-purple-200 p-3 sm:p-4">
             <p className="font-semibold text-sm sm:text-base text-warm-800">You're presumed capable</p>
@@ -594,6 +608,7 @@ function DecisionMakingContent() {
           The Mental Capacity Act (MCA) is a law that protects people who might struggle to make some decisions.
           It has five important principles:
         </p>
+        <div className="mt-2"><ReadAloud text="The Mental Capacity Act is a law that protects people who might struggle to make some decisions. It has five important principles. First, assume capacity and start by assuming someone can make decisions. Second, support first and help people make their own decisions where possible. Third, unwise is okay, you can make choices others disagree with. Fourth, best interests, decisions made for someone must help them. And fifth, least restrictive, choose options that limit freedom least." /></div>
         <ol className="space-y-2 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="font-bold text-blue-600">1.</span>
@@ -627,6 +642,7 @@ function DecisionMakingContent() {
         <p className="text-sm sm:text-base text-warm-600 leading-relaxed">
           An LPA lets you choose someone to make decisions for you if you can't in the future. There are two types:
         </p>
+        <div className="mt-2"><ReadAloud text="An LPA lets you choose someone to make decisions for you if you cannot in the future. Health and Welfare LPA covers daily care, medical treatment, and where you live, and is only used if you lose capacity to decide. Property and Finance LPA covers money, bills, and property, and can be used anytime you choose, even if you still have capacity. You need mental capacity when making an LPA, you need to understand what you are doing and who you are choosing." /></div>
         <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 mt-3">
           <div className="rounded-xl border-2 border-accent-200 bg-accent-50/80 p-4">
             <h5 className="font-bold text-warm-800 text-sm sm:text-base">Health & Welfare LPA</h5>
@@ -673,6 +689,7 @@ function DecisionMakingContent() {
             </p>
           </div>
         </div>
+        <div className="mt-2"><ReadAloud text="Supported decision-making is getting help to make your own decisions. You might need information explained differently, more time, or someone to help you think things through. The decision is still yours. Best interests decisions happen if you truly cannot make a particular decision, even with support, and someone else may decide for you, considering your wishes, feelings, and what you would have wanted. The goal is always to support you to make decisions yourself. Best interests decisions are a last resort." /></div>
         <div className="bg-white/60 rounded-xl p-3 sm:p-4 border border-amber-100 mt-3">
           <p className="text-sm sm:text-base text-warm-600">
             <strong>Remember:</strong> The goal is always to support YOU to make decisions yourself.

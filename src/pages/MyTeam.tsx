@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface TeamMember {
   id: string
@@ -125,10 +126,15 @@ export function MyTeam() {
       {/* Introduction */}
       <section className="bg-gradient-to-br from-primary-50 to-white rounded-2xl border border-primary-100 p-5 shadow-card">
         <h2 className="text-lg font-semibold text-warm-800 mb-3">Who looks after your health? 🏥</h2>
-        <p className="text-sm text-warm-600 leading-relaxed">
-          Lots of different people might help look after you - doctors, nurses, therapists, and more!
-          It's really useful to know who they are and what they do. That way, you know who to ask when you have questions.
-        </p>
+        <div className="space-y-3 text-sm text-warm-600 leading-relaxed">
+          <p>
+            Lots of different people might help look after you - doctors, nurses, therapists, and more!
+            It's really useful to know who they are and what they do. That way, you know who to ask when you have questions.
+          </p>
+          <div className="mt-2">
+            <ReadAloud text="Lots of different people might help look after you - doctors, nurses, therapists, and more! It's really useful to know who they are and what they do. That way, you know who to ask when you have questions." />
+          </div>
+        </div>
       </section>
 
       {/* Role Explanations */}

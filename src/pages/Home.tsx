@@ -18,7 +18,7 @@ import {
 } from '../components/home/journeyQuizHelpers'
 import type { UserRole } from '../hooks/useRole'
 import { FloatingShapes, ConfettiCelebration } from '../components/illustrations'
-import { LanguageSwitcherCompact } from '../components/layout/LanguageSwitcher'
+// import { LanguageSwitcherCompact } from '../components/layout/LanguageSwitcher'
 import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
@@ -362,12 +362,7 @@ export function Home() {
 
           <div className="relative flex flex-col items-center text-center">
             <div className="space-y-5 md:space-y-6 max-w-2xl">
-              {/* Language switcher - at very top of hero */}
-              <div className="flex justify-center">
-                <LanguageSwitcherCompact />
-              </div>
-
-              {/* Role toggle - centered below language */}
+              {/* Role toggle */}
               <div className="flex justify-center">
                 <RoleToggle value={role} onChange={setRole} />
               </div>

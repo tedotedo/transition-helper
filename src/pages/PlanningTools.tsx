@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ReadAloud from '../components/ReadAloud'
 
 type StageKey = 'ready' | 'steady' | 'go'
 
@@ -33,6 +34,7 @@ export function PlanningTools() {
           Think of it like moving up in school - you learn new things gradually. The Ready Steady Go
           programme has three stages to help you:
         </p>
+        <div className="mt-2"><ReadAloud text="Right now, you see doctors and nurses who work with children and teenagers. As you get older, you'll move to doctors who work with adults. This is called transition. Think of it like moving up in school - you learn new things gradually. The Ready Steady Go programme has three stages to help you." /></div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="bg-white p-4 rounded-xl border border-green-200">
             <span className="text-2xl mb-2 block">🌱</span>
@@ -112,6 +114,7 @@ export function PlanningTools() {
                   Don't worry, you won't be doing everything alone yet. This stage is just about
                   understanding more about yourself and your condition.
                 </p>
+                <div className="mt-2"><ReadAloud text="This is the beginning. Right now, your parents or carers probably do most of the talking at doctor appointments. That is okay. But now it is time to start learning about your own health. Do not worry, you will not be doing everything alone yet. This stage is just about understanding more about yourself and your condition." /></div>
               </div>
 
               <div>
@@ -208,6 +211,7 @@ export function PlanningTools() {
                   Your parents and healthcare team are still here to help, but you'll gradually start
                   doing more things independently.
                 </p>
+                <div className="mt-2"><ReadAloud text="Now you know about your health, it is time to practice doing some things yourself. Think of it like learning to ride a bike. At first someone holds the bike steady, then they let go but stay close, and finally you are riding on your own. Your parents and healthcare team are still here to help, but you will gradually start doing more things independently." /></div>
               </div>
 
               <div>
@@ -302,6 +306,7 @@ export function PlanningTools() {
                   The adult healthcare team works differently from the children's team, but they're still
                   there to help you.
                 </p>
+                <div className="mt-2"><ReadAloud text="You are nearly there. This is when you prepare to move from children's healthcare to adult healthcare. It might feel a bit scary, but you have been building up to this through the Ready and Steady stages. The adult healthcare team works differently from the children's team, but they are still there to help you." /></div>
               </div>
 
               <div>
@@ -334,6 +339,7 @@ export function PlanningTools() {
                   Remember: your adult healthcare team are experts at helping people like you. They know
                   you're moving from children's services and they'll help you settle in.
                 </p>
+                <div className="mt-2"><ReadAloud text="It is completely normal to feel worried about moving to adult services. Lots of young people feel the same way. Remember, your adult healthcare team are experts at helping people like you. They know you are moving from children's services and they will help you settle in." /></div>
               </div>
 
               <div className="bg-white p-4 rounded-xl border border-blue-200">

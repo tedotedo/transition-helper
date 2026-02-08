@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import ReadAloud from '../components/ReadAloud'
 
 export function Consent18Plus() {
   return (
@@ -10,6 +11,9 @@ export function Consent18Plus() {
           At 18, you become a legal adult. This means you're in charge of your own healthcare decisions.
           Here's what changes, what stays the same, and how the law protects you.
         </p>
+        <div className="mt-2">
+          <ReadAloud text="At 18, you become a legal adult. This means you're in charge of your own healthcare decisions. Here's what changes, what stays the same, and how the law protects you." />
+        </div>
       </header>
 
       <section className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,1.1fr)]">
@@ -22,6 +26,7 @@ export function Consent18Plus() {
               <li>You sign your own consent forms</li>
               <li>You can still involve family if YOU choose to</li>
             </ul>
+            <div className="mt-2"><ReadAloud text="You're legally presumed to have capacity to make your own decisions. Your parents no longer have automatic rights to make decisions for you. Staff need YOUR permission to share information with family. You sign your own consent forms. You can still involve family if YOU choose to." /></div>
           </Card>
 
           <Card title="What changes at 18?" emoji="🔄">
@@ -47,6 +52,7 @@ export function Consent18Plus() {
                 </ul>
               </div>
             </div>
+            <div className="mt-2"><ReadAloud text="Turning 18 brings some important legal changes to your healthcare. Before 18: Parents could be involved in decisions. Staff might share info with parents. Children's services looked after you. From 18: YOU make your own decisions. YOUR permission needed to share info. Adult services take over your care. You can sign legal documents." /></div>
           </Card>
 
           <Card title="The Mental Capacity Act" emoji="📜">
@@ -76,6 +82,7 @@ export function Consent18Plus() {
                 <p className="text-xs text-warm-600 mt-1">Choose the option that limits the person's freedom least</p>
               </div>
             </div>
+            <div className="mt-2"><ReadAloud text="The Mental Capacity Act, or MCA, is a law that protects adults who might need support making decisions. It's based on five important principles. 1. Assume capacity: Everyone is assumed to be able to make their own decisions unless proven otherwise. 2. Support to decide: People must be given all possible help to make decisions before anyone concludes they can't. 3. Unwise decisions are allowed: Making a decision others think is unwise doesn't mean you lack capacity. 4. Best interests: Any decision made for someone must be in their best interests. 5. Less restrictive option: Choose the option that limits the person's freedom least." /></div>
           </Card>
 
           <Card title="Involving your family" emoji="👨‍👩‍👧">
@@ -106,6 +113,7 @@ export function Consent18Plus() {
                 Staff will ask you, not your parents, for permission.
               </p>
             </div>
+            <div className="mt-2"><ReadAloud text="Being 18 doesn't mean you have to do everything alone! You can choose to involve family: Bring someone to appointments for support. Give permission for staff to share info with specific people. Ask family to help you understand information. Set up formal arrangements like Lasting Power of Attorney. The difference is that it's YOUR choice now. Staff will ask you, not your parents, for permission." /></div>
           </Card>
 
           <Card title="Lasting Power of Attorney" emoji="📋">
@@ -133,6 +141,7 @@ export function Consent18Plus() {
               Many young people with health conditions choose to set up an LPA, just in case.
               It gives peace of mind knowing someone you trust can help if needed.
             </p>
+            <div className="mt-2"><ReadAloud text="A Lasting Power of Attorney, or LPA, lets you choose someone to make decisions for you if you ever can't make them yourself. You need to set this up WHILE you have capacity. Health and Welfare LPA: Covers decisions about daily care, medical treatment, where you live. Only used if you lose capacity. Property and Finance LPA: Covers money, bills, and property decisions. Can be used anytime you choose. Many young people with health conditions choose to set up an LPA, just in case. It gives peace of mind knowing someone you trust can help if needed." /></div>
           </Card>
 
           <Card title="If you need support with decisions" emoji="🤝">
@@ -163,6 +172,7 @@ export function Consent18Plus() {
                 </p>
               </div>
             </div>
+            <div className="mt-2"><ReadAloud text="Some people need extra support to make decisions. This doesn't mean someone else takes over - it means you get the help you need to decide yourself. Supported decision-making: Getting help to make YOUR own decisions - like having info explained differently, more time, or someone to help you think things through. Independent Mental Capacity Advocate, or IMCA: A trained person who can support you with serious decisions if you don't have family or friends who can help. Best interests meeting: If you truly can't make a specific decision, people who know you meet to decide what you would have wanted." /></div>
           </Card>
         </div>
 
@@ -189,6 +199,7 @@ export function Consent18Plus() {
                 <p className="mt-1 text-warm-600">See and manage your health information</p>
               </li>
             </ul>
+            <div className="mt-2"><ReadAloud text="Being 18 means you have the right to: Make your own choices - even if others disagree with them. Keep things private - staff can't tell your family without permission. Choose your support - decide who helps you and how. Access your records - see and manage your health information." /></div>
           </Card>
 
           <Card title="NHS App access 📱">
@@ -216,6 +227,7 @@ export function Consent18Plus() {
             <p className="mt-3 text-xs text-warm-500">
               Download the NHS App and register with your GP to get started.
             </p>
+            <div className="mt-2"><ReadAloud text="From 18, you can use the NHS App to: View your GP health record. Book appointments. Order repeat prescriptions. Access test results. Download the NHS App and register with your GP to get started." /></div>
           </Card>
 
           <Card title="Questions to ask 📝">
@@ -225,6 +237,7 @@ export function Consent18Plus() {
               <li className="flex items-start gap-2"><span>❓</span> Should I think about setting up an LPA?</li>
               <li className="flex items-start gap-2"><span>❓</span> How do I access my medical records?</li>
             </ul>
+            <div className="mt-2"><ReadAloud text="Questions to ask: Who will be my main contact in adult services? How do I give permission for my family to be involved? Should I think about setting up an LPA? How do I access my medical records?" /></div>
           </Card>
 
           <Card title="Helpful links 🔗">
@@ -244,6 +257,7 @@ export function Consent18Plus() {
                 <span className="text-warm-500">- Keep your health info organized</span>
               </li>
             </ul>
+            <div className="mt-2"><ReadAloud text="Helpful links: Money and PIP page - More on LPA and legal capacity. My Care Plan - Keep your health info organized." /></div>
           </Card>
         </aside>
       </section>

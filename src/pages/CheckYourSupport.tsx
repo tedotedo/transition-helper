@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface SupportData {
   currentSituation: string
@@ -166,6 +167,9 @@ export function CheckYourSupport() {
           <p>
             This page helps you keep track of what support you have and who to contact if things change.
           </p>
+          <div className="mt-3">
+            <ReadAloud text="As you move into adult life, it's important to check you have the right support in place - whether that's at college, work, or home. Support needs can change, so it's good to review this regularly. This page helps you keep track of what support you have and who to contact if things change." />
+          </div>
         </div>
       </section>
 
@@ -555,6 +559,9 @@ export function CheckYourSupport() {
               <li>• At least once a year</li>
               <li>• Before benefits renewals or reviews</li>
             </ul>
+            <div className="mt-3">
+              <ReadAloud text="Review your support when your situation changes, such as a new job or moving house. If your health needs change, review at least once a year, and before benefits renewals or reviews. Contact your local council's adult social care team for a care needs assessment if you need more support." />
+            </div>
             <p className="mt-3">
               <strong>Need more support?</strong> Contact your local council's adult social care team for a care needs assessment.
             </p>

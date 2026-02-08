@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ReadAloud from '../components/ReadAloud'
 
 interface Skill {
   id: string
@@ -224,6 +225,7 @@ export function SkillsBuilder() {
           Practice the real-life skills you'll need to manage your own healthcare.
           Start easy and work your way up!
         </p>
+        <div className="mt-2"><ReadAloud text="Practice the real-life skills you'll need to manage your own healthcare. Start easy and work your way up!" /></div>
       </header>
 
       {/* Progress Card */}
@@ -300,6 +302,7 @@ export function SkillsBuilder() {
               Don't worry if it feels awkward at first - everyone feels that way!
               The more you practice, the more confident you'll become.
             </p>
+            <div className="mt-2"><ReadAloud text="Do not worry if it feels awkward at first. Everyone feels that way. The more you practice, the more confident you will become." /></div>
             <Link
               to="/journey"
               className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white text-accent-700 font-semibold hover:bg-white/90 transition-all shadow-lg"
@@ -427,6 +430,7 @@ function SkillCard({ skill, config, isExpanded, isCompleted, onToggle, onComplet
                   </li>
                 ))}
               </ul>
+              <div className="mt-2"><ReadAloud text={skill.tips.join('. ')} /></div>
             </div>
 
             {/* Practice Prompt */}
@@ -441,6 +445,7 @@ function SkillCard({ skill, config, isExpanded, isCompleted, onToggle, onComplet
                   <p className="text-sm sm:text-base text-warm-700 font-medium">"{skill.exampleResponse}"</p>
                 </div>
               )}
+              <div className="mt-2"><ReadAloud text={`${skill.practicePrompt} ${skill.exampleResponse ? `Example: ${skill.exampleResponse}` : ''}`} /></div>
             </div>
 
             {/* Complete Button */}

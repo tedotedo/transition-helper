@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface TeamMember {
   id: string
@@ -136,6 +137,9 @@ export function HelloNewTeam() {
           <p>
             Use this page to keep track of who's who, how to contact them, and any important information about your new service.
           </p>
+          <div className="mt-3">
+            <ReadAloud text="You've made it to adult care! Things work a bit differently here, so it's good to get to know your new team and how everything works. Use this page to keep track of who's who, how to contact them, and any important information about your new service." />
+          </div>
         </div>
       </section>
 
@@ -160,6 +164,9 @@ export function HelloNewTeam() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-4">
+          <ReadAloud text="You'll arrange your own appointments and chase things up yourself. Staff will talk to you directly, not through your parents. You might be seen less often if you're stable. You'll have new phone numbers and possibly new locations." />
         </div>
       </section>
 
@@ -438,6 +445,9 @@ export function HelloNewTeam() {
               <li>• Sign up for the NHS app if you haven't already</li>
               <li>• Ask about patient portals where you can see test results</li>
             </ul>
+            <div className="mt-3">
+              <ReadAloud text="Save these numbers in your phone. Don't be afraid to call if you're unsure about something. Keep a list of your conditions and medicines on your phone. Sign up for the NHS app if you haven't already. Ask about patient portals where you can see test results." />
+            </div>
           </div>
         </div>
       </section>

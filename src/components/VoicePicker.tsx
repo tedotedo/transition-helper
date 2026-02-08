@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { useVoice } from '../hooks/useVoice'
-import { useEasyRead, useRole } from '../hooks'
+import { useRole } from '../hooks'
 
 /** Map voice lang codes to country flag emojis */
 function langFlag(lang: string): string {
@@ -31,13 +31,12 @@ function previewVoice(voice: SpeechSynthesisVoice) {
 
 export default function VoicePicker() {
   const { voiceName, setVoiceName, voices } = useVoice()
-  const { easyRead } = useEasyRead()
   const { isYoungPerson } = useRole()
   const [open, setOpen] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const showPicker = isYoungPerson && easyRead
+  const showPicker = isYoungPerson
 
   // Close dropdown when clicking outside
   useEffect(() => {

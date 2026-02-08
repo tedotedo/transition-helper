@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface Medicine {
   id: string
@@ -150,6 +151,9 @@ export function KnowYourMedicines() {
               <span>Reorder prescriptions when you're running low</span>
             </li>
           </ul>
+          <div className="mt-3">
+            <ReadAloud text="Knowing about your medicines is a big step towards looking after yourself. When you understand what each one does, you can remember to take them at the right times, tell doctors or pharmacists what you take if you need to, notice if something doesn't feel right, and reorder prescriptions when you're running low." />
+          </div>
         </div>
       </section>
 
@@ -345,9 +349,14 @@ export function KnowYourMedicines() {
           <span>🏪</span>
           <span>My Pharmacy</span>
         </h2>
-        <p className="text-sm text-warm-500">
-          It's useful to know where you get your medicines from, in case you need to order more or have questions.
-        </p>
+        <div>
+          <p className="text-sm text-warm-500">
+            It's useful to know where you get your medicines from, in case you need to order more or have questions.
+          </p>
+          <div className="mt-2">
+            <ReadAloud text="It's useful to know where you get your medicines from, in case you need to order more or have questions." />
+          </div>
+        </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label htmlFor="pharmacy-name" className="block text-sm font-medium text-warm-700 mb-1">
@@ -409,6 +418,9 @@ export function KnowYourMedicines() {
               <li>• Tell your doctor if you have any side effects</li>
               <li>• Keep a list of your medicines on your phone in case of emergencies</li>
             </ul>
+            <div className="mt-3">
+              <ReadAloud text="Never take someone else's medicines. If you miss a dose, don't take double - check the leaflet or ask a pharmacist. Tell your doctor if you have any side effects. Keep a list of your medicines on your phone in case of emergencies." />
+            </div>
           </div>
         </div>
       </section>

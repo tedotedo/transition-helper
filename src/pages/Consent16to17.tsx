@@ -1,3 +1,5 @@
+import ReadAloud from '../components/ReadAloud'
+
 export function Consent16to17() {
   return (
     <div className="space-y-8 animate-fade-in">
@@ -7,6 +9,9 @@ export function Consent16to17() {
         <p className="max-w-2xl text-sm md:text-base text-warm-600 leading-relaxed">
           From 16, the law usually treats you as able to decide about your own healthcare. Here's what that actually means, how health staff check if you can make decisions, and how your family can still be there for you.
         </p>
+        <div className="mt-2">
+          <ReadAloud text="From 16, the law usually treats you as able to decide about your own healthcare. Here's what that actually means, how health staff check if you can make decisions, and how your family can still be there for you." />
+        </div>
       </header>
 
       <section className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,1.1fr)]">
@@ -20,6 +25,7 @@ export function Consent16to17() {
                 In rare emergencies, doctors or courts might decide treatment should go ahead to keep you safe, even if you disagree
               </li>
             </ul>
+            <div className="mt-2"><ReadAloud text="From 16, you can usually agree to your own treatment if you understand what's involved. Health staff should explain things in a way that makes sense to you. You can ask to have part of your appointment without your parent or carer there. In rare emergencies, doctors or courts might decide treatment should go ahead to keep you safe, even if you disagree." /></div>
           </Card>
 
           <Card title="What changes at 16?" emoji="🔄">
@@ -43,6 +49,7 @@ export function Consent16to17() {
                 </ul>
               </div>
             </div>
+            <div className="mt-2"><ReadAloud text="Before 16, your parent or carer usually agreed to treatment. You were asked what you thought, but adults made most decisions. From 16, health staff will normally ask you directly! Before 16: Parents or carers usually gave consent. You were asked what you wanted, but adults decided. From 16: Health staff usually ask you to agree to treatment. Your parent or carer can still support you if you want. You can choose who's in the room for part of your appointment." /></div>
           </Card>
 
           <Card title="How do staff check if I can make decisions?" emoji="🤔">
@@ -58,6 +65,7 @@ export function Consent16to17() {
             <p className="mt-3 text-sm text-warm-600">
               A doctor or nurse might ask you to explain the plan in your own words. If you don't understand yet, they should explain it again more clearly.
             </p>
+            <div className="mt-2"><ReadAloud text="To give consent, you need to be able to understand the decision, think about your options, and share what you want to do. You need to understand what the treatment is for, remember the key info long enough to decide, think about the pros and cons in a way that makes sense to you, and tell someone your choice, in whatever way works for you. A doctor or nurse might ask you to explain the plan in your own words. If you don't understand yet, they should explain it again more clearly." /></div>
           </Card>
 
           <Card title="When do parents and carers get involved?" emoji="👨‍👩‍👧">
@@ -67,6 +75,7 @@ export function Consent16to17() {
             <p className="mt-3 text-sm text-warm-600">
               If staff think you or someone else is at serious risk, they might need to share info even if you'd prefer they didn't. They should explain what they're doing and why.
             </p>
+            <div className="mt-2"><ReadAloud text="You can usually decide if you want a parent, carer or friend with you. You can also choose what info gets shared with them, or keep some things private. If staff think you or someone else is at serious risk, they might need to share info even if you'd prefer they didn't. They should explain what they're doing and why." /></div>
           </Card>
 
           <Card title="Feeling unsure or pressured?" emoji="💭">
@@ -79,6 +88,7 @@ export function Consent16to17() {
               <li className="flex items-start gap-2"><span>🚪</span> "Can I talk to you on my own for a few minutes?"</li>
               <li className="flex items-start gap-2"><span>🙋</span> "Can I speak to someone else, like a nurse or an advocate?"</li>
             </ul>
+            <div className="mt-2"><ReadAloud text="It's totally okay to say you're not sure. You can ask for more time, or ask someone to explain things differently. You can try saying: Can you explain that again in a different way? Can I talk to you on my own for a few minutes? Can I speak to someone else, like a nurse or an advocate?" /></div>
           </Card>
         </div>
 
@@ -111,6 +121,7 @@ export function Consent16to17() {
             <p className="mt-4 text-xs text-warm-500 bg-warm-50 px-3 py-2 rounded-lg border border-warm-100">
               🔜 Soon you'll be able to save these questions to your appointment planner!
             </p>
+            <div className="mt-2"><ReadAloud text="Questions to ask your team: Who will be asking me for consent now I'm 16 or 17? Can I have part of my appointment on my own? What happens if I don't agree with a treatment? How can my parent or carer stay involved if I want?" /></div>
           </Card>
         </aside>
       </section>

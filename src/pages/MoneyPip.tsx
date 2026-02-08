@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ReadAloud from '../components/ReadAloud'
 
 type SectionKey = 'benefits' | 'legal' | 'education' | null
 
@@ -33,6 +34,7 @@ export function MoneyPip() {
             <p className="text-sm font-medium text-warm-700">
               Have a look through and see what applies to you. If you're not sure, your GP can help.
             </p>
+            <div className="mt-2"><ReadAloud text="This page has lots of info, but you probably won't need all of it. Most young people moving to adult care don't need benefits or special legal arrangements - and that's totally fine! Have a look through and see what applies to you. If you're not sure, your GP can help." /></div>
           </div>
         </div>
       </div>
@@ -46,6 +48,7 @@ export function MoneyPip() {
             <p className="text-sm text-warm-600 mb-4">
               Some of this stuff is a bit complicated - here are people who can help you out.
             </p>
+            <div className="mt-2"><ReadAloud text="Some of this stuff is a bit complicated. Here are people who can help you. Citizens Advice provides free help with benefits like PIP, DLA, and Universal Credit. IPSEA provides free advice about EHCPs and getting support at school or college. Contact is a helpline for families covering benefits, education, health and local services. Mencap provides help understanding legal things like Power of Attorney and making decisions." /></div>
 
             <h4 className="font-semibold text-warm-800 mb-3 flex items-center gap-2">
               <span>🎯</span> People who can help
@@ -138,6 +141,7 @@ export function MoneyPip() {
                       This is mainly for people who already get DLA (Disability Living Allowance).
                       If you don't get DLA, you can probably skip this bit. Most young people don't need PIP!
                     </p>
+                    <div className="mt-2"><ReadAloud text="This section is mainly for people who already get DLA or Disability Living Allowance. If you do not get DLA, you can probably skip this bit. Most young people do not need PIP." /></div>
                   </div>
                 </div>
               </div>
@@ -153,6 +157,7 @@ export function MoneyPip() {
                   much money you earn or whether you're working - it's based on how your condition
                   affects you. It's for people aged 16 and over.
                 </p>
+                <div className="mt-2"><ReadAloud text="PIP or Personal Independence Payment is money from the government that helps with extra costs if you have a health condition or disability. It does not matter how much money you earn or whether you are working. It is based on how your condition affects you. It is for people aged 16 and over." /></div>
               </div>
 
               {/* Transitioning from DLA */}
@@ -166,6 +171,7 @@ export function MoneyPip() {
                   automatically! You'll get a letter from the DWP (Department for Work and Pensions)
                   shortly after your 16th birthday.
                 </p>
+                <div className="mt-2"><ReadAloud text="If you get DLA, you will need to apply for PIP when you turn 16. It does not happen automatically. You will get a letter from the DWP or Department for Work and Pensions shortly after your 16th birthday. Apply within 28 days of getting the letter to keep your DLA payments while they decide. It usually takes about 3 to 4 months to process. If a parent managed your DLA, they will need to apply again to manage your PIP." /></div>
                 <ul className="space-y-2 text-sm text-warm-600">
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
@@ -194,6 +200,7 @@ export function MoneyPip() {
                       Your GP or children's doctor can write a letter to support your PIP application.
                       They can explain how your condition affects your everyday life - this really helps!
                     </p>
+                    <div className="mt-2"><ReadAloud text="Your GP or children's doctor can write a letter to support your PIP application. They can explain how your condition affects your everyday life. This really helps." /></div>
                   </div>
                 </div>
               </div>
@@ -286,6 +293,7 @@ export function MoneyPip() {
                       even if you need help with some decisions. If you might need help, it's best to
                       sort out the legal stuff BEFORE your 18th birthday.
                     </p>
+                    <div className="mt-2"><ReadAloud text="When you turn 18, your parents cannot automatically make decisions for you anymore, even if you need help with some decisions. If you might need help, it is best to sort out the legal stuff before your 18th birthday." /></div>
                   </div>
                 </div>
               </div>
@@ -298,6 +306,7 @@ export function MoneyPip() {
                   and life - not your parents. This is great for most people! But if you have a condition
                   that makes some decisions tricky, there are legal ways to get help from people you trust.
                 </p>
+                <div className="mt-2"><ReadAloud text="At 18, you are legally an adult. This means you make decisions about your health, money, and life, not your parents. This is great for most people. But if you have a condition that makes some decisions tricky, there are legal ways to get help from people you trust." /></div>
               </div>
 
               {/* Lasting Power of Attorney */}
@@ -307,6 +316,7 @@ export function MoneyPip() {
                   An LPA is a legal document where you choose someone you trust to help make decisions
                   if you can't. You set it up yourself when you're 18+. There are two types:
                 </p>
+                <div className="mt-2"><ReadAloud text="An LPA is a legal document where you choose someone you trust to help make decisions if you cannot. You set it up yourself when you are 18 and older. Health and Welfare LPA is for decisions about your care, medical treatment, and where you live. Money LPA is for decisions about your bank accounts, bills, and money stuff. To make an LPA, you need to understand what you are doing and who you are choosing. If this is tricky, there is another option." /></div>
                 <div className="space-y-3 ml-2">
                   <div>
                     <p className="font-medium text-sm text-warm-800">🏥 Health and Welfare LPA</p>
@@ -335,6 +345,7 @@ export function MoneyPip() {
                   can apply to the Court to become your "Deputy". This means they can officially help
                   you with decisions. It's best to start this process well before you turn 18.
                 </p>
+                <div className="mt-2"><ReadAloud text="If making an LPA yourself is too tricky, someone who cares about you, like a parent, can apply to the Court to become your Deputy. This means they can officially help you with decisions. It is best to start this process well before you turn 18." /></div>
               </div>
 
               {/* Timeline */}
@@ -441,6 +452,7 @@ export function MoneyPip() {
                   you need at school or college. If you have one, it lists your needs and what support
                   you should get. It's there to help you do your best!
                 </p>
+                <div className="mt-2"><ReadAloud text="An EHCP or Education, Health and Care Plan is a document that describes what extra help you need at school or college. If you have one, it lists your needs and what support you should get. It is there to help you do your best." /></div>
               </div>
 
               {/* Key Highlight */}
@@ -454,6 +466,7 @@ export function MoneyPip() {
                   if you're still in education or training. It's not automatic though - they'll check
                   each year if you still need it.
                 </p>
+                <div className="mt-2"><ReadAloud text="Unlike lots of other support that stops at 18, your EHCP can carry on until you are 25 if you are still in education or training. It is not automatic though. They will check each year if you still need it." /></div>
               </div>
 
               {/* When EHCPs Continue */}
@@ -462,6 +475,7 @@ export function MoneyPip() {
                 <p className="text-sm text-warm-600 mb-2">
                   Your EHCP can keep going until 25 if you're doing:
                 </p>
+                <div className="mt-2"><ReadAloud text="Your EHCP can keep going until 25 if you are doing college or sixth form, an apprenticeship, or other training courses. EHCPs do not cover university, but universities have their own support services you can use." /></div>
                 <ul className="space-y-1 text-sm text-warm-600 ml-4">
                   <li className="flex items-start gap-2">
                     <span className="text-primary-500 mt-1">•</span>
@@ -491,6 +505,7 @@ export function MoneyPip() {
                       Your GP can write letters to support your EHCP applications and reviews. They can
                       explain how your health affects your learning and help make sure you get the right support.
                     </p>
+                    <div className="mt-2"><ReadAloud text="Your GP can write letters to support your EHCP applications and reviews. They can explain how your health affects your learning and help make sure you get the right support." /></div>
                   </div>
                 </div>
               </div>

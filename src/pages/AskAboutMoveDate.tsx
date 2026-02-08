@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface TransitionData {
   expectedMoveAge: string
@@ -117,6 +118,9 @@ export function AskAboutMoveDate() {
             It's really important to start talking about this early so you're not surprised! Your children's team should work
             with you and your family to make sure the move goes smoothly.
           </p>
+          <div className="mt-3">
+            <ReadAloud text="Transition is the process of moving from children's healthcare services to adult services. This usually happens between ages 16 and 18, but it can be different for everyone. It's really important to start talking about this early so you're not surprised! Your children's team should work with you and your family to make sure the move goes smoothly." />
+          </div>
         </div>
       </section>
 
@@ -315,6 +319,9 @@ export function AskAboutMoveDate() {
               <li>• If you don't feel ready, tell your team - they may be able to delay the move</li>
               <li>• Ask for a written summary of your care to take to your new team</li>
             </ul>
+            <div className="mt-3">
+              <ReadAloud text="Some areas have a transition clinic where you meet both teams together. You might have a gradual handover with several joint appointments. If you don't feel ready, tell your team - they may be able to delay the move. Ask for a written summary of your care to take to your new team." />
+            </div>
           </div>
         </div>
       </section>

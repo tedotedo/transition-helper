@@ -1,3 +1,5 @@
+import ReadAloud from '../components/ReadAloud'
+
 const rsgBase = '/ready-steady-go-pdfs'
 
 const resources = [
@@ -74,6 +76,7 @@ export function Resources() {
         <p className="max-w-2xl text-sm md:text-base text-warm-600 leading-relaxed">
           These resources are from the Ready Steady Go transition programme. They help you and your family think about what you already know, what questions you have, and what support you might need.
         </p>
+        <div className="mt-2"><ReadAloud text="These resources are from the Ready Steady Go transition programme. They help you and your family think about what you already know, what questions you have, and what support you might need." /></div>
       </header>
 
       <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -108,9 +111,12 @@ export function Resources() {
         ))}
       </section>
 
-      <p className="text-sm text-warm-500 bg-warm-50 px-4 py-3 rounded-xl border border-warm-100">
-        These documents are for info and planning only. For the latest details about how your local service uses Ready Steady Go, check with your hospital or clinic.
-      </p>
+      <section className="text-sm text-warm-500 bg-warm-50 px-4 py-3 rounded-xl border border-warm-100">
+        <p>
+          These documents are for info and planning only. For the latest details about how your local service uses Ready Steady Go, check with your hospital or clinic.
+        </p>
+        <div className="mt-2"><ReadAloud text="These documents are for information and planning only. For the latest details about how your local service uses Ready Steady Go, check with your hospital or clinic." /></div>
+      </section>
     </div>
   )
 }

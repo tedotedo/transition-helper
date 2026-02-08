@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface PIPData {
   currentlyGetsDLA: string
@@ -131,6 +132,9 @@ export function LookIntoPIP() {
               It's separate from other benefits.
             </p>
           </div>
+          <div className="mt-4">
+            <ReadAloud text="PIP, which stands for Personal Independence Payment, is money from the government to help with extra costs if you have a long-term health condition or disability. It's not means-tested - that means it doesn't matter if your family has money or not. If you currently get DLA, which stands for Disability Living Allowance, you'll usually need to apply for PIP when you turn 16. You can get PIP whether you're in school, college, work, or not working. It's separate from other benefits." />
+          </div>
         </div>
       </section>
 
@@ -241,10 +245,15 @@ export function LookIntoPIP() {
           <span>🏠</span>
           <span>Daily living activities</span>
         </h2>
-        <p className="text-sm text-warm-500 mb-4">
-          PIP looks at what help you need with everyday tasks. Tick any areas where you need help, supervision, or prompting
-          because of your condition. This helps you prepare for your application.
-        </p>
+        <div>
+          <p className="text-sm text-warm-500 mb-4">
+            PIP looks at what help you need with everyday tasks. Tick any areas where you need help, supervision, or prompting
+            because of your condition. This helps you prepare for your application.
+          </p>
+          <div className="mb-4">
+            <ReadAloud text="PIP looks at what help you need with everyday tasks. Tick any areas where you need help, supervision, or prompting because of your condition. This helps you prepare for your application." />
+          </div>
+        </div>
 
         <div className="space-y-2">
           {dailyActivities.map((activity) => (
@@ -277,9 +286,14 @@ export function LookIntoPIP() {
           <span>🚶</span>
           <span>Mobility activities</span>
         </h2>
-        <p className="text-sm text-warm-500 mb-4">
-          This is about getting around outside your home. Tick if you need help with these.
-        </p>
+        <div>
+          <p className="text-sm text-warm-500 mb-4">
+            This is about getting around outside your home. Tick if you need help with these.
+          </p>
+          <div className="mb-4">
+            <ReadAloud text="This is about getting around outside your home. Tick if you need help with these." />
+          </div>
+        </div>
 
         <div className="space-y-2">
           {mobilityActivities.map((activity) => (
@@ -312,9 +326,14 @@ export function LookIntoPIP() {
           <span>📝</span>
           <span>My notes</span>
         </h2>
-        <p className="text-sm text-warm-500 mb-3">
-          Write down examples of how your condition affects you day-to-day. This will help with your application.
-        </p>
+        <div>
+          <p className="text-sm text-warm-500 mb-3">
+            Write down examples of how your condition affects you day-to-day. This will help with your application.
+          </p>
+          <div className="mb-4">
+            <ReadAloud text="Write down examples of how your condition affects you day-to-day. This will help with your application." />
+          </div>
+        </div>
         <textarea
           value={notes}
           onChange={(e) => updateField('notes', e.target.value)}

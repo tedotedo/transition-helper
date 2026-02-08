@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import ReadAloud from '../components/ReadAloud'
 
 export default function About() {
   return (
@@ -41,6 +42,7 @@ export default function About() {
               This app was created to help young people and their families navigate the often
               challenging transition from children's to adult healthcare services.
             </p>
+            <div className="mt-2"><ReadAloud text="Consultant Community Paediatrician at University Hospitals Tees NHS Foundation Trust, with a particular interest in neurodevelopmental differences, particularly autism. This app was created to help young people and their families navigate the often challenging transition from children's to adult healthcare services." /></div>
           </div>
         </div>
       </section>
@@ -53,6 +55,7 @@ export default function About() {
           healthcare journey. We believe that with the right information and support, every young
           person can feel confident and prepared for adult healthcare services.
         </p>
+        <div className="mt-2"><ReadAloud text="Transition Ready aims to empower young people aged 11-18 and older to take control of their healthcare journey. We believe that with the right information and support, every young person can feel confident and prepared for adult healthcare services." /></div>
       </section>
 
       {/* Install App section */}
@@ -115,6 +118,7 @@ export default function About() {
               Steering Group at University Hospital Southampton NHS Foundation Trust. Used with
               acknowledgement of the original creators.
             </p>
+            <div className="mt-2"><ReadAloud text="The transition checklist structure used in this app is adapted from the Ready Steady Go transition programme, originally developed by Dr Arvind Nagra and the Transition Steering Group at University Hospital Southampton NHS Foundation Trust. Used with acknowledgement of the original creators." /></div>
           </div>
 
           <div className="p-4 bg-primary-50 rounded-xl border border-primary-100">
@@ -134,6 +138,7 @@ export default function About() {
           not replace medical or legal advice. Always consult with your healthcare team for
           guidance specific to your situation.
         </p>
+        <div className="mt-2"><ReadAloud text="This app provides general information for young people and families in the UK. It does not replace medical or legal advice. Always consult with your healthcare team for guidance specific to your situation." /></div>
         <Link
           to="/privacy"
           className="inline-flex items-center gap-1 text-sm text-primary-600 hover:text-primary-700 transition-colors"
@@ -151,6 +156,7 @@ export default function About() {
         <p className="text-white/80 text-sm">
           Click the feedback button in the bottom right corner to share your thoughts! 💬
         </p>
+        <div className="mt-2"><ReadAloud text="We would love to hear how we can make Transition Ready even better. Click the feedback button in the bottom right corner to share your thoughts." /></div>
       </section>
 
       {/* Books section */}

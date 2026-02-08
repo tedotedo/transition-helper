@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
 
 interface SpeakUpData {
   practiceAnswers: string[]
@@ -118,6 +119,9 @@ export function SpeakUpAtAppointments() {
           <p>
             Your doctors and nurses <strong>want</strong> to hear from you - you know your own body better than anyone else.
           </p>
+          <div className="mt-3">
+            <ReadAloud text="It can feel scary to speak up at appointments, especially if you're used to your parent or carer doing the talking. But the more you practise, the easier it gets! Your doctors and nurses want to hear from you - you know your own body better than anyone else." />
+          </div>
         </div>
       </section>
 
@@ -177,11 +181,17 @@ export function SpeakUpAtAppointments() {
                     <p className="text-sm text-accent-700">
                       <strong>💡 Tip:</strong> {item.tip}
                     </p>
+                    <div className="mt-2">
+                      <ReadAloud text={item.tip} />
+                    </div>
                   </div>
                   <div className="bg-warm-50 rounded-xl p-3 border border-warm-100">
                     <p className="text-sm text-warm-600">
                       <strong>Example answer:</strong> &quot;{item.example}&quot;
                     </p>
+                    <div className="mt-2">
+                      <ReadAloud text={item.example} />
+                    </div>
                   </div>
                   <div>
                     <label htmlFor={`answer-${index}`} className="block text-sm font-medium text-warm-700 mb-2">
@@ -286,6 +296,9 @@ export function SpeakUpAtAppointments() {
               It's okay to say "I don't know" or "Can you explain that differently?" Your care team won't mind at all -
               they'd rather you ask than leave confused!
             </p>
+            <div className="mt-3">
+              <ReadAloud text="It's okay to say I don't know or Can you explain that differently? Your care team won't mind at all - they'd rather you ask than leave confused!" />
+            </div>
           </div>
         </div>
       </section>

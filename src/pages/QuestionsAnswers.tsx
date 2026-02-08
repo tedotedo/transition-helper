@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ReadAloud from '../components/ReadAloud'
 
 interface FAQ {
   id: string
@@ -208,6 +209,7 @@ export function QuestionsAnswers() {
           Real questions from young people just like you, answered in plain English.
           No jargon, no judgment!
         </p>
+        <div className="mt-2"><ReadAloud text="Real questions from young people just like you, answered in plain English. No jargon, no judgment!" /></div>
       </header>
 
       {/* Category Filter */}
@@ -272,6 +274,7 @@ export function QuestionsAnswers() {
                       <p className="text-base sm:text-lg text-warm-700 leading-relaxed">
                         {faq.answer}
                       </p>
+                      <div className="mt-2"><ReadAloud text={faq.answer} /></div>
                     </div>
                   </div>
                 </div>
@@ -295,6 +298,7 @@ export function QuestionsAnswers() {
               These FAQs cover the common stuff, but YOUR situation is unique.
               Don't be afraid to ask your healthcare team - no question is too small!
             </p>
+            <div className="mt-2"><ReadAloud text="These FAQs cover the common stuff, but your situation is unique. Do not be afraid to ask your healthcare team. No question is too small." /></div>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/rights"
