@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { TransitionTimeline } from '../components/home/TransitionTimeline'
 import { JourneyIllustration, FloatingShapes } from '../components/illustrations'
+import ReadAloud from '../components/ReadAloud'
 
 type StageKey = 'ready' | 'steady' | 'go' | 'adult'
 
@@ -157,6 +158,9 @@ export function MyJourney() {
         <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-warm-600 leading-relaxed font-medium">
           You're on your way to taking charge of your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready.
         </p>
+        <div className="flex justify-center">
+          <ReadAloud text="You're on your way to taking charge of your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready." />
+        </div>
       </header>
 
       {/* Visual progress timeline */}

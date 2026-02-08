@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Search } from './Search'
-import { useRole } from '../../hooks'
+import { useRole, useEasyRead } from '../../hooks'
 import { CompactRoleToggle } from '../home/CompactRoleToggle'
 import { FeedbackButton } from './FeedbackButton'
 import { LanguageSwitcher, LanguageSwitcherCompact } from './LanguageSwitcher'
@@ -14,6 +14,7 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   const { role, setRole, isYoungPerson } = useRole()
+  const { easyRead, toggleEasyRead } = useEasyRead()
   const { t } = useTranslation()
 
   // Close more menu when route changes
@@ -48,6 +49,24 @@ export function AppShell({ children }: AppShellProps) {
           <p className="text-xs text-warm-500 mb-2">{t('language.select')}:</p>
           <LanguageSwitcher />
         </div>
+        {/* Easy Read toggle in sidebar */}
+        {isYoungPerson && (
+          <div className="px-4 py-3 border-t border-warm-100">
+            <button
+              onClick={toggleEasyRead}
+              aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
+              aria-pressed={easyRead}
+              className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                easyRead
+                  ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-sm'
+                  : 'bg-warm-50 text-warm-600 hover:bg-warm-100'
+              }`}
+            >
+              <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
+              <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+            </button>
+          </div>
+        )}
         {/* Role toggle in sidebar */}
         <div className="px-4 py-3 border-t border-warm-100">
           <p className="text-xs text-warm-500 mb-2">{t('role.viewingAs')}</p>
@@ -137,6 +156,24 @@ export function AppShell({ children }: AppShellProps) {
                 <div className="mb-3 pb-3 border-b border-warm-100 flex justify-center">
                   <LanguageSwitcherCompact />
                 </div>
+                {/* Easy Read toggle for mobile */}
+                {isYoungPerson && (
+                  <div className="mb-3 pb-3 border-b border-warm-100 flex justify-center">
+                    <button
+                      onClick={toggleEasyRead}
+                      aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
+                      aria-pressed={easyRead}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                        easyRead
+                          ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-sm'
+                          : 'bg-warm-50 text-warm-600'
+                      }`}
+                    >
+                      <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
+                      <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+                    </button>
+                  </div>
+                )}
                 {/* Role toggle for mobile */}
                 <div className="mb-4 pb-3 border-b border-warm-100">
                   <p className="text-xs text-warm-500 mb-2 text-center">{t('role.viewingAs')}</p>

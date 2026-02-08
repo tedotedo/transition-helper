@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { EasyReadProvider, RoleProvider, useRole } from './hooks'
+import { EasyReadProvider, RoleProvider, useRole, useEasyRead } from './hooks'
+import { VoiceProvider } from './hooks/useVoice'
 import { isRTL } from './i18n'
 import { AppShell } from './components/layout/AppShell'
 import { Home } from './pages/Home'
@@ -40,6 +41,7 @@ import Privacy from './pages/Privacy'
 // Wrapper to apply role-based styling and handle RTL
 function AppContent() {
   const { isYoungPerson } = useRole()
+  const { easyRead } = useEasyRead()
   const { i18n } = useTranslation()
 
   // Update document direction and language when language changes
@@ -50,6 +52,11 @@ function AppContent() {
     document.documentElement.setAttribute('dir', dir)
     document.documentElement.setAttribute('lang', lang)
   }, [i18n.language])
+
+  // Toggle body.easy-read CSS class for Easy Read mode typography
+  useEffect(() => {
+    document.body.classList.toggle('easy-read', easyRead)
+  }, [easyRead])
 
   return (
     <div className={isYoungPerson ? 'font-friendly' : 'font-sans'}>
@@ -132,9 +139,11 @@ function App() {
   return (
     <RoleProvider>
       <EasyReadProvider>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
+        <VoiceProvider>
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </VoiceProvider>
       </EasyReadProvider>
     </RoleProvider>
   )

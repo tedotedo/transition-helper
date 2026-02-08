@@ -23,6 +23,8 @@ import { getChecklistProgress } from './Checklist'
 import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
 import { useEasyRead, useRole } from '../hooks'
+import ReadAloud from '../components/ReadAloud'
+import VoicePicker from '../components/VoicePicker'
 
 const LAST_BACKUP_KEY = 'transition-last-backup'
 const USER_NAME_KEY = 'transition-user-name'
@@ -445,6 +447,12 @@ export function Home() {
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-semibold px-2">
                 {t('home.heroYoung.mainMessage')}
               </p>
+
+              {/* Read Aloud + Voice Picker (Easy Read mode) */}
+              <div className="flex items-center justify-center gap-2 flex-wrap">
+                <ReadAloud text={heroBody} label="Read aloud" />
+                <VoicePicker />
+              </div>
 
               <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 pt-4 px-2">
                 <a
