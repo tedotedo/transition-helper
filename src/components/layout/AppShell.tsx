@@ -104,6 +104,21 @@ export function AppShell({ children }: AppShellProps) {
             <Search />
           </div>
           <div className="ml-3 flex items-center gap-4">
+            {isYoungPerson && (
+              <button
+                onClick={toggleEasyRead}
+                aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
+                aria-pressed={easyRead}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold transition-all ${
+                  easyRead
+                    ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
+                    : 'bg-primary-50 text-primary-700 border-2 border-primary-200 hover:bg-primary-100'
+                }`}
+              >
+                <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
+                <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+              </button>
+            )}
             <CompactRoleToggle value={role} onChange={setRole} />
             <div className={`h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-card ${
               isYoungPerson
@@ -114,6 +129,25 @@ export function AppShell({ children }: AppShellProps) {
             </div>
           </div>
         </header>
+
+        {/* Mobile top bar - Easy Read toggle */}
+        {isYoungPerson && (
+          <div className="md:hidden flex items-center justify-center px-4 py-2 bg-white/90 backdrop-blur-sm border-b border-warm-100 sticky top-0 z-10">
+            <button
+              onClick={toggleEasyRead}
+              aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
+              aria-pressed={easyRead}
+              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
+                easyRead
+                  ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
+                  : 'bg-primary-50 text-primary-700 border-2 border-primary-200 hover:bg-primary-100'
+              }`}
+            >
+              <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
+              <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+            </button>
+          </div>
+        )}
 
         <main className="flex-1 px-4 md:px-8 py-4 md:py-8 pb-20 md:pb-8 animate-fade-in">
           <div className="max-w-6xl mx-auto">{children}</div>
