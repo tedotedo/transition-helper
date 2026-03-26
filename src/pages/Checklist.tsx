@@ -68,7 +68,19 @@ export function Checklist() {
   const [data, setData] = useLocalStorage<ChecklistData>(CHECKLIST_STORAGE_KEY, initialData)
   const [showAllStages, setShowAllStages] = useState(false)
 
-  const { completedItems, currentStage } = data
+  // Migrate old RSG stage names from localStorage
+  const stageMap: Record<string, Stage> = {
+    'ready': 'getting-started',
+    'steady': 'building-skills',
+    'go': 'almost-there',
+    'adult': 'flying-solo',
+  }
+  const migratedStage = stageMap[data.currentStage] || data.currentStage as Stage
+  if (migratedStage !== data.currentStage) {
+    setData(prev => ({ ...prev, currentStage: migratedStage }))
+  }
+  const { completedItems } = data
+  const currentStage = migratedStage
 
   const toggleItem = useCallback((itemId: string) => {
     setData(prev => ({
