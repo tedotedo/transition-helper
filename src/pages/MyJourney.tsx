@@ -101,9 +101,9 @@ const tasks: Record<
       title: 'Fill in the Go questionnaire',
       emoji: '📋',
       description:
-        'Use the Ready Steady Go questionnaire to think about how ready you feel for adult services.',
-      linkLabel: 'Start questionnaire →',
-      linkHref: '/resources/ready-steady-go/go-questionnaire',
+        'Use the official Ready Steady Go questionnaire to think about how ready you feel for adult services.',
+      linkLabel: 'Open on RSG website →',
+      linkHref: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygogoquestionnaire_1-2_1.pdf',
     },
     {
       title: 'Ask about your move date',

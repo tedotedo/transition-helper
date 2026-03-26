@@ -413,9 +413,9 @@ export function PlanningTools() {
           <span className="text-xl">💜</span>
           <div>
             <h4 className="font-semibold text-warm-800 text-sm mb-1">Acknowledgement</h4>
-            <p className="text-xs text-warm-600">
-              This app is built upon the NHS Ready Steady Go programme, developed by Dr. Arvind Nagra,
-              Paediatric Nephrologist at Southampton Children's Hospital. Learn more at{' '}
+            <p className="text-xs text-warm-600 mb-2">
+              This app is designed to complement the Ready Steady Go &amp; Hello programme. We encourage
+              all users to access the official questionnaires and resources at{' '}
               <a
                 href="https://www.readysteadygo.net"
                 target="_blank"
@@ -423,7 +423,12 @@ export function PlanningTools() {
                 className="text-primary-600 hover:text-primary-700 underline"
               >
                 www.readysteadygo.net
-              </a>
+              </a>.
+            </p>
+            <p className="text-[0.65rem] text-warm-500 leading-relaxed">
+              'Ready Steady Go' and 'Hello to adult services' developed by the Transition Steering Group
+              led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at
+              Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust.
             </p>
           </div>
         </div>

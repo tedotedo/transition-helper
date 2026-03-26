@@ -103,22 +103,42 @@ export default function About() {
         <h2 className="text-xl font-bold text-warm-800 mb-4">Acknowledgements</h2>
         <div className="space-y-4">
           <div className="p-4 bg-accent-50 rounded-xl border border-accent-100">
-            <h3 className="font-semibold text-accent-700 mb-2">Ready Steady Go Programme</h3>
-            <p className="text-warm-600 text-sm leading-relaxed">
-              The transition checklist structure used in this app is adapted from the{' '}
+            <h3 className="font-semibold text-accent-700 mb-2">Ready Steady Go &amp; Hello Programme</h3>
+            <p className="text-warm-600 text-sm leading-relaxed mb-3">
+              This app is designed to complement the{' '}
               <a
-                href="https://www.uhs.nhs.uk/health-professionals/transition-from-child-to-adult-services"
+                href="https://www.readysteadygo.net"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent-600 underline hover:text-accent-700"
               >
-                Ready Steady Go
+                Ready Steady Go &amp; Hello
               </a>{' '}
-              transition programme, originally developed by Dr Arvind Nagra and the Transition
-              Steering Group at University Hospital Southampton NHS Foundation Trust. Used with
-              acknowledgement of the original creators.
+              transition programme. We encourage all users to access the official RSG questionnaires
+              and resources at{' '}
+              <a
+                href="https://www.readysteadygo.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent-600 underline hover:text-accent-700"
+              >
+                www.readysteadygo.net
+              </a>.
             </p>
-            <div className="mt-2"><ReadAloud text="The transition checklist structure used in this app is adapted from the Ready Steady Go transition programme, originally developed by Dr Arvind Nagra and the Transition Steering Group at University Hospital Southampton NHS Foundation Trust. Used with acknowledgement of the original creators." /></div>
+            <div className="p-3 bg-white/60 rounded-lg border border-accent-200 text-xs text-warm-500 leading-relaxed space-y-2">
+              <p>
+                'Ready Steady Go' and 'Hello to adult services' developed by the Transition Steering Group
+                led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at
+                Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust based
+                on the work of:
+              </p>
+              <ol className="list-decimal list-inside space-y-1">
+                <li>S Whitehouse and MC Paone. Bridging the gap from youth to adulthood. Contemporary Pediatrics; 1998, December. 13-16.</li>
+                <li>Paone MC, Wigle M, Saewyc E. The ON TRAC model for transitional care of adolescents. Prog Transplant 2006;16:291-302</li>
+                <li>Janet E McDonagh et al, J Child Health Care 2006;10(1):22-42.</li>
+              </ol>
+            </div>
+            <div className="mt-2"><ReadAloud text="This app is designed to complement the Ready Steady Go and Hello to adult services transition programme, developed by Dr Arvind Nagra and the Transition Steering Group at University Hospital Southampton NHS Foundation Trust." /></div>
           </div>
 
           <div className="p-4 bg-primary-50 rounded-xl border border-primary-100">

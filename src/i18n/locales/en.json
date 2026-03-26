@@ -116,14 +116,14 @@
     }
   },
   "stages": {
-    "ready": "Ready",
-    "steady": "Steady",
-    "go": "Go",
-    "adult": "Hello Adult Services",
-    "ready11to13": "Ready (11-13)",
-    "steady14to15": "Steady (14-15)",
-    "go16to17": "Go (16-17)",
-    "adult18plus": "Adult (18+)"
+    "ready": "Getting Started",
+    "steady": "Building Skills",
+    "go": "Almost There",
+    "adult": "Flying Solo",
+    "ready11to13": "Getting Started (11-13)",
+    "steady14to15": "Building Skills (14-15)",
+    "go16to17": "Almost There (16-17)",
+    "adult18plus": "Flying Solo (18+)"
   },
   "buttons": {
     "back": "Back",
@@ -293,7 +293,7 @@
   },
   "resources": {
     "title": "Resources",
-    "rsgTitle": "Ready Steady Go questionnaires",
+    "rsgTitle": "Official Ready Steady Go resources",
     "downloadPdf": "Download PDF",
     "viewOnline": "View online",
     "easyRead": "Easy Read version"
@@ -318,7 +318,7 @@
   "footer": {
     "disclaimer": "This app gives general information for the UK. It does not replace medical or legal advice.",
     "privacyLink": "Privacy & Disclaimer",
-    "attribution": "Transition checklist adapted from Ready Steady Go by Dr Arvind Nagra, University Hospital Southampton NHS Foundation Trust."
+    "attribution": "This app is designed to complement the Ready Steady Go & Hello programme by Dr Arvind Nagra, University Hospital Southampton NHS Foundation Trust."
   },
   "privacy": {
     "title": "Privacy & Disclaimer",

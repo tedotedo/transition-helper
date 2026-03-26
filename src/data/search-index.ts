@@ -70,7 +70,7 @@ export const searchIndex: SearchItem[] = [
     id: 'checklist',
     title: 'My Transition Checklist',
     description: 'Track your progress with stage-specific transition tasks',
-    keywords: ['checklist', 'tasks', 'progress', 'ready', 'steady', 'go', 'adult', 'transition', 'goals'],
+    keywords: ['checklist', 'tasks', 'progress', 'getting started', 'building skills', 'almost there', 'flying solo', 'transition', 'goals'],
     href: '/checklist',
     category: 'page',
   },
@@ -187,7 +187,7 @@ export const searchIndex: SearchItem[] = [
     title: 'Ready Questionnaire (Age 11-13)',
     description: 'Start learning about your health and your care team',
     keywords: ['ready', 'questionnaire', '11', '12', '13', 'young', 'start', 'learn'],
-    href: '/resources/ready-steady-go/ready-questionnaire',
+    href: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygoreadyquestionnaire_1-3_1.pdf',
     category: 'resource',
   },
   {
@@ -195,7 +195,7 @@ export const searchIndex: SearchItem[] = [
     title: 'Steady Questionnaire (Age 14-15)',
     description: 'Build independence and learn about your medicines',
     keywords: ['steady', 'questionnaire', '14', '15', 'independence', 'medicines', 'practice'],
-    href: '/resources/ready-steady-go/steady-questionnaire',
+    href: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygosteadyquestionnaire_1-2_1.pdf',
     category: 'resource',
   },
   {
@@ -203,7 +203,7 @@ export const searchIndex: SearchItem[] = [
     title: 'Go Questionnaire (Age 16-17)',
     description: 'Prepare for your move to adult services',
     keywords: ['go', 'questionnaire', '16', '17', 'adult', 'services', 'prepare', 'transition'],
-    href: '/resources/ready-steady-go/go-questionnaire',
+    href: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygogoquestionnaire_1-2_1.pdf',
     category: 'resource',
   },
 

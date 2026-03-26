@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
 
-type Stage = 'ready' | 'steady' | 'go' | 'adult'
+type Stage = 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo'
 
 interface ChecklistItem {
   id: string
@@ -18,50 +18,50 @@ interface ChecklistData {
 
 export const CHECKLIST_STORAGE_KEY = 'transition-care-checklist'
 
-// Stage-specific checklist items
+// Fully original transition readiness checklist items
 const checklistItems: ChecklistItem[] = [
-  // Ready Stage (11-13)
-  { id: 'ready-1', text: 'I can name my condition', stage: 'ready' },
-  { id: 'ready-2', text: 'I know who my main doctor or nurse is', stage: 'ready' },
-  { id: 'ready-3', text: 'I can describe how my condition affects me', stage: 'ready' },
-  { id: 'ready-4', text: 'I know when to ask for help with my health', stage: 'ready' },
-  { id: 'ready-5', text: 'I know the names of my medicines', stage: 'ready' },
+  // Getting Started (11-13)
+  { id: 'gs-1', text: "I've written down what my health condition is called", stage: 'getting-started' },
+  { id: 'gs-2', text: 'I can tell someone one thing about why I see my doctor', stage: 'getting-started' },
+  { id: 'gs-3', text: 'I know the names of the people who look after my health', stage: 'getting-started' },
+  { id: 'gs-4', text: "I've thought about one question I'd like to ask at my next appointment", stage: 'getting-started' },
+  { id: 'gs-5', text: 'I know what to do if I feel really unwell at home', stage: 'getting-started' },
 
-  // Steady Stage (14-15)
-  { id: 'steady-1', text: 'I can explain my condition in my own words', stage: 'steady' },
-  { id: 'steady-2', text: 'I know what my medicines do and when to take them', stage: 'steady' },
-  { id: 'steady-3', text: 'I try to answer questions at appointments myself', stage: 'steady' },
-  { id: 'steady-4', text: 'I know what to do if I feel unwell', stage: 'steady' },
-  { id: 'steady-5', text: 'I understand the importance of taking my medicines', stage: 'steady' },
+  // Building Skills (14-15)
+  { id: 'bs-1', text: 'I can explain my condition to a friend or teacher in my own words', stage: 'building-skills' },
+  { id: 'bs-2', text: 'I know what each of my medicines or treatments does', stage: 'building-skills' },
+  { id: 'bs-3', text: "I've tried answering a question from my doctor or nurse myself", stage: 'building-skills' },
+  { id: 'bs-4', text: 'I know what to do if I run out of medicine or a prescription', stage: 'building-skills' },
+  { id: 'bs-5', text: "I've thought about how my health might affect college or work plans", stage: 'building-skills' },
 
-  // Go Stage (16-17)
-  { id: 'go-1', text: 'I know the name of my condition and can explain it', stage: 'go' },
-  { id: 'go-2', text: 'I know what medications I take and why', stage: 'go' },
-  { id: 'go-3', text: "I've asked about when I'll move to adult services", stage: 'go' },
-  { id: 'go-4', text: "I've read about consent and know I can agree to my own treatment", stage: 'go' },
-  { id: 'go-5', text: 'I know how to book my own appointments', stage: 'go' },
-  { id: 'go-6', text: 'I understand how to order repeat prescriptions', stage: 'go' },
-  { id: 'go-7', text: "I've looked into whether PIP might apply to me", stage: 'go' },
+  // Almost There (16-17)
+  { id: 'at-1', text: 'I can describe my full health history to someone new', stage: 'almost-there' },
+  { id: 'at-2', text: 'I know how to book a GP or hospital appointment', stage: 'almost-there' },
+  { id: 'at-3', text: 'I understand what changes when I turn 16 (like consent)', stage: 'almost-there' },
+  { id: 'at-4', text: "I've asked my team about when and how I'll move to adult services", stage: 'almost-there' },
+  { id: 'at-5', text: 'I know how to order repeat prescriptions', stage: 'almost-there' },
+  { id: 'at-6', text: "I've looked into whether I might be eligible for PIP or other support", stage: 'almost-there' },
+  { id: 'at-7', text: "I've practised speaking to a healthcare professional on my own", stage: 'almost-there' },
 
-  // Adult Stage (18+)
-  { id: 'adult-1', text: "I've met my new adult care team", stage: 'adult' },
-  { id: 'adult-2', text: 'I know how to contact my adult service', stage: 'adult' },
-  { id: 'adult-3', text: 'I manage my own appointments and prescriptions', stage: 'adult' },
-  { id: 'adult-4', text: "I've reviewed my benefits and support options", stage: 'adult' },
-  { id: 'adult-5', text: 'I feel confident speaking to healthcare professionals', stage: 'adult' },
-  { id: 'adult-6', text: 'I have an up-to-date care plan I can share', stage: 'adult' },
+  // Flying Solo (18+)
+  { id: 'fs-1', text: "I've attended an appointment with my new adult care team", stage: 'flying-solo' },
+  { id: 'fs-2', text: 'I have the contact details for my adult service and know how to reach them', stage: 'flying-solo' },
+  { id: 'fs-3', text: 'I manage my own appointments, prescriptions, and repeat orders', stage: 'flying-solo' },
+  { id: 'fs-4', text: "I've checked what benefits or support I'm entitled to as an adult", stage: 'flying-solo' },
+  { id: 'fs-5', text: 'I feel confident explaining my needs to a new healthcare professional', stage: 'flying-solo' },
+  { id: 'fs-6', text: "I have an up-to-date summary of my health that I can share if needed", stage: 'flying-solo' },
 ]
 
 const stageInfo: Record<Stage, { name: string; ages: string; emoji: string; color: string }> = {
-  ready: { name: 'Ready', ages: '11-13', emoji: '🌱', color: 'from-green-400 to-green-500' },
-  steady: { name: 'Steady', ages: '14-15', emoji: '🌿', color: 'from-teal-400 to-teal-500' },
-  go: { name: 'Go', ages: '16-17', emoji: '🚀', color: 'from-primary-400 to-primary-500' },
-  adult: { name: 'Hello Adult Services', ages: '18+', emoji: '⭐', color: 'from-accent-400 to-accent-500' },
+  'getting-started': { name: 'Getting Started', ages: '11-13', emoji: '🌱', color: 'from-green-400 to-green-500' },
+  'building-skills': { name: 'Building Skills', ages: '14-15', emoji: '🌿', color: 'from-teal-400 to-teal-500' },
+  'almost-there': { name: 'Almost There', ages: '16-17', emoji: '🚀', color: 'from-primary-400 to-primary-500' },
+  'flying-solo': { name: 'Flying Solo', ages: '18+', emoji: '⭐', color: 'from-accent-400 to-accent-500' },
 }
 
 const initialData: ChecklistData = {
   completedItems: [],
-  currentStage: 'go',
+  currentStage: 'almost-there',
 }
 
 export function Checklist() {
@@ -97,7 +97,7 @@ export function Checklist() {
   const completedInCurrentStage = currentStageItems.filter(item => completedItems.includes(item.id)).length
   const progressPercent = Math.round((completedInCurrentStage / currentStageItems.length) * 100)
 
-  const stages: Stage[] = ['ready', 'steady', 'go', 'adult']
+  const stages: Stage[] = ['getting-started', 'building-skills', 'almost-there', 'flying-solo']
 
   return (
     <div className="space-y-6 animate-fade-in max-w-3xl">
@@ -285,18 +285,26 @@ function ChecklistItemRow({ item, completed, onToggle }: ChecklistItemRowProps) 
 export function getChecklistProgress(): { completed: number; total: number; stage: Stage; percent: number } {
   const stored = localStorage.getItem(CHECKLIST_STORAGE_KEY)
   if (!stored) {
-    const defaultStageItems = checklistItems.filter(item => item.stage === 'go')
-    return { completed: 0, total: defaultStageItems.length, stage: 'go', percent: 0 }
+    const defaultStageItems = checklistItems.filter(item => item.stage === 'almost-there')
+    return { completed: 0, total: defaultStageItems.length, stage: 'almost-there', percent: 0 }
   }
 
   try {
     const data: ChecklistData = JSON.parse(stored)
-    const stageItems = checklistItems.filter(item => item.stage === data.currentStage)
+    // Handle migration from old RSG stage names
+    const stageMap: Record<string, Stage> = {
+      'ready': 'getting-started',
+      'steady': 'building-skills',
+      'go': 'almost-there',
+      'adult': 'flying-solo',
+    }
+    const currentStage = stageMap[data.currentStage] || data.currentStage as Stage
+    const stageItems = checklistItems.filter(item => item.stage === currentStage)
     const completed = stageItems.filter(item => data.completedItems.includes(item.id)).length
     const percent = Math.round((completed / stageItems.length) * 100)
-    return { completed, total: stageItems.length, stage: data.currentStage, percent }
+    return { completed, total: stageItems.length, stage: currentStage, percent }
   } catch {
-    const defaultStageItems = checklistItems.filter(item => item.stage === 'go')
-    return { completed: 0, total: defaultStageItems.length, stage: 'go', percent: 0 }
+    const defaultStageItems = checklistItems.filter(item => item.stage === 'almost-there')
+    return { completed: 0, total: defaultStageItems.length, stage: 'almost-there', percent: 0 }
   }
 }

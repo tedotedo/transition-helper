@@ -47,23 +47,23 @@ test.describe('Checklist Page', () => {
 
   test('shows stage selector with all stages', async ({ page }) => {
     await expect(page.getByText(/what stage are you at/i)).toBeVisible()
-    await expect(page.getByRole('button', { name: /ready.*11-13/i })).toBeVisible()
-    await expect(page.getByRole('button', { name: /steady.*14-15/i })).toBeVisible()
-    await expect(page.getByRole('button', { name: /go.*16-17/i })).toBeVisible()
-    await expect(page.getByRole('button', { name: /hello adult.*18/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /getting started.*11-13/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /building skills.*14-15/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /almost there.*16-17/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /flying solo.*18/i })).toBeVisible()
   })
 
   test('can select different stages', async ({ page }) => {
-    await page.getByRole('button', { name: /ready.*11-13/i }).click()
-    await expect(page.getByText(/ready stage progress/i)).toBeVisible()
+    await page.getByRole('button', { name: /getting started.*11-13/i }).click()
+    await expect(page.getByText(/getting started stage progress/i)).toBeVisible()
 
-    await page.getByRole('button', { name: /steady.*14-15/i }).click()
-    await expect(page.getByText(/steady stage progress/i)).toBeVisible()
+    await page.getByRole('button', { name: /building skills.*14-15/i }).click()
+    await expect(page.getByText(/building skills stage progress/i)).toBeVisible()
   })
 
   test('can check/uncheck tasks', async ({ page }) => {
     // Find a task and click it
-    const taskButton = page.getByRole('button', { name: /i know the name of my condition/i })
+    const taskButton = page.getByRole('button', { name: /i've written down what my health condition is called/i })
     await expect(taskButton).toBeVisible()
     await taskButton.click()
 
@@ -77,7 +77,7 @@ test.describe('Checklist Page', () => {
     await expect(progressText).toBeVisible()
 
     // Complete a task
-    const taskButton = page.getByRole('button', { name: /i know the name of my condition/i })
+    const taskButton = page.getByRole('button', { name: /i've written down what my health condition is called/i })
     await taskButton.click()
 
     // Progress should update
@@ -259,8 +259,8 @@ test.describe('Home Page Badge Updates', () => {
     await page.evaluate(() => localStorage.clear())
 
     // Complete some tasks
-    await page.getByRole('button', { name: /i know the name of my condition/i }).click()
-    await page.getByRole('button', { name: /i know what medications/i }).click()
+    await page.getByRole('button', { name: /i can describe my full health history/i }).click()
+    await page.getByRole('button', { name: /i know how to book a gp or hospital appointment/i }).click()
 
     // Go back to home
     await page.goto('/')

@@ -42,7 +42,7 @@ export default function Privacy() {
             </ul>
           </div>
           <p>
-            The checklist structure used in this app is adapted from the Ready Steady Go programme and is intended as a guide only. Your healthcare team may have different requirements or processes for transition.
+            The transition checklist in this app is an independent educational tool, designed to complement the NHS transition process. It is intended as a guide only. Your healthcare team may have different requirements or processes for transition.
           </p>
           <p>
             While we strive to keep information accurate and up-to-date, healthcare practices and policies may vary between NHS trusts and can change over time. Always verify information with your local healthcare providers.
