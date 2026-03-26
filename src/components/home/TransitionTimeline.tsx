@@ -11,7 +11,7 @@ interface TimelineStage {
 const stages: TimelineStage[] = [
   {
     age: '11-13',
-    title: 'Ready',
+    title: 'Getting Started',
     subtitle: 'Start learning about your health',
     emoji: '🌱',
     color: 'text-green-600',
@@ -20,7 +20,7 @@ const stages: TimelineStage[] = [
   },
   {
     age: '14-15',
-    title: 'Steady',
+    title: 'Building Skills',
     subtitle: 'Practice doing more yourself',
     emoji: '🌿',
     color: 'text-amber-600',
@@ -29,7 +29,7 @@ const stages: TimelineStage[] = [
   },
   {
     age: '16-17',
-    title: 'Go',
+    title: 'Almost There',
     subtitle: 'You can make your own decisions',
     emoji: '🚀',
     color: 'text-blue-600',
@@ -38,7 +38,7 @@ const stages: TimelineStage[] = [
   },
   {
     age: '18+',
-    title: 'Adult Services',
+    title: 'Flying Solo',
     subtitle: 'Welcome to your new team',
     emoji: '🎓',
     color: 'text-purple-600',

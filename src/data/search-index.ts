@@ -99,7 +99,7 @@ export const searchIndex: SearchItem[] = [
     category: 'page',
   },
 
-  // Journey Activities - Ready Stage
+  // Journey Activities - Getting Started
   {
     id: 'learn-condition',
     title: 'Learn About Your Condition',
@@ -117,7 +117,7 @@ export const searchIndex: SearchItem[] = [
     category: 'guide',
   },
 
-  // Journey Activities - Steady Stage
+  // Journey Activities - Building Skills
   {
     id: 'speak-up',
     title: 'Speak Up at Appointments',
@@ -135,7 +135,7 @@ export const searchIndex: SearchItem[] = [
     category: 'guide',
   },
 
-  // Journey Activities - Go Stage
+  // Journey Activities - Almost There
   {
     id: 'move-date',
     title: 'Ask About Your Move Date',
@@ -153,7 +153,7 @@ export const searchIndex: SearchItem[] = [
     category: 'guide',
   },
 
-  // Journey Activities - Adult Stage
+  // Journey Activities - Flying Solo
   {
     id: 'new-team',
     title: 'Say Hello to Your New Team',

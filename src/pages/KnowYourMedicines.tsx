@@ -119,7 +119,7 @@ export function KnowYourMedicines() {
         <div className="flex items-center gap-3">
           <span className="text-3xl">💊</span>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Steady Stage Activity</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Building Skills Activity</p>
             <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Know Your Medicines</h1>
           </div>
         </div>

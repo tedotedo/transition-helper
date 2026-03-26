@@ -86,14 +86,13 @@ test.describe('Button Audit - Home Page', () => {
     await expect(emailLink).toHaveAttribute('href', /^mailto:/);
   });
 
-  test('next step links navigate correctly', async ({ page }) => {
-    // First next step - Go questionnaire
+  test('next step links are present', async ({ page }) => {
+    // First next step - Go questionnaire (now external link to RSG website)
     const goQuestLink = page.getByRole('link', { name: /open/i }).first();
-    await goQuestLink.click();
-    await expect(page).toHaveURL('/resources/ready-steady-go/go-questionnaire');
+    await expect(goQuestLink).toHaveAttribute('href', /readysteadygo\.net/);
+    await expect(goQuestLink).toHaveAttribute('target', '_blank');
 
-    // Go back and test consent guide link
-    await page.goto('/');
+    // Consent guide link
     const consentLink = page.getByRole('link', { name: /open/i }).nth(1);
     await consentLink.click();
     await expect(page).toHaveURL('/rights/consent-16-17');
@@ -111,36 +110,37 @@ test.describe('Button Audit - My Journey Page', () => {
   });
 
   test('all stage buttons change content', async ({ page }) => {
-    // Click Ready
-    await page.getByRole('button', { name: /Ready/i }).first().click();
-    await expect(page.getByRole('heading', { name: 'Ready', level: 2 })).toBeVisible();
+    // Click Getting Started
+    await page.getByRole('button', { name: /Getting Started/i }).first().click();
+    await expect(page.getByRole('heading', { name: 'Getting Started', level: 2 })).toBeVisible();
 
-    // Click Steady
-    await page.getByRole('button', { name: /Steady/i }).first().click();
-    await expect(page.getByRole('heading', { name: 'Steady', level: 2 })).toBeVisible();
+    // Click Building Skills
+    await page.getByRole('button', { name: /Building Skills/i }).first().click();
+    await expect(page.getByRole('heading', { name: 'Building Skills', level: 2 })).toBeVisible();
 
-    // Click Go
-    await page.getByRole('button', { name: /Go/i }).first().click();
-    await expect(page.getByRole('heading', { name: 'Go', level: 2 })).toBeVisible();
+    // Click Almost There
+    await page.getByRole('button', { name: /Almost There/i }).first().click();
+    await expect(page.getByRole('heading', { name: 'Almost There', level: 2 })).toBeVisible();
 
-    // Click Adult
-    await page.getByRole('button', { name: /Hello adult services/i }).click();
-    await expect(page.getByRole('heading', { name: 'Hello adult services!', level: 2 })).toBeVisible();
+    // Click Flying Solo
+    await page.getByRole('button', { name: /Flying Solo/i }).click();
+    await expect(page.getByRole('heading', { name: 'Flying Solo', level: 2 })).toBeVisible();
   });
 
   test('task links in Go stage navigate correctly', async ({ page }) => {
-    // Ensure Go stage is active
-    await page.getByRole('button', { name: /🚀 Age 16–17 Go/i }).click();
+    // Ensure Almost There stage is active
+    await page.getByRole('button', { name: /🚀 Age 16–17 Almost There/i }).click();
 
     // Test consent guide link
     await page.getByRole('link', { name: /open consent guide/i }).click();
     await expect(page).toHaveURL('/rights/consent-16-17');
 
-    // Go back and test questionnaire link
+    // Go back and test questionnaire link (now external to RSG website)
     await page.goto('/journey');
-    await page.getByRole('button', { name: /🚀 Age 16–17 Go/i }).click();
-    await page.getByRole('link', { name: /start questionnaire/i }).click();
-    await expect(page).toHaveURL('/resources/ready-steady-go/go-questionnaire');
+    await page.getByRole('button', { name: /🚀 Age 16–17 Almost There/i }).click();
+    const rsgLink = page.getByRole('link', { name: /open on rsg website/i });
+    await expect(rsgLink).toHaveAttribute('href', /readysteadygo\.net/);
+    await expect(rsgLink).toHaveAttribute('target', '_blank');
   });
 });
 
@@ -185,56 +185,28 @@ test.describe('Button Audit - Resources Page', () => {
     await page.goto('/resources');
   });
 
-  test('Ready questionnaire link works', async ({ page }) => {
-    // Find the card with "Ready questionnaire" and click its internal link
-    await page.locator('a[href="/resources/ready-steady-go/ready-questionnaire"]').click();
-    await expect(page).toHaveURL('/resources/ready-steady-go/ready-questionnaire');
-  });
+  test('all questionnaire links point to RSG website', async ({ page }) => {
+    // All PDF links should be external to readysteadygo.net
+    const pdfLinks = page.locator('a[href*="readysteadygo.net"][href$=".pdf"]');
+    const count = await pdfLinks.count();
+    expect(count).toBeGreaterThan(0);
 
-  test('Steady questionnaire link works', async ({ page }) => {
-    await page.locator('a[href="/resources/ready-steady-go/steady-questionnaire"]').click();
-    await expect(page).toHaveURL('/resources/ready-steady-go/steady-questionnaire');
-  });
-
-  test('Go questionnaire link works', async ({ page }) => {
-    await page.locator('a[href="/resources/ready-steady-go/go-questionnaire"]').click();
-    await expect(page).toHaveURL('/resources/ready-steady-go/go-questionnaire');
+    // Each link should open in a new tab
+    for (let i = 0; i < count; i++) {
+      await expect(pdfLinks.nth(i)).toHaveAttribute('target', '_blank');
+    }
   });
 
   test('PDF links have correct href attributes', async ({ page }) => {
-    // Check that external PDF links exist and have href
     const pdfLinks = page.locator('a[href$=".pdf"]');
     const count = await pdfLinks.count();
     expect(count).toBeGreaterThan(0);
 
-    // Each PDF link should have a valid href
     for (let i = 0; i < count; i++) {
       const href = await pdfLinks.nth(i).getAttribute('href');
       expect(href).toContain('.pdf');
+      expect(href).toContain('readysteadygo.net');
     }
-  });
-});
-
-test.describe('Button Audit - PDF Viewer Page', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/resources/ready-steady-go/go-questionnaire');
-  });
-
-  test('Open in new tab button has correct attributes', async ({ page }) => {
-    const openBtn = page.getByRole('link', { name: /open in new tab/i });
-    await expect(openBtn).toHaveAttribute('target', '_blank');
-    await expect(openBtn).toHaveAttribute('href', /\.pdf$/);
-  });
-
-  test('Download PDF button has download attribute', async ({ page }) => {
-    const downloadBtn = page.getByRole('link', { name: /download pdf/i });
-    await expect(downloadBtn).toHaveAttribute('download');
-    await expect(downloadBtn).toHaveAttribute('href', /\.pdf$/);
-  });
-
-  test('Easy-read PDF button exists and has correct href', async ({ page }) => {
-    const easyReadBtn = page.getByRole('link', { name: /easy-read/i });
-    await expect(easyReadBtn).toHaveAttribute('href', /\.pdf$/);
   });
 });
 
@@ -286,25 +258,26 @@ test.describe('Button Audit - Planning Tools Page', () => {
 
   test('stage toggles expand and collapse', async ({ page }) => {
     // Ready stage is expanded by default, click to collapse and re-expand
-    const readyToggle = page.locator('button').filter({ hasText: 'Stage 1: Ready' });
+    const readyToggle = page.locator('button').filter({ hasText: 'Stage 1: Getting Started' });
     // Ready is already expanded by default, so we should see content
     await expect(page.getByText('What happens in this stage?').first()).toBeVisible();
 
     // Click Steady toggle to expand it
-    const steadyToggle = page.locator('button').filter({ hasText: 'Stage 2: Steady' });
+    const steadyToggle = page.locator('button').filter({ hasText: 'Stage 2: Building Skills' });
     await steadyToggle.click();
     await expect(page.getByText('Skills you\'ll practice')).toBeVisible();
 
     // Click Go toggle to expand it
-    const goToggle = page.locator('button').filter({ hasText: 'Stage 3: Go' });
+    const goToggle = page.locator('button').filter({ hasText: 'Stage 3: Almost There' });
     await goToggle.click();
     await expect(page.getByText('What you\'ll learn about')).toBeVisible();
   });
 
-  test('internal questionnaire links navigate correctly', async ({ page }) => {
-    // Ready section is expanded by default, click View Ready Questionnaire
-    await page.locator('a[href="/resources/ready-steady-go/ready-questionnaire"]').click();
-    await expect(page).toHaveURL('/resources/ready-steady-go/ready-questionnaire');
+  test('questionnaire links point to RSG website', async ({ page }) => {
+    // Ready section is expanded by default, check questionnaire link is external
+    const rsgLink = page.locator('a').filter({ hasText: /Open Ready Questionnaire on RSG website/ });
+    await expect(rsgLink).toHaveAttribute('href', /readysteadygo\.net/);
+    await expect(rsgLink).toHaveAttribute('target', '_blank');
   });
 
   test('external PDF links have correct href', async ({ page }) => {

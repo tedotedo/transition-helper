@@ -249,10 +249,10 @@ export function Home() {
 
   // Get translated stage names
   const stageNames: Record<string, string> = {
-    ready: t('stages.ready'),
-    steady: t('stages.steady'),
-    go: t('stages.go'),
-    adult: t('stages.adult'),
+    'getting-started': t('stages.ready'),
+    'building-skills': t('stages.steady'),
+    'almost-there': t('stages.go'),
+    'flying-solo': t('stages.adult'),
   }
 
   const tip = role === 'young-person' ? t('home.tip.youngPerson') : t('home.tip.parent')
@@ -511,7 +511,7 @@ export function Home() {
       </section>
 
       {/* Progress tracker */}
-      <ProgressTracker stageName={stageNames[currentStage] || 'Go'} percent={progressPercent} />
+      <ProgressTracker stageName={stageNames[currentStage] || 'Almost There'} percent={progressPercent} />
 
       {/* Resources */}
       <section className="grid gap-4 md:grid-cols-3">

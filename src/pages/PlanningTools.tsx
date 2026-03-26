@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import ReadAloud from '../components/ReadAloud'
 
 type StageKey = 'ready' | 'steady' | 'go'
@@ -38,17 +37,17 @@ export function PlanningTools() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="bg-white p-4 rounded-xl border border-green-200">
             <span className="text-2xl mb-2 block">🌱</span>
-            <p className="font-semibold text-green-700 text-sm">Stage 1: Ready</p>
+            <p className="font-semibold text-green-700 text-sm">Stage 1: Getting Started</p>
             <p className="text-xs text-warm-600 mt-1">Learn about your health</p>
           </div>
           <div className="bg-white p-4 rounded-xl border border-amber-200">
             <span className="text-2xl mb-2 block">🚴</span>
-            <p className="font-semibold text-amber-700 text-sm">Stage 2: Steady</p>
+            <p className="font-semibold text-amber-700 text-sm">Stage 2: Building Skills</p>
             <p className="text-xs text-warm-600 mt-1">Practice doing things yourself</p>
           </div>
           <div className="bg-white p-4 rounded-xl border border-blue-200">
             <span className="text-2xl mb-2 block">🎯</span>
-            <p className="font-semibold text-blue-700 text-sm">Stage 3: Go</p>
+            <p className="font-semibold text-blue-700 text-sm">Stage 3: Almost There</p>
             <p className="text-xs text-warm-600 mt-1">You're ready for adult care!</p>
           </div>
         </div>
@@ -60,27 +59,27 @@ export function PlanningTools() {
           <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-lg">
             1
           </div>
-          <span className="text-xs font-medium text-green-700 mt-2">Ready</span>
+          <span className="text-xs font-medium text-green-700 mt-2">Start</span>
         </div>
         <div className="flex-1 h-1 bg-gradient-to-r from-green-500 to-amber-500 mx-2" />
         <div className="flex flex-col items-center flex-1">
           <div className="w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-lg">
             2
           </div>
-          <span className="text-xs font-medium text-amber-700 mt-2">Steady</span>
+          <span className="text-xs font-medium text-amber-700 mt-2">Build</span>
         </div>
         <div className="flex-1 h-1 bg-gradient-to-r from-amber-500 to-blue-500 mx-2" />
         <div className="flex flex-col items-center flex-1">
           <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg">
             3
           </div>
-          <span className="text-xs font-medium text-blue-700 mt-2">Go</span>
+          <span className="text-xs font-medium text-blue-700 mt-2">Go!</span>
         </div>
       </div>
 
       {/* Stage Cards */}
       <div className="space-y-4">
-        {/* Ready Stage */}
+        {/* Getting Started Stage */}
         <div
           className={`rounded-2xl border-2 ${expandedStage === 'ready' ? 'border-green-300' : 'border-green-200'} bg-green-50/50 overflow-hidden shadow-card hover:shadow-card-hover transition-all`}
         >
@@ -91,7 +90,7 @@ export function PlanningTools() {
                   <span className="text-xl">📚</span>
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-green-900">Stage 1: Ready (Ages 11-13)</h2>
+                  <h2 className="text-xl font-bold text-green-900">Stage 1: Getting Started (Ages 11-13)</h2>
                   <p className="text-sm text-green-700 mt-1">
                     Learn about your health condition and start asking questions
                   </p>
@@ -139,7 +138,7 @@ export function PlanningTools() {
               <div className="bg-white p-4 rounded-xl border border-green-200">
                 <h4 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
                   <span>📄</span>
-                  Ready Stage Downloads
+                  Getting Started Downloads
                 </h4>
                 <p className="text-xs text-warm-500 mb-3">
                   Worksheets to help you learn about your health (you can fill these in with your
@@ -167,17 +166,19 @@ export function PlanningTools() {
                 </div>
               </div>
 
-              <Link
-                to="/resources/ready-steady-go/ready-questionnaire"
+              <a
+                href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygoreadyquestionnaire_1-3_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full text-center px-4 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-medium transition-colors"
               >
-                View Ready Questionnaire
-              </Link>
+                Open Ready Questionnaire on RSG website ↗
+              </a>
             </div>
           )}
         </div>
 
-        {/* Steady Stage */}
+        {/* Building Skills Stage */}
         <div
           className={`rounded-2xl border-2 ${expandedStage === 'steady' ? 'border-amber-300' : 'border-amber-200'} bg-amber-50/50 overflow-hidden shadow-card hover:shadow-card-hover transition-all`}
         >
@@ -188,7 +189,7 @@ export function PlanningTools() {
                   <span className="text-xl">🎯</span>
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-amber-900">Stage 2: Steady (Ages 14-15)</h2>
+                  <h2 className="text-xl font-bold text-amber-900">Stage 2: Building Skills (Ages 14-15)</h2>
                   <p className="text-sm text-amber-700 mt-1">
                     Start doing more for yourself with support nearby
                   </p>
@@ -237,7 +238,7 @@ export function PlanningTools() {
               <div className="bg-white p-4 rounded-xl border border-amber-200">
                 <h4 className="font-semibold text-amber-900 mb-2 flex items-center gap-2">
                   <span>📄</span>
-                  Steady Stage Downloads
+                  Building Skills Downloads
                 </h4>
                 <p className="text-xs text-warm-500 mb-3">Worksheets to track your growing independence</p>
                 <div className="space-y-2">
@@ -262,17 +263,19 @@ export function PlanningTools() {
                 </div>
               </div>
 
-              <Link
-                to="/resources/ready-steady-go/steady-questionnaire"
+              <a
+                href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygosteadyquestionnaire_1-2_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full text-center px-4 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
               >
-                View Steady Questionnaire
-              </Link>
+                Open Steady Questionnaire on RSG website ↗
+              </a>
             </div>
           )}
         </div>
 
-        {/* Go Stage */}
+        {/* Almost There Stage */}
         <div
           className={`rounded-2xl border-2 ${expandedStage === 'go' ? 'border-blue-300' : 'border-blue-200'} bg-blue-50/50 overflow-hidden shadow-card hover:shadow-card-hover transition-all`}
         >
@@ -283,7 +286,7 @@ export function PlanningTools() {
                   <span className="text-xl">🚀</span>
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-blue-900">Stage 3: Go (Ages 16-17)</h2>
+                  <h2 className="text-xl font-bold text-blue-900">Stage 3: Almost There (Ages 16-17)</h2>
                   <p className="text-sm text-blue-700 mt-1">
                     Get ready to move to adult healthcare services
                   </p>
@@ -345,7 +348,7 @@ export function PlanningTools() {
               <div className="bg-white p-4 rounded-xl border border-blue-200">
                 <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
                   <span>📄</span>
-                  Go Stage Downloads
+                  Almost There Downloads
                 </h4>
                 <p className="text-xs text-warm-500 mb-3">Final preparation tools for your transition</p>
                 <div className="space-y-2">
@@ -370,12 +373,14 @@ export function PlanningTools() {
                 </div>
               </div>
 
-              <Link
-                to="/resources/ready-steady-go/go-questionnaire"
+              <a
+                href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygogoquestionnaire_1-2_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full text-center px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
               >
-                View Go Questionnaire
-              </Link>
+                Open Go Questionnaire on RSG website ↗
+              </a>
             </div>
           )}
         </div>

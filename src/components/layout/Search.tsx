@@ -88,6 +88,12 @@ export function Search() {
     setIsOpen(false)
     setResults([])
 
+    // Handle external links
+    if (item.href.startsWith('http')) {
+      window.open(item.href, '_blank', 'noopener,noreferrer')
+      return
+    }
+
     // Handle hash navigation for topics
     if (item.href.includes('#')) {
       const [path, hash] = item.href.split('#')

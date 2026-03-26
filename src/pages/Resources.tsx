@@ -112,7 +112,7 @@ export function Resources() {
         ))}
       </section>
 
-      <section className="text-sm text-warm-500 bg-warm-50 px-4 py-3 rounded-xl border border-warm-100">
+      <section className="text-sm text-warm-500 bg-warm-50 px-4 py-3 rounded-xl border border-warm-100 space-y-3">
         <p>
           These documents are hosted on the official{' '}
           <a
@@ -124,6 +124,19 @@ export function Resources() {
             Ready Steady Go website
           </a>. For the latest details about how your local service uses Ready Steady Go, check with your hospital or clinic.
         </p>
+        <div className="p-3 bg-white/60 rounded-lg border border-warm-200 text-xs text-warm-500 leading-relaxed space-y-2">
+          <p>
+            'Ready Steady Go' and 'Hello to adult services' developed by the Transition Steering Group
+            led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at
+            Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust based
+            on the work of:
+          </p>
+          <ol className="list-decimal list-inside space-y-1">
+            <li>S Whitehouse and MC Paone. Bridging the gap from youth to adulthood. Contemporary Pediatrics; 1998, December. 13-16.</li>
+            <li>Paone MC, Wigle M, Saewyc E. The ON TRAC model for transitional care of adolescents. Prog Transplant 2006;16:291-302</li>
+            <li>Janet E McDonagh et al, J Child Health Care 2006;10(1):22-42.</li>
+          </ol>
+        </div>
         <div className="mt-2"><ReadAloud text="These documents are hosted on the official Ready Steady Go website. For the latest details about how your local service uses Ready Steady Go, check with your hospital or clinic." /></div>
       </section>
     </div>

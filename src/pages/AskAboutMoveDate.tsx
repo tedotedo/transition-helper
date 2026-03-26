@@ -100,7 +100,7 @@ export function AskAboutMoveDate() {
         <div className="flex items-center gap-3">
           <span className="text-3xl">📅</span>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Go Stage Activity</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Almost There Activity</p>
             <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Ask About Your Move Date</h1>
           </div>
         </div>

@@ -53,7 +53,11 @@ export function Notifications() {
     // Navigate if there's a link
     if (notification.href) {
       setIsOpen(false)
-      navigate(notification.href)
+      if (notification.href.startsWith('http')) {
+        window.open(notification.href, '_blank', 'noopener,noreferrer')
+      } else {
+        navigate(notification.href)
+      }
     }
   }
 

@@ -4,9 +4,9 @@ import ReadAloud from '../components/ReadAloud'
 import { successStories } from '../data/success-stories'
 
 const stageColors: Record<string, string> = {
-  Ready: 'bg-green-100 text-green-800 border-green-200',
-  Steady: 'bg-amber-100 text-amber-800 border-amber-200',
-  Go: 'bg-blue-100 text-blue-800 border-blue-200',
+  'Getting Started': 'bg-green-100 text-green-800 border-green-200',
+  'Building Skills': 'bg-amber-100 text-amber-800 border-amber-200',
+  'Almost There': 'bg-blue-100 text-blue-800 border-blue-200',
   'All Stages': 'bg-purple-100 text-purple-800 border-purple-200',
 }
 

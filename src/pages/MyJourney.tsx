@@ -8,7 +8,7 @@ type StageKey = 'ready' | 'steady' | 'go' | 'adult'
 const stages: { key: StageKey; name: string; ages: string; tagline: string; description: string; emoji: string; color: string; bgGradient: string }[] = [
   {
     key: 'ready',
-    name: 'Ready',
+    name: 'Getting Started',
     ages: 'Age 11–13',
     tagline: 'Start learning about your health',
     emoji: '🌱',
@@ -19,7 +19,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
   },
   {
     key: 'steady',
-    name: 'Steady',
+    name: 'Building Skills',
     ages: 'Age 14–15',
     tagline: 'Building your confidence',
     emoji: '💪',
@@ -30,7 +30,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
   },
   {
     key: 'go',
-    name: 'Go',
+    name: 'Almost There',
     ages: 'Age 16–17',
     tagline: 'Getting ready for the move',
     emoji: '🚀',
@@ -41,7 +41,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
   },
   {
     key: 'adult',
-    name: 'Hello adult services!',
+    name: 'Flying Solo',
     ages: 'Age 18+',
     tagline: 'Welcome to your new team',
     emoji: '🎉',
@@ -253,10 +253,11 @@ function JourneyStageDetail({ stageKey }: JourneyStageDetailProps) {
                   {item.linkHref && item.linkLabel && (
                     <a
                       href={item.linkHref}
+                      {...(item.linkHref.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       className="mt-4 inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all"
                     >
                       {item.linkLabel.replace(' →', '')}
-                      <span className="ml-1">→</span>
+                      <span className="ml-1">{item.linkHref.startsWith('http') ? '↗' : '→'}</span>
                     </a>
                   )}
                 </div>

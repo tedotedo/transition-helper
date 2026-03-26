@@ -12,7 +12,7 @@ export interface SuccessStory {
   duration: string // Format: "MM:SS"
   age: string // Age or "Parent"
   condition: string // Health condition or "Various"
-  stage: 'Ready' | 'Steady' | 'Go' | 'All Stages'
+  stage: 'Getting Started' | 'Building Skills' | 'Almost There' | 'All Stages'
 }
 
 export const successStories: SuccessStory[] = [
