@@ -36,6 +36,7 @@ import { QuestionsAnswers } from './pages/QuestionsAnswers'
 import About from './pages/About'
 import Install from './pages/Install'
 import Privacy from './pages/Privacy'
+import CommunicationPassport from './pages/CommunicationPassport'
 
 // Wrapper to apply role-based styling and handle RTL
 function AppContent() {
@@ -65,6 +66,7 @@ function AppContent() {
           <Route path="/checklist" element={<Checklist />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/care-plan" element={<CarePlan />} />
+          <Route path="/care-plan/passport" element={<CommunicationPassport />} />
           <Route path="/care-team" element={<CareTeam />} />
           <Route path="/journey" element={<MyJourney />} />
           <Route path="/journey/learn-about-condition" element={<LearnAboutCondition />} />

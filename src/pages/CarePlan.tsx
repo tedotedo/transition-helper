@@ -633,6 +633,23 @@ export function CarePlan() {
         />
       </AccordionSection>
 
+      {/* Communication Passport */}
+      <Link
+        to="/care-plan/passport"
+        className="block bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl border border-accent-200 p-5 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all print:hidden"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl">🗂️</span>
+            <div>
+              <h2 className="text-base font-semibold text-warm-800">Communication Passport</h2>
+              <p className="text-sm text-warm-500">Help clinicians understand how to communicate with your young person</p>
+            </div>
+          </div>
+          <span className="text-warm-400 text-lg">→</span>
+        </div>
+      </Link>
+
       {/* Print Button (bottom) */}
       <div className="flex justify-center print:hidden">
         <button
