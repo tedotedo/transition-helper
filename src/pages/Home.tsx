@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { RoleToggle } from '../components/home/RoleToggle'
 import { RoleSelector } from '../components/home/RoleSelector'
@@ -509,6 +509,19 @@ export function Home() {
           badge={teamCount > 0 ? teamCount : undefined}
         />
       </section>
+
+      {/* Communication Passport banner */}
+      <Link
+        to="/care-plan/passport"
+        className="flex items-center gap-4 bg-gradient-to-r from-accent-500 to-accent-600 rounded-2xl p-4 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all"
+      >
+        <span className="text-4xl flex-shrink-0">🗂️</span>
+        <div className="flex-1 min-w-0">
+          <p className="text-white font-bold text-base leading-tight">Communication Passport</p>
+          <p className="text-accent-100 text-sm mt-0.5">Help any clinician understand how to communicate with your young person</p>
+        </div>
+        <span className="text-white text-xl flex-shrink-0">→</span>
+      </Link>
 
       {/* Progress tracker */}
       <ProgressTracker stageName={stageNames[currentStage] || 'Almost There'} percent={progressPercent} />

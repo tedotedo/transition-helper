@@ -229,6 +229,7 @@ export function AppShell({ children }: AppShellProps) {
                   </div>
                 )}
                 <div className="grid grid-cols-3 gap-3 pb-16">
+                  <MoreMenuItem to="/care-plan/passport" icon="🗂️" label="Communication Passport" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/journey" icon="🚀" label={t('nav.journey')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/rights" icon="⚖️" label={t('nav.rights')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/money" icon="💰" label={t('nav.money')} onClick={closeMoreMenu} />
