@@ -6,17 +6,17 @@ import { useLocalStorage } from '../hooks'
 
 interface PassportAnswers {
   a: {
-    a1: string[]; a2: string; a3: string; a4: string[]; a5: string[]
-    a5text: string; a6: string; a7: string
+    a1: string[]; a1other: string; a2: string; a3: string; a4: string[]; a4other: string
+    a5: string[]; a5text: string; a6: string; a7: string
   }
-  b: { b1: string[]; b2: string; b3: string[]; b3text: string; b4: string; b5: string }
-  c: { c1: string[]; c2: string[]; c3: string; c4: string; c5: string; c5text: string; c6: string }
+  b: { b1: string[]; b1other: string; b2: string; b3: string[]; b3other: string; b3text: string; b4: string; b5: string }
+  c: { c1: string[]; c1other: string; c2: string[]; c2other: string; c3: string; c4: string; c5: string; c5text: string; c6: string }
   d: {
     d1name: string; d1dob: string; d2: string[]; d2text: string; d3: string
-    d4: string; d5: string[]; d5text: string; d6: string; d7: string
+    d4: string; d5: string[]; d5other: string; d5text: string; d6: string; d7: string
   }
-  e: { e1: string[]; e1text: string; e2: string; e3: string; e4: string }
-  f: { f1: string; f2: string[]; f2text: string; f3: string; f4: string }
+  e: { e1: string[]; e1other: string; e1text: string; e2: string; e3: string; e4: string }
+  f: { f1: string; f2: string[]; f2other: string; f2text: string; f3: string; f4: string }
   carer: { name: string; relationship: string; phone: string; coordName: string; coordPhone: string }
   lastUpdated: string
 }
@@ -24,38 +24,53 @@ interface PassportAnswers {
 type SectionKey = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'carer'
 
 const defaultAnswers: PassportAnswers = {
-  a: { a1: [], a2: '', a3: '', a4: [], a5: [], a5text: '', a6: '', a7: '' },
-  b: { b1: [], b2: '', b3: [], b3text: '', b4: '', b5: '' },
-  c: { c1: [], c2: [], c3: '', c4: '', c5: '', c5text: '', c6: '' },
-  d: { d1name: '', d1dob: '', d2: [], d2text: '', d3: '', d4: '', d5: [], d5text: '', d6: '', d7: '' },
-  e: { e1: [], e1text: '', e2: '', e3: '', e4: '' },
-  f: { f1: '', f2: [], f2text: '', f3: '', f4: '' },
+  a: { a1: [], a1other: '', a2: '', a3: '', a4: [], a4other: '', a5: [], a5text: '', a6: '', a7: '' },
+  b: { b1: [], b1other: '', b2: '', b3: [], b3other: '', b3text: '', b4: '', b5: '' },
+  c: { c1: [], c1other: '', c2: [], c2other: '', c3: '', c4: '', c5: '', c5text: '', c6: '' },
+  d: { d1name: '', d1dob: '', d2: [], d2text: '', d3: '', d4: '', d5: [], d5other: '', d5text: '', d6: '', d7: '' },
+  e: { e1: [], e1other: '', e1text: '', e2: '', e3: '', e4: '' },
+  f: { f1: '', f2: [], f2other: '', f2text: '', f3: '', f4: '' },
   carer: { name: '', relationship: '', phone: '', coordName: '', coordPhone: '' },
   lastUpdated: '',
 }
 
 // ─── Chip Component ───────────────────────────────────────────────────────────
 
-function Chips({ options, selected, onToggle }: {
+function Chips({ options, selected, onToggle, otherValue, onOtherChange }: {
   options: string[]
   selected: string[]
   onToggle: (v: string) => void
+  otherValue?: string
+  onOtherChange?: (v: string) => void
 }) {
+  const showOtherField = selected.includes('Other') && onOtherChange !== undefined
   return (
-    <div className="flex flex-wrap gap-2 mt-2">
-      {options.map(opt => (
-        <button
-          key={opt}
-          onClick={() => onToggle(opt)}
-          className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
-            selected.includes(opt)
-              ? 'bg-primary-500 text-white border-primary-500'
-              : 'bg-white text-warm-600 border-warm-200 hover:border-primary-300'
-          }`}
-        >
-          {opt}
-        </button>
-      ))}
+    <div className="mt-2 space-y-2">
+      <div className="flex flex-wrap gap-2">
+        {options.map(opt => (
+          <button
+            key={opt}
+            onClick={() => onToggle(opt)}
+            className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
+              selected.includes(opt)
+                ? 'bg-primary-500 text-white border-primary-500'
+                : 'bg-white text-warm-600 border-warm-200 hover:border-primary-300'
+            }`}
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+      {showOtherField && (
+        <input
+          className="w-full px-4 py-2 rounded-xl border border-primary-300 bg-warm-50/50 text-warm-800 focus:outline-none focus:ring-2 focus:ring-primary-300 text-sm"
+          type="text"
+          placeholder="Please explain..."
+          value={otherValue ?? ''}
+          onChange={e => onOtherChange!(e.target.value)}
+          autoFocus
+        />
+      )}
     </div>
   )
 }
@@ -329,6 +344,8 @@ export default function CommunicationPassport() {
           options={['Uses words', 'Uses phrases', 'Points or gestures', 'Pictures or symbols', 'Communication device', 'Eye gaze', 'Sounds and expressions', 'Other']}
           selected={answers.a.a1}
           onToggle={v => updateA('a1', toggleChip(answers.a.a1, v))}
+          otherValue={answers.a.a1other}
+          onOtherChange={v => updateA('a1other', v)}
         />
       </div>,
       ...(answers.a.a1.some(x => ['Uses words', 'Uses phrases'].includes(x)) ? [
@@ -353,6 +370,8 @@ export default function CommunicationPassport() {
           options={['Follows simple instructions', 'Responds to their name', 'Understands routines', 'Understands pictures', 'Hard to tell', 'Other']}
           selected={answers.a.a4}
           onToggle={v => updateA('a4', toggleChip(answers.a.a4, v))}
+          otherValue={answers.a.a4other}
+          onOtherChange={v => updateA('a4other', v)}
         />
       </div>,
       <div key="a5">
@@ -381,9 +400,11 @@ export default function CommunicationPassport() {
       <div key="b1">
         <QuestionBubble text={`Does ${name} have any sensory sensitivities?`} />
         <Chips
-          options={['Touch', 'Sound', 'Bright lights', 'Smells', 'Crowds', 'Medical equipment', 'None that I know of']}
+          options={['Touch', 'Sound', 'Bright lights', 'Smells', 'Crowds', 'Medical equipment', 'None that I know of', 'Other']}
           selected={answers.b.b1}
           onToggle={v => updateB('b1', toggleChip(answers.b.b1, v))}
+          otherValue={answers.b.b1other}
+          onOtherChange={v => updateB('b1other', v)}
         />
       </div>,
       ...(answers.b.b1.length > 0 && !answers.b.b1.includes('None that I know of') ? [
@@ -395,9 +416,11 @@ export default function CommunicationPassport() {
       <div key="b3">
         <QuestionBubble text={`What helps ${name} feel calm in an unfamiliar place?`} />
         <Chips
-          options={['Music / headphones', 'A specific object', 'Familiar person present', 'Dim lighting', 'Quiet space']}
+          options={['Music / headphones', 'A specific object', 'Familiar person present', 'Dim lighting', 'Quiet space', 'Other']}
           selected={answers.b.b3}
           onToggle={v => updateB('b3', toggleChip(answers.b.b3, v))}
+          otherValue={answers.b.b3other}
+          onOtherChange={v => updateB('b3other', v)}
         />
         <TextInput value={answers.b.b3text} onChange={v => updateB('b3text', v)} placeholder="Anything else..." />
       </div>,
@@ -417,6 +440,8 @@ export default function CommunicationPassport() {
           options={['Goes quiet', 'Rocks or stimms', 'Makes repetitive sounds', 'Covers ears or eyes', 'Tries to leave', 'Becomes agitated', 'Other']}
           selected={answers.c.c1}
           onToggle={v => updateC('c1', toggleChip(answers.c.c1, v))}
+          otherValue={answers.c.c1other}
+          onOtherChange={v => updateC('c1other', v)}
         />
       </div>,
       <div key="c2">
@@ -425,6 +450,8 @@ export default function CommunicationPassport() {
           options={['Long waits', 'Unexpected changes', 'Being touched without warning', 'Strangers', 'Noise', 'Not understanding what is happening', 'Other']}
           selected={answers.c.c2}
           onToggle={v => updateC('c2', toggleChip(answers.c.c2, v))}
+          otherValue={answers.c.c2other}
+          onOtherChange={v => updateC('c2other', v)}
         />
       </div>,
       <div key="c3">
@@ -484,6 +511,8 @@ export default function CommunicationPassport() {
           options={['Blood tests', 'Cannulas', 'Examinations', 'Injections', 'MRI / scans', 'Other']}
           selected={answers.d.d5}
           onToggle={v => updateD('d5', toggleChip(answers.d.d5, v))}
+          otherValue={answers.d.d5other}
+          onOtherChange={v => updateD('d5other', v)}
         />
         <TextInput value={answers.d.d5text} onChange={v => updateD('d5text', v)} placeholder="Any others..." />
       </div>,
@@ -503,6 +532,8 @@ export default function CommunicationPassport() {
           options={['Music', 'TV / films', 'Animals', 'Water', 'Outdoors', 'Food', 'Routine', 'People', 'Other']}
           selected={answers.e.e1}
           onToggle={v => updateE('e1', toggleChip(answers.e.e1, v))}
+          otherValue={answers.e.e1other}
+          onOtherChange={v => updateE('e1other', v)}
         />
         <TextInput value={answers.e.e1text} onChange={v => updateE('e1text', v)} placeholder="Anything specific they love..." />
       </div>,
@@ -530,6 +561,8 @@ export default function CommunicationPassport() {
           options={['Introduce themselves', 'Explain what they will do', 'Ask permission before touching', 'Give a countdown', 'Let me explain it first', 'Other']}
           selected={answers.f.f2}
           onToggle={v => updateF('f2', toggleChip(answers.f.f2, v))}
+          otherValue={answers.f.f2other}
+          onOtherChange={v => updateF('f2other', v)}
         />
         <TextInput value={answers.f.f2text} onChange={v => updateF('f2text', v)} placeholder="Anything else..." />
       </div>,
