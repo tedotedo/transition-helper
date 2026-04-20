@@ -72,7 +72,6 @@ export default function ReadAloud({ text, label = 'Read aloud' }: ReadAloudProps
       return
     }
 
-    // Build utterance
     const utterance = new SpeechSynthesisUtterance(text)
     const voice = selectedVoice || selectAutoVoice(voices)
     if (voice) {
@@ -81,17 +80,28 @@ export default function ReadAloud({ text, label = 'Read aloud' }: ReadAloudProps
     } else {
       utterance.lang = 'en-GB'
     }
-
-    // Gentle voice parameters
     utterance.rate = 0.9
     utterance.pitch = 1.1
-
     utterance.onend = () => setSpeaking(false)
-    utterance.onerror = () => setSpeaking(false)
+    utterance.onerror = (e) => {
+      console.warn('[ReadAloud] utterance error:', (e as SpeechSynthesisErrorEvent).error)
+      setSpeaking(false)
+    }
 
-    synth.cancel() // clear any queued speech
-    synth.speak(utterance)
-    setSpeaking(true)
+    const start = () => {
+      // Chrome can leave the synth paused across tab-switches; resume defensively.
+      if (synth.paused) synth.resume()
+      synth.speak(utterance)
+      setSpeaking(true)
+    }
+
+    // Chromium race: speak() called in the same tick as cancel() is often dropped.
+    if (synth.speaking || synth.pending) {
+      synth.cancel()
+      setTimeout(start, 120)
+    } else {
+      start()
+    }
   }, [text, selectedVoice, voices, speaking])
 
   if (!showReadAloud) return null
