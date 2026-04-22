@@ -6,6 +6,8 @@ import { useRole, useEasyRead } from '../../hooks'
 import VoicePicker from '../VoicePicker'
 import { CompactRoleToggle } from '../home/CompactRoleToggle'
 import { FeedbackButton } from './FeedbackButton'
+import WelcomeIntro from '../WelcomeIntro'
+import { resetIntro } from '../introStorage'
 
 interface AppShellProps {
   children: ReactNode
@@ -13,6 +15,7 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
+  const [showIntro, setShowIntro] = useState(false)
   const { role, setRole, isYoungPerson } = useRole()
   const { easyRead, toggleEasyRead } = useEasyRead()
   const { t } = useTranslation()
@@ -240,6 +243,11 @@ export function AppShell({ children }: AppShellProps) {
                   <MoreMenuItem to="/about" icon="ℹ️" label={t('nav.about')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/install" icon="📲" label={t('nav.install')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/privacy" icon="🔒" label={t('nav.privacy')} onClick={closeMoreMenu} />
+                  <MoreMenuButton
+                    icon="▶️"
+                    label={t('nav.watchIntro')}
+                    onClick={() => { resetIntro(); setShowIntro(true); closeMoreMenu() }}
+                  />
                 </div>
               </div>
             </>
@@ -249,6 +257,7 @@ export function AppShell({ children }: AppShellProps) {
         {/* Floating Feedback Button */}
         <FeedbackButton />
       </div>
+      {showIntro && <WelcomeIntro onClose={() => setShowIntro(false)} />}
     </div>
   )
 }
@@ -332,5 +341,24 @@ function MoreMenuItem({ to, icon, label, onClick }: MoreMenuItemProps) {
       <span className="text-2xl">{icon}</span>
       <span className="text-xs mt-1 font-medium text-warm-700">{label}</span>
     </NavLink>
+  )
+}
+
+interface MoreMenuButtonProps {
+  icon: string
+  label: string
+  onClick: () => void
+}
+
+function MoreMenuButton({ icon, label, onClick }: MoreMenuButtonProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex flex-col items-center justify-center p-3 rounded-xl bg-warm-50 hover:bg-primary-50 transition-all"
+    >
+      <span className="text-2xl">{icon}</span>
+      <span className="text-xs mt-1 font-medium text-warm-700">{label}</span>
+    </button>
   )
 }

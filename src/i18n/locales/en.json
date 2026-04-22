@@ -17,7 +17,8 @@
     "install": "Install App",
     "more": "More",
     "money": "Money & PIP",
-    "planning": "Planning tools"
+    "planning": "Planning tools",
+    "watchIntro": "Watch intro"
   },
   "search": {
     "placeholder": "Search pages, topics...",
