@@ -12,6 +12,11 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
+      workbox: {
+        // Don't precache the intro video — it's 3.7MB and most users watch it once.
+        // Fetches on demand instead, keeping the PWA install lightweight.
+        globIgnores: ['**/intro.mp4'],
+      },
       manifest: {
         name: 'Transition Ready',
         short_name: 'Transition',

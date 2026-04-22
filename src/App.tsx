@@ -37,6 +37,7 @@ import About from './pages/About'
 import Install from './pages/Install'
 import Privacy from './pages/Privacy'
 import CommunicationPassport from './pages/CommunicationPassport'
+import WelcomeIntroGate from './components/WelcomeIntroGate'
 
 // Wrapper to apply role-based styling and handle RTL
 function AppContent() {
@@ -111,6 +112,7 @@ function App() {
           <BrowserRouter>
             <AppContent />
           </BrowserRouter>
+          <WelcomeIntroGate />
         </VoiceProvider>
       </EasyReadProvider>
     </RoleProvider>

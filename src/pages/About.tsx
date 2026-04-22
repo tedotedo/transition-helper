@@ -1,7 +1,12 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReadAloud from '../components/ReadAloud'
+import WelcomeIntro from '../components/WelcomeIntro'
+import { resetIntro } from '../components/introStorage'
 
 export default function About() {
+  const [showIntro, setShowIntro] = useState(false)
+
   return (
     <div className="space-y-8 max-w-3xl mx-auto">
       {/* Header */}
@@ -12,14 +17,23 @@ export default function About() {
         >
           ← Back to Home
         </Link>
-        <div className="flex items-center gap-3">
-          <span className="text-3xl">ℹ️</span>
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-warm-800">About Transition Ready</h1>
-            <p className="text-sm text-warm-500">The story behind this app</p>
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl">ℹ️</span>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold text-warm-800">About Transition Ready</h1>
+              <p className="text-sm text-warm-500">The story behind this app</p>
+            </div>
           </div>
+          <button
+            onClick={() => { resetIntro(); setShowIntro(true) }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-primary-300 text-primary-700 hover:bg-primary-50 font-semibold text-sm whitespace-nowrap"
+          >
+            ▶ Watch intro (55s)
+          </button>
         </div>
       </header>
+      {showIntro && <WelcomeIntro onClose={() => setShowIntro(false)} />}
 
       {/* Creator section */}
       <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">

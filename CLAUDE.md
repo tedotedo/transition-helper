@@ -120,6 +120,7 @@ All user data is stored in localStorage using these keys:
 | `transition-last-backup` | Home | ISO date string of last backup |
 | `transition-level-up-progress` | Level Up | `{ powersViewed, mythsFlipped, badgesEarned, visitDates }` |
 | `transition-skills-completed` | SkillsBuilder | `string[]` (array of completed skill IDs) |
+| `transition-intro-shown` | WelcomeIntro | `'true'` once the first-visit intro video has been viewed or dismissed |
 
 The `useLocalStorage` hook handles persistence with automatic JSON serialization.
 
