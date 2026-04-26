@@ -88,6 +88,7 @@ export function AppShell({ children }: AppShellProps) {
           <NavItem to="/planning" label={t('nav.planning')} icon="📝" />
           <NavItem to="/videos" label={t('nav.videos')} icon="🎬" />
           <NavItem to="/resources" label={t('nav.resources')} icon="📚" />
+          <NavItem to="/comic-guide" label="Comic guide" icon="🎨" />
           <NavItem to="/level-up" label={t('nav.levelUp')} icon="🎮" />
           <NavItem to="/about" label={t('nav.about')} icon="ℹ️" />
         </nav>
@@ -239,6 +240,7 @@ export function AppShell({ children }: AppShellProps) {
                   <MoreMenuItem to="/appointments" icon="📅" label={t('nav.appointments')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/videos" icon="🎬" label={t('nav.videos')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/resources" icon="📚" label={t('nav.resources')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/comic-guide" icon="🎨" label="Comic guide" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/level-up" icon="🎮" label={t('nav.levelUp')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/about" icon="ℹ️" label={t('nav.about')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/install" icon="📲" label={t('nav.install')} onClick={closeMoreMenu} />

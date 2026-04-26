@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { TransitionTimeline } from '../components/home/TransitionTimeline'
 import { JourneyIllustration, FloatingShapes } from '../components/illustrations'
 import ReadAloud from '../components/ReadAloud'
@@ -167,6 +168,24 @@ export function MyJourney() {
       <section className="max-w-4xl mx-auto">
         <TransitionTimeline currentStage={activeStage} onStageClick={setActiveStage} />
       </section>
+
+      <Link
+        to="/comic-guide"
+        className="mx-auto flex max-w-4xl items-center gap-4 rounded-2xl border border-primary-100 bg-white p-4 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all"
+      >
+        <img
+          src="/zachs-transition-journey-comic.png"
+          alt=""
+          className="h-24 w-20 flex-shrink-0 rounded-xl border border-warm-200 object-cover object-top"
+        />
+        <div className="flex-1 min-w-0 text-left">
+          <p className="font-bold text-warm-800">See the whole journey as a comic strip</p>
+          <p className="mt-1 text-sm text-warm-500">
+            A picture-led version for anyone who likes stories, panels, and quick reminders.
+          </p>
+        </div>
+        <span className="text-primary-500 text-xl flex-shrink-0">→</span>
+      </Link>
 
       <section className="space-y-5">
         {/* Stage selector cards */}

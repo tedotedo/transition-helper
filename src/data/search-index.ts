@@ -67,6 +67,14 @@ export const searchIndex: SearchItem[] = [
     category: 'page',
   },
   {
+    id: 'comic-guide',
+    title: "Zach's Transition Journey Comic",
+    description: 'A visual comic-strip guide to moving from paediatric to adult medical services',
+    keywords: ['comic', 'visual', 'pictures', 'zach', 'journey', 'transition', 'easy', 'friendly', 'story', 'cartoon'],
+    href: '/comic-guide',
+    category: 'guide',
+  },
+  {
     id: 'checklist',
     title: 'My Transition Checklist',
     description: 'Track your progress with stage-specific transition tasks',

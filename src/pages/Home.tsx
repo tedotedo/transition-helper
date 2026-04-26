@@ -523,6 +523,23 @@ export function Home() {
         <span className="text-white text-xl flex-shrink-0">→</span>
       </Link>
 
+      {/* Comic guide banner */}
+      <Link
+        to="/comic-guide"
+        className="flex items-center gap-4 bg-white rounded-2xl border border-primary-100 p-4 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all"
+      >
+        <img
+          src="/zachs-transition-journey-comic.png"
+          alt=""
+          className="h-20 w-16 flex-shrink-0 rounded-lg border border-warm-200 object-cover object-top"
+        />
+        <div className="flex-1 min-w-0">
+          <p className="text-warm-800 font-bold text-base leading-tight">Prefer pictures and short captions?</p>
+          <p className="text-warm-500 text-sm mt-0.5">Try Zach's comic-strip guide to the transition journey.</p>
+        </div>
+        <span className="text-primary-500 text-xl flex-shrink-0">→</span>
+      </Link>
+
       {/* Progress tracker */}
       <ProgressTracker stageName={stageNames[currentStage] || 'Almost There'} percent={progressPercent} />
 
@@ -629,4 +646,3 @@ function ResourceCard({ title, description, href, disabled, exploreText = 'Explo
     </a>
   )
 }
-

@@ -37,6 +37,7 @@ import About from './pages/About'
 import Install from './pages/Install'
 import Privacy from './pages/Privacy'
 import CommunicationPassport from './pages/CommunicationPassport'
+import { ComicGuide } from './pages/ComicGuide'
 import WelcomeIntroGate from './components/WelcomeIntroGate'
 
 // Wrapper to apply role-based styling and handle RTL
@@ -88,6 +89,7 @@ function AppContent() {
           <Route path="/skills" element={<SkillsBuilder />} />
           <Route path="/questions" element={<QuestionsAnswers />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/comic-guide" element={<ComicGuide />} />
           {/* Level Up Game */}
           <Route path="/level-up" element={<LevelUpHome />} />
           <Route path="/level-up/myths" element={<MythBusters />} />

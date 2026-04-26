@@ -1,8 +1,18 @@
 import ReadAloud from '../components/ReadAloud'
+import { Link } from 'react-router-dom'
 
 const rsgSite = 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883'
 
 const resources = [
+  {
+    title: "Zach's transition journey comic",
+    emoji: '🎨',
+    description:
+      'A picture-led comic strip explaining transition in short, friendly steps for anyone who prefers a visual format.',
+    href: '/comic-guide',
+    audience: 'Young person and family',
+    internal: true,
+  },
   {
     title: 'Ready questionnaire (age 11–13)',
     emoji: '🌱',
@@ -89,14 +99,23 @@ export function Resources() {
             <h2 className="mt-2 text-base font-semibold text-warm-800">{item.title}</h2>
             <p className="mt-2 flex-1 text-warm-600 leading-relaxed">{item.description}</p>
             <div className="mt-4 space-y-2">
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
-              >
-                Open PDF on RSG website ↗
-              </a>
+              {'internal' in item && item.internal ? (
+                <Link
+                  to={item.href}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+                >
+                  Open visual guide →
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+                >
+                  Open PDF on RSG website ↗
+                </a>
+              )}
               {item.easyReadHref && (
                 <a
                   href={item.easyReadHref}
