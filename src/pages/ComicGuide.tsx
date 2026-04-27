@@ -160,7 +160,7 @@ export function ComicGuide() {
                   aria-pressed={language === option}
                   className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition-all ${
                     language === option
-                      ? 'border-primary-500 bg-primary-500 text-white shadow-card'
+                      ? 'border-accent-700 bg-white text-accent-800 shadow-card ring-2 ring-accent-500'
                       : 'border-warm-200 bg-white text-warm-600 hover:border-primary-300 hover:text-primary-700'
                   }`}
                 >
