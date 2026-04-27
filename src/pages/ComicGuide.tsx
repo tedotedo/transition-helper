@@ -13,7 +13,7 @@ const panelSummaries = [
 ]
 
 const panelImages = panelSummaries.map((summary, index) => ({
-  number: index + 1,
+  panelNumber: index + 1,
   summary,
   src: `/comic-panels/zachs-transition-panel-${index + 1}.png`,
 }))
@@ -73,17 +73,14 @@ export function ComicGuide() {
         </div>
         <div className="space-y-4">
           {panelImages.map((panel) => (
-            <article key={panel.number} className="overflow-hidden rounded-2xl border border-warm-200 bg-white shadow-card">
+            <article key={panel.panelNumber} className="overflow-hidden rounded-2xl border border-warm-200 bg-white shadow-card">
               <img
                 src={panel.src}
-                alt={`Comic panel ${panel.number}: ${panel.summary}`}
+                alt={`Comic panel ${panel.panelNumber}: ${panel.summary}`}
                 className="w-full"
-                loading={panel.number > 2 ? 'lazy' : 'eager'}
+                loading={panel.panelNumber > 2 ? 'lazy' : 'eager'}
               />
-              <div className="flex gap-3 border-t border-warm-100 bg-warm-50 px-4 py-3 text-sm text-warm-700">
-                <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-700">
-                  {panel.number}
-                </span>
+              <div className="border-t border-warm-100 bg-warm-50 px-4 py-3 text-sm text-warm-700">
                 <p>{panel.summary}</p>
               </div>
             </article>
