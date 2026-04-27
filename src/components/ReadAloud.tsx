@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useVoice } from '../hooks/useVoice'
-import { useRole } from '../hooks'
 
 /**
  * Voice selection priority (auto mode):
@@ -41,11 +40,7 @@ interface ReadAloudProps {
 
 export default function ReadAloud({ text, label = 'Read aloud' }: ReadAloudProps) {
   const { selectedVoice, voices } = useVoice()
-  const { isYoungPerson } = useRole()
   const [speaking, setSpeaking] = useState(false)
-
-  // Only show when young person mode is active
-  const showReadAloud = isYoungPerson
 
   // Cancel speech on unmount
   useEffect(() => {
@@ -53,14 +48,6 @@ export default function ReadAloud({ text, label = 'Read aloud' }: ReadAloudProps
       window.speechSynthesis?.cancel()
     }
   }, [])
-
-  // Cancel if young person mode turns off while speaking
-  useEffect(() => {
-    if (!showReadAloud && speaking) {
-      window.speechSynthesis?.cancel()
-      setSpeaking(false)
-    }
-  }, [showReadAloud, speaking])
 
   const handleToggle = useCallback(() => {
     const synth = window.speechSynthesis
@@ -103,8 +90,6 @@ export default function ReadAloud({ text, label = 'Read aloud' }: ReadAloudProps
       start()
     }
   }, [text, selectedVoice, voices, speaking])
-
-  if (!showReadAloud) return null
 
   return (
     <button

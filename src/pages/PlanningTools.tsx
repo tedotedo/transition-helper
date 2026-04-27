@@ -433,7 +433,11 @@ export function PlanningTools() {
             <p className="text-[0.65rem] text-warm-500 leading-relaxed">
               'Ready Steady Go' and 'Hello to adult services' developed by the Transition Steering Group
               led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at
-              Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust.
+              Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust based
+              on the work of: 1. S Whitehouse and MC Paone. Bridging the gap from youth to adulthood.
+              Contemporary Pediatrics; 1998, December. 13-16. 2. Paone MC, Wigle M, Saewyc E.
+              The ON TRAC model for transitional care of adolescents. Prog Transplant 2006;16:291-302
+              3. Janet E McDonagh et al, J Child Health Care 2006;10(1):22-42.
             </p>
           </div>
         </div>
