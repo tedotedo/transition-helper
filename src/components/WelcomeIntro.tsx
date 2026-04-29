@@ -43,7 +43,7 @@ export default function WelcomeIntro({ onClose }: Props) {
         </button>
         <video
           ref={videoRef}
-          src="/intro.mp4"
+          src="/intro-narrated.mp4"
           autoPlay
           controls
           playsInline
