@@ -17,6 +17,7 @@ A working MVP teleprompter you can open in Xcode and run on a real device or sim
   - 3-2-1 countdown before scrolling starts
   - Estimated reading time
 - **Settings** — defaults for speed, font size, theme, mirror
+- **Record-while-prompting** — front/back camera preview behind the scrolling text, with a tap-to-record button. Finished videos are saved straight to the Photos library.
 
 ## Project layout
 
@@ -31,9 +32,10 @@ Teleprompter/
 │   ├── ScriptListView.swift         # Library / home screen
 │   ├── ScriptEditorView.swift       # Edit a script
 │   ├── TeleprompterView.swift       # Full-screen prompter
-│   ├── PrompterControls.swift       # Floating controls overlay
+│   ├── CameraPreviewView.swift      # Live AVCaptureSession preview
 │   └── SettingsView.swift           # App settings
 ├── Services/
+│   ├── CameraRecorder.swift         # AVCaptureSession + save to Photos
 │   └── ReadingTimeEstimator.swift   # Words/minute helpers
 └── Resources/
     └── Assets.xcassets/             # (create in Xcode)
@@ -48,7 +50,15 @@ Xcode project files (`.xcodeproj`) are tricky to hand-write, so the simplest pat
 3. When the new project opens, **delete** the auto-generated `ContentView.swift` and `TeleprompterApp.swift`.
 4. Drag the contents of the `Teleprompter/` folder from this repo into the Xcode project navigator (check "Copy items if needed" and "Create groups").
 5. In **Signing & Capabilities**, pick your Apple ID team.
-6. Hit ▶ to build & run.
+6. In the target's **Info** tab, add the following Info.plist keys (required for the camera-record feature):
+
+   | Key | Suggested value |
+   |-----|-----------------|
+   | `NSCameraUsageDescription` | "Teleprompter uses the camera so you can record yourself reading your script." |
+   | `NSMicrophoneUsageDescription` | "Teleprompter records audio with your video so your recordings have sound." |
+   | `NSPhotoLibraryAddUsageDescription` | "Teleprompter saves finished recordings to your Photos library." |
+
+7. Hit ▶ to build & run **on a real device** (the iOS simulator doesn't expose a real camera).
 
 ## Roadmap of paid-app "bells and whistles"
 
@@ -58,7 +68,7 @@ These are the features that justify a price tag and review well:
 |------|---------|--------------|
 | Free hook | Basic scroll, speed, mirror | What the App Store will judge as "is it a real teleprompter" |
 | Easy wins | Countdown, reading-time estimate, dark/sepia themes | Polish — reviewers notice |
-| **Killer feature** | **Record video while teleprompting** (front camera overlay, prompter reflected over the preview) | Lets users film + read in one app — single biggest reason people pay |
+| ✅ Built | **Record video while teleprompting** (front/back camera overlay, prompter over the preview, saves to Photos) | Lets users film + read in one app — single biggest reason people pay |
 | Killer feature | **Bluetooth foot-pedal & AirTurn support** | Pros buy this — covers a niche existing free apps ignore |
 | Killer feature | **Apple Watch remote** (start/stop, speed up/down) | Demo-able, screenshotable, no extra hardware |
 | Killer feature | **Voice-paced auto-scroll** (uses on-device speech recognition to keep the line you're saying under the eye-line marker) | "Magic" feature — no big competitor does it well |

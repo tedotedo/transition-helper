@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import AVFoundation
 
 struct TeleprompterView: View {
     @Bindable var script: Script
@@ -20,10 +21,23 @@ struct TeleprompterView: View {
     @State private var showingControls = true
     @State private var hideControlsTask: Task<Void, Never>?
 
+    @State private var cameraEnabled = false
+    @State private var recorder = CameraRecorder()
+    @State private var showSavedToast = false
+
     var body: some View {
         ZStack {
             settings.theme.background
                 .ignoresSafeArea()
+
+            if cameraEnabled && recorder.isAuthorized {
+                CameraPreviewView(session: recorder.session)
+                    .ignoresSafeArea()
+                Rectangle()
+                    .fill(.black.opacity(0.35))
+                    .ignoresSafeArea()
+                    .allowsHitTesting(false)
+            }
 
             scrollingScript
                 .scaleEffect(x: mirrored ? -1 : 1, y: 1)
@@ -38,6 +52,10 @@ struct TeleprompterView: View {
                 .allowsHitTesting(false)
             }
 
+            if recorder.isRecording {
+                recordingBadge
+            }
+
             if let countdown {
                 CountdownOverlay(value: countdown)
             }
@@ -46,13 +64,62 @@ struct TeleprompterView: View {
                 controlsOverlay
                     .transition(.opacity)
             }
+
+            if showSavedToast {
+                savedToast
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
         .statusBarHidden()
         .persistentSystemOverlays(.hidden)
         .onAppear(perform: configureFromPreferences)
-        .onDisappear(perform: persistPreferences)
+        .onDisappear(perform: handleDisappear)
         .onTapGesture { handleTap() }
         .gesture(verticalDragGesture)
+        .onChange(of: recorder.isRecording) { wasRecording, nowRecording in
+            if wasRecording && !nowRecording {
+                withAnimation { showSavedToast = true }
+                Task {
+                    try? await Task.sleep(for: .seconds(2.5))
+                    withAnimation { showSavedToast = false }
+                }
+            }
+        }
+    }
+
+    private var recordingBadge: some View {
+        VStack {
+            HStack {
+                Spacer()
+                HStack(spacing: 6) {
+                    Circle().fill(.red).frame(width: 10, height: 10)
+                        .opacity(0.95)
+                    Text("REC")
+                        .font(.caption.bold())
+                        .foregroundStyle(.white)
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(.black.opacity(0.55), in: Capsule())
+                .padding(.top, 12)
+                .padding(.trailing, 16)
+            }
+            Spacer()
+        }
+        .allowsHitTesting(false)
+    }
+
+    private var savedToast: some View {
+        VStack {
+            Spacer()
+            Label("Saved to Photos", systemImage: "checkmark.circle.fill")
+                .foregroundStyle(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(.green.opacity(0.85), in: Capsule())
+                .padding(.bottom, 120)
+        }
+        .allowsHitTesting(false)
     }
 
     // MARK: - Scrolling content
@@ -106,7 +173,7 @@ struct TeleprompterView: View {
 
     private var controlsOverlay: some View {
         VStack {
-            HStack {
+            HStack(spacing: 16) {
                 Button {
                     dismiss()
                 } label: {
@@ -115,6 +182,22 @@ struct TeleprompterView: View {
                         .foregroundStyle(.white, .black.opacity(0.4))
                 }
                 Spacer()
+                Button {
+                    Task { await toggleCamera() }
+                } label: {
+                    Image(systemName: cameraEnabled ? "video.fill" : "video.slash.fill")
+                        .font(.title2)
+                        .foregroundStyle(.white, .black.opacity(0.4))
+                }
+                if cameraEnabled && recorder.isAuthorized {
+                    Button {
+                        Task { await recorder.switchCamera() }
+                    } label: {
+                        Image(systemName: "arrow.triangle.2.circlepath.camera.fill")
+                            .font(.title2)
+                            .foregroundStyle(.white, .black.opacity(0.4))
+                    }
+                }
                 Button {
                     mirrored.toggle()
                 } label: {
@@ -128,7 +211,7 @@ struct TeleprompterView: View {
             Spacer()
 
             VStack(spacing: 14) {
-                HStack(spacing: 14) {
+                HStack(spacing: 18) {
                     Button(action: rewind) {
                         Image(systemName: "gobackward.10")
                             .font(.title2)
@@ -143,6 +226,24 @@ struct TeleprompterView: View {
                     Button(action: restart) {
                         Image(systemName: "arrow.counterclockwise")
                             .font(.title2)
+                    }
+                    if cameraEnabled && recorder.isAuthorized {
+                        Button(action: toggleRecord) {
+                            ZStack {
+                                Circle()
+                                    .stroke(.white, lineWidth: 3)
+                                    .frame(width: 56, height: 56)
+                                if recorder.isRecording {
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .fill(.red)
+                                        .frame(width: 22, height: 22)
+                                } else {
+                                    Circle()
+                                        .fill(.red)
+                                        .frame(width: 44, height: 44)
+                                }
+                            }
+                        }
                     }
                 }
                 .foregroundStyle(.white)
@@ -160,6 +261,13 @@ struct TeleprompterView: View {
                     range: 24...140,
                     valueText: "\(Int(fontSize))"
                 )
+
+                if let error = recorder.lastError {
+                    Text(error)
+                        .font(.caption)
+                        .foregroundStyle(.yellow)
+                        .multilineTextAlignment(.center)
+                }
             }
             .padding()
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24))
@@ -237,6 +345,30 @@ struct TeleprompterView: View {
             }
     }
 
+    // MARK: - Camera
+
+    private func toggleCamera() async {
+        if cameraEnabled {
+            if recorder.isRecording { recorder.stopRecording() }
+            recorder.stop()
+            cameraEnabled = false
+            return
+        }
+        recorder.clearError()
+        await recorder.prepare()
+        guard recorder.isAuthorized else { return }
+        cameraEnabled = true
+        recorder.start()
+    }
+
+    private func toggleRecord() {
+        if recorder.isRecording {
+            recorder.stopRecording()
+        } else {
+            recorder.startRecording()
+        }
+    }
+
     // MARK: - Preferences
 
     private func configureFromPreferences() {
@@ -246,7 +378,9 @@ struct TeleprompterView: View {
         scheduleControlsHide()
     }
 
-    private func persistPreferences() {
+    private func handleDisappear() {
+        if recorder.isRecording { recorder.stopRecording() }
+        recorder.stop()
         script.preferredFontSize = fontSize
         script.preferredScrollSpeed = scrollSpeed
         script.preferredMirrored = mirrored
