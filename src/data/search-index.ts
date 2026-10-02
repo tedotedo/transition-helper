@@ -53,8 +53,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: 'videos',
     title: 'Videos & Stories',
-    description: 'Real stories from young people about their transition experiences',
-    keywords: ['videos', 'stories', 'experiences', 'real', 'young', 'people', 'watch'],
+    description: 'Videos about moving to adult health care, shown via YouTube',
+    keywords: ['videos', 'stories', 'experiences', 'youtube', 'films', 'watch'],
     href: '/videos',
     category: 'page',
   },

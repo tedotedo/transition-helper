@@ -58,3 +58,16 @@ test('videos page makes no consent or safeguarding claim', async ({ page }) => {
   await expect(page.getByText(/created with consent/i)).toHaveCount(0);
   await expect(page.getByText(/names may have been changed/i)).toHaveCount(0);
 });
+
+test('videos page, search and notification use neutral wording', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('transition-intro-shown', 'true');
+    localStorage.setItem('transition-has-visited', 'true');
+  });
+  await page.goto('/videos');
+  await expect(page.getByRole('heading', { name: /Videos about moving to adult health care/, level: 1 })).toBeVisible();
+  await expect(page.getByText(/real stories|real young people/i)).toHaveCount(0);
+  const { searchIndex } = await import('../src/data/search-index');
+  const entry = searchIndex.find((e) => e.id === 'videos');
+  expect(entry?.description).toBe('Videos about moving to adult health care, shown via YouTube');
+});
