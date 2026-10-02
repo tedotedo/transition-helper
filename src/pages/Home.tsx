@@ -24,6 +24,8 @@ import { getUpcomingAppointmentsCount } from './Appointments'
 import { getCareTeamCount } from './CareTeam'
 import { useRole } from '../hooks'
 import ReadAloud from '../components/ReadAloud'
+import { AgeBandPrompt } from '../components/age/AgeBand'
+import { AGE_BAND_EVENT } from '../utils/ageStage'
 import VoicePicker from '../components/VoicePicker'
 
 const LAST_BACKUP_KEY = 'transition-last-backup'
@@ -51,6 +53,7 @@ const ALL_STORAGE_KEYS = [
   'transition-user-name',
   'transition-easy-read',
   'transition-has-visited',
+  'transition-age-band',
 ]
 
 function getLastBackupDate(): Date | null {
@@ -238,10 +241,12 @@ export function Home() {
     // Also update on focus (when user comes back to the page)
     window.addEventListener('focus', handleStorageChange)
     window.addEventListener('storage', handleStorageChange)
+    window.addEventListener(AGE_BAND_EVENT, handleStorageChange)
 
     return () => {
       window.removeEventListener('focus', handleStorageChange)
       window.removeEventListener('storage', handleStorageChange)
+      window.removeEventListener(AGE_BAND_EVENT, handleStorageChange)
     }
   }, [])
 
@@ -337,6 +342,9 @@ export function Home() {
           </div>
         </section>
       )}
+
+      {/* Ask for an age group once (skippable). Not shown during the first-visit welcome, which asks it. */}
+      {!isFirstVisit && <AgeBandPrompt />}
 
       {/* Hero with role toggle */}
       {role === 'young-person' ? (

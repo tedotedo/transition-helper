@@ -9,6 +9,7 @@ import { FeedbackButton } from './FeedbackButton'
 import { SimpleLanguagePanel } from './SimpleLanguagePanel'
 import WelcomeIntro from '../WelcomeIntro'
 import { resetIntro } from '../introStorage'
+import { AgeSettingButton } from '../age/AgeBand'
 
 interface AppShellProps {
   children: ReactNode
@@ -75,6 +76,7 @@ export function AppShell({ children }: AppShellProps) {
             <span className="text-lg">{simpleLanguage ? '\u2705' : '\uD83D\uDCD6'}</span>
             <span>{simpleLanguage ? 'Simple language ON' : 'Simple language'}</span>
           </button>
+          <AgeSettingButton className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-sm font-medium bg-warm-50 text-warm-700 border border-warm-200 hover:bg-warm-100 transition-all" />
           <div className="flex justify-center">
             <VoicePicker />
           </div>
@@ -223,6 +225,7 @@ export function AppShell({ children }: AppShellProps) {
                     <span className="text-lg">{simpleLanguage ? '\u2705' : '\uD83D\uDCD6'}</span>
                     <span>{simpleLanguage ? 'Simple language ON' : 'Simple language'}</span>
                   </button>
+                  <AgeSettingButton className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-warm-50 text-warm-700 border border-warm-200" />
                   <div className="flex justify-center">
                     <VoicePicker />
                   </div>

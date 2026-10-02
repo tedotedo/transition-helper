@@ -69,6 +69,7 @@ export default function Privacy() {
               <ul className="list-disc list-inside space-y-1 text-green-700">
                 <li>Your checklist progress and completed items</li>
                 <li>Your selected role (young person or parent/carer)</li>
+                <li>Your age group, if you choose to give it, so the app can show the stage that fits</li>
                 <li>Your preferences (such as theme settings)</li>
                 <li>Any notes or information you enter</li>
               </ul>
