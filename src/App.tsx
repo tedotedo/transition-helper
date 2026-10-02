@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { EasyReadProvider, RoleProvider, useRole, useEasyRead } from './hooks'
+import { SimpleLanguageProvider, RoleProvider, useRole, useSimpleLanguage } from './hooks'
 import { VoiceProvider } from './hooks/useVoice'
 import { isRTL } from './i18n'
 import { AppShell } from './components/layout/AppShell'
@@ -16,7 +16,7 @@ import { SpeakUpAtAppointments } from './pages/SpeakUpAtAppointments'
 import { KnowYourMedicines } from './pages/KnowYourMedicines'
 import { AskAboutMoveDate } from './pages/AskAboutMoveDate'
 import { LookIntoPIP } from './pages/LookIntoPIP'
-import { HelloNewTeam } from './pages/HelloNewTeam'
+import { MeetNewTeam } from './pages/MeetNewTeam'
 import { CheckYourSupport } from './pages/CheckYourSupport'
 import { Consent16to17 } from './pages/Consent16to17'
 import { ConsentUnder16 } from './pages/ConsentUnder16'
@@ -43,7 +43,7 @@ import WelcomeIntroGate from './components/WelcomeIntroGate'
 // Wrapper to apply role-based styling and handle RTL
 function AppContent() {
   const { isYoungPerson } = useRole()
-  const { easyRead } = useEasyRead()
+  const { simpleLanguage } = useSimpleLanguage()
   const { i18n } = useTranslation()
 
   // Update document direction and language when language changes
@@ -55,10 +55,10 @@ function AppContent() {
     document.documentElement.setAttribute('lang', lang)
   }, [i18n.language])
 
-  // Toggle body.easy-read CSS class for Easy Read mode typography
+  // Toggle body.simple-language CSS class for Simple language mode typography
   useEffect(() => {
-    document.body.classList.toggle('easy-read', easyRead)
-  }, [easyRead])
+    document.body.classList.toggle('simple-language', simpleLanguage)
+  }, [simpleLanguage])
 
   return (
     <div className={isYoungPerson ? 'font-friendly' : 'font-sans'}>
@@ -77,7 +77,7 @@ function AppContent() {
           <Route path="/journey/my-medicines" element={<KnowYourMedicines />} />
           <Route path="/journey/move-date" element={<AskAboutMoveDate />} />
           <Route path="/journey/pip" element={<LookIntoPIP />} />
-          <Route path="/journey/new-team" element={<HelloNewTeam />} />
+          <Route path="/journey/new-team" element={<MeetNewTeam />} />
           <Route path="/journey/check-support" element={<CheckYourSupport />} />
           <Route path="/rights" element={<RightsHub />} />
           <Route path="/rights/consent-under-16" element={<ConsentUnder16 />} />
@@ -109,14 +109,14 @@ function AppContent() {
 function App() {
   return (
     <RoleProvider>
-      <EasyReadProvider>
+      <SimpleLanguageProvider>
         <VoiceProvider>
           <BrowserRouter>
             <AppContent />
           </BrowserRouter>
           <WelcomeIntroGate />
         </VoiceProvider>
-      </EasyReadProvider>
+      </SimpleLanguageProvider>
     </RoleProvider>
   )
 }

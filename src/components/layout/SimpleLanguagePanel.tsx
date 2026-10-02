@@ -2,14 +2,14 @@ import { useLocation } from 'react-router-dom'
 import { useRole } from '../../hooks'
 import ReadAloud from '../ReadAloud'
 
-interface EasyReadContent {
+interface SimpleLanguageContent {
   icon: string
   title: string
   message: string
   actions: { icon: string; text: string }[]
 }
 
-const defaultContent: EasyReadContent = {
+const defaultContent: SimpleLanguageContent = {
   icon: '🧭',
   title: 'You can take this one step at a time',
   message: 'This page has tools to help you plan your move to adult health care.',
@@ -20,7 +20,7 @@ const defaultContent: EasyReadContent = {
   ],
 }
 
-const contentByPath: { match: (path: string) => boolean; content: EasyReadContent }[] = [
+const contentByPath: { match: (path: string) => boolean; content: SimpleLanguageContent }[] = [
   {
     match: (path) => path === '/',
     content: {
@@ -130,7 +130,7 @@ const contentByPath: { match: (path: string) => boolean; content: EasyReadConten
     content: {
       icon: '📚',
       title: 'This page has resources',
-      message: 'You can open forms, guides and easy-read documents.',
+      message: 'You can open forms, guides and simple-language documents.',
       actions: [
         { icon: '📖', text: 'Choose the right guide' },
         { icon: '📝', text: 'Fill it in with support' },
@@ -140,7 +140,7 @@ const contentByPath: { match: (path: string) => boolean; content: EasyReadConten
   },
 ]
 
-export function EasyReadPanel() {
+export function SimpleLanguagePanel() {
   const { pathname } = useLocation()
   const { isYoungPerson } = useRole()
   const content = contentByPath.find((item) => item.match(pathname))?.content ?? defaultContent
@@ -152,7 +152,7 @@ export function EasyReadPanel() {
   ].join('. ')
 
   return (
-    <section className="easy-read-panel rounded-2xl border-2 border-accent-200 bg-white p-4 md:p-5 shadow-card">
+    <section className="simple-language-panel rounded-2xl border-2 border-accent-200 bg-white p-4 md:p-5 shadow-card">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="flex gap-4">
           <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-accent-50 text-3xl border border-accent-100">
@@ -160,7 +160,7 @@ export function EasyReadPanel() {
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-wider text-accent-700">
-              Easy Read {isYoungPerson ? 'for young people' : 'for parents and carers'}
+              Simple language {isYoungPerson ? 'for young people' : 'for parents and carers'}
             </p>
             <h2 className="mt-1 text-xl md:text-2xl font-bold text-warm-800">{content.title}</h2>
             <p className="mt-2 text-base md:text-lg text-warm-600 leading-relaxed">{content.message}</p>

@@ -82,10 +82,10 @@ Based on Census 2021 data for Middlesbrough and Stockton:
 
 | English | Urdu |
 |---------|------|
-| Ready | تیار |
-| Steady | مستحکم |
-| Go | چلو |
-| Hello Adult Services | بالغ خدمات میں خوش آمدید |
+| Getting Started | شروعات |
+| Building Skills | مہارت بنانا |
+| Almost There | تقریباً تیار |
+| Flying Solo | خود مختار |
 
 ### 2.5 Common Buttons & Actions
 
@@ -119,10 +119,10 @@ Based on Census 2021 data for Middlesbrough and Stockton:
 |---------|------|
 | Transition Checklist | منتقلی چیک لسٹ |
 | Track your progress | اپنی پیشرفت دیکھیں |
-| Ready (11-13) | تیار (11-13) |
-| Steady (14-15) | مستحکم (14-15) |
-| Go (16-17) | چلو (16-17) |
-| Adult (18+) | بالغ (18+) |
+| Getting Started (11-13) | شروعات (11-13) |
+| Building Skills (14-15) | مہارت بنانا (14-15) |
+| Almost There (16-17) | تقریباً تیار (16-17) |
+| Flying Solo (18+) | خود مختار (18+) |
 | Mark as complete | مکمل کریں |
 | Completed | مکمل ہو گیا |
 
@@ -225,10 +225,9 @@ Based on Census 2021 data for Middlesbrough and Stockton:
 | English | Urdu |
 |---------|------|
 | Resources | وسائل |
-| Ready Steady Go questionnaires | ریڈی سٹیڈی گو سوالنامے |
 | Download PDF | PDF ڈاؤن لوڈ کریں |
 | View online | آن لائن دیکھیں |
-| Easy Read version | آسان پڑھنے والا ورژن |
+| Simple language version | آسان پڑھنے والا ورژن |
 
 ### 2.15 About Page
 
@@ -257,7 +256,6 @@ Based on Census 2021 data for Middlesbrough and Stockton:
 |---------|------|
 | This app gives general information for the UK. It does not replace medical or legal advice. | یہ ایپ برطانیہ کے لیے عمومی معلومات دیتی ہے۔ یہ طبی یا قانونی مشورے کی جگہ نہیں لیتی۔ |
 | Privacy & Disclaimer | رازداری اور دستبرداری |
-| Transition checklist adapted from Ready Steady Go by Dr Arvind Nagra, University Hospital Southampton NHS Foundation Trust. | منتقلی چیک لسٹ ڈاکٹر اروند ناگرا، یونیورسٹی ہسپتال ساؤتھمپٹن NHS فاؤنڈیشن ٹرسٹ کی ریڈی سٹیڈی گو سے اخذ کی گئی ہے۔ |
 
 ### 2.18 Privacy Page Content
 
@@ -277,13 +275,13 @@ Based on Census 2021 data for Middlesbrough and Stockton:
 | Your Rights | آپ کے حقوق |
 | UK GDPR | برطانیہ GDPR |
 
-### 2.19 Easy Read Toggle
+### 2.19 Simple language Toggle
 
 | English | Urdu |
 |---------|------|
-| Easy Read Mode | آسان پڑھنے کا موڈ |
+| Simple language mode | آسان پڑھنے کا موڈ |
 | Simpler words, bigger buttons, more pictures | آسان الفاظ، بڑے بٹن، زیادہ تصاویر |
-| Easy Read is ON | آسان پڑھنا آن ہے |
+| Simple language is ON | آسان پڑھنا آن ہے |
 
 ### 2.20 Error & Status Messages
 

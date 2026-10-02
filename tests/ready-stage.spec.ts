@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.describe('Ready Stage - Learn About Your Condition', () => {
+test.describe('Getting Started Stage - Learn About Your Condition', () => {
   test.beforeEach(async ({ page }) => {
     // Clear localStorage before each test
     await page.goto('/')
@@ -10,8 +10,8 @@ test.describe('Ready Stage - Learn About Your Condition', () => {
   test('can navigate to Learn About Condition page from My Journey', async ({ page }) => {
     await page.goto('/journey')
 
-    // Click on Ready stage button (matches "Ready" with age range)
-    await page.getByRole('button', { name: /age 11.*ready/i }).click()
+    // Click on the Getting Started stage button (matches the age range)
+    await page.getByRole('button', { name: /age 11.*getting started/i }).click()
 
     // Click on the activity link
     await page.getByRole('link', { name: /start activity/i }).click()
@@ -116,7 +116,7 @@ test.describe('Ready Stage - Learn About Your Condition', () => {
   })
 })
 
-test.describe('Ready Stage - My Team', () => {
+test.describe('Getting Started Stage - My Team', () => {
   test.beforeEach(async ({ page }) => {
     // Clear localStorage before each test
     await page.goto('/')
@@ -126,8 +126,8 @@ test.describe('Ready Stage - My Team', () => {
   test('can navigate to My Team page from My Journey', async ({ page }) => {
     await page.goto('/journey')
 
-    // Click on Ready stage button (matches "Ready" with age range)
-    await page.getByRole('button', { name: /age 11.*ready/i }).click()
+    // Click on the Getting Started stage button (matches the age range)
+    await page.getByRole('button', { name: /age 11.*getting started/i }).click()
 
     // Click on the team link
     await page.getByRole('link', { name: /meet your team/i }).click()

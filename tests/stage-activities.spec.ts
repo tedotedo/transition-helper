@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
-// Steady Stage Tests
-test.describe('Steady Stage - Speak Up at Appointments', () => {
+// Building Skills stage tests
+test.describe('Building Skills Stage - Speak Up at Appointments', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await page.evaluate(() => localStorage.clear())
@@ -10,7 +10,7 @@ test.describe('Steady Stage - Speak Up at Appointments', () => {
   test('page loads with correct heading', async ({ page }) => {
     await page.goto('/journey/speak-up')
     await expect(page.getByRole('heading', { name: /speak up at appointments/i })).toBeVisible()
-    await expect(page.getByText(/steady stage activity/i)).toBeVisible()
+    await expect(page.getByText(/building skills activity/i)).toBeVisible()
   })
 
   test('displays helpful phrases', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe('Steady Stage - Speak Up at Appointments', () => {
   })
 })
 
-test.describe('Steady Stage - Know Your Medicines', () => {
+test.describe('Building Skills Stage - Know Your Medicines', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await page.evaluate(() => localStorage.clear())
@@ -60,7 +60,7 @@ test.describe('Steady Stage - Know Your Medicines', () => {
   test('page loads with correct heading', async ({ page }) => {
     await page.goto('/journey/my-medicines')
     await expect(page.getByRole('heading', { name: /know your medicines/i })).toBeVisible()
-    await expect(page.getByText(/steady stage activity/i)).toBeVisible()
+    await expect(page.getByText(/building skills activity/i)).toBeVisible()
   })
 
   test('shows empty state initially', async ({ page }) => {
@@ -94,8 +94,8 @@ test.describe('Steady Stage - Know Your Medicines', () => {
   })
 })
 
-// Go Stage Tests
-test.describe('Go Stage - Ask About Move Date', () => {
+// Almost There stage tests
+test.describe('Almost There Stage - Ask About Move Date', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await page.evaluate(() => localStorage.clear())
@@ -104,7 +104,7 @@ test.describe('Go Stage - Ask About Move Date', () => {
   test('page loads with correct heading', async ({ page }) => {
     await page.goto('/journey/move-date')
     await expect(page.getByRole('heading', { name: /ask about your move date/i })).toBeVisible()
-    await expect(page.getByText(/go stage activity/i)).toBeVisible()
+    await expect(page.getByText(/almost there activity/i)).toBeVisible()
   })
 
   test('explains what transition is', async ({ page }) => {
@@ -139,7 +139,7 @@ test.describe('Go Stage - Ask About Move Date', () => {
   })
 })
 
-test.describe('Go Stage - Look into PIP', () => {
+test.describe('Almost There Stage - Look into PIP', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await page.evaluate(() => localStorage.clear())
@@ -148,7 +148,7 @@ test.describe('Go Stage - Look into PIP', () => {
   test('page loads with correct heading', async ({ page }) => {
     await page.goto('/journey/pip')
     await expect(page.getByRole('heading', { name: /look into pip/i })).toBeVisible()
-    await expect(page.getByText(/go stage activity/i)).toBeVisible()
+    await expect(page.getByText(/almost there activity/i)).toBeVisible()
   })
 
   test('explains what PIP is', async ({ page }) => {
@@ -184,7 +184,7 @@ test.describe('Go Stage - Look into PIP', () => {
 })
 
 // Adult Stage Tests
-test.describe('Adult Stage - Hello New Team', () => {
+test.describe('Flying Solo Stage - Meet New Team', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await page.evaluate(() => localStorage.clear())
@@ -192,8 +192,8 @@ test.describe('Adult Stage - Hello New Team', () => {
 
   test('page loads with correct heading', async ({ page }) => {
     await page.goto('/journey/new-team')
-    await expect(page.getByRole('heading', { name: /say hello to your new team/i })).toBeVisible()
-    await expect(page.getByText(/adult stage activity/i)).toBeVisible()
+    await expect(page.getByRole('heading', { name: /meet your new team/i })).toBeVisible()
+    await expect(page.getByText(/flying solo activity/i)).toBeVisible()
   })
 
   test('shows how adult care is different', async ({ page }) => {
@@ -234,7 +234,7 @@ test.describe('Adult Stage - Check Your Support', () => {
   test('page loads with correct heading', async ({ page }) => {
     await page.goto('/journey/check-support')
     await expect(page.getByRole('heading', { name: /check your support/i })).toBeVisible()
-    await expect(page.getByText(/adult stage activity/i)).toBeVisible()
+    await expect(page.getByText(/flying solo activity/i)).toBeVisible()
   })
 
   test('shows situation options', async ({ page }) => {
@@ -266,23 +266,23 @@ test.describe('Adult Stage - Check Your Support', () => {
 
 // Navigation from My Journey page
 test.describe('My Journey - Stage Links', () => {
-  test('Steady stage shows links to activities', async ({ page }) => {
+  test('Building Skills stage shows links to activities', async ({ page }) => {
     await page.goto('/journey')
-    await page.getByRole('button', { name: /age 14.*steady/i }).click()
+    await page.getByRole('button', { name: /age 14.*building skills/i }).click()
     await expect(page.getByRole('link', { name: /practice speaking up/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /track my medicines/i })).toBeVisible()
   })
 
-  test('Go stage shows links to activities', async ({ page }) => {
+  test('Almost There stage shows links to activities', async ({ page }) => {
     await page.goto('/journey')
-    await page.getByRole('button', { name: /age 16.*go/i }).click()
+    await page.getByRole('button', { name: /age 16.*almost there/i }).click()
     await expect(page.getByRole('link', { name: /plan my move/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /learn about pip/i })).toBeVisible()
   })
 
-  test('Adult stage shows links to activities', async ({ page }) => {
+  test('Flying Solo stage shows links to activities', async ({ page }) => {
     await page.goto('/journey')
-    await page.getByRole('button', { name: /age 18.*hello adult/i }).click()
+    await page.getByRole('button', { name: /age 18.*flying solo/i }).click()
     await expect(page.getByRole('link', { name: /meet my new team/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /review my support/i })).toBeVisible()
   })

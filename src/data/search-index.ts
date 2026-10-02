@@ -21,8 +21,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: 'journey',
     title: 'My Journey',
-    description: 'Track your progress through Ready, Steady, Go stages',
-    keywords: ['journey', 'progress', 'stages', 'ready', 'steady', 'go', 'checklist', 'transition'],
+    description: 'Track your progress through the four stages, from Getting Started to Flying Solo',
+    keywords: ['journey', 'progress', 'stages', 'getting started', 'building skills', 'almost there', 'flying solo', 'checklist', 'transition'],
     href: '/journey',
     category: 'page',
   },
@@ -45,8 +45,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: 'planning',
     title: 'Planning Tools',
-    description: 'Ready Steady Go questionnaires and transition resources',
-    keywords: ['planning', 'tools', 'questionnaire', 'ready', 'steady', 'go', 'nhs'],
+    description: 'Plan each of the four stages, from Getting Started to Flying Solo',
+    keywords: ['planning', 'tools', 'stages', 'getting started', 'building skills', 'almost there', 'flying solo', 'plan'],
     href: '/planning',
     category: 'page',
   },
@@ -112,7 +112,7 @@ export const searchIndex: SearchItem[] = [
     id: 'learn-condition',
     title: 'Learn About Your Condition',
     description: 'Interactive activity to understand and describe your health condition',
-    keywords: ['condition', 'learn', 'health', 'ready', 'activity', 'describe', 'understand', 'illness', 'diagnosis'],
+    keywords: ['condition', 'learn', 'health', 'getting started', 'activity', 'describe', 'understand', 'illness', 'diagnosis'],
     href: '/journey/learn-about-condition',
     category: 'guide',
   },
@@ -130,7 +130,7 @@ export const searchIndex: SearchItem[] = [
     id: 'speak-up',
     title: 'Speak Up at Appointments',
     description: 'Practice answering questions and build confidence at appointments',
-    keywords: ['speak', 'appointments', 'confidence', 'questions', 'answers', 'practice', 'steady'],
+    keywords: ['speak', 'appointments', 'confidence', 'questions', 'answers', 'practice', 'building skills'],
     href: '/journey/speak-up',
     category: 'guide',
   },
@@ -164,9 +164,9 @@ export const searchIndex: SearchItem[] = [
   // Journey Activities - Flying Solo
   {
     id: 'new-team',
-    title: 'Say Hello to Your New Team',
+    title: 'Meet Your New Team',
     description: 'Meet your adult care team and learn how to contact them',
-    keywords: ['new', 'team', 'adult', 'services', 'contact', 'hello', 'meet'],
+    keywords: ['new', 'team', 'adult', 'services', 'contact', 'meet', 'introduce'],
     href: '/journey/new-team',
     category: 'guide',
   },
@@ -187,32 +187,6 @@ export const searchIndex: SearchItem[] = [
     keywords: ['consent', '16', '17', 'age', 'decision', 'gillick', 'fraser', 'competence'],
     href: '/rights/consent-16-17',
     category: 'guide',
-  },
-
-  // Resources - Questionnaires
-  {
-    id: 'ready-questionnaire',
-    title: 'Ready Questionnaire (Age 11-13)',
-    description: 'Start learning about your health and your care team',
-    keywords: ['ready', 'questionnaire', '11', '12', '13', 'young', 'start', 'learn'],
-    href: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygoreadyquestionnaire_1-3_1.pdf',
-    category: 'resource',
-  },
-  {
-    id: 'steady-questionnaire',
-    title: 'Steady Questionnaire (Age 14-15)',
-    description: 'Build independence and learn about your medicines',
-    keywords: ['steady', 'questionnaire', '14', '15', 'independence', 'medicines', 'practice'],
-    href: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygosteadyquestionnaire_1-2_1.pdf',
-    category: 'resource',
-  },
-  {
-    id: 'go-questionnaire',
-    title: 'Go Questionnaire (Age 16-17)',
-    description: 'Prepare for your move to adult services',
-    keywords: ['go', 'questionnaire', '16', '17', 'adult', 'services', 'prepare', 'transition'],
-    href: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygogoquestionnaire_1-2_1.pdf',
-    category: 'resource',
   },
 
   // Topics

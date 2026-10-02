@@ -18,36 +18,36 @@ interface ChecklistData {
 
 export const CHECKLIST_STORAGE_KEY = 'transition-care-checklist'
 
-// Fully original transition readiness checklist items
+// Transition checklist items. Keep each item's id the same: ticks are saved against the id.
 const checklistItems: ChecklistItem[] = [
   // Getting Started (11-13)
   { id: 'gs-1', text: "I've written down what my health condition is called", stage: 'getting-started' },
   { id: 'gs-2', text: 'I can tell someone one thing about why I see my doctor', stage: 'getting-started' },
-  { id: 'gs-3', text: 'I know the names of the people who look after my health', stage: 'getting-started' },
+  { id: 'gs-3', text: "I've made a list of the people in my care team and their jobs", stage: 'getting-started' },
   { id: 'gs-4', text: "I've thought about one question I'd like to ask at my next appointment", stage: 'getting-started' },
   { id: 'gs-5', text: 'I know what to do if I feel really unwell at home', stage: 'getting-started' },
 
   // Building Skills (14-15)
   { id: 'bs-1', text: 'I can explain my condition to a friend or teacher in my own words', stage: 'building-skills' },
-  { id: 'bs-2', text: 'I know what each of my medicines or treatments does', stage: 'building-skills' },
+  { id: 'bs-2', text: "I've written a list of my medicines, with the reason for each one", stage: 'building-skills' },
   { id: 'bs-3', text: "I've tried answering a question from my doctor or nurse myself", stage: 'building-skills' },
   { id: 'bs-4', text: 'I know what to do if I run out of medicine or a prescription', stage: 'building-skills' },
-  { id: 'bs-5', text: "I've thought about how my health might affect college or work plans", stage: 'building-skills' },
+  { id: 'bs-5', text: "I've jotted down ways my condition could affect my plans after school", stage: 'building-skills' },
 
   // Almost There (16-17)
   { id: 'at-1', text: 'I can describe my full health history to someone new', stage: 'almost-there' },
-  { id: 'at-2', text: 'I know how to book a GP or hospital appointment', stage: 'almost-there' },
+  { id: 'at-2', text: "I've practised ringing the surgery to book a visit", stage: 'almost-there' },
   { id: 'at-3', text: 'I understand what changes when I turn 16 (like consent)', stage: 'almost-there' },
-  { id: 'at-4', text: "I've asked my team about when and how I'll move to adult services", stage: 'almost-there' },
-  { id: 'at-5', text: 'I know how to order repeat prescriptions', stage: 'almost-there' },
-  { id: 'at-6', text: "I've looked into whether I might be eligible for PIP or other support", stage: 'almost-there' },
-  { id: 'at-7', text: "I've practised speaking to a healthcare professional on my own", stage: 'almost-there' },
+  { id: 'at-4', text: "I've asked my team for a rough timeline for my move", stage: 'almost-there' },
+  { id: 'at-5', text: "I've ordered a repeat prescription myself, with help if I needed it", stage: 'almost-there' },
+  { id: 'at-6', text: "I've read about PIP and other support, and noted what might apply to me", stage: 'almost-there' },
+  { id: 'at-7', text: "I've done part of an appointment by myself, when I felt ready", stage: 'almost-there' },
 
   // Flying Solo (18+)
   { id: 'fs-1', text: "I've attended an appointment with my new adult care team", stage: 'flying-solo' },
-  { id: 'fs-2', text: 'I have the contact details for my adult service and know how to reach them', stage: 'flying-solo' },
-  { id: 'fs-3', text: 'I manage my own appointments, prescriptions, and repeat orders', stage: 'flying-solo' },
-  { id: 'fs-4', text: "I've checked what benefits or support I'm entitled to as an adult", stage: 'flying-solo' },
+  { id: 'fs-2', text: "I've saved my adult team's phone number and email somewhere I can find them", stage: 'flying-solo' },
+  { id: 'fs-3', text: 'I keep track of my own appointments and medicine supplies with a calendar or reminders', stage: 'flying-solo' },
+  { id: 'fs-4', text: "I've asked an advice service or my team if I can claim extra support as an adult", stage: 'flying-solo' },
   { id: 'fs-5', text: 'I feel confident explaining my needs to a new healthcare professional', stage: 'flying-solo' },
   { id: 'fs-6', text: "I have an up-to-date summary of my health that I can share if needed", stage: 'flying-solo' },
 ]
@@ -68,7 +68,7 @@ export function Checklist() {
   const [data, setData] = useLocalStorage<ChecklistData>(CHECKLIST_STORAGE_KEY, initialData)
   const [showAllStages, setShowAllStages] = useState(false)
 
-  // Migrate old RSG stage names from localStorage
+  // Map stage ids saved by earlier versions of the app
   const stageMap: Record<string, Stage> = {
     'ready': 'getting-started',
     'steady': 'building-skills',
@@ -303,7 +303,7 @@ export function getChecklistProgress(): { completed: number; total: number; stag
 
   try {
     const data: ChecklistData = JSON.parse(stored)
-    // Handle migration from old RSG stage names
+    // Map stage ids saved by earlier versions of the app
     const stageMap: Record<string, Stage> = {
       'ready': 'getting-started',
       'steady': 'building-skills',

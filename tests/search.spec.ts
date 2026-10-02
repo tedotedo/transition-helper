@@ -90,9 +90,9 @@ test.describe('Search Functionality', () => {
 
   test('search finds resources by keywords', async ({ page }) => {
     const searchInput = page.getByPlaceholder(/search/i);
-    await searchInput.fill('questionnaire');
+    await searchInput.fill('comic');
 
-    // Should find Ready, Steady, Go questionnaires
-    await expect(page.getByText(/ready questionnaire/i)).toBeVisible();
+    // Should find the comic guide
+    await expect(page.getByText(/comic/i).first()).toBeVisible();
   });
 });

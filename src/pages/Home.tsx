@@ -249,10 +249,10 @@ export function Home() {
 
   // Get translated stage names
   const stageNames: Record<string, string> = {
-    'getting-started': t('stages.ready'),
-    'building-skills': t('stages.steady'),
-    'almost-there': t('stages.go'),
-    'flying-solo': t('stages.adult'),
+    'getting-started': t('stages.gettingStarted'),
+    'building-skills': t('stages.buildingSkills'),
+    'almost-there': t('stages.almostThere'),
+    'flying-solo': t('stages.flyingSolo'),
   }
 
   const tip = role === 'young-person' ? t('home.tip.youngPerson') : t('home.tip.parent')
@@ -443,7 +443,7 @@ export function Home() {
                 {t('home.heroYoung.mainMessage')}
               </p>
 
-              {/* Read Aloud + Voice Picker (Easy Read mode) */}
+              {/* Read Aloud + Voice Picker (Simple language mode) */}
               <div className="flex items-center justify-center gap-2 flex-wrap">
                 <ReadAloud text={heroBody} label="Read aloud" />
                 <VoicePicker />

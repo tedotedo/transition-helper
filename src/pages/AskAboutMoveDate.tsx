@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks'
 import ReadAloud from '../components/ReadAloud'
@@ -18,15 +18,23 @@ interface TransitionData {
 const STORAGE_KEY = 'transition-care-move-date'
 
 const suggestedQuestions = [
-  "When am I likely to move to adult services?",
+  "Roughly when is my move planned for?",
   "What will my new service be called?",
-  "Will I meet my new team before I move?",
+  "Can we arrange a visit or joint appointment before I move?",
   "Can my parent/carer come to my first appointment?",
   "What happens if I'm not ready to move yet?",
   "Will all my information be sent to the new team?",
   "Who do I contact if I have problems during the move?",
-  "How is adult care different from children's services?"
+  "What will change day to day once I'm in adult care?"
 ]
+
+// Earlier versions of this page saved the ticked questions as text.
+// This maps those saved ticks onto the reworded questions so nothing is lost.
+const renamedQuestions: Record<string, string> = {
+  "When am I likely to move to adult services?": "Roughly when is my move planned for?",
+  "Will I meet my new team before I move?": "Can we arrange a visit or joint appointment before I move?",
+  "How is adult care different from children's services?": "What will change day to day once I'm in adult care?",
+}
 
 const initialData: TransitionData = {
   expectedMoveAge: '',
@@ -55,6 +63,16 @@ export function AskAboutMoveDate() {
     questionsToAsk,
     notes
   } = data
+
+  // Carry over any ticks saved against the earlier wording
+  useEffect(() => {
+    if (questionsToAsk.some(q => q in renamedQuestions)) {
+      setData(prev => ({
+        ...prev,
+        questionsToAsk: Array.from(new Set(prev.questionsToAsk.map(q => renamedQuestions[q] ?? q)))
+      }))
+    }
+  }, [questionsToAsk, setData])
 
   // Helper to update any field
   const updateField = useCallback(<K extends keyof TransitionData>(field: K, value: TransitionData[K]) => {
@@ -111,15 +129,15 @@ export function AskAboutMoveDate() {
         <h2 className="text-lg font-semibold text-warm-800 mb-3">What is transition? 🔄</h2>
         <div className="space-y-3 text-sm text-warm-600 leading-relaxed">
           <p>
-            <strong>Transition</strong> is the process of moving from children's healthcare services to adult services.
-            This usually happens between ages 16 and 18, but it can be different for everyone.
+            <strong>Transition</strong> means handing your care over from the children's team to an adult team.
+            It happens in small steps over a few years, not on a single day. The timing is different for everyone, but it is often between 16 and 18.
           </p>
           <p>
             It's really important to start talking about this early so you're not surprised! Your children's team should work
             with you and your family to make sure the move goes smoothly.
           </p>
           <div className="mt-3">
-            <ReadAloud text="Transition is the process of moving from children's healthcare services to adult services. This usually happens between ages 16 and 18, but it can be different for everyone. It's really important to start talking about this early so you're not surprised! Your children's team should work with you and your family to make sure the move goes smoothly." />
+            <ReadAloud text="Transition means handing your care over from the children's team to an adult team. It happens in small steps over a few years, not on a single day. The timing is different for everyone, but it is often between 16 and 18. It's really important to start talking about this early so you're not surprised! Your children's team should work with you and your family to make sure the move goes smoothly." />
           </div>
         </div>
       </section>

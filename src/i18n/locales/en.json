@@ -47,9 +47,9 @@
       "title": "Your Health, Your Future",
       "greeting": "Hey, welcome back!",
       "greetingWithName": "Hey {{name}}!",
-      "subtitle": "Take charge of your healthcare journey",
+      "subtitle": "Get ready for adult healthcare, one step at a time",
       "journeyLabel": "Your Journey to Independence",
-      "mainMessage": "Moving to adult services is a big step — and you're ready for it! Learn what changes at 16 & 18, understand your rights, and take charge of your own healthcare.",
+      "mainMessage": "Moving to adult services is a big step — and you can get ready for it! Find out what changes at 16 & 18, learn about your rights, and start looking after your own health.",
       "addName": "Add your name - make it personal!",
       "changeName": "Change name"
     },
@@ -110,21 +110,21 @@
       "restoreSuccess": "Data restored successfully! Refreshing...",
       "restoreError": "Could not restore backup. Is the file valid?"
     },
-    "easyRead": {
-      "title": "Easy Read Mode",
-      "description": "Simpler words, bigger buttons, more pictures",
-      "on": "Easy Read is ON - content will be simpler"
+    "simpleLanguage": {
+      "title": "Simple language mode",
+      "description": "Simpler words and bigger buttons",
+      "on": "Simple language is ON - content will be simpler"
     }
   },
   "stages": {
-    "ready": "Getting Started",
-    "steady": "Building Skills",
-    "go": "Almost There",
-    "adult": "Flying Solo",
-    "ready11to13": "Getting Started (11-13)",
-    "steady14to15": "Building Skills (14-15)",
-    "go16to17": "Almost There (16-17)",
-    "adult18plus": "Flying Solo (18+)"
+    "gettingStarted": "Getting Started",
+    "buildingSkills": "Building Skills",
+    "almostThere": "Almost There",
+    "flyingSolo": "Flying Solo",
+    "gettingStarted11to13": "Getting Started (11-13)",
+    "buildingSkills14to15": "Building Skills (14-15)",
+    "almostThere16to17": "Almost There (16-17)",
+    "flyingSolo18plus": "Flying Solo (18+)"
   },
   "buttons": {
     "back": "Back",
@@ -294,10 +294,8 @@
   },
   "resources": {
     "title": "Resources",
-    "rsgTitle": "Official Ready Steady Go resources",
     "downloadPdf": "Download PDF",
-    "viewOnline": "View online",
-    "easyRead": "Easy Read version"
+    "viewOnline": "View online"
   },
   "about": {
     "title": "About Transition Ready",
@@ -318,8 +316,7 @@
   },
   "footer": {
     "disclaimer": "This app gives general information for the UK. It does not replace medical or legal advice.",
-    "privacyLink": "Privacy & Disclaimer",
-    "attribution": "'Ready Steady Go' and 'Hello to adult services' developed by the Transition Steering Group led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust based on the work of: 1. S Whitehouse and MC Paone. Bridging the gap from youth to adulthood. Contemporary Pediatrics; 1998, December. 13-16. 2. Paone MC, Wigle M, Saewyc E. The ON TRAC model for transitional care of adolescents. Prog Transplant 2006;16:291-302 3. Janet E McDonagh et al, J Child Health Care 2006;10(1):22-42."
+    "privacyLink": "Privacy & Disclaimer"
   },
   "privacy": {
     "title": "Privacy & Disclaimer",

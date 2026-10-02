@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Transition Ready** (https://transitionready.app) is a React-based Progressive Web App (PWA) designed to help young people (ages 11-18+) and their parents/carers prepare for transitioning from children's healthcare to adult healthcare services. It follows the NHS "Ready Steady Go" transition framework.
+**Transition Ready** (https://transitionready.app) is a React-based Progressive Web App (PWA) designed to help young people (ages 11-18+) and their parents/carers prepare for transitioning from children's healthcare to adult healthcare services. It uses its own four stages: Getting Started (11-13), Building Skills (14-15), Almost There (16-17) and Flying Solo (18+).
 
 ## Tech Stack
 
@@ -84,7 +84,7 @@ docs/
 | `/journey/my-medicines` | KnowYourMedicines | Medication tracking activity |
 | `/journey/move-date` | AskAboutMoveDate | Transition timing planning |
 | `/journey/pip` | LookIntoPIP | PIP benefits information |
-| `/journey/new-team` | HelloNewTeam | Guide for meeting adult services |
+| `/journey/new-team` | MeetNewTeam | Guide for meeting adult services |
 | `/journey/check-support` | CheckYourSupport | Support system review |
 | `/rights` | RightsHub | Consent, privacy, decision-making info |
 | `/rights/consent-under-16` | ConsentUnder16 | Consent guide for under 16s |
@@ -95,8 +95,7 @@ docs/
 | `/videos` | VideosStories | Video/story content hub |
 | `/skills` | SkillsBuilder | Interactive skills practice (9 skills) |
 | `/questions` | QuestionsAnswers | FAQ page (16 questions in 4 categories) |
-| `/resources` | Resources | Ready Steady Go PDF downloads |
-| `/resources/ready-steady-go/*` | PdfViewer | PDF viewer for questionnaires |
+| `/resources` | Resources | In-app tools, NICE NG43 link, and a separate "Other resource" list of third-party PDFs |
 | `/level-up` | LevelUpHome | Game hub with progress tracking |
 | `/level-up/myths` | MythBusters | Flip-card game: fears vs facts |
 | `/level-up/powers` | PowerUpsGuide | Browse abilities unlocked by age |
@@ -401,7 +400,7 @@ The first-time visitor welcome screen (`src/pages/Home.tsx`) includes:
 Located at `/about` (`src/pages/About.tsx`):
 - Creator profile (Dr Mark Aszkenasy) with photo
 - Mission statement
-- Acknowledgements section including Ready Steady Go attribution
+- Acknowledgements section (background animations)
 - Disclaimer with link to Privacy page
 - Feedback call-to-action
 - Children's books section (helpful healthcare resources):
@@ -425,10 +424,11 @@ Located at `/privacy` (`src/pages/Privacy.tsx`):
 - **Terms of Use**: Basic usage terms
 - **Contact**: Last updated date and contact info
 
-## Attribution
+## Third-party resources
 
-The app includes attribution to the Ready Steady Go programme:
-- Displayed in sidebar footer (desktop)
-- Full details on About page
-- Link to Privacy & Disclaimer page in sidebar footer
-- Original creators: Dr Arvind Nagra and the Transition Steering Group, University Hospital Southampton NHS Foundation Trust
+The app does not contain or adapt any material from the NHS Ready Steady Go programme. The only mention is on the Resources page (`/resources`), in a separate "Other resource" section:
+- A plain list of links to the programme's own, unchanged PDFs on readysteadygo.net
+- The publisher's required acknowledgement statement, copied exactly from https://www.readysteadygo.net/rsg.html
+- A note to check their terms (non-commercial use, original format, no changes)
+
+Do not add Ready Steady Go wording, stage names, questionnaire items, branding or links anywhere else in the app, and do not put the acknowledgement in the footer or About page.

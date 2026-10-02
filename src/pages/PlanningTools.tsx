@@ -1,10 +1,201 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import ReadAloud from '../components/ReadAloud'
 
-type StageKey = 'ready' | 'steady' | 'go'
+type StageKey = 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo'
+
+interface PlanningStage {
+  key: StageKey
+  number: number
+  name: string
+  ages: string
+  emoji: string
+  summary: string
+  intro: string[]
+  introAudio: string
+  learnHeading: string
+  learn: { title: string; desc: string }[]
+  tools: { label: string; to: string }[]
+  // Tailwind classes are written out in full so the build can find them
+  c: {
+    cardBorderOpen: string
+    cardBorder: string
+    cardBg: string
+    circle: string
+    heading: string
+    sub: string
+    divider: string
+    innerBorder: string
+    tick: string
+    toolBg: string
+    toolText: string
+  }
+}
+
+const stages: PlanningStage[] = [
+  {
+    key: 'getting-started',
+    number: 1,
+    name: 'Getting Started',
+    ages: '11-13',
+    emoji: '📚',
+    summary: 'Learn about your health condition and start asking questions',
+    intro: [
+      "This is the beginning! Right now, your parents or carers probably do most of the talking at appointments. That's okay - now it's time to start learning about your own health.",
+      "Don't worry, you won't be doing everything alone yet. This stage is about understanding more about yourself and your condition.",
+    ],
+    introAudio:
+      'This is the beginning. Right now, your parents or carers probably do most of the talking at appointments. That is okay. Now it is time to start learning about your own health. Do not worry, you will not be doing everything alone yet. This stage is about understanding more about yourself and your condition.',
+    learnHeading: "Things you'll learn about:",
+    learn: [
+      { title: 'Your health condition', desc: 'What it is, why you have it, and how it affects your body' },
+      { title: 'Your healthcare team', desc: 'Who the doctors and nurses are, and what each person does' },
+      { title: 'Asking questions', desc: "It's okay to ask questions! It shows you're interested in your health" },
+    ],
+    tools: [
+      { label: 'Learn about your condition', to: '/journey/learn-about-condition' },
+      { label: 'Get to know your team', to: '/journey/my-team' },
+    ],
+    c: {
+      cardBorderOpen: 'border-green-300',
+      cardBorder: 'border-green-200',
+      cardBg: 'bg-green-50/50',
+      circle: 'bg-green-500',
+      heading: 'text-green-900',
+      sub: 'text-green-700',
+      divider: 'border-green-200',
+      innerBorder: 'border-green-200',
+      tick: 'text-green-600',
+      toolBg: 'bg-green-50 hover:bg-green-100',
+      toolText: 'text-green-600',
+    },
+  },
+  {
+    key: 'building-skills',
+    number: 2,
+    name: 'Building Skills',
+    ages: '14-15',
+    emoji: '🎯',
+    summary: 'Start doing more for yourself with support nearby',
+    intro: [
+      "Now you know more about your health, it's time to practise doing some things yourself. Think of it like learning to ride a bike: at first someone holds the saddle, then they let go but stay close, and finally you're riding on your own.",
+      "Your parents and healthcare team are still here to help, but you'll gradually do more things independently.",
+    ],
+    introAudio:
+      'Now you know more about your health, it is time to practise doing some things yourself. Think of it like learning to ride a bike. At first someone holds the saddle, then they let go but stay close, and finally you are riding on your own. Your parents and healthcare team are still here to help, but you will gradually do more things independently.',
+    learnHeading: "Skills you'll practise:",
+    learn: [
+      { title: 'Booking appointments', desc: 'Learning to call the surgery or hospital to arrange your own appointments' },
+      { title: 'Understanding your medicines', desc: 'Knowing what tablets or treatments you take, when, and what they do' },
+      { title: 'Talking about your health', desc: 'Being able to explain your condition to teachers, friends, or others' },
+      { title: 'Managing at school/college', desc: 'Working out how to handle your health needs while studying' },
+    ],
+    tools: [
+      { label: 'Speak up at appointments', to: '/journey/speak-up' },
+      { label: 'Know your medicines', to: '/journey/my-medicines' },
+      { label: 'Skills Builder', to: '/skills' },
+    ],
+    c: {
+      cardBorderOpen: 'border-amber-300',
+      cardBorder: 'border-amber-200',
+      cardBg: 'bg-amber-50/50',
+      circle: 'bg-amber-500',
+      heading: 'text-amber-900',
+      sub: 'text-amber-700',
+      divider: 'border-amber-200',
+      innerBorder: 'border-amber-200',
+      tick: 'text-amber-600',
+      toolBg: 'bg-amber-50 hover:bg-amber-100',
+      toolText: 'text-amber-600',
+    },
+  },
+  {
+    key: 'almost-there',
+    number: 3,
+    name: 'Almost There',
+    ages: '16-17',
+    emoji: '🚀',
+    summary: 'Get ready to move to adult healthcare services',
+    intro: [
+      "You're nearly there! This is when you prepare to move from children's healthcare to adult healthcare. It might feel a bit scary, but you've been building up to this through the earlier stages.",
+      "The adult healthcare team works differently from the children's team, but they're still there to help you.",
+    ],
+    introAudio:
+      "You are nearly there. This is when you prepare to move from children's healthcare to adult healthcare. It might feel a bit scary, but you have been building up to this through the earlier stages. The adult healthcare team works differently from the children's team, but they are still there to help you.",
+    learnHeading: "What you'll learn about:",
+    learn: [
+      { title: 'How adult healthcare is different', desc: 'Adult clinics might be in different buildings, with appointments further apart' },
+      { title: 'Your rights and responsibilities', desc: 'What you can legally decide, and what you are responsible for' },
+      { title: 'Managing health with work or university', desc: 'How to tell employers or lecturers about your needs' },
+      { title: 'Meeting your new healthcare team', desc: 'What to expect in your first adult clinic appointment' },
+    ],
+    tools: [
+      { label: 'Consent guide for 16-17', to: '/rights/consent-16-17' },
+      { label: 'Plan my move', to: '/journey/move-date' },
+      { label: 'Look into PIP', to: '/journey/pip' },
+    ],
+    c: {
+      cardBorderOpen: 'border-blue-300',
+      cardBorder: 'border-blue-200',
+      cardBg: 'bg-blue-50/50',
+      circle: 'bg-blue-500',
+      heading: 'text-blue-900',
+      sub: 'text-blue-700',
+      divider: 'border-blue-200',
+      innerBorder: 'border-blue-200',
+      tick: 'text-blue-600',
+      toolBg: 'bg-blue-50 hover:bg-blue-100',
+      toolText: 'text-blue-600',
+    },
+  },
+  {
+    key: 'flying-solo',
+    number: 4,
+    name: 'Flying Solo',
+    ages: '18+',
+    emoji: '⭐',
+    summary: 'Settle in with your adult team and look after your own care',
+    intro: [
+      "You're now using adult services. Things may work a little differently: appointments can be further apart, and you're the main person who makes the decisions.",
+      'You can still ask family or friends to help if you want them to. And your new team is there to support you.',
+    ],
+    introAudio:
+      'You are now using adult services. Things may work a little differently. Appointments can be further apart, and you are the main person who makes the decisions. You can still ask family or friends to help if you want them to. And your new team is there to support you.',
+    learnHeading: 'Things to sort out:',
+    learn: [
+      { title: 'Your new team', desc: 'Who they are and how to get in touch with them' },
+      { title: 'Your own appointments and medicines', desc: 'Booking visits and ordering what you need, in a way that works for you' },
+      { title: 'Money and support', desc: 'Checking what help you can get at college, at work or at home' },
+      { title: 'Your adult rights', desc: 'How consent and privacy work now that you are 18' },
+    ],
+    tools: [
+      { label: 'Meet your new team', to: '/journey/new-team' },
+      { label: 'Check your support', to: '/journey/check-support' },
+      { label: 'Consent at 18+', to: '/rights/consent-18-plus' },
+    ],
+    c: {
+      cardBorderOpen: 'border-purple-300',
+      cardBorder: 'border-purple-200',
+      cardBg: 'bg-purple-50/50',
+      circle: 'bg-purple-500',
+      heading: 'text-purple-900',
+      sub: 'text-purple-700',
+      divider: 'border-purple-200',
+      innerBorder: 'border-purple-200',
+      tick: 'text-purple-600',
+      toolBg: 'bg-purple-50 hover:bg-purple-100',
+      toolText: 'text-purple-600',
+    },
+  },
+]
+
+const overviewIntro =
+  "Right now, you see doctors and nurses who work with children and teenagers. As you get older, you'll move to doctors who work with adults. This is called \"transition\". Think of it like moving up in school - you learn new things gradually. This app breaks it into four stages:"
+const overviewAudio =
+  'Right now, you see doctors and nurses who work with children and teenagers. As you get older, you will move to doctors who work with adults. This is called transition. Think of it like moving up in school. You learn new things gradually. This app breaks it into four stages.'
 
 export function PlanningTools() {
-  const [expandedStage, setExpandedStage] = useState<StageKey | null>('ready')
+  const [expandedStage, setExpandedStage] = useState<StageKey | null>('getting-started')
 
   const toggleStage = (stage: StageKey) => {
     setExpandedStage(expandedStage === stage ? null : stage)
@@ -15,378 +206,140 @@ export function PlanningTools() {
       {/* Header */}
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Planning Tools</p>
-        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Ready Steady Go resources 📝</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Plan your four stages 📝</h1>
         <p className="max-w-2xl text-sm md:text-base text-warm-600 leading-relaxed">
-          Download, view and print official NHS Ready Steady Go questionnaires and guides to support
-          your transition journey.
+          See what happens at each stage of your transition, and jump straight to the tools that help.
         </p>
       </header>
 
-      {/* What is RSG */}
+      {/* Overview */}
       <div className="rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50 to-accent-50 px-5 py-5">
-        <h3 className="text-lg font-semibold text-warm-800 mb-3">What is Ready Steady Go?</h3>
-        <p className="text-sm text-warm-600 mb-3">
-          Right now, you see doctors and nurses who work with children and teenagers. As you get older,
-          you'll move to doctors who work with adults. This is called "transition".
-        </p>
-        <p className="text-sm text-warm-600 mb-4">
-          Think of it like moving up in school - you learn new things gradually. The Ready Steady Go
-          programme has three stages to help you:
-        </p>
-        <div className="mt-2"><ReadAloud text="Right now, you see doctors and nurses who work with children and teenagers. As you get older, you'll move to doctors who work with adults. This is called transition. Think of it like moving up in school - you learn new things gradually. The Ready Steady Go programme has three stages to help you." /></div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="bg-white p-4 rounded-xl border border-green-200">
-            <span className="text-2xl mb-2 block">🌱</span>
-            <p className="font-semibold text-green-700 text-sm">Stage 1: Getting Started</p>
-            <p className="text-xs text-warm-600 mt-1">Learn about your health</p>
-          </div>
-          <div className="bg-white p-4 rounded-xl border border-amber-200">
-            <span className="text-2xl mb-2 block">🚴</span>
-            <p className="font-semibold text-amber-700 text-sm">Stage 2: Building Skills</p>
-            <p className="text-xs text-warm-600 mt-1">Practice doing things yourself</p>
-          </div>
-          <div className="bg-white p-4 rounded-xl border border-blue-200">
-            <span className="text-2xl mb-2 block">🎯</span>
-            <p className="font-semibold text-blue-700 text-sm">Stage 3: Almost There</p>
-            <p className="text-xs text-warm-600 mt-1">You're ready for adult care!</p>
-          </div>
+        <h3 className="text-lg font-semibold text-warm-800 mb-3">What is transition?</h3>
+        <p className="text-sm text-warm-600 mb-3">{overviewIntro}</p>
+        <div className="mt-2 mb-4"><ReadAloud text={overviewAudio} /></div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {stages.map((s) => (
+            <div key={s.key} className={`bg-white p-4 rounded-xl border ${s.c.innerBorder}`}>
+              <span className="text-2xl mb-2 block">{s.emoji}</span>
+              <p className={`font-semibold text-sm ${s.c.sub}`}>Stage {s.number}: {s.name}</p>
+              <p className="text-xs text-warm-500">Ages {s.ages}</p>
+              <p className="text-xs text-warm-600 mt-1">{s.summary}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Progress Timeline */}
-      <div className="flex items-center justify-between max-w-xl mx-auto px-4">
-        <div className="flex flex-col items-center flex-1">
-          <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-lg">
-            1
+      {/* Progress strip */}
+      <div className="flex items-center justify-between max-w-2xl mx-auto px-4">
+        {stages.map((s, index) => (
+          <div key={s.key} className="flex items-center flex-1 last:flex-none">
+            <div className="flex flex-col items-center">
+              <div className={`w-12 h-12 rounded-full ${s.c.circle} flex items-center justify-center text-white font-bold text-lg`}>
+                {s.number}
+              </div>
+              <span className={`text-xs font-medium mt-2 text-center ${s.c.sub}`}>{s.name}</span>
+            </div>
+            {index < stages.length - 1 && <div className="flex-1 h-1 bg-warm-200 mx-2 mb-6" />}
           </div>
-          <span className="text-xs font-medium text-green-700 mt-2">Start</span>
-        </div>
-        <div className="flex-1 h-1 bg-gradient-to-r from-green-500 to-amber-500 mx-2" />
-        <div className="flex flex-col items-center flex-1">
-          <div className="w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-lg">
-            2
-          </div>
-          <span className="text-xs font-medium text-amber-700 mt-2">Build</span>
-        </div>
-        <div className="flex-1 h-1 bg-gradient-to-r from-amber-500 to-blue-500 mx-2" />
-        <div className="flex flex-col items-center flex-1">
-          <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg">
-            3
-          </div>
-          <span className="text-xs font-medium text-blue-700 mt-2">Go!</span>
-        </div>
+        ))}
       </div>
 
       {/* Stage Cards */}
       <div className="space-y-4">
-        {/* Getting Started Stage */}
-        <div
-          className={`rounded-2xl border-2 ${expandedStage === 'ready' ? 'border-green-300' : 'border-green-200'} bg-green-50/50 overflow-hidden shadow-card hover:shadow-card-hover transition-all`}
-        >
-          <button onClick={() => toggleStage('ready')} className="w-full px-5 py-5 text-left">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white shrink-0">
-                  <span className="text-xl">📚</span>
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-green-900">Stage 1: Getting Started (Ages 11-13)</h2>
-                  <p className="text-sm text-green-700 mt-1">
-                    Learn about your health condition and start asking questions
-                  </p>
-                </div>
-              </div>
-              <span className="text-green-700 text-xl">{expandedStage === 'ready' ? '−' : '+'}</span>
-            </div>
-          </button>
-
-          {expandedStage === 'ready' && (
-            <div className="px-5 pb-5 space-y-4 border-t border-green-200 pt-4">
-              <div className="bg-white p-4 rounded-xl border border-green-200">
-                <h4 className="font-semibold text-green-900 mb-2">What happens in this stage?</h4>
-                <p className="text-sm text-warm-600 mb-2">
-                  This is the beginning! Right now, your parents or carers probably do most of the
-                  talking at doctor appointments. That's okay - but now it's time to start learning about
-                  your own health.
-                </p>
-                <p className="text-sm text-warm-600">
-                  Don't worry, you won't be doing everything alone yet. This stage is just about
-                  understanding more about yourself and your condition.
-                </p>
-                <div className="mt-2"><ReadAloud text="This is the beginning. Right now, your parents or carers probably do most of the talking at doctor appointments. That is okay. But now it is time to start learning about your own health. Do not worry, you will not be doing everything alone yet. This stage is just about understanding more about yourself and your condition." /></div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-green-900 mb-3">Things you'll learn about:</h4>
-                <ul className="space-y-2">
-                  {[
-                    { title: 'Your health condition', desc: 'What it is, why you have it, and how it affects your body' },
-                    { title: 'Your healthcare team', desc: 'Who the doctors and nurses are, and what each person does' },
-                    { title: 'Asking questions', desc: "It's okay to ask questions! It shows you're interested in your health" },
-                  ].map((item) => (
-                    <li key={item.title} className="flex items-start gap-3 bg-white p-3 rounded-xl">
-                      <span className="text-green-600 mt-0.5">✓</span>
-                      <div>
-                        <p className="font-medium text-sm text-warm-800">{item.title}</p>
-                        <p className="text-xs text-warm-600">{item.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-white p-4 rounded-xl border border-green-200">
-                <h4 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
-                  <span>📄</span>
-                  Getting Started Downloads
-                </h4>
-                <p className="text-xs text-warm-500 mb-3">
-                  Worksheets to help you learn about your health (you can fill these in with your
-                  parent/carer or doctor)
-                </p>
-                <div className="space-y-2">
-                  <a
-                    href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygoreadyquestionnaire_1-3_1.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 bg-green-50 hover:bg-green-100 rounded-xl transition-colors group"
-                  >
-                    <span className="text-sm font-medium text-warm-800">Ready Questionnaire (PDF)</span>
-                    <span className="text-green-600">↗</span>
-                  </a>
-                  <a
-                    href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/easy-read-ready-3.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 bg-green-50 hover:bg-green-100 rounded-xl transition-colors group"
-                  >
-                    <span className="text-sm font-medium text-warm-800">Ready Questionnaire (Easy Read)</span>
-                    <span className="text-green-600">↗</span>
-                  </a>
-                </div>
-              </div>
-
-              <a
-                href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygoreadyquestionnaire_1-3_1.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-center px-4 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-medium transition-colors"
+        {stages.map((s) => {
+          const open = expandedStage === s.key
+          return (
+            <div
+              key={s.key}
+              className={`rounded-2xl border-2 ${open ? s.c.cardBorderOpen : s.c.cardBorder} ${s.c.cardBg} overflow-hidden shadow-card hover:shadow-card-hover transition-all`}
+            >
+              <button
+                onClick={() => toggleStage(s.key)}
+                aria-expanded={open}
+                className="w-full px-5 py-5 text-left"
               >
-                Open Ready Questionnaire on RSG website ↗
-              </a>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-4">
+                    <div className={`w-12 h-12 rounded-full ${s.c.circle} flex items-center justify-center text-white shrink-0`}>
+                      <span className="text-xl">{s.emoji}</span>
+                    </div>
+                    <div>
+                      <h2 className={`text-xl font-bold ${s.c.heading}`}>
+                        Stage {s.number}: {s.name} (Ages {s.ages})
+                      </h2>
+                      <p className={`text-sm mt-1 ${s.c.sub}`}>{s.summary}</p>
+                    </div>
+                  </div>
+                  <span className={`${s.c.sub} text-xl`}>{open ? '−' : '+'}</span>
+                </div>
+              </button>
+
+              {open && (
+                <div className={`px-5 pb-5 space-y-4 border-t ${s.c.divider} pt-4`}>
+                  <div className={`bg-white p-4 rounded-xl border ${s.c.innerBorder}`}>
+                    <h4 className={`font-semibold mb-2 ${s.c.heading}`}>What happens in this stage?</h4>
+                    {s.intro.map((p, i) => (
+                      <p key={i} className="text-sm text-warm-600 mb-2 last:mb-0">{p}</p>
+                    ))}
+                    <div className="mt-2"><ReadAloud text={s.introAudio} /></div>
+                  </div>
+
+                  <div>
+                    <h4 className={`font-semibold mb-3 ${s.c.heading}`}>{s.learnHeading}</h4>
+                    <ul className="space-y-2">
+                      {s.learn.map((item) => (
+                        <li key={item.title} className="flex items-start gap-3 bg-white p-3 rounded-xl">
+                          <span className={`${s.c.tick} mt-0.5`}>✓</span>
+                          <div>
+                            <p className="font-medium text-sm text-warm-800">{item.title}</p>
+                            <p className="text-xs text-warm-600">{item.desc}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className={`bg-white p-4 rounded-xl border ${s.c.innerBorder}`}>
+                    <h4 className={`font-semibold mb-2 flex items-center gap-2 ${s.c.heading}`}>
+                      <span>🧰</span>
+                      Tools for this stage
+                    </h4>
+                    <div className="space-y-2">
+                      {s.tools.map((tool) => (
+                        <Link
+                          key={tool.to}
+                          to={tool.to}
+                          className={`flex items-center justify-between p-3 ${s.c.toolBg} rounded-xl transition-colors`}
+                        >
+                          <span className="text-sm font-medium text-warm-800">{tool.label}</span>
+                          <span className={s.c.toolText}>→</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {s.key === 'almost-there' && (
+                    <div className="bg-gradient-to-r from-blue-100 via-purple-100 to-primary-100 rounded-xl p-4 border border-blue-200">
+                      <h4 className="font-semibold text-blue-900 mb-2">Feeling nervous?</h4>
+                      <p className="text-sm text-warm-600 mb-2">
+                        It's completely normal to feel worried about moving to adult services. Lots of young
+                        people feel the same way!
+                      </p>
+                      <p className="text-sm text-warm-600">
+                        Remember: your adult healthcare team are experts at helping people like you. They know
+                        you're moving from children's services and they'll help you settle in.
+                      </p>
+                      <div className="mt-2"><ReadAloud text="It is completely normal to feel worried about moving to adult services. Lots of young people feel the same way. Remember, your adult healthcare team are experts at helping people like you. They know you are moving from children's services and they will help you settle in." /></div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-
-        {/* Building Skills Stage */}
-        <div
-          className={`rounded-2xl border-2 ${expandedStage === 'steady' ? 'border-amber-300' : 'border-amber-200'} bg-amber-50/50 overflow-hidden shadow-card hover:shadow-card-hover transition-all`}
-        >
-          <button onClick={() => toggleStage('steady')} className="w-full px-5 py-5 text-left">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center text-white shrink-0">
-                  <span className="text-xl">🎯</span>
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-amber-900">Stage 2: Building Skills (Ages 14-15)</h2>
-                  <p className="text-sm text-amber-700 mt-1">
-                    Start doing more for yourself with support nearby
-                  </p>
-                </div>
-              </div>
-              <span className="text-amber-700 text-xl">{expandedStage === 'steady' ? '−' : '+'}</span>
-            </div>
-          </button>
-
-          {expandedStage === 'steady' && (
-            <div className="px-5 pb-5 space-y-4 border-t border-amber-200 pt-4">
-              <div className="bg-white p-4 rounded-xl border border-amber-200">
-                <h4 className="font-semibold text-amber-900 mb-2">What happens in this stage?</h4>
-                <p className="text-sm text-warm-600 mb-2">
-                  Now you know about your health, it's time to practice doing some things yourself! Think
-                  of it like learning to ride a bike - at first someone holds the bike steady, then they
-                  let go but stay close, and finally you're riding on your own.
-                </p>
-                <p className="text-sm text-warm-600">
-                  Your parents and healthcare team are still here to help, but you'll gradually start
-                  doing more things independently.
-                </p>
-                <div className="mt-2"><ReadAloud text="Now you know about your health, it is time to practice doing some things yourself. Think of it like learning to ride a bike. At first someone holds the bike steady, then they let go but stay close, and finally you are riding on your own. Your parents and healthcare team are still here to help, but you will gradually start doing more things independently." /></div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-amber-900 mb-3">Skills you'll practice:</h4>
-                <ul className="space-y-2">
-                  {[
-                    { title: 'Booking appointments', desc: 'Learning to call the surgery or hospital to arrange your own appointments' },
-                    { title: 'Understanding your medicines', desc: 'Knowing what tablets or treatments you take, when, and what they do' },
-                    { title: 'Talking about your health', desc: 'Being able to explain your condition to teachers, friends, or others' },
-                    { title: 'Managing at school/college', desc: 'Working out how to handle your health needs while studying' },
-                  ].map((item) => (
-                    <li key={item.title} className="flex items-start gap-3 bg-white p-3 rounded-xl">
-                      <span className="text-amber-600 mt-0.5">✓</span>
-                      <div>
-                        <p className="font-medium text-sm text-warm-800">{item.title}</p>
-                        <p className="text-xs text-warm-600">{item.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-white p-4 rounded-xl border border-amber-200">
-                <h4 className="font-semibold text-amber-900 mb-2 flex items-center gap-2">
-                  <span>📄</span>
-                  Building Skills Downloads
-                </h4>
-                <p className="text-xs text-warm-500 mb-3">Worksheets to track your growing independence</p>
-                <div className="space-y-2">
-                  <a
-                    href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygosteadyquestionnaire_1-2_1.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors group"
-                  >
-                    <span className="text-sm font-medium text-warm-800">Steady Questionnaire (PDF)</span>
-                    <span className="text-amber-600">↗</span>
-                  </a>
-                  <a
-                    href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/easy-read-steady-3.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors group"
-                  >
-                    <span className="text-sm font-medium text-warm-800">Steady Questionnaire (Easy Read)</span>
-                    <span className="text-amber-600">↗</span>
-                  </a>
-                </div>
-              </div>
-
-              <a
-                href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygosteadyquestionnaire_1-2_1.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-center px-4 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
-              >
-                Open Steady Questionnaire on RSG website ↗
-              </a>
-            </div>
-          )}
-        </div>
-
-        {/* Almost There Stage */}
-        <div
-          className={`rounded-2xl border-2 ${expandedStage === 'go' ? 'border-blue-300' : 'border-blue-200'} bg-blue-50/50 overflow-hidden shadow-card hover:shadow-card-hover transition-all`}
-        >
-          <button onClick={() => toggleStage('go')} className="w-full px-5 py-5 text-left">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white shrink-0">
-                  <span className="text-xl">🚀</span>
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-blue-900">Stage 3: Almost There (Ages 16-17)</h2>
-                  <p className="text-sm text-blue-700 mt-1">
-                    Get ready to move to adult healthcare services
-                  </p>
-                </div>
-              </div>
-              <span className="text-blue-700 text-xl">{expandedStage === 'go' ? '−' : '+'}</span>
-            </div>
-          </button>
-
-          {expandedStage === 'go' && (
-            <div className="px-5 pb-5 space-y-4 border-t border-blue-200 pt-4">
-              <div className="bg-white p-4 rounded-xl border border-blue-200">
-                <h4 className="font-semibold text-blue-900 mb-2">What happens in this stage?</h4>
-                <p className="text-sm text-warm-600 mb-2">
-                  You're nearly there! This is when you prepare to move from children's healthcare to
-                  adult healthcare. It might feel a bit scary, but you've been building up to this through
-                  the Ready and Steady stages.
-                </p>
-                <p className="text-sm text-warm-600">
-                  The adult healthcare team works differently from the children's team, but they're still
-                  there to help you.
-                </p>
-                <div className="mt-2"><ReadAloud text="You are nearly there. This is when you prepare to move from children's healthcare to adult healthcare. It might feel a bit scary, but you have been building up to this through the Ready and Steady stages. The adult healthcare team works differently from the children's team, but they are still there to help you." /></div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-blue-900 mb-3">What you'll learn about:</h4>
-                <ul className="space-y-2">
-                  {[
-                    { title: 'How adult healthcare is different', desc: 'Adult clinics might be in different buildings, appointments longer apart' },
-                    { title: 'Your rights and responsibilities', desc: 'What you can legally decide, and what you are responsible for' },
-                    { title: 'Managing health with work or university', desc: 'How to tell employers or lecturers about your needs' },
-                    { title: 'Meeting your new healthcare team', desc: 'What to expect in your first adult clinic appointment' },
-                  ].map((item) => (
-                    <li key={item.title} className="flex items-start gap-3 bg-white p-3 rounded-xl">
-                      <span className="text-blue-600 mt-0.5">✓</span>
-                      <div>
-                        <p className="font-medium text-sm text-warm-800">{item.title}</p>
-                        <p className="text-xs text-warm-600">{item.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-gradient-to-r from-blue-100 via-purple-100 to-primary-100 rounded-xl p-4 border border-blue-200">
-                <h4 className="font-semibold text-blue-900 mb-2">Feeling nervous?</h4>
-                <p className="text-sm text-warm-600 mb-2">
-                  It's completely normal to feel worried about moving to adult services. Lots of young
-                  people feel the same way!
-                </p>
-                <p className="text-sm text-warm-600">
-                  Remember: your adult healthcare team are experts at helping people like you. They know
-                  you're moving from children's services and they'll help you settle in.
-                </p>
-                <div className="mt-2"><ReadAloud text="It is completely normal to feel worried about moving to adult services. Lots of young people feel the same way. Remember, your adult healthcare team are experts at helping people like you. They know you are moving from children's services and they will help you settle in." /></div>
-              </div>
-
-              <div className="bg-white p-4 rounded-xl border border-blue-200">
-                <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
-                  <span>📄</span>
-                  Almost There Downloads
-                </h4>
-                <p className="text-xs text-warm-500 mb-3">Final preparation tools for your transition</p>
-                <div className="space-y-2">
-                  <a
-                    href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygogoquestionnaire_1-2_1.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors group"
-                  >
-                    <span className="text-sm font-medium text-warm-800">Go Questionnaire (PDF)</span>
-                    <span className="text-blue-600">↗</span>
-                  </a>
-                  <a
-                    href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/easy-read-go-3.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors group"
-                  >
-                    <span className="text-sm font-medium text-warm-800">Go Questionnaire (Easy Read)</span>
-                    <span className="text-blue-600">↗</span>
-                  </a>
-                </div>
-              </div>
-
-              <a
-                href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygogoquestionnaire_1-2_1.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-center px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
-              >
-                Open Go Questionnaire on RSG website ↗
-              </a>
-            </div>
-          )}
-        </div>
+          )
+        })}
       </div>
 
-      {/* Parent Resources */}
+      {/* For families */}
       <div className="rounded-2xl border border-purple-200 bg-white overflow-hidden shadow-card">
         <div className="px-5 py-5">
           <div className="flex items-start gap-4">
@@ -399,46 +352,20 @@ export function PlanningTools() {
             </div>
           </div>
           <div className="mt-4 space-y-2">
-            <a
-              href="https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygoparentplanpatientinformation_1-2_1.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-3 bg-purple-50 hover:bg-purple-100 rounded-xl transition-colors group"
+            <Link
+              to="/checklist"
+              className="flex items-center justify-between p-3 bg-purple-50 hover:bg-purple-100 rounded-xl transition-colors"
             >
-              <span className="text-sm font-medium text-warm-800">Parent Questionnaire (PDF)</span>
-              <span className="text-purple-600">↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Acknowledgement */}
-      <div className="rounded-2xl border border-warm-200 bg-warm-50 px-5 py-4">
-        <div className="flex items-start gap-3">
-          <span className="text-xl">💜</span>
-          <div>
-            <h4 className="font-semibold text-warm-800 text-sm mb-1">Acknowledgement</h4>
-            <p className="text-xs text-warm-600 mb-2">
-              This app is designed to complement the Ready Steady Go &amp; Hello programme. We encourage
-              all users to access the official questionnaires and resources at{' '}
-              <a
-                href="https://www.readysteadygo.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-600 hover:text-primary-700 underline"
-              >
-                www.readysteadygo.net
-              </a>.
-            </p>
-            <p className="text-[0.65rem] text-warm-500 leading-relaxed">
-              'Ready Steady Go' and 'Hello to adult services' developed by the Transition Steering Group
-              led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at
-              Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust based
-              on the work of: 1. S Whitehouse and MC Paone. Bridging the gap from youth to adulthood.
-              Contemporary Pediatrics; 1998, December. 13-16. 2. Paone MC, Wigle M, Saewyc E.
-              The ON TRAC model for transitional care of adolescents. Prog Transplant 2006;16:291-302
-              3. Janet E McDonagh et al, J Child Health Care 2006;10(1):22-42.
-            </p>
+              <span className="text-sm font-medium text-warm-800">Open the transition checklist</span>
+              <span className="text-purple-600">→</span>
+            </Link>
+            <Link
+              to="/rights"
+              className="flex items-center justify-between p-3 bg-purple-50 hover:bg-purple-100 rounded-xl transition-colors"
+            >
+              <span className="text-sm font-medium text-warm-800">Consent and rights at each age</span>
+              <span className="text-purple-600">→</span>
+            </Link>
           </div>
         </div>
       </div>

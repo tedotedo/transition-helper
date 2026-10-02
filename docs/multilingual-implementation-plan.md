@@ -52,11 +52,11 @@ Chinese community (0.5%) is relatively small but if included, **Simplified Chine
 | **Error Messages** | ~20 messages | ~30 | Medium |
 | **Total Estimated** | - | **~3,000** | - |
 
-### 2.2 Easy Read Consideration
+### 2.2 Simple language Consideration
 
-The app already has "Easy Read" variants for accessibility. For multilingual:
-- **Option A:** Translate both Standard and Easy Read versions (6,000 strings per language)
-- **Option B:** Translate Standard only; offer Easy Read in English (3,000 strings per language)
+The app already has "Simple language" variants for accessibility. For multilingual:
+- **Option A:** Translate both Standard and Simple language versions (6,000 strings per language)
+- **Option B:** Translate Standard only; offer Simple language in English (3,000 strings per language)
 - **Recommended:** Option A for Tier 1 languages, Option B for Tier 2-3
 
 ### 2.3 RTL (Right-to-Left) Languages
@@ -80,7 +80,7 @@ Reasons:
 - Excellent TypeScript support
 - Namespace support (group by feature/page)
 - Pluralization and interpolation built-in
-- Easy Read variants can use nested keys
+- Simple language variants can use nested keys
 - Good RTL support
 
 Alternative: `lingui` (smaller bundle, good for PWAs)
@@ -103,7 +103,7 @@ src/
 │       │   ├── faq.json         # Questions & Answers
 │       │   ├── rights.json      # Rights Hub + consent pages
 │       │   ├── journey.json     # My Journey activities
-│       │   └── easyRead.json    # Easy Read variants (all)
+│       │   └── simpleLanguage.json    # Simple language variants (all)
 │       ├── ur/                  # Urdu
 │       │   └── [same structure]
 │       ├── ar/                  # Arabic
@@ -139,7 +139,7 @@ src/
       "manageTeam": "Manage Care Team"
     }
   },
-  "easyRead": {
+  "simpleLanguage": {
     "home": {
       "hero": {
         "youngPerson": {
@@ -234,21 +234,21 @@ Value: ISO 639-1 code (`en`, `ur`, `ar`, `pa`, `bn`, `ti`, `ps`)
 
 **Deliverable:** All content pages translated
 
-### Phase 5: Easy Read Translations
+### Phase 5: Simple language Translations
 **Duration:** Sprint 7
 
-1. Extract Easy Read variants for all translated content
-2. Translate Easy Read versions for Tier 1 languages
-3. Test Easy Read toggle in each language
+1. Extract Simple language variants for all translated content
+2. Translate Simple language versions for Tier 1 languages
+3. Test Simple language toggle in each language
 4. Review with accessibility consultants
 
-**Deliverable:** Full Easy Read support in Tier 1 languages
+**Deliverable:** Full Simple language support in Tier 1 languages
 
 ### Phase 6: PDF & Resources
 **Duration:** Sprint 8
 
 1. Create translated PDF landing pages
-2. Source or create translated Ready Steady Go materials
+2. Create translated versions of the app's own resources
 3. Add language-specific resource links
 4. Create "Resources in Your Language" section
 
@@ -569,7 +569,7 @@ i18n.loadNamespaces(['common', 'home']);
 | Phase 2: Core UI | 2 weeks | EN, UR, AR, PA | Navigation translated |
 | Phase 3: Key Features | 4 weeks | EN, UR, AR, PA | Core features translated |
 | Phase 4: Content Pages | 4 weeks | EN, UR, AR, PA | All pages translated |
-| Phase 5: Easy Read | 2 weeks | UR, AR, PA | Easy Read in Tier 1 |
+| Phase 5: Simple language | 2 weeks | UR, AR, PA | Simple language in Tier 1 |
 | Phase 6: Resources | 2 weeks | All | Resource guidance |
 | Phase 7: Testing | 4 weeks | All | Production ready |
 | **Total** | **20 weeks** | **6 languages** | **Full multilingual** |

@@ -1,9 +1,7 @@
 import ReadAloud from '../components/ReadAloud'
 import { Link } from 'react-router-dom'
 
-const rsgSite = 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883'
-
-const resources = [
+const ownResources = [
   {
     title: "Zach's transition journey comic",
     emoji: '🎨',
@@ -11,83 +9,59 @@ const resources = [
       'A picture-led comic strip explaining transition in short, friendly steps for anyone who prefers a visual format.',
     href: '/comic-guide',
     audience: 'Young person and family',
-    internal: true,
+    linkLabel: 'Open visual guide →',
   },
   {
-    title: 'Ready questionnaire (age 11–13)',
-    emoji: '🌱',
-    description:
-      "Helps younger children start talking about their condition, who's in their team, and what they understand so far.",
-    href: `${rsgSite}/readysteadygoreadyquestionnaire_1-3_1.pdf`,
+    title: 'My Transition Checklist',
+    emoji: '✅',
+    description: 'Practical tasks for each stage, from 11 to 18 and beyond. Tick them off at your own pace.',
+    href: '/checklist',
     audience: 'Young person',
-    easyReadHref: `${rsgSite}/easy-read-ready-3.pdf`,
+    linkLabel: 'Open the checklist →',
   },
   {
-    title: 'Steady questionnaire (age 14–15)',
-    emoji: '💪',
-    description:
-      'Helps you think about independence, your medicines, and what you want to know before transition.',
-    href: `${rsgSite}/readysteadygosteadyquestionnaire_1-2_1.pdf`,
+    title: 'Skills Builder',
+    emoji: '🛠️',
+    description: 'Practise real-life skills, like booking an appointment or explaining how you feel.',
+    href: '/skills',
     audience: 'Young person',
-    easyReadHref: `${rsgSite}/easy-read-steady-3.pdf`,
-  },
-  {
-    title: 'Go questionnaire (age 16–17)',
-    emoji: '🚀',
-    description:
-      "For when you're getting close to moving to adult services. Fill it in and bring it to your next appointment!",
-    href: `${rsgSite}/readysteadygogoquestionnaire_1-2_1.pdf`,
-    audience: 'Young person',
-    easyReadHref: `${rsgSite}/easy-read-go-3.pdf`,
-  },
-  {
-    title: 'Ready Steady Go transition plan',
-    emoji: '📋',
-    description:
-      'A plan that you, your family, and your team can fill in together to record your goals and next steps.',
-    href: `${rsgSite}/ready-steady-go-transition-plan_1-2_1.pdf`,
-    audience: 'Young person and family',
-  },
-  {
-    title: 'Parent plan and info',
-    emoji: '👨‍👩‍👧',
-    description:
-      'Info and questions for parents and carers to think about how to support growing independence.',
-    href: `${rsgSite}/readysteadygoparentplanpatientinformation_1-2_1.pdf`,
-    audience: 'Parent or carer',
-  },
-  {
-    title: 'Moving into adult care',
-    emoji: '🎓',
-    description:
-      'Easy-to-understand info about what to expect from adult services and how they might work differently.',
-    href: `${rsgSite}/transitionmovingintoadultcare-patientinformation_2.pdf`,
-    audience: 'Young person and family',
-  },
-  {
-    title: 'Easy-read booklet',
-    emoji: '📖',
-    description:
-      'A booklet explaining Ready Steady Go with simple words and pictures - great for everyone!',
-    href: `${rsgSite}/ready-steady-go-programme-easy-read-booklet-2459-patient-information.pdf`,
-    audience: 'Young person and family',
+    linkLabel: 'Open Skills Builder →',
   },
 ]
+
+// Third-party documents. Links are unchanged from the original publisher.
+const thirdPartySite = 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883'
+
+const thirdPartyDocs = [
+  { title: 'Ready questionnaire (age 11–13)', href: `${thirdPartySite}/readysteadygoreadyquestionnaire_1-3_1.pdf` },
+  { title: 'Ready questionnaire (Easy Read)', href: `${thirdPartySite}/easy-read-ready-3.pdf` },
+  { title: 'Steady questionnaire (age 14–15)', href: `${thirdPartySite}/readysteadygosteadyquestionnaire_1-2_1.pdf` },
+  { title: 'Steady questionnaire (Easy Read)', href: `${thirdPartySite}/easy-read-steady-3.pdf` },
+  { title: 'Go questionnaire (age 16–17)', href: `${thirdPartySite}/readysteadygogoquestionnaire_1-2_1.pdf` },
+  { title: 'Go questionnaire (Easy Read)', href: `${thirdPartySite}/easy-read-go-3.pdf` },
+  { title: 'Ready Steady Go transition plan', href: `${thirdPartySite}/ready-steady-go-transition-plan_1-2_1.pdf` },
+  { title: 'Parent plan and information', href: `${thirdPartySite}/readysteadygoparentplanpatientinformation_1-2_1.pdf` },
+  { title: 'Moving into adult care', href: `${thirdPartySite}/transitionmovingintoadultcare-patientinformation_2.pdf` },
+  { title: 'Ready Steady Go programme Easy Read booklet', href: `${thirdPartySite}/ready-steady-go-programme-easy-read-booklet-2459-patient-information.pdf` },
+]
+
+const thirdPartyIntro =
+  "Ready Steady Go is a separate transition programme from Southampton Children's Hospital / RSG-TIER. These are their original, unchanged documents. This app does not contain or adapt them."
 
 export function Resources() {
   return (
     <div className="space-y-8 animate-fade-in">
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Resources</p>
-        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Ready Steady Go resources 📚</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Resources 📚</h1>
         <p className="max-w-2xl text-sm md:text-base text-warm-600 leading-relaxed">
-          These official resources are provided by the Ready Steady Go &amp; Hello programme. We link directly to the original materials on the official RSG website so you always have the latest versions.
+          Tools in this app that can help you get ready to move to adult services.
         </p>
-        <div className="mt-2"><ReadAloud text="These official resources are provided by the Ready Steady Go and Hello programme. We link directly to the original materials on the official RSG website so you always have the latest versions." /></div>
+        <div className="mt-2"><ReadAloud text="Tools in this app that can help you get ready to move to adult services." /></div>
       </header>
 
       <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {resources.map((item) => (
+        {ownResources.map((item) => (
           <article
             key={item.title}
             className="group flex h-full flex-col rounded-2xl border border-warm-200 bg-white px-5 py-5 shadow-card text-sm transition-all duration-300 hover:border-primary-200 hover:shadow-card-hover hover:-translate-y-0.5"
@@ -98,65 +72,84 @@ export function Resources() {
             </div>
             <h2 className="mt-2 text-base font-semibold text-warm-800">{item.title}</h2>
             <p className="mt-2 flex-1 text-warm-600 leading-relaxed">{item.description}</p>
-            <div className="mt-4 space-y-2">
-              {'internal' in item && item.internal ? (
-                <Link
-                  to={item.href}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
-                >
-                  Open visual guide →
-                </Link>
-              ) : (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
-                >
-                  Open PDF on RSG website ↗
-                </a>
-              )}
-              {item.easyReadHref && (
-                <a
-                  href={item.easyReadHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-xs font-medium text-warm-500 hover:text-primary-600 transition-colors"
-                >
-                  📖 Easy-read version (PDF) ↗
-                </a>
-              )}
+            <div className="mt-4">
+              <Link
+                to={item.href}
+                className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+              >
+                {item.linkLabel}
+              </Link>
             </div>
           </article>
         ))}
       </section>
 
-      <section className="text-sm text-warm-500 bg-warm-50 px-4 py-3 rounded-xl border border-warm-100 space-y-3">
+      <section className="text-sm text-warm-600 bg-warm-50 px-4 py-4 rounded-xl border border-warm-100 space-y-2">
+        <h2 className="text-base font-semibold text-warm-800">Read more: national guidance</h2>
         <p>
-          These documents are hosted on the official{' '}
+          The{' '}
+          <a
+            href="https://www.nice.org.uk/guidance/ng43"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-600 underline hover:text-primary-700"
+          >
+            NICE guideline NG43: Transition from children's to adults' services ↗
+          </a>{' '}
+          is the national guidance on how health and social care services should plan the move to adult services. It is NICE's own document and is separate from this app.
+        </p>
+        <p className="text-xs text-warm-500">For the most up-to-date guidance, see the official NICE website.</p>
+      </section>
+
+      {/* Separate third-party resource: kept apart from the rest of the app */}
+      <section
+        aria-labelledby="other-resource-heading"
+        className="rounded-2xl border border-warm-200 bg-white px-5 py-5 shadow-card space-y-4"
+      >
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Other resource</p>
+          <h2 id="other-resource-heading" className="mt-1 text-lg font-bold text-warm-800">
+            Ready Steady Go (separate programme)
+          </h2>
+          <p className="mt-2 text-sm text-warm-600 leading-relaxed">{thirdPartyIntro}</p>
+          <div className="mt-2"><ReadAloud text={thirdPartyIntro} /></div>
+        </div>
+
+        <ul className="space-y-2">
+          {thirdPartyDocs.map((doc) => (
+            <li key={doc.href}>
+              <a
+                href={doc.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3 bg-warm-50 hover:bg-warm-100 rounded-xl transition-colors text-sm font-medium text-warm-800"
+              >
+                <span>{doc.title} (PDF)</span>
+                <span className="text-warm-500">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <p className="text-sm text-warm-600">
+          Their website is at{' '}
           <a
             href="https://www.readysteadygo.net/rsg.html"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-600 underline hover:text-primary-700"
           >
-            Ready Steady Go website
-          </a>. For the latest details about how your local service uses Ready Steady Go, check with your hospital or clinic.
+            www.readysteadygo.net ↗
+          </a>
+          . Please check their terms before you use or share the documents. They say the materials can be used in their original format for non-commercial purposes only, with no changes. For the most up-to-date versions, see the official Ready Steady Go website.
         </p>
-        <div className="p-3 bg-white/60 rounded-lg border border-warm-200 text-xs text-warm-500 leading-relaxed space-y-2">
+
+        <div className="p-3 bg-warm-50 rounded-lg border border-warm-200 text-xs text-warm-600 leading-relaxed space-y-1">
+          <p>© Copyright RSG-TIER 2024/5</p>
           <p>
-            'Ready Steady Go' and 'Hello to adult services' developed by the Transition Steering Group
-            led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at
-            Southampton Children's Hospital, University Hospital Southampton NHS Foundation Trust based
-            on the work of:
+            “Ready Steady Go’ and ‘Hello to adult services’ developed by the Transition Steering Group led by Dr Arvind Nagra, paediatric nephrologist and clinical lead for transitional care at Southampton Children’s Hospital, University Hospital Southampton NHS Foundation Trust.
           </p>
-          <ol className="list-decimal list-inside space-y-1">
-            <li>S Whitehouse and MC Paone. Bridging the gap from youth to adulthood. Contemporary Pediatrics; 1998, December. 13-16.</li>
-            <li>Paone MC, Wigle M, Saewyc E. The ON TRAC model for transitional care of adolescents. Prog Transplant 2006;16:291-302</li>
-            <li>Janet E McDonagh et al, J Child Health Care 2006;10(1):22-42.</li>
-          </ol>
         </div>
-        <div className="mt-2"><ReadAloud text="These documents are hosted on the official Ready Steady Go website. For the latest details about how your local service uses Ready Steady Go, check with your hospital or clinic." /></div>
       </section>
     </div>
   )

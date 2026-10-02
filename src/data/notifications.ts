@@ -21,9 +21,9 @@ export const defaultNotifications: Notification[] = [
   {
     id: 'reminder-1',
     type: 'reminder',
-    title: 'Time to fill in your questionnaire? 📋',
-    message: 'Have you completed your official Ready Steady Go questionnaire? Visit the RSG website to download it and bring it to your next appointment.',
-    href: 'https://www.readysteadygo.net/rsg.html',
+    title: 'Time to check your checklist? 📋',
+    message: 'Have you ticked off any tasks lately? Open your checklist to see what you can do next.',
+    href: '/checklist',
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), // 3 days ago
   },
   {

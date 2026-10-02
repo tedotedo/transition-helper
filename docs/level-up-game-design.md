@@ -65,8 +65,8 @@ An interactive, game-like experience that reframes healthcare transition from so
         START                                          FINISH
           │                                              │
     ┌─────┴─────┐    ┌───────────┐    ┌───────────┐    ┌┴────────┐
-    │  Getting  │───▶│  Getting  │───▶│  Ready    │───▶│  GO!    │
-    │  Ready    │    │  Steady   │    │  Steady   │    │  Adult  │
+    │  Getting  │───▶│ Building  │───▶│  Almost   │───▶│ Flying  │
+    │  Started  │    │  Skills   │    │  There    │    │  Solo   │
     │  (11-13)  │    │  (14-15)  │    │  (16-17)  │    │  (18+)  │
     └───────────┘    └───────────┘    └───────────┘    └─────────┘
          🌱               🌿               🌳              🌲
@@ -82,7 +82,7 @@ An interactive, game-like experience that reframes healthcare transition from so
 **Data Structure:**
 ```typescript
 interface JourneyProgress {
-  currentStage: 'getting-ready' | 'getting-steady' | 'ready-steady' | 'go';
+  currentStage: 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo';
   stagesVisited: string[];
   characterCustomization: {
     avatar: string;
