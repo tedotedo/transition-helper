@@ -120,6 +120,7 @@ All user data is stored in localStorage using these keys:
 | `transition-level-up-progress` | Level Up | `{ powersViewed, mythsFlipped, badgesEarned, visitDates }` |
 | `transition-skills-completed` | SkillsBuilder | `string[]` (array of completed skill IDs) |
 | `transition-intro-shown` | WelcomeIntro | `'true'` once the first-visit intro video has been viewed or dismissed |
+| `transition-age-band` | AgeBand, JourneyQuiz, ParentQuiz | Plain string: `'under-11' \| '11-13' \| '14-15' \| '16-17' \| '18+' \| 'skipped'`. Absent until asked. Local only |
 
 The `useLocalStorage` hook handles persistence with automatic JSON serialization.
 
@@ -432,3 +433,11 @@ The app does not contain or adapt any material from the NHS Ready Steady Go prog
 - A note to check their terms (non-commercial use, original format, no changes)
 
 Do not add Ready Steady Go wording, stage names, questionnaire items, branding or links anywhere else in the app, and do not put the acknowledgement in the footer or About page.
+
+## Age-based stage default
+
+- `src/utils/ageStage.ts` maps the stored age group to a stage (under 11 and 11-13 Getting Started, 14-15 Building Skills, 16-17 Almost There, 18+ Flying Solo). No age, or 'skipped', falls back to Almost There.
+- `useAgeStage()` / `useStoredAge()` (in `src/hooks/useAgeStage.ts`) read it and update live when it changes.
+- A stage the user taps is saved as `stageChoice` in the checklist data, tagged with the age group it was chosen under. Changing the age group makes the new age stage the default again.
+- The age question lives in `src/components/age/AgeBand.tsx`: a skippable card on Home, plus a "My age group" button in the sidebar and More menu that opens a dialog. The first-visit quizzes also save the age.
+- The age is stored in localStorage only and is listed on the Privacy page.

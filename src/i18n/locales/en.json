@@ -344,5 +344,22 @@
     "select": "Language",
     "english": "English",
     "urdu": "اردو"
+  },
+  "age": {
+    "title": "How old are you?",
+    "titleParent": "How old is your young person?",
+    "help": "We use this to show the stage that fits you. It stays on this device only. You can skip it and change it any time.",
+    "helpParent": "We use this to show the stage that fits them. It stays on this device only. You can skip it and change it any time.",
+    "helpSimple": "Pick an age group. It stays on this device only.",
+    "groupLabel": "Age group",
+    "under11": "Under 11",
+    "skip": "Skip for now",
+    "clear": "Don't use my age",
+    "close": "Close",
+    "settingsLabel": "My age group",
+    "setNow": "Set my age group",
+    "change": "Change",
+    "yourStage": "Your stage",
+    "yourStageIs": "Your stage:"
   }
 }

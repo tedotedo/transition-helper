@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { useLocalStorage } from '../hooks'
-
-type Stage = 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo'
+import { useTranslation } from 'react-i18next'
+import { useLocalStorage, useStoredAge } from '../hooks'
+import { choiceKey, readStoredAge, resolveStage, stageFromStoredAge, type Stage, type StageChoice } from '../utils/ageStage'
 
 interface ChecklistItem {
   id: string
@@ -13,6 +13,8 @@ interface ChecklistItem {
 interface ChecklistData {
   completedItems: string[]
   currentStage: Stage
+  // Set when the user taps a stage themselves. Without it, the stage follows their age group.
+  stageChoice?: StageChoice
   lastUpdated?: string
 }
 
@@ -68,19 +70,12 @@ export function Checklist() {
   const [data, setData] = useLocalStorage<ChecklistData>(CHECKLIST_STORAGE_KEY, initialData)
   const [showAllStages, setShowAllStages] = useState(false)
 
-  // Map stage ids saved by earlier versions of the app
-  const stageMap: Record<string, Stage> = {
-    'ready': 'getting-started',
-    'steady': 'building-skills',
-    'go': 'almost-there',
-    'adult': 'flying-solo',
-  }
-  const migratedStage = stageMap[data.currentStage] || data.currentStage as Stage
-  if (migratedStage !== data.currentStage) {
-    setData(prev => ({ ...prev, currentStage: migratedStage }))
-  }
+  const { t } = useTranslation()
+  const storedAge = useStoredAge()
+  const ageStage = stageFromStoredAge(storedAge)
   const { completedItems } = data
-  const currentStage = migratedStage
+  // The stage follows the user's age group unless they have tapped a different one
+  const currentStage = resolveStage(data, storedAge)
 
   const toggleItem = useCallback((itemId: string) => {
     setData(prev => ({
@@ -96,9 +91,10 @@ export function Checklist() {
     setData(prev => ({
       ...prev,
       currentStage: stage,
+      stageChoice: { stage, band: choiceKey(storedAge) },
       lastUpdated: new Date().toISOString()
     }))
-  }, [setData])
+  }, [setData, storedAge])
 
   // Get items for current stage (or all stages if showing all)
   const displayItems = showAllStages
@@ -152,6 +148,11 @@ export function Checklist() {
                 <p className="text-xs text-primary-600 font-medium mt-1">
                   {stageCompleted}/{stageItems.length} done
                 </p>
+                {stage === ageStage && (
+                  <span className="mt-1 inline-block rounded-full bg-primary-100 px-2 py-0.5 text-[0.65rem] font-bold text-primary-700">
+                    {t('age.yourStage', 'Your stage')}
+                  </span>
+                )}
               </button>
             )
           })}
@@ -295,28 +296,19 @@ function ChecklistItemRow({ item, completed, onToggle }: ChecklistItemRowProps) 
 
 // Export helper function for getting checklist progress (used by Home page)
 export function getChecklistProgress(): { completed: number; total: number; stage: Stage; percent: number } {
-  const stored = localStorage.getItem(CHECKLIST_STORAGE_KEY)
-  if (!stored) {
-    const defaultStageItems = checklistItems.filter(item => item.stage === 'almost-there')
-    return { completed: 0, total: defaultStageItems.length, stage: 'almost-there', percent: 0 }
+  const storedAge = readStoredAge()
+  let saved: ChecklistData | null = null
+  try {
+    const stored = localStorage.getItem(CHECKLIST_STORAGE_KEY)
+    saved = stored ? JSON.parse(stored) : null
+  } catch {
+    saved = null
   }
 
-  try {
-    const data: ChecklistData = JSON.parse(stored)
-    // Map stage ids saved by earlier versions of the app
-    const stageMap: Record<string, Stage> = {
-      'ready': 'getting-started',
-      'steady': 'building-skills',
-      'go': 'almost-there',
-      'adult': 'flying-solo',
-    }
-    const currentStage = stageMap[data.currentStage] || data.currentStage as Stage
-    const stageItems = checklistItems.filter(item => item.stage === currentStage)
-    const completed = stageItems.filter(item => data.completedItems.includes(item.id)).length
-    const percent = Math.round((completed / stageItems.length) * 100)
-    return { completed, total: stageItems.length, stage: currentStage, percent }
-  } catch {
-    const defaultStageItems = checklistItems.filter(item => item.stage === 'almost-there')
-    return { completed: 0, total: defaultStageItems.length, stage: 'almost-there', percent: 0 }
-  }
+  const stage = resolveStage(saved, storedAge)
+  const stageItems = checklistItems.filter(item => item.stage === stage)
+  const completedItems = Array.isArray(saved?.completedItems) ? saved.completedItems : []
+  const completed = stageItems.filter(item => completedItems.includes(item.id)).length
+  const percent = stageItems.length ? Math.round((completed / stageItems.length) * 100) : 0
+  return { completed, total: stageItems.length, stage, percent }
 }

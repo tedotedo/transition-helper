@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { saveAgeBand } from '../../utils/ageStage'
 import type { AgeGroup, Familiarity, Goal, QuizAnswers } from './journeyQuizHelpers'
 
 interface JourneyQuizProps {
@@ -32,6 +33,7 @@ export function JourneyQuiz({ onComplete, onSkip, onBack }: JourneyQuizProps) {
   const [answers, setAnswers] = useState<QuizAnswers>({})
 
   const handleAgeSelect = (age: AgeGroup) => {
+    saveAgeBand(age) // stored on this device only, so the right stage is highlighted
     setAnswers(prev => ({ ...prev, age }))
     setStep(2)
   }

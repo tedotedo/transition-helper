@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { TransitionTimeline } from '../components/home/TransitionTimeline'
 import { JourneyIllustration, FloatingShapes } from '../components/illustrations'
 import ReadAloud from '../components/ReadAloud'
+import { useStoredAge } from '../hooks'
+import { choiceKey, FALLBACK_STAGE, stageFromStoredAge } from '../utils/ageStage'
 
 type StageKey = 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo'
 
@@ -143,7 +146,15 @@ const tasks: Record<
 }
 
 export function MyJourney() {
-  const [activeStage, setActiveStage] = useState<StageKey>('almost-there')
+  const { t } = useTranslation()
+  const storedAge = useStoredAge()
+  // The stage that fits the user's age group (or the old default if we don't know it)
+  const ageStage = stageFromStoredAge(storedAge)
+  const defaultStage: StageKey = ageStage ?? FALLBACK_STAGE
+  // A stage the user tapped. It is forgotten if they change their age group.
+  const [picked, setPicked] = useState<{ stage: StageKey; band: string } | null>(null)
+  const activeStage: StageKey = picked && picked.band === choiceKey(storedAge) ? picked.stage : defaultStage
+  const setActiveStage = (stage: StageKey) => setPicked({ stage, band: choiceKey(storedAge) })
 
   return (
     <div className="space-y-6 sm:space-y-8 animate-fade-in">
@@ -209,6 +220,11 @@ export function MyJourney() {
                 {stage.name}
               </span>
               <span className="mt-1 text-xs sm:text-sm text-warm-500 font-medium">{stage.tagline}</span>
+              {stage.key === ageStage && (
+                <span className="mt-2 inline-block self-start rounded-full bg-primary-100 px-2 py-0.5 text-[0.65rem] font-bold text-primary-700">
+                  {t('age.yourStage', 'Your stage')}
+                </span>
+              )}
             </button>
           ))}
         </div>
