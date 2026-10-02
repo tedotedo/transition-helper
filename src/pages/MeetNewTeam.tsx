@@ -50,7 +50,7 @@ const initialData: NewTeamData = {
   notes: ''
 }
 
-export function HelloNewTeam() {
+export function MeetNewTeam() {
   const [data, setData] = useLocalStorage<NewTeamData>(STORAGE_KEY, initialData)
   const [showAddForm, setShowAddForm] = useState(false)
   const [newMember, setNewMember] = useState({
@@ -121,7 +121,7 @@ export function HelloNewTeam() {
           <span className="text-3xl">🤝</span>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Flying Solo Activity</p>
-            <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Say Hello to Your New Team</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Meet Your New Team</h1>
           </div>
         </div>
       </header>

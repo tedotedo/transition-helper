@@ -222,10 +222,10 @@ export function SkillsBuilder() {
         </h1>
 
         <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-warm-600 leading-relaxed font-medium px-4">
-          Practice the real-life skills you'll need to manage your own healthcare.
+          Practice the real-life skills you'll need to look after your own health.
           Start easy and work your way up!
         </p>
-        <div className="mt-2"><ReadAloud text="Practice the real-life skills you'll need to manage your own healthcare. Start easy and work your way up!" /></div>
+        <div className="mt-2"><ReadAloud text="Practice the real-life skills you'll need to look after your own health. Start easy and work your way up!" /></div>
       </header>
 
       {/* Progress Card */}

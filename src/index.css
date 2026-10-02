@@ -150,26 +150,26 @@ button, a, input {
   backdrop-filter: blur(8px);
 }
 
-/* ===== Easy Read mode ===== */
-body.easy-read {
+/* ===== Simple language mode ===== */
+body.simple-language {
   font-size: 1.2rem;
   line-height: 1.9;
   letter-spacing: 0.01em;
   word-spacing: 0.05em;
 }
 
-body.easy-read h1 { font-size: 2.25rem; line-height: 1.3; }
-body.easy-read h2 { font-size: 1.75rem; line-height: 1.4; }
-body.easy-read h3 { font-size: 1.35rem; line-height: 1.4; }
+body.simple-language h1 { font-size: 2.25rem; line-height: 1.3; }
+body.simple-language h2 { font-size: 1.75rem; line-height: 1.4; }
+body.simple-language h3 { font-size: 1.35rem; line-height: 1.4; }
 
-body.easy-read p,
-body.easy-read li,
-body.easy-read label {
+body.simple-language p,
+body.simple-language li,
+body.simple-language label {
   max-width: 55ch;
 }
 
 @media (max-width: 768px) {
-  body.easy-read {
+  body.simple-language {
     font-size: 1.15rem;
   }
 }

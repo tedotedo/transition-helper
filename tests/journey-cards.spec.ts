@@ -5,76 +5,76 @@ test.describe('My Journey page - stage card selection', () => {
     await page.goto('/journey');
   });
 
-  test('clicking Ready card shows Ready content', async ({ page }) => {
-    // Click the Ready card - use the full accessible name
-    await page.getByRole('button', { name: /🌱 Age 11–13 Ready/i }).click();
+  test('clicking Getting Started card shows Getting Started content', async ({ page }) => {
+    // Click the Getting Started card - use the full accessible name
+    await page.getByRole('button', { name: /🌱 Age 11–13 Getting Started/i }).click();
 
-    // Verify Ready content is shown - check for unique text in the content panel
-    await expect(page.getByRole('heading', { name: 'Ready', level: 2 })).toBeVisible();
+    // Verify Getting Started content is shown - check for unique text in the content panel
+    await expect(page.getByRole('heading', { name: 'Getting Started', level: 2 })).toBeVisible();
     await expect(page.getByText('Learn about your condition')).toBeVisible();
     await expect(page.getByText('Get to know your team')).toBeVisible();
   });
 
-  test('clicking Steady card shows Steady content', async ({ page }) => {
-    // Click the Steady card
-    await page.getByRole('button', { name: /💪 Age 14–15 Steady/i }).click();
+  test('clicking Building Skills card shows Building Skills content', async ({ page }) => {
+    // Click the Building Skills card
+    await page.getByRole('button', { name: /💪 Age 14–15 Building Skills/i }).click();
 
-    // Verify Steady content is shown - check for unique text
-    await expect(page.getByRole('heading', { name: 'Steady', level: 2 })).toBeVisible();
+    // Verify Building Skills content is shown - check for unique text
+    await expect(page.getByRole('heading', { name: 'Building Skills', level: 2 })).toBeVisible();
     await expect(page.getByText('Speak up at appointments')).toBeVisible();
     await expect(page.getByText('Know your medicines')).toBeVisible();
   });
 
-  test('clicking Go card shows Go content', async ({ page }) => {
-    // Click the Go card
-    await page.getByRole('button', { name: /🚀 Age 16–17 Go/i }).click();
+  test('clicking Almost There card shows Almost There content', async ({ page }) => {
+    // Click the Almost There card
+    await page.getByRole('button', { name: /🚀 Age 16–17 Almost There/i }).click();
 
-    // Verify Go content is shown - check for unique text
-    await expect(page.getByRole('heading', { name: 'Go', level: 2 })).toBeVisible();
+    // Verify Almost There content is shown - check for unique text
+    await expect(page.getByRole('heading', { name: 'Almost There', level: 2 })).toBeVisible();
     await expect(page.getByText('Check out the consent guide')).toBeVisible();
-    await expect(page.getByText('Fill in the Go questionnaire')).toBeVisible();
+    await expect(page.getByText('Build your health summary')).toBeVisible();
   });
 
-  test('clicking Hello adult services card shows adult content', async ({ page }) => {
-    // Click the Hello adult services card
-    await page.getByRole('button', { name: /🎉 Age 18\+ Hello adult services!/i }).click();
+  test('clicking Flying Solo card shows adult content', async ({ page }) => {
+    // Click the Flying Solo card
+    await page.getByRole('button', { name: /🎉 Age 18\+ Flying Solo/i }).click();
 
     // Verify adult content is shown - check for unique text
-    await expect(page.getByRole('heading', { name: 'Hello adult services!', level: 2 })).toBeVisible();
-    await expect(page.getByText('Say hello to your new team')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Flying Solo', level: 2 })).toBeVisible();
+    await expect(page.getByText('Meet your new team')).toBeVisible();
     await expect(page.getByText('Check your support')).toBeVisible();
   });
 
   test('selected card has visual highlight', async ({ page }) => {
-    // Click Ready card and verify it has selected styling
-    const readyCard = page.getByRole('button', { name: /🌱 Age 11–13 Ready/i });
-    await readyCard.click();
+    // Click Getting Started card and verify it has selected styling
+    const startedCard = page.getByRole('button', { name: /🌱 Age 11–13 Getting Started/i });
+    await startedCard.click();
 
     // The selected card should have the primary border color
-    await expect(readyCard).toHaveClass(/border-primary-300/);
+    await expect(startedCard).toHaveClass(/border-primary-300/);
 
     // Other cards should not have the selected styling
-    const steadyCard = page.getByRole('button', { name: /💪 Age 14–15 Steady/i });
-    await expect(steadyCard).not.toHaveClass(/border-primary-300/);
+    const skillsCard = page.getByRole('button', { name: /💪 Age 14–15 Building Skills/i });
+    await expect(skillsCard).not.toHaveClass(/border-primary-300/);
   });
 
   test('switching between cards updates content panel', async ({ page }) => {
-    // Start with Ready
-    await page.getByRole('button', { name: /🌱 Age 11–13 Ready/i }).click();
+    // Start with Getting Started
+    await page.getByRole('button', { name: /🌱 Age 11–13 Getting Started/i }).click();
     await expect(page.getByText('Learn about your condition')).toBeVisible();
 
-    // Switch to Steady
-    await page.getByRole('button', { name: /💪 Age 14–15 Steady/i }).click();
+    // Switch to Building Skills
+    await page.getByRole('button', { name: /💪 Age 14–15 Building Skills/i }).click();
     await expect(page.getByText('Speak up at appointments')).toBeVisible();
-    // Ready content should no longer be visible
+    // Getting Started content should no longer be visible
     await expect(page.getByText('Learn about your condition')).not.toBeVisible();
 
-    // Switch to Go
-    await page.getByRole('button', { name: /🚀 Age 16–17 Go/i }).click();
+    // Switch to Almost There
+    await page.getByRole('button', { name: /🚀 Age 16–17 Almost There/i }).click();
     await expect(page.getByText('Check out the consent guide')).toBeVisible();
 
     // Switch to Adult
-    await page.getByRole('button', { name: /🎉 Age 18\+ Hello adult services!/i }).click();
-    await expect(page.getByText('Say hello to your new team')).toBeVisible();
+    await page.getByRole('button', { name: /🎉 Age 18\+ Flying Solo/i }).click();
+    await expect(page.getByText('Meet your new team')).toBeVisible();
   });
 });

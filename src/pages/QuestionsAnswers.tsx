@@ -15,14 +15,14 @@ const faqs: FAQ[] = [
   {
     id: 'what-is-transition',
     question: 'What actually IS transition?',
-    answer: 'Transition is the process of moving from children\'s (paediatric) healthcare services to adult healthcare services. It\'s not just one moment - it\'s a gradual journey that usually happens between ages 14-25. The goal is for YOU to become the expert on your own health, with support from your healthcare team.',
+    answer: 'Transition means handing your care over from the children\'s (paediatric) team to an adult team. It\'s not one moment - it happens in steps. This app splits it into four stages: Getting Started (11-13), Building Skills (14-15), Almost There (16-17) and Flying Solo (18+). The aim is for YOU to know your own health well, with support from your healthcare team.',
     emoji: '🔄',
     category: 'basics',
   },
   {
     id: 'when-does-it-happen',
     question: 'When will I transition?',
-    answer: 'There\'s no single age - it depends on your condition, your local services, and how ready you feel. Most young people transition between 16-19, but it can be earlier or later. Your team should talk to you about timing well in advance. If no one has mentioned it yet, it\'s okay to ask!',
+    answer: 'There\'s no single age - it depends on your condition, your local services, and how ready you feel. Many young people move on between 16 and 18, but it can be earlier or later. Your team should talk to you about timing well in advance. If no one has mentioned it yet, it\'s okay to ask!',
     emoji: '📅',
     category: 'basics',
   },

@@ -12,7 +12,7 @@ The TTS system provides browser-based text-to-speech across the app using the We
 
 | File | Purpose |
 |------|---------|
-| `src/hooks/useEasyRead.tsx` | Toggle for Easy Read mode (localStorage) — pre-existing |
+| `src/hooks/useSimpleLanguage.tsx` | Toggle for Simple language mode (localStorage) — pre-existing |
 | `src/hooks/useVoice.tsx` | Stores selected voice (localStorage), loads available English voices, filters novelty voices |
 | `src/components/ReadAloud.tsx` | Per-section "Read aloud" button using Web Speech API |
 | `src/components/VoicePicker.tsx` | Portal-based dropdown to preview & choose a voice |
@@ -21,10 +21,10 @@ The TTS system provides browser-based text-to-speech across the app using the We
 
 | File | Change |
 |------|--------|
-| `src/App.tsx` | Wrapped with `VoiceProvider`, toggles `body.easy-read` CSS class |
+| `src/App.tsx` | Wrapped with `VoiceProvider`, toggles `body.simple-language` CSS class |
 | `src/hooks/index.ts` | Exports `useVoice` and `VoiceProvider` |
-| `src/components/layout/AppShell.tsx` | Easy Read toggle + VoicePicker in sidebar and mobile menu |
-| `src/index.css` | Easy Read typography styles + ReadAloud button animations |
+| `src/components/layout/AppShell.tsx` | Simple language toggle + VoicePicker in sidebar and mobile menu |
+| `src/index.css` | Simple language typography styles + ReadAloud button animations |
 | 21 page files in `src/pages/` | ReadAloud buttons on all text sections (101 instances total) |
 
 ---
@@ -32,7 +32,7 @@ The TTS system provides browser-based text-to-speech across the app using the We
 ## How it works
 
 1. **Young person mode** — ReadAloud buttons and VoicePicker are visible only in young person mode
-2. **Easy Read toggle** — in the sidebar (desktop) and "More" menu (mobile), above the navigation. Toggles larger text, wider line-height, and max-width on paragraphs
+2. **Simple language toggle** — in the sidebar (desktop) and "More" menu (mobile), above the navigation. Toggles larger text, wider line-height, and max-width on paragraphs
 3. **Read aloud buttons** — appear next to every informational text section. Each button reads only its own section's plain text (no emojis, no HTML)
 4. **Voice picker** — in the sidebar/mobile menu. Shows all available English voices with country flags and preview buttons. Selection persists to localStorage
 5. **Auto fallback** — if no voice is manually chosen, the system picks: en-GB female > en-GB any > en female any > en any > browser default
@@ -66,7 +66,7 @@ The TTS system provides browser-based text-to-speech across the app using the We
 - **Novelty voice filter** — filters out joke voices (Bells, Boing, Bubbles etc.) that aren't appropriate for a care/health app
 - **Gentle voice params** — `rate: 0.9` and `pitch: 1.1` make the voice sound softer and less robotic
 - **Cancel on unmount** — speech is cancelled when navigating away
-- **TTS independent of Easy Read** — ReadAloud buttons show in young person mode regardless of Easy Read state. Easy Read only controls typography
+- **TTS independent of Simple language** — ReadAloud buttons show in young person mode regardless of Simple language state. Simple language only controls typography
 
 ## Adding ReadAloud to a new page
 
@@ -85,7 +85,7 @@ The `text` prop should be plain English only — no emojis, no HTML tags, no bol
 ## Pages with ReadAloud coverage (101 instances across 21 pages)
 
 - Home, My Journey
-- Learn About Condition, My Team, Speak Up, Know Your Medicines, Ask About Move Date, Look Into PIP, Hello New Team, Check Your Support
+- Learn About Condition, My Team, Speak Up, Know Your Medicines, Ask About Move Date, Look Into PIP, Meet New Team, Check Your Support
 - Rights Hub, Consent Under 16, Consent 16-17, Consent 18+
 - Money & PIP, Planning Tools
 - Videos & Stories, Resources

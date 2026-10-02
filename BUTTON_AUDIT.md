@@ -38,7 +38,6 @@
 | QuickActionTile "Care Team" | Disabled tile | disabled=true | N/A | **NO_HANDLER** (intentional) |
 | NamedWorkerCard "Call" | Phone link | href="tel:..." | External | WORKING |
 | NamedWorkerCard "Email" | Email link | href="mailto:..." | External | WORKING |
-| Next step 1 "Open" | Link to Go questionnaire | href="/resources/ready-steady-go/go-questionnaire" | Yes | WORKING |
 | Next step 2 "Open" | Link to consent guide | href="/rights/consent-16-17" | Yes | WORKING |
 | ResourceCard "Learn about adult services" | Link to /rights | href="/rights" | Yes | WORKING |
 | ResourceCard "Skills builder" | Disabled card | disabled=true | N/A | **NO_HANDLER** (intentional) |
@@ -50,12 +49,11 @@
 
 | Element | Description | Handler | Target Exists | Status |
 |---------|-------------|---------|---------------|--------|
-| Stage button "Ready" | Select Ready stage | onClick (state) | N/A | WORKING |
-| Stage button "Steady" | Select Steady stage | onClick (state) | N/A | WORKING |
-| Stage button "Go" | Select Go stage | onClick (state) | N/A | WORKING |
-| Stage button "Adult" | Select Adult stage | onClick (state) | N/A | WORKING |
-| Task link "Open consent guide" | Link in Go tasks | href="/rights/consent-16-17" | Yes | WORKING |
-| Task link "Start questionnaire" | Link in Go tasks | href="/resources/ready-steady-go/go-questionnaire" | Yes | WORKING |
+| Stage button "Getting Started" | Select Getting Started stage | onClick (state) | N/A | WORKING |
+| Stage button "Building Skills" | Select Building Skills stage | onClick (state) | N/A | WORKING |
+| Stage button "Almost There" | Select Almost There stage | onClick (state) | N/A | WORKING |
+| Stage button "Flying Solo" | Select Flying Solo stage | onClick (state) | N/A | WORKING |
+| Task link "Open consent guide" | Link in Almost There tasks | href="/rights/consent-16-17" | Yes | WORKING |
 
 ---
 
@@ -84,14 +82,6 @@
 
 | Element | Description | Handler | Target Exists | Status |
 |---------|-------------|---------|---------------|--------|
-| Resource "Ready questionnaire" | Link to PDF viewer | href="/resources/ready-steady-go/ready-questionnaire" | Yes | WORKING |
-| Resource "Steady questionnaire" | Link to PDF viewer | href="/resources/ready-steady-go/steady-questionnaire" | Yes | WORKING |
-| Resource "Go questionnaire" | Link to PDF viewer | href="/resources/ready-steady-go/go-questionnaire" | Yes | WORKING |
-| Resource "Transition plan" | External PDF | href (PDF path) | Yes (public folder) | WORKING |
-| Resource "Parent plan" | External PDF | href (PDF path) | Yes (public folder) | WORKING |
-| Resource "Moving into adult care" | External PDF | href (PDF path) | Yes (public folder) | WORKING |
-| Resource "Easy-read booklet" | External PDF | href (PDF path) | Yes (public folder) | WORKING |
-| Easy-read links (x3) | External PDFs | href (PDF paths) | Yes (public folder) | WORKING |
 
 ---
 
@@ -101,7 +91,7 @@
 |---------|-------------|---------|---------------|--------|
 | "Open in new tab" button | External link to PDF | href + target="_blank" | Yes | WORKING |
 | "Download PDF" button | Download link | href + download | Yes | WORKING |
-| "Easy-read PDF" button | External link | href | Yes (when provided) | WORKING |
+| "Simple-language PDF" button | External link | href | Yes (when provided) | WORKING |
 
 ---
 
@@ -131,20 +121,10 @@
 
 | Element | Description | Handler | Target Exists | Status |
 |---------|-------------|---------|---------------|--------|
-| Ready stage toggle | Expand/collapse | onClick (state) | N/A | WORKING |
-| Steady stage toggle | Expand/collapse | onClick (state) | N/A | WORKING |
-| Go stage toggle | Expand/collapse | onClick (state) | N/A | WORKING |
-| External PDF "Ready Questionnaire" | External link | href (external) | External | WORKING |
-| External PDF "Ready Easy Read" | External link | href (external) | External | WORKING |
-| Link "View Ready Questionnaire" | Internal link | to="/resources/ready-steady-go/ready-questionnaire" | Yes | WORKING |
-| External PDF "Steady Questionnaire" | External link | href (external) | External | WORKING |
-| External PDF "Steady Easy Read" | External link | href (external) | External | WORKING |
-| Link "View Steady Questionnaire" | Internal link | to="/resources/ready-steady-go/steady-questionnaire" | Yes | WORKING |
-| External PDF "Go Questionnaire" | External link | href (external) | External | WORKING |
-| External PDF "Go Easy Read" | External link | href (external) | External | WORKING |
-| Link "View Go Questionnaire" | Internal link | to="/resources/ready-steady-go/go-questionnaire" | Yes | WORKING |
-| External PDF "Parent Questionnaire" | External link | href (external) | External | WORKING |
-| Link "www.readysteadygo.net" | External link | href (external) | External | WORKING |
+| Getting Started stage toggle | Expand/collapse | onClick (state) | N/A | WORKING |
+| Building Skills stage toggle | Expand/collapse | onClick (state) | N/A | WORKING |
+| Almost There stage toggle |
+| Flying Solo stage toggle | Expand/collapse | onClick (state) | N/A | WORKING | Expand/collapse | onClick (state) | N/A | WORKING |
 
 ---
 

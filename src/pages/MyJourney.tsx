@@ -4,11 +4,11 @@ import { TransitionTimeline } from '../components/home/TransitionTimeline'
 import { JourneyIllustration, FloatingShapes } from '../components/illustrations'
 import ReadAloud from '../components/ReadAloud'
 
-type StageKey = 'ready' | 'steady' | 'go' | 'adult'
+type StageKey = 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo'
 
 const stages: { key: StageKey; name: string; ages: string; tagline: string; description: string; emoji: string; color: string; bgGradient: string }[] = [
   {
-    key: 'ready',
+    key: 'getting-started',
     name: 'Getting Started',
     ages: 'Age 11–13',
     tagline: 'Start learning about your health',
@@ -19,7 +19,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
       "This is where it all begins! You're starting to learn more about your condition and getting to know the people who help look after you.",
   },
   {
-    key: 'steady',
+    key: 'building-skills',
     name: 'Building Skills',
     ages: 'Age 14–15',
     tagline: 'Building your confidence',
@@ -30,7 +30,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
       "You're practising small steps towards independence - like speaking up about how you feel, knowing your medicines, and asking questions.",
   },
   {
-    key: 'go',
+    key: 'almost-there',
     name: 'Almost There',
     ages: 'Age 16–17',
     tagline: 'Getting ready for the move',
@@ -41,7 +41,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
       "You're usually old enough now to make decisions about your own care. This is the time to plan your move to adult services!",
   },
   {
-    key: 'adult',
+    key: 'flying-solo',
     name: 'Flying Solo',
     ages: 'Age 18+',
     tagline: 'Welcome to your new team',
@@ -57,7 +57,7 @@ const tasks: Record<
   StageKey,
   { title: string; description: string; linkLabel?: string; linkHref?: string; emoji: string }[]
 > = {
-  ready: [
+  'getting-started': [
     {
       title: 'Learn about your condition',
       emoji: '📚',
@@ -73,7 +73,7 @@ const tasks: Record<
       linkHref: '/journey/my-team',
     },
   ],
-  steady: [
+  'building-skills': [
     {
       title: 'Speak up at appointments',
       emoji: '💬',
@@ -89,7 +89,7 @@ const tasks: Record<
       linkHref: '/journey/my-medicines',
     },
   ],
-  go: [
+  'almost-there': [
     {
       title: 'Check out the consent guide',
       emoji: '✨',
@@ -99,12 +99,12 @@ const tasks: Record<
       linkHref: '/rights/consent-16-17',
     },
     {
-      title: 'Fill in the Go questionnaire',
+      title: 'Build your health summary',
       emoji: '📋',
       description:
-        'Use the official Ready Steady Go questionnaire to think about how ready you feel for adult services.',
-      linkLabel: 'Open on RSG website →',
-      linkHref: 'https://www.readysteadygo.net/uploads/4/7/8/1/47810883/readysteadygogoquestionnaire_1-2_1.pdf',
+        'Pull your key health details into one place that you can share with your new team.',
+      linkLabel: 'Open my care plan →',
+      linkHref: '/care-plan',
     },
     {
       title: 'Ask about your move date',
@@ -123,9 +123,9 @@ const tasks: Record<
       linkHref: '/journey/pip',
     },
   ],
-  adult: [
+  'flying-solo': [
     {
-      title: 'Say hello to your new team',
+      title: 'Meet your new team',
       emoji: '🤝',
       description: 'Get to know the names of your new adult doctors and nurses, and find out how to get in touch with them.',
       linkLabel: 'Meet my new team →',
@@ -143,7 +143,7 @@ const tasks: Record<
 }
 
 export function MyJourney() {
-  const [activeStage, setActiveStage] = useState<StageKey>('go')
+  const [activeStage, setActiveStage] = useState<StageKey>('almost-there')
 
   return (
     <div className="space-y-6 sm:space-y-8 animate-fade-in">
@@ -157,10 +157,10 @@ export function MyJourney() {
           Every step counts! ✨
         </h1>
         <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-warm-600 leading-relaxed font-medium">
-          You're on your way to taking charge of your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready.
+          You're on your way to looking after your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready.
         </p>
         <div className="flex justify-center">
-          <ReadAloud text="You're on your way to taking charge of your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready." />
+          <ReadAloud text="You're on your way to looking after your own health! Tap a stage to see what's ahead and find activities to help you feel confident and ready." />
         </div>
       </header>
 

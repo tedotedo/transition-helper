@@ -107,7 +107,7 @@ export function LearnAboutCondition() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary-500">✓</span>
-              <span>Take charge of your own health as you grow up</span>
+              <span>Know your own health as you grow up</span>
             </li>
           </ul>
           <p className="mt-3 text-warm-500 italic">

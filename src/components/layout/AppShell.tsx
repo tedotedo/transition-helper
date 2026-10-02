@@ -2,11 +2,11 @@ import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Search } from './Search'
-import { useRole, useEasyRead } from '../../hooks'
+import { useRole, useSimpleLanguage } from '../../hooks'
 import VoicePicker from '../VoicePicker'
 import { CompactRoleToggle } from '../home/CompactRoleToggle'
 import { FeedbackButton } from './FeedbackButton'
-import { EasyReadPanel } from './EasyReadPanel'
+import { SimpleLanguagePanel } from './SimpleLanguagePanel'
 import WelcomeIntro from '../WelcomeIntro'
 import { resetIntro } from '../introStorage'
 
@@ -18,7 +18,7 @@ export function AppShell({ children }: AppShellProps) {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
   const { role, setRole, isYoungPerson } = useRole()
-  const { easyRead, toggleEasyRead } = useEasyRead()
+  const { simpleLanguage, toggleSimpleLanguage } = useSimpleLanguage()
   const { t } = useTranslation()
 
   // Close more menu when route changes
@@ -60,20 +60,20 @@ export function AppShell({ children }: AppShellProps) {
             </button>
           </div>
         </div>
-        {/* Easy Read toggle + Voice picker in sidebar - above nav */}
+        {/* Simple language toggle + Voice picker in sidebar - above nav */}
         <div className="px-4 py-3 border-b border-warm-100 space-y-2">
           <button
-            onClick={toggleEasyRead}
-            aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
-            aria-pressed={easyRead}
+            onClick={toggleSimpleLanguage}
+            aria-label={simpleLanguage ? 'Turn off simple language' : 'Turn on simple language'}
+            aria-pressed={simpleLanguage}
             className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-              easyRead
+              simpleLanguage
                 ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
                 : 'bg-primary-50 text-primary-700 border-2 border-primary-200 hover:bg-primary-100'
             }`}
           >
-            <span className="text-lg">{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
-            <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+            <span className="text-lg">{simpleLanguage ? '\u2705' : '\uD83D\uDCD6'}</span>
+            <span>{simpleLanguage ? 'Simple language ON' : 'Simple language'}</span>
           </button>
           <div className="flex justify-center">
             <VoicePicker />
@@ -93,7 +93,6 @@ export function AppShell({ children }: AppShellProps) {
         </nav>
         <div className="px-4 py-4 text-xs border-t border-warm-100 space-y-3">
           <p className="text-warm-500">{t('footer.disclaimer')}</p>
-          <p className="text-warm-500">{t('footer.attribution')}</p>
           <NavLink to="/privacy" className="text-warm-500 hover:text-primary-600 underline transition-colors">
             {t('footer.privacyLink')}
           </NavLink>
@@ -108,17 +107,17 @@ export function AppShell({ children }: AppShellProps) {
           </div>
           <div className="ml-3 flex items-center gap-4">
             <button
-              onClick={toggleEasyRead}
-              aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
-              aria-pressed={easyRead}
+              onClick={toggleSimpleLanguage}
+              aria-label={simpleLanguage ? 'Turn off simple language' : 'Turn on simple language'}
+              aria-pressed={simpleLanguage}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold transition-all ${
-                easyRead
+                simpleLanguage
                   ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
                   : 'bg-primary-50 text-primary-700 border-2 border-primary-200 hover:bg-primary-100'
               }`}
             >
-              <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
-              <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+              <span>{simpleLanguage ? '\u2705' : '\uD83D\uDCD6'}</span>
+              <span>{simpleLanguage ? 'Simple language ON' : 'Simple language'}</span>
             </button>
             <CompactRoleToggle value={role} onChange={setRole} />
             <div className={`h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-card ${
@@ -131,26 +130,26 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </header>
 
-        {/* Mobile top bar - Easy Read toggle */}
+        {/* Mobile top bar - Simple language toggle */}
         <div className="md:hidden flex items-center justify-center px-4 py-2 bg-white/90 backdrop-blur-sm border-b border-warm-100 sticky top-0 z-10">
           <button
-            onClick={toggleEasyRead}
-            aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
-            aria-pressed={easyRead}
+            onClick={toggleSimpleLanguage}
+            aria-label={simpleLanguage ? 'Turn off simple language' : 'Turn on simple language'}
+            aria-pressed={simpleLanguage}
             className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
-              easyRead
+              simpleLanguage
                 ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
                 : 'bg-primary-50 text-primary-700 border-2 border-primary-200 hover:bg-primary-100'
             }`}
           >
-            <span>{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
-            <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+            <span>{simpleLanguage ? '\u2705' : '\uD83D\uDCD6'}</span>
+            <span>{simpleLanguage ? 'Simple language ON' : 'Simple language'}</span>
           </button>
         </div>
 
         <main className="flex-1 px-4 md:px-8 py-4 md:py-8 pb-20 md:pb-8 animate-fade-in">
           <div className="max-w-6xl mx-auto space-y-6">
-            {easyRead && <EasyReadPanel />}
+            {simpleLanguage && <SimpleLanguagePanel />}
             {children}
           </div>
         </main>
@@ -209,20 +208,20 @@ export function AppShell({ children }: AppShellProps) {
                     </button>
                   </div>
                 </div>
-                {/* Easy Read toggle + Voice picker for mobile */}
+                {/* Simple language toggle + Voice picker for mobile */}
                 <div className="mb-4 pb-3 border-b border-warm-100 space-y-2">
                   <button
-                    onClick={toggleEasyRead}
-                    aria-label={easyRead ? 'Turn off Easy Read' : 'Turn on Easy Read'}
-                    aria-pressed={easyRead}
+                    onClick={toggleSimpleLanguage}
+                    aria-label={simpleLanguage ? 'Turn off simple language' : 'Turn on simple language'}
+                    aria-pressed={simpleLanguage}
                     className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      easyRead
+                      simpleLanguage
                         ? 'bg-gradient-to-r from-accent-400 to-accent-500 text-white shadow-md'
                         : 'bg-primary-50 text-primary-700 border-2 border-primary-200'
                     }`}
                   >
-                    <span className="text-lg">{easyRead ? '\u2705' : '\uD83D\uDCD6'}</span>
-                    <span>{easyRead ? 'Easy Read ON' : 'Easy Read'}</span>
+                    <span className="text-lg">{simpleLanguage ? '\u2705' : '\uD83D\uDCD6'}</span>
+                    <span>{simpleLanguage ? 'Simple language ON' : 'Simple language'}</span>
                   </button>
                   <div className="flex justify-center">
                     <VoicePicker />

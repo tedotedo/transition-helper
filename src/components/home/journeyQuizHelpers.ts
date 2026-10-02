@@ -45,11 +45,11 @@ export function getRecommendedRoute(answers: QuizAnswers): string {
 
   // Age-based recommendations
   if (age === '11-13') {
-    return '/journey' // Ready stage
+    return '/journey' // Getting Started stage
   } else if (age === '14-15') {
-    return '/journey' // Steady stage
+    return '/journey' // Building Skills stage
   } else if (age === '16-17') {
-    return '/rights' // Go stage - rights become important
+    return '/rights' // Almost There stage - rights become important
   } else if (age === '18+') {
     return '/rights' // Adult services - need to understand rights
   }

@@ -48,16 +48,16 @@ const stages: TimelineStage[] = [
 ]
 
 interface TransitionTimelineProps {
-  currentStage?: 'ready' | 'steady' | 'go' | 'adult'
+  currentStage?: 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo'
   compact?: boolean
-  onStageClick?: (stage: 'ready' | 'steady' | 'go' | 'adult') => void
+  onStageClick?: (stage: 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo') => void
 }
 
-const stageKeys: ('ready' | 'steady' | 'go' | 'adult')[] = ['ready', 'steady', 'go', 'adult']
+const stageKeys: ('getting-started' | 'building-skills' | 'almost-there' | 'flying-solo')[] = ['getting-started', 'building-skills', 'almost-there', 'flying-solo']
 
 export function TransitionTimeline({ currentStage, compact = false, onStageClick }: TransitionTimelineProps) {
   const stageIndex = currentStage
-    ? { ready: 0, steady: 1, go: 2, adult: 3 }[currentStage]
+    ? { 'getting-started': 0, 'building-skills': 1, 'almost-there': 2, 'flying-solo': 3 }[currentStage]
     : undefined
 
   if (compact) {

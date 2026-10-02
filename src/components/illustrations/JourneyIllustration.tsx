@@ -1,5 +1,5 @@
 interface JourneyIllustrationProps {
-  stage: 'ready' | 'steady' | 'go' | 'adult'
+  stage: 'getting-started' | 'building-skills' | 'almost-there' | 'flying-solo'
   className?: string
   size?: 'sm' | 'md' | 'lg'
 }
@@ -13,8 +13,8 @@ const sizeMap = {
 export function JourneyIllustration({ stage, className = '', size = 'md' }: JourneyIllustrationProps) {
   const sizeClass = sizeMap[size]
 
-  // Ready stage: Seedling growing
-  if (stage === 'ready') {
+  // Getting Started stage: Seedling growing
+  if (stage === 'getting-started') {
     return (
       <svg viewBox="0 0 120 120" className={`${sizeClass} ${className}`} fill="none" xmlns="http://www.w3.org/2000/svg">
         {/* Ground */}
@@ -43,8 +43,8 @@ export function JourneyIllustration({ stage, className = '', size = 'md' }: Jour
     )
   }
 
-  // Steady stage: Growing plant with more leaves
-  if (stage === 'steady') {
+  // Building Skills stage: Growing plant with more leaves
+  if (stage === 'building-skills') {
     return (
       <svg viewBox="0 0 120 120" className={`${sizeClass} ${className}`} fill="none" xmlns="http://www.w3.org/2000/svg">
         {/* Ground */}
@@ -75,8 +75,8 @@ export function JourneyIllustration({ stage, className = '', size = 'md' }: Jour
     )
   }
 
-  // Go stage: Rocket launching
-  if (stage === 'go') {
+  // Almost There stage: Rocket launching
+  if (stage === 'almost-there') {
     return (
       <svg viewBox="0 0 120 120" className={`${sizeClass} ${className}`} fill="none" xmlns="http://www.w3.org/2000/svg">
         {/* Exhaust flames */}
@@ -107,7 +107,7 @@ export function JourneyIllustration({ stage, className = '', size = 'md' }: Jour
     )
   }
 
-  // Adult stage: Graduation cap / celebration
+  // Flying Solo stage: Graduation cap / celebration
   return (
     <svg viewBox="0 0 120 120" className={`${sizeClass} ${className}`} fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Graduation cap */}

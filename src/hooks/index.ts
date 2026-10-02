@@ -1,5 +1,5 @@
 export { useLocalStorage, usePersistedData } from './useLocalStorage'
 export { useLevelUpProgress } from './useLevelUpProgress'
-export { useEasyRead, EasyReadProvider } from './useEasyRead'
+export { useSimpleLanguage, SimpleLanguageProvider } from './useSimpleLanguage'
 export { useRole, RoleProvider, type UserRole } from './useRole'
 export { useVoice, VoiceProvider } from './useVoice'

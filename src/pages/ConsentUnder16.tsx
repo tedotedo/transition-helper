@@ -157,7 +157,7 @@ export function ConsentUnder16() {
                 <p className="mt-1 text-warm-600">Start learning about your condition and asking questions</p>
               </div>
               <div className="p-3 bg-warm-50 rounded-xl border border-warm-100">
-                <p className="font-semibold text-warm-800">Age 13-15</p>
+                <p className="font-semibold text-warm-800">Age 14-15</p>
                 <p className="mt-1 text-warm-600">Have more say in decisions, might have some time alone with staff</p>
               </div>
               <div className="p-3 bg-primary-50 rounded-xl border border-primary-200">
@@ -165,7 +165,7 @@ export function ConsentUnder16() {
                 <p className="mt-1 text-warm-600">Usually make your own decisions about treatment</p>
               </div>
             </div>
-            <div className="mt-2"><ReadAloud text="As you get older, you'll gradually get more control over your healthcare. Age 11 to 13: Start learning about your condition and asking questions. Age 13 to 15: Have more say in decisions, might have some time alone with staff. Age 16 and above: Usually make your own decisions about treatment." /></div>
+            <div className="mt-2"><ReadAloud text="As you get older, you'll gradually get more control over your healthcare. Age 11 to 13: Start learning about your condition and asking questions. Age 14 to 15: Have more say in decisions, might have some time alone with staff. Age 16 and above: Usually make your own decisions about treatment." /></div>
           </Card>
 
           <Card title="Privacy under 16 🔒">

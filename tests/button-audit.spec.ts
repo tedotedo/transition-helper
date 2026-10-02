@@ -87,13 +87,8 @@ test.describe('Button Audit - Home Page', () => {
   });
 
   test('next step links are present', async ({ page }) => {
-    // First next step - Go questionnaire (now external link to RSG website)
-    const goQuestLink = page.getByRole('link', { name: /open/i }).first();
-    await expect(goQuestLink).toHaveAttribute('href', /readysteadygo\.net/);
-    await expect(goQuestLink).toHaveAttribute('target', '_blank');
-
     // Consent guide link
-    const consentLink = page.getByRole('link', { name: /open/i }).nth(1);
+    const consentLink = page.getByRole('link', { name: /open/i }).first();
     await consentLink.click();
     await expect(page).toHaveURL('/rights/consent-16-17');
   });
@@ -127,7 +122,7 @@ test.describe('Button Audit - My Journey Page', () => {
     await expect(page.getByRole('heading', { name: 'Flying Solo', level: 2 })).toBeVisible();
   });
 
-  test('task links in Go stage navigate correctly', async ({ page }) => {
+  test('task links in Almost There stage navigate correctly', async ({ page }) => {
     // Ensure Almost There stage is active
     await page.getByRole('button', { name: /🚀 Age 16–17 Almost There/i }).click();
 
@@ -135,12 +130,11 @@ test.describe('Button Audit - My Journey Page', () => {
     await page.getByRole('link', { name: /open consent guide/i }).click();
     await expect(page).toHaveURL('/rights/consent-16-17');
 
-    // Go back and test questionnaire link (now external to RSG website)
+    // Go back and test the care plan link
     await page.goto('/journey');
     await page.getByRole('button', { name: /🚀 Age 16–17 Almost There/i }).click();
-    const rsgLink = page.getByRole('link', { name: /open on rsg website/i });
-    await expect(rsgLink).toHaveAttribute('href', /readysteadygo\.net/);
-    await expect(rsgLink).toHaveAttribute('target', '_blank');
+    await page.getByRole('link', { name: /open my care plan/i }).click();
+    await expect(page).toHaveURL('/care-plan');
   });
 });
 
@@ -185,7 +179,7 @@ test.describe('Button Audit - Resources Page', () => {
     await page.goto('/resources');
   });
 
-  test('all questionnaire links point to RSG website', async ({ page }) => {
+  test('third-party PDF links open in a new tab', async ({ page }) => {
     // All PDF links should be external to readysteadygo.net
     const pdfLinks = page.locator('a[href*="readysteadygo.net"][href$=".pdf"]');
     const count = await pdfLinks.count();
@@ -195,6 +189,12 @@ test.describe('Button Audit - Resources Page', () => {
     for (let i = 0; i < count; i++) {
       await expect(pdfLinks.nth(i)).toHaveAttribute('target', '_blank');
     }
+  });
+
+  test('third-party documents are labelled and acknowledged', async ({ page }) => {
+    await expect(page.getByText('Other resource')).toBeVisible();
+    await expect(page.getByText(/separate transition programme/i)).toBeVisible();
+    await expect(page.getByText(/Transition Steering Group led by Dr Arvind Nagra/)).toBeVisible();
   });
 
   test('PDF links have correct href attributes', async ({ page }) => {
@@ -257,39 +257,29 @@ test.describe('Button Audit - Planning Tools Page', () => {
   });
 
   test('stage toggles expand and collapse', async ({ page }) => {
-    // Ready stage is expanded by default, click to collapse and re-expand
-    const readyToggle = page.locator('button').filter({ hasText: 'Stage 1: Getting Started' });
-    // Ready is already expanded by default, so we should see content
+    // Getting Started is expanded by default
     await expect(page.getByText('What happens in this stage?').first()).toBeVisible();
 
-    // Click Steady toggle to expand it
-    const steadyToggle = page.locator('button').filter({ hasText: 'Stage 2: Building Skills' });
-    await steadyToggle.click();
-    await expect(page.getByText('Skills you\'ll practice')).toBeVisible();
+    // Expand Building Skills
+    await page.locator('button').filter({ hasText: 'Stage 2: Building Skills' }).click();
+    await expect(page.getByText('Skills you\'ll practise')).toBeVisible();
 
-    // Click Go toggle to expand it
-    const goToggle = page.locator('button').filter({ hasText: 'Stage 3: Almost There' });
-    await goToggle.click();
+    // Expand Almost There
+    await page.locator('button').filter({ hasText: 'Stage 3: Almost There' }).click();
     await expect(page.getByText('What you\'ll learn about')).toBeVisible();
+
+    // Expand Flying Solo
+    await page.locator('button').filter({ hasText: 'Stage 4: Flying Solo' }).click();
+    await expect(page.getByText('Things to sort out')).toBeVisible();
   });
 
-  test('questionnaire links point to RSG website', async ({ page }) => {
-    // Ready section is expanded by default, check questionnaire link is external
-    const rsgLink = page.locator('a').filter({ hasText: /Open Ready Questionnaire on RSG website/ });
-    await expect(rsgLink).toHaveAttribute('href', /readysteadygo\.net/);
-    await expect(rsgLink).toHaveAttribute('target', '_blank');
+  test('stage tool links go to pages inside the app', async ({ page }) => {
+    await page.getByRole('link', { name: /learn about your condition/i }).click();
+    await expect(page).toHaveURL('/journey/learn-about-condition');
   });
 
-  test('external PDF links have correct href', async ({ page }) => {
-    // Ready stage is expanded by default, check for PDF links
-    const pdfLinks = page.locator('a[href*="readysteadygo.net"][href$=".pdf"]');
-    const count = await pdfLinks.count();
-    expect(count).toBeGreaterThan(0);
-  });
-
-  test('readysteadygo.net external link exists', async ({ page }) => {
-    const externalLink = page.locator('a[href="https://www.readysteadygo.net"]');
-    await expect(externalLink).toBeVisible();
+  test('page has no external links', async ({ page }) => {
+    await expect(page.locator('a[target="_blank"]')).toHaveCount(0);
   });
 });
 
