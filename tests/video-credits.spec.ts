@@ -46,3 +46,15 @@ test('privacy page mentions YouTube', async ({ page }) => {
   await expect(page.getByRole('heading', { name: /YouTube videos/ })).toBeVisible();
   await expect(page.getByText('youtube-nocookie.com').first()).toBeVisible();
 });
+
+test('videos page makes no consent or safeguarding claim', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('transition-intro-shown', 'true');
+    localStorage.setItem('transition-has-visited', 'true');
+  });
+  await page.goto('/videos');
+  await expect(page.getByTestId('video-credit-note')).toBeVisible();
+  await expect(page.getByText(/safeguarding/i)).toHaveCount(0);
+  await expect(page.getByText(/created with consent/i)).toHaveCount(0);
+  await expect(page.getByText(/names may have been changed/i)).toHaveCount(0);
+});

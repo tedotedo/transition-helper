@@ -43,21 +43,6 @@ export function VideosStories() {
             </div>
           </div>
         </div>
-
-        <div className="rounded-2xl border border-accent-200 bg-accent-50 px-5 py-4">
-          <div className="flex items-start gap-3">
-            <span className="text-xl">💚</span>
-            <div>
-              <h3 className="font-semibold text-warm-800 mb-1">These are real stories from young people</h3>
-              <p className="text-sm text-warm-600">
-                All videos have been created with consent and professional safeguarding oversight. Names may
-                have been changed to protect privacy. These young people wanted to share their experiences
-                to help others feel less alone.
-              </p>
-              <div className="mt-2"><ReadAloud text="All videos have been created with consent and professional safeguarding oversight. Names may have been changed to protect privacy. These young people wanted to share their experiences to help others feel less alone." /></div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <p className="text-sm text-warm-600" data-testid="video-credit-note">
