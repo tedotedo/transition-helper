@@ -44,8 +44,8 @@ export const defaultNotifications: Notification[] = [
   {
     id: 'tip-2',
     type: 'tip',
-    title: 'Watch: Real stories from young people 🎬',
-    message: "Hear from other young people who've been through transition. Their experiences might help you feel less alone.",
+    title: 'Watch: videos about moving to adult care 🎬',
+    message: "Short films from NHS teams and other organisations about moving to adult services. Seeing what to expect can help you feel more ready.",
     href: '/videos',
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 12), // 12 hours ago
   },

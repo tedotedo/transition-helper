@@ -24,7 +24,7 @@ const familiarOptions: { value: Familiarity; label: string; emoji: string }[] = 
 const goalOptions: { value: Goal; label: string; emoji: string; description: string }[] = [
   { value: 'understand', label: 'Understand what\'s changing', emoji: '📚', description: 'Learn what happens at 16 and 18' },
   { value: 'plan', label: 'Plan my transition', emoji: '📝', description: 'Get ready step by step' },
-  { value: 'stories', label: 'Hear from others', emoji: '💬', description: 'Watch videos from young people' },
+  { value: 'stories', label: 'Hear from others', emoji: '💬', description: 'Watch videos about moving to adult care' },
   { value: 'rights', label: 'Know my rights', emoji: '⚖️', description: 'Understand consent and decisions' },
 ]
 

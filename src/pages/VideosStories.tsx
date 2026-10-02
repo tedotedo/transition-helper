@@ -18,12 +18,12 @@ export function VideosStories() {
       {/* Header */}
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">Videos & Stories</p>
-        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Real stories from young people 🎬</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-warm-800">Videos about moving to adult health care 🎬</h1>
         <p className="max-w-2xl text-sm md:text-base text-warm-600 leading-relaxed">
-          Watch and listen to real young people sharing their experiences of transitioning to adult care.
-          Every journey is unique, and these stories show there's no single "right way" to transition.
+          Watch short films about moving from children's to adult health services, made by NHS teams and other organisations.
+          Every journey is unique, and there's no single "right way" to transition.
         </p>
-        <div className="mt-2"><ReadAloud text="Watch and listen to real young people sharing their experiences of transitioning to adult care. Every journey is unique, and these stories show there's no single right way to transition." /></div>
+        <div className="mt-2"><ReadAloud text="Watch short films about moving from children's to adult health services, made by NHS teams and other organisations. Every journey is unique, and there's no single right way to transition." /></div>
       </header>
 
       {/* Info Banners */}
