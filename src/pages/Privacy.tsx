@@ -144,8 +144,21 @@ export default function Privacy() {
             </ul>
           </div>
           <p className="text-warm-500 text-xs">
-            The only external service used is Resend (for feedback emails), which operates under its own privacy policy and only processes data when you actively submit feedback.
+            Two external services are used. Resend delivers feedback emails, and only processes data when you actively submit feedback. YouTube (Google) provides the videos on the Videos &amp; Stories page. Each service operates under its own privacy policy.
           </p>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-blue-700">
+            <h3 className="font-semibold text-blue-800 mb-2">▶️ YouTube videos</h3>
+            <p>
+              The videos on the Videos &amp; Stories page are made by other organisations and shown via YouTube. We use YouTube's privacy-enhanced mode (youtube-nocookie.com), which asks YouTube not to store information about you unless you play a video.
+            </p>
+            <p className="mt-2">
+              The small preview pictures on that page are loaded from YouTube's servers when the page opens, so YouTube may see that your device has loaded them. Playing a video connects you to YouTube, which may set cookies or collect data under{' '}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-900">
+                Google's privacy policy<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              . Nothing else in the app is sent to YouTube.
+            </p>
+          </div>
         </div>
       </section>
 

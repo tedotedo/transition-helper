@@ -1,68 +1,86 @@
 // Success Stories Video Data
 // To add a new video:
 // 1. Get the YouTube video ID (the part after "v=" in the URL)
-// 2. Add a new entry to this array
-// 3. Fill in all the required fields
+// 2. Look it up at https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=VIDEO_ID&format=json
+//    and copy the exact title, author_name and author_url. Never type these from memory.
+// 3. Add a new entry to this array and fill in all the required fields
 
 export interface SuccessStory {
   id: number
-  title: string
-  description: string
+  title: string // Exact title of the video on YouTube
+  description: string // Short summary based on the video's YouTube description
   youtubeId: string // The YouTube video ID (e.g., from youtube.com/watch?v=VIDEO_ID_HERE)
-  duration: string // Format: "MM:SS"
+  creator: string // Channel name shown on YouTube (oEmbed author_name)
+  creatorUrl: string // Channel link on YouTube (oEmbed author_url)
+  duration: string // Format: "M:SS", from the video's YouTube page
   age: string // Age or "Parent"
   condition: string // Health condition or "Various"
   stage: 'Getting Started' | 'Building Skills' | 'Almost There' | 'All Stages'
 }
 
+// Credits below were checked against each video's YouTube oEmbed data and watch page on 2 October 2026.
 export const successStories: SuccessStory[] = [
   {
     id: 1,
-    title: 'Transition to Adult Services - Young Person\'s Experience',
+    title: 'The Transition Journey at CHFT',
     description:
-      'A young person shares their personal journey transitioning from paediatric to adult healthcare services',
+      "A short film from a hospital trust about how moving from children's to adult outpatient clinics has been made smoother for patients.",
     youtubeId: '3dLcS7bn0xo',
-    duration: 'Video 1',
+    creator: 'Calderdale and Huddersfield NHS Foundation Trust',
+    creatorUrl: 'https://www.youtube.com/@chftnhs',
+    duration: '2:45',
     age: 'Various',
     condition: 'Various',
     stage: 'All Stages',
   },
   {
     id: 2,
-    title: 'Healthcare Transition Journey',
-    description: 'Learn about the transition process and what to expect when moving to adult services',
+    title: 'Transition to adult health care: preparing for the move',
+    description:
+      'Young people with long-term illnesses share how they feel about moving to adult health care, including worries and excitement.',
     youtubeId: 'Fcm9s3-Xst0',
-    duration: 'Video 2',
+    creator: 'SteppingUp Ireland',
+    creatorUrl: 'https://www.youtube.com/@steppingupireland9195',
+    duration: '3:02',
     age: 'Various',
     condition: 'Various',
     stage: 'All Stages',
   },
   {
     id: 3,
-    title: 'Moving to Adult Care',
-    description: 'Tips and insights about preparing for and managing the transition to adult healthcare',
+    title: 'Ready Steady Go - Supporting Transition to Adult Care',
+    description:
+      "A film about supporting young people as they move from children's to adult care.",
     youtubeId: '30JMnQZz8nk',
-    duration: 'Video 3',
+    creator: 'Picker Experience Network',
+    creatorUrl: 'https://www.youtube.com/@pickerexperiencenetwork',
+    duration: '6:06',
     age: 'Various',
     condition: 'Various',
     stage: 'All Stages',
   },
   {
     id: 4,
-    title: 'Transition Support and Guidance',
-    description: 'Understanding the support available during your transition to adult services',
+    title: 'GCS Ready Steady Go   Ready Subtitle',
+    description:
+      'A short film explaining what "transition" means: preparing, planning and moving from children\'s to adult services.',
     youtubeId: 'p6VaU1-1Ltc',
-    duration: 'Video 4',
+    creator: 'Gloucestershire Care Services NHS Trust',
+    creatorUrl: 'https://www.youtube.com/@gloucestershirecareservice7535',
+    duration: '1:33',
     age: 'Various',
     condition: 'Various',
     stage: 'All Stages',
   },
   {
     id: 5,
-    title: 'Preparing for Adult Healthcare',
-    description: 'Practical advice on getting ready for your move to adult healthcare services',
+    title: 'Health Transition',
+    description:
+      'A short film about health transition, designed with students from Cambridge Regional College.',
     youtubeId: 'L-tN2kx6Rmg',
-    duration: 'Video 5',
+    creator: 'Cambridgeshire County Council',
+    creatorUrl: 'https://www.youtube.com/@CambsCountyCouncil',
+    duration: '13:17',
     age: 'Various',
     condition: 'Various',
     stage: 'All Stages',

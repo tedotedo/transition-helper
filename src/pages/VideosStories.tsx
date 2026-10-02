@@ -60,6 +60,12 @@ export function VideosStories() {
         </div>
       </div>
 
+      <p className="text-sm text-warm-600" data-testid="video-credit-note">
+        Videos are by their creators and shown via YouTube. Each one is credited below it, with a link to the original.
+        Playing a video connects you to YouTube (see our{' '}
+        <Link to="/privacy" className="text-primary-700 underline hover:text-primary-800">privacy page</Link>).
+      </p>
+
       {/* Video Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {successStories.map((story) => (
@@ -72,21 +78,24 @@ export function VideosStories() {
               {playingVideo === story.id ? (
                 <iframe
                   className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${story.youtubeId}?autoplay=1`}
-                  title={story.title}
+                  src={`https://www.youtube-nocookie.com/embed/${story.youtubeId}?autoplay=1`}
+                  title={`${story.title} (video by ${story.creator})`}
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               ) : (
                 <>
                   <img
-                    src={`https://img.youtube.com/vi/${story.youtubeId}/maxresdefault.jpg`}
-                    alt={story.title}
+                    src={`https://i.ytimg.com/vi/${story.youtubeId}/hqdefault.jpg`}
+                    alt={`Thumbnail for ${story.title}`}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                     <button
                       onClick={() => setPlayingVideo(story.id)}
+                      aria-label={`Play video: ${story.title}`}
                       className="w-14 h-14 rounded-full bg-white hover:bg-white/90 text-primary-500 flex items-center justify-center shadow-lg transition-transform hover:scale-110"
                     >
                       <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
@@ -123,7 +132,27 @@ export function VideosStories() {
 
               <p className="text-sm text-warm-600 mb-2">{story.description}</p>
 
-              <p className="text-xs text-warm-500">{story.condition}</p>
+              {/* Credit: creator, exact title and link to the original, all taken from the video's YouTube page */}
+              <p className="text-xs text-warm-600 mt-3 pt-3 border-t border-warm-100" data-testid="video-credit">
+                Video by{' '}
+                <a
+                  href={story.creatorUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary-700 underline hover:text-primary-800"
+                >
+                  {story.creator}
+                </a>
+                . Original title: &ldquo;{story.title}&rdquo;.{' '}
+                <a
+                  href={`https://www.youtube.com/watch?v=${story.youtubeId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary-700 underline hover:text-primary-800"
+                >
+                  Watch on YouTube<span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </p>
             </div>
           </div>
         ))}
