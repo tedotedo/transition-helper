@@ -110,7 +110,7 @@ test.describe('Almost There Stage - Ask About Move Date', () => {
   test('explains what transition is', async ({ page }) => {
     await page.goto('/journey/move-date')
     await expect(page.getByText(/what is transition/i)).toBeVisible()
-    await expect(page.getByText(/moving from children's healthcare/i)).toBeVisible()
+    await expect(page.getByText(/handing your care over from the children's team/i)).toBeVisible()
   })
 
   test('can select expected move age', async ({ page }) => {
@@ -128,8 +128,8 @@ test.describe('Almost There Stage - Ask About Move Date', () => {
 
   test('shows suggested questions', async ({ page }) => {
     await page.goto('/journey/move-date')
-    await expect(page.getByText(/when am i likely to move/i)).toBeVisible()
-    await expect(page.getByText(/will i meet my new team/i)).toBeVisible()
+    await expect(page.getByText(/roughly when is my move planned/i)).toBeVisible()
+    await expect(page.getByText(/arrange a visit or joint appointment/i)).toBeVisible()
   })
 
   test('can save plan', async ({ page }) => {
