@@ -57,54 +57,97 @@ export default function Privacy() {
         </h2>
         <div className="space-y-4 text-warm-600 text-sm leading-relaxed">
           <p>
-            Your privacy is important to us. This notice explains how Transition Ready handles your information.
+            This notice explains what Transition Ready keeps, what it sends, and which other companies can see ordinary technical information when you use it.
           </p>
 
           <div className="space-y-4">
             <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-              <h3 className="font-semibold text-green-800 mb-2">🏠 All your data stays on YOUR device</h3>
+              <h3 className="font-semibold text-green-800 mb-2">🏠 What you enter stays on your device</h3>
               <p className="text-green-700 mb-3">
-                Transition Ready stores all your information <strong>locally on your device only</strong>. We do not have any servers or databases that store your data remotely.
+                <strong>The app does not send anything you enter to us, or to any server, automatically.</strong> We do not keep a database of users' information. What you enter is saved in your browser's local storage, on your own device. It leaves your device only if you choose to send or share it (see "What you can choose to send" below).
               </p>
+              <p className="text-green-700 mb-2">Saved on your device:</p>
               <ul className="list-disc list-inside space-y-1 text-green-700">
                 <li>Your checklist progress and completed items</li>
                 <li>Your selected role (young person or parent/carer)</li>
                 <li>Your age group, if you choose to give it, so the app can show the stage that fits</li>
-                <li>Your preferences (such as theme settings)</li>
-                <li>Any notes or information you enter</li>
+                <li>Your preferences (such as language, Simple language mode and voice)</li>
+                <li>Anything you type in, such as notes, appointments, care plan details and contact details</li>
               </ul>
               <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg space-y-2">
                 <p className="text-amber-800 text-xs font-medium">
-                  ⚠️ Important: If you lose your device, clear your browser data, or uninstall the app, <strong>all your data will be lost</strong>. We cannot recover it because we never had access to it.
+                  ⚠️ Important: If you lose your device, clear your browser data, or uninstall the app, <strong>all your data will be lost</strong>. We cannot recover it because we do not have a copy.
                 </p>
                 <p className="text-amber-700 text-xs">
-                  <strong>Backing up your data:</strong> If you'd like to keep a record of your progress, we recommend taking screenshots or copying important notes to your own secure cloud storage (such as Google Drive, iCloud, or Dropbox). This is entirely your choice and responsibility — we're not able to back up your data for you.
+                  <strong>Backing up your data:</strong> The backup button on the Home page saves a file on your device. The app does not upload it anywhere. If you want a second copy, you can keep that file somewhere safe of your own choosing, such as your own cloud storage. That is your choice and your responsibility.
                 </p>
                 <p className="text-amber-700 text-xs">
-                  <strong>Your responsibility:</strong> Since your data stays on your device, you are responsible for keeping your device secure and for any backups you choose to make. We cannot be held responsible for any data loss or security issues on your personal device.
+                  <strong>Your responsibility:</strong> Because your data stays on your device, you are responsible for keeping your device secure. We cannot be held responsible for data loss or security problems on your own device.
                 </p>
               </div>
             </div>
 
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-              <h3 className="font-semibold text-blue-800 mb-2">When you submit feedback:</h3>
+              <h3 className="font-semibold text-blue-800 mb-2">✉️ What you can choose to send</h3>
+              <p className="text-blue-700 mb-2">
+                <strong>Feedback button.</strong> If you use it, the app sends three things: your message, your email address (only if you type one in), and the page you were on (for example, /checklist). It does not attach anything else from your device.
+              </p>
               <ul className="list-disc list-inside space-y-1 text-blue-700">
-                <li>Your feedback message is sent via email to the app creator</li>
-                <li>Your email address (if provided) is included so we can respond</li>
-                <li>We use Resend, a third-party email service, to deliver feedback</li>
+                <li>Your feedback goes through our hosting provider, Netlify, to Resend, a service that sends emails</li>
+                <li>Resend emails it to the app's owner, Dr Mark Aszkenasy</li>
+                <li>We use feedback only to read it, reply if you gave an email address, and improve the app</li>
+                <li>Netlify and Resend may keep records of the message for a time under their own policies</li>
               </ul>
-              <p className="mt-2 text-blue-600 text-xs">
-                Feedback is used solely to improve the app and will not be shared with third parties.
+              <p className="mt-2 text-blue-700">
+                <strong>Please do not put patient-identifiable information in feedback.</strong> That means names, dates of birth, NHS numbers, addresses, or details of someone's health.
+              </p>
+              <p className="mt-2 text-blue-700">
+                <strong>Other things you do yourself.</strong> If you tap an email address, your own email app opens. If you tap a link to another website, that website opens. Printing uses your browser's print window. What happens after that is between you and that service or printer.
+              </p>
+            </div>
+
+            <div className="bg-warm-50 border border-warm-200 rounded-xl p-4">
+              <h3 className="font-semibold text-warm-800 mb-2">🌐 Other companies that see ordinary visitor information</h3>
+              <p className="mb-2">
+                Like any website, the app is delivered over the internet. When your device loads it, these services can see ordinary technical information, such as your IP address, browser and device type, and the time. This is not information you entered in the app.
+              </p>
+              <ul className="list-disc list-inside space-y-1.5">
+                <li>
+                  <strong>Netlify</strong> hosts the app and sends its pages and files to your device. It also runs the feedback form's connection.{' '}
+                  <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">
+                    Netlify's privacy policy<span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
+                <li>
+                  <strong>Google Fonts</strong> supplies the app's text styles. Every time the app opens, your device asks Google for these fonts, so Google can see the request.{' '}
+                  <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">
+                    Google Fonts privacy information<span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
+                <li>
+                  <strong>YouTube (Google)</strong> provides the videos on the Videos &amp; Stories page only. See "YouTube videos" below.{' '}
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">
+                    Google's privacy policy<span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
+                <li>
+                  <strong>Resend</strong> sees your feedback only if you send some.{' '}
+                  <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">
+                    Resend's privacy policy<span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
+              </ul>
+              <p className="mt-2">
+                Each of these companies has its own privacy policy, and we do not control what it records. The app's own code contains no analytics, advertising or tracking tools. The read-aloud feature uses your browser's built-in voices, and the app does not send the text anywhere. Your browser or device maker may handle speech in its own way.
               </p>
             </div>
 
             <div className="bg-purple-50 border border-purple-200 rounded-xl p-4">
-              <h3 className="font-semibold text-purple-800 mb-2">What we do NOT collect:</h3>
+              <h3 className="font-semibold text-purple-800 mb-2">What the app does not do:</h3>
               <ul className="list-disc list-inside space-y-1 text-purple-700">
-                <li>Personal health information or medical records</li>
-                <li>Names, addresses, or identifying information (unless you provide it in feedback)</li>
-                <li>Analytics or tracking data</li>
-                <li>Cookies for advertising or marketing purposes</li>
+                <li>Send your checklist, notes, care plan, appointments or contacts to us automatically</li>
+                <li>Use analytics, advertising or tracking tools of its own</li>
+                <li>Use cookies for advertising or marketing</li>
               </ul>
             </div>
           </div>
@@ -114,37 +157,14 @@ export default function Privacy() {
       {/* Cookie Notice */}
       <section className="bg-white rounded-2xl border border-warm-200 p-6 shadow-card">
         <h2 className="text-xl font-bold text-warm-800 mb-4 flex items-center gap-2">
-          <span>🍪</span> Cookie Notice
+          <span>🍪</span> Cookies and local storage
         </h2>
         <div className="space-y-4 text-warm-600 text-sm leading-relaxed">
           <p>
-            <strong className="text-warm-800">This app does not use cookies for tracking, advertising, or analytics.</strong>
+            <strong className="text-warm-800">The app itself does not use cookies for tracking, advertising or analytics.</strong>
           </p>
           <p>
-            We use your browser's <strong>local storage</strong> (not cookies) to save your preferences and progress. This is a technical distinction, but an important one:
-          </p>
-          <div className="bg-warm-50 border border-warm-200 rounded-xl p-4">
-            <ul className="space-y-2 text-warm-700">
-              <li className="flex items-start gap-2">
-                <span className="text-green-600 font-bold">✓</span>
-                <span><strong>Local storage:</strong> Data stays on your device and is never sent to any server</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 font-bold">✗</span>
-                <span><strong>No tracking cookies:</strong> We don't track your browsing behaviour</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 font-bold">✗</span>
-                <span><strong>No third-party cookies:</strong> We don't allow advertisers or analytics services to place cookies</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 font-bold">✗</span>
-                <span><strong>No cookie consent needed:</strong> Because we don't use cookies, you won't see annoying cookie banners!</span>
-              </li>
-            </ul>
-          </div>
-          <p className="text-warm-500 text-xs">
-            Two external services are used. Resend delivers feedback emails, and only processes data when you actively submit feedback. YouTube (Google) provides the videos on the Videos &amp; Stories page. Each service operates under its own privacy policy.
+            We use your browser's <strong>local storage</strong> (not cookies) to save your preferences and progress on your device. Local storage is never sent to a server by the app.
           </p>
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-blue-700">
             <h3 className="font-semibold text-blue-800 mb-2">▶️ YouTube videos</h3>
@@ -156,7 +176,7 @@ export default function Privacy() {
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-900">
                 Google's privacy policy<span className="sr-only"> (opens in a new tab)</span>
               </a>
-              . Nothing else in the app is sent to YouTube.
+              . Nothing you have entered in the app is sent to YouTube.
             </p>
           </div>
         </div>
@@ -172,7 +192,7 @@ export default function Privacy() {
             Under UK GDPR, you have rights regarding your personal data:
           </p>
           <ul className="list-disc list-inside space-y-2">
-            <li><strong className="text-warm-700">Right to access:</strong> You can request a copy of any personal data we hold about you</li>
+            <li><strong className="text-warm-700">Right to access:</strong> You can request a copy of any personal data we hold about you (for example, a feedback email you sent us)</li>
             <li><strong className="text-warm-700">Right to erasure:</strong> You can ask us to delete any feedback or personal data you've submitted</li>
             <li><strong className="text-warm-700">Right to rectification:</strong> You can ask us to correct any inaccurate information</li>
             <li><strong className="text-warm-700">Clear your local data:</strong> You can clear your browser's local storage at any time to remove all app data from your device</li>
@@ -230,7 +250,7 @@ export default function Privacy() {
         <h2 className="text-lg font-bold text-warm-700 mb-3">Contact & Updates</h2>
         <div className="space-y-3 text-warm-600 text-sm leading-relaxed">
           <p>
-            This privacy notice was last updated in January 2025.
+            This privacy notice was last updated in October 2026.
           </p>
           <p>
             If you have any questions about this privacy notice or how we handle your data, please contact:

@@ -89,8 +89,8 @@ export default function Install() {
           <div className="flex items-start gap-3">
             <span className="text-2xl">🔒</span>
             <div>
-              <h3 className="font-semibold text-warm-800 text-sm">Private & secure</h3>
-              <p className="text-warm-500 text-xs">Your data stays on your device</p>
+              <h3 className="font-semibold text-warm-800 text-sm">Kept on your device</h3>
+              <p className="text-warm-500 text-xs">What you enter stays on your device unless you choose to send it</p>
             </div>
           </div>
         </div>
