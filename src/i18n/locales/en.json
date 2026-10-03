@@ -326,10 +326,10 @@
     "consultDoctor": "Always consult your doctor",
     "emergency": "In an emergency, call 999",
     "privacyNotice": "Privacy Notice",
-    "dataOnDevice": "Your data stays on your device",
-    "noCollection": "We don't collect personal information",
+    "dataOnDevice": "What you enter stays on your device unless you choose to send it",
+    "noCollection": "The app does not send what you enter to a server automatically",
     "cookieNotice": "Cookie Notice",
-    "noCookies": "We don't use cookies",
+    "noCookies": "The app itself does not use tracking cookies",
     "yourRights": "Your Rights",
     "ukGdpr": "UK GDPR"
   },
