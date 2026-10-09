@@ -283,8 +283,8 @@ export const searchIndex: SearchItem[] = [
   {
     id: 'mental-capacity-16',
     title: 'Mental Capacity Act from 16',
-    description: 'How decisions are made in your best interests if you cannot make a particular decision',
-    keywords: ['mental capacity act', 'mca', 'capacity', 'best interests', '16', '17', 'decision'],
+    description: 'At 16 and 17: help to decide first, best interests, what parents can and can\'t agree to, and advocates',
+    keywords: ['mental capacity act', 'mca', 'capacity', 'best interests', '16', '17', 'decision', 'parental responsibility', 'parents', 'liberty', 'court of protection', 'advocate', 'imca'],
     href: '/rights/consent-16-17',
     category: 'topic',
   },

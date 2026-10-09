@@ -148,7 +148,7 @@ const faqs: FAQ[] = [
   {
     id: 'mental-capacity-16',
     question: 'Does the Mental Capacity Act apply to me before 18?',
-    answer: 'Yes - it applies from 16. If you can\'t make a particular decision, even with help, it\'s made in your best interests. That means involving you, thinking about your wishes, and talking to people who know you well.',
+    answer: 'Yes - it applies from 16. The law starts by assuming you can make your own decisions, and you must be given help to decide first. If you still can\'t make a particular decision, the professionals caring for you usually make it in your best interests. That means involving you, thinking about your wishes and feelings, and talking to people who care about you, including your parents. Until you\'re 18, your parents can sometimes agree to treatment for you, but they can\'t agree to you living somewhere you\'re not free to leave. That needs a court. This is the law in England and Wales - it\'s different in Scotland and Northern Ireland.',
     emoji: '⚖️',
     category: 'rights',
   },

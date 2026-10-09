@@ -70,25 +70,43 @@ export function Consent16to17() {
 
           <Card title="If you can't make a particular decision ⚖️" emoji="⚖️">
             <p className="text-sm text-warm-600">
-              The Mental Capacity Act applies to everyone aged 16 and over. It's a law about how decisions are made if someone can't make a particular decision, even with help.
+              At 16 and 17, the law starts by assuming you can make your own decisions. You can agree to your own treatment, just like an adult.
             </p>
             <p className="mt-3 text-sm text-warm-600">
-              Capacity is about one decision at a time. You might be able to decide some things and not others, or be able to decide later on.
+              Capacity is about one decision at a time. You might be able to decide some things and not others, or be able to decide later on. Before anyone says you can't decide, staff must give you all the help they can to decide for yourself. For example, they can explain things another way, give you more time, or have someone you trust with you.
             </p>
             <p className="mt-3 text-sm text-warm-600">
-              If staff find you can't make a particular decision right now, even with support, the decision is made in your <strong>best interests</strong>. That means they should:
+              If you still can't make a particular decision, even with help, the professionals caring for you usually make it under the Mental Capacity Act. It must be in your <strong>best interests</strong>. That means they must:
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-warm-600">
               <li>Involve you as much as possible</li>
-              <li>Think about your wishes, feelings and beliefs</li>
-              <li>Talk to the people who know you well, such as your parents or carers</li>
+              <li>Think about your wishes, feelings, beliefs and values</li>
+              <li>Talk to people who care about you, including your parents. If there's someone you don't want involved, tell staff</li>
               <li>Choose the option that limits your freedom the least</li>
             </ul>
-            <p className="mt-3 text-xs text-warm-500">
-              For the full rules, see the official 
-              <a href="https://www.gov.uk/government/publications/mental-capacity-act-code-of-practice" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">Mental Capacity Act Code of Practice ↗</a>.
+            <p className="mt-4 text-sm font-semibold text-warm-800">What about your parents?</p>
+            <p className="mt-1 text-sm text-warm-600">
+              Your parents still have parental responsibility for you until you're 18. In some situations, they can agree to treatment for you if you can't make that decision yourself.
             </p>
-            <div className="mt-2"><ReadAloud text="The Mental Capacity Act applies to everyone aged 16 and over. It's a law about how decisions are made if someone can't make a particular decision, even with help. Capacity is about one decision at a time. You might be able to decide some things and not others, or be able to decide later on. If staff find you can't make a particular decision right now, even with support, the decision is made in your best interests. That means they should: involve you as much as possible, think about your wishes, feelings and beliefs, talk to the people who know you well, such as your parents or carers, and choose the option that limits your freedom the least." /></div>
+            <p className="mt-3 text-sm text-warm-600">
+              But your parents can't agree to arrangements that take away your liberty. For example, living somewhere you're not free to leave, with someone watching you all the time. That needs the Court of Protection or another legal process.
+            </p>
+            <p className="mt-4 text-sm font-semibold text-warm-800">If people disagree</p>
+            <p className="mt-1 text-sm text-warm-600">
+              If people can't agree about what you can decide, or what's best for you, a court can be asked to decide. This is often the Court of Protection.
+            </p>
+            <p className="mt-3 text-sm text-warm-600">
+              You can ask for an advocate. This is someone independent who helps you have your say. In some situations, this might be an Independent Mental Capacity Advocate (IMCA).
+            </p>
+            <p className="mt-3 text-xs text-warm-500">
+              This is the law in England and Wales. The law is different in Scotland and Northern Ireland, so if you live there, ask your team what applies to you.
+            </p>
+            <p className="mt-2 text-xs text-warm-500">
+              For the full rules, see chapter 12 of the official{' '}
+              <a href="https://www.gov.uk/government/publications/mental-capacity-act-code-of-practice" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">Mental Capacity Act Code of Practice ↗</a>.
+              For professionals: Family Law Reform Act 1969 s8; Mental Capacity Act 2005 ss1–4; Re D (A Child) [2019] UKSC 42 (parental responsibility does not extend to consenting to a deprivation of liberty of a 16 or 17-year-old).
+            </p>
+            <div className="mt-2"><ReadAloud text="At 16 and 17, the law starts by assuming you can make your own decisions. You can agree to your own treatment, just like an adult. Capacity is about one decision at a time. You might be able to decide some things and not others, or be able to decide later on. Before anyone says you can't decide, staff must give you all the help they can to decide for yourself. For example, they can explain things another way, give you more time, or have someone you trust with you. If you still can't make a particular decision, even with help, the professionals caring for you usually make it under the Mental Capacity Act. It must be in your best interests. That means they must: involve you as much as possible, think about your wishes, feelings, beliefs and values, talk to people who care about you, including your parents, and choose the option that limits your freedom the least. If there's someone you don't want involved, tell staff. What about your parents? Your parents still have parental responsibility for you until you're 18. In some situations, they can agree to treatment for you if you can't make that decision yourself. But your parents can't agree to arrangements that take away your liberty. For example, living somewhere you're not free to leave, with someone watching you all the time. That needs the Court of Protection or another legal process. If people disagree: if people can't agree about what you can decide, or what's best for you, a court can be asked to decide. This is often the Court of Protection. You can ask for an advocate. This is someone independent who helps you have your say. In some situations, this might be an Independent Mental Capacity Advocate, or IMCA. This is the law in England and Wales. The law is different in Scotland and Northern Ireland, so if you live there, ask your team what applies to you." /></div>
           </Card>
 
           <Card title="When do parents and carers get involved?" emoji="👨‍👩‍👧">

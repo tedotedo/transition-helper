@@ -126,6 +126,19 @@ const contentByPath: { match: (path: string) => boolean; content: SimpleLanguage
     },
   },
   {
+    match: (path) => path === '/rights/consent-16-17',
+    content: {
+      icon: '⚖️',
+      title: 'At 16 and 17, you can make your own choices',
+      message: 'You can usually say yes or no to your treatment. If a choice is hard, staff must help you first.',
+      actions: [
+        { icon: '🤝', text: 'Ask for help to decide' },
+        { icon: '🗣️', text: 'If you can’t decide, people must still listen to you' },
+        { icon: '🙋', text: 'You can ask for an advocate' },
+      ],
+    },
+  },
+  {
     match: (path) => path === '/journey/no-adult-service',
     content: {
       icon: '🧭',
