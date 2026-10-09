@@ -286,14 +286,14 @@ export function MoneyPip() {
                   <span className="text-lg">🚨</span>
                   <div>
                     <h4 className="font-semibold text-warm-800 text-sm">
-                      Important: Sort this out before you're 18!
+                      Important: Plan this before you're 18
                     </h4>
                     <p className="text-sm text-warm-600 mt-1">
-                      When you turn 18, your parents can't automatically make decisions for you anymore -
-                      even if you need help with some decisions. If you might need help, it's best to
-                      sort out the legal stuff BEFORE your 18th birthday.
+                      The Mental Capacity Act already applies to you from 16. When you turn 18, your parents
+                      can't make decisions for you just because they're your parents - even if you need help
+                      with some decisions. If you might need help, it's best to start planning before your 18th birthday.
                     </p>
-                    <div className="mt-2"><ReadAloud text="When you turn 18, your parents cannot automatically make decisions for you anymore, even if you need help with some decisions. If you might need help, it is best to sort out the legal stuff before your 18th birthday." /></div>
+                    <div className="mt-2"><ReadAloud text="The Mental Capacity Act already applies to you from 16. When you turn 18, your parents cannot make decisions for you just because they are your parents, even if you need help with some decisions. If you might need help, it is best to start planning before your 18th birthday." /></div>
                   </div>
                 </div>
               </div>
@@ -314,9 +314,9 @@ export function MoneyPip() {
                 <h3 className="font-semibold text-warm-800">Power of Attorney (LPA)</h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
                   An LPA is a legal document where you choose someone you trust to help make decisions
-                  if you can't. You set it up yourself when you're 18+. There are two types:
+                  if you can't. You can only make one yourself once you're 18. There are two types:
                 </p>
-                <div className="mt-2"><ReadAloud text="An LPA is a legal document where you choose someone you trust to help make decisions if you cannot. You set it up yourself when you are 18 and older. Health and Welfare LPA is for decisions about your care, medical treatment, and where you live. Money LPA is for decisions about your bank accounts, bills, and money stuff. To make an LPA, you need to understand what you are doing and who you are choosing. If this is tricky, there is another option." /></div>
+                <div className="mt-2"><ReadAloud text="An LPA is a legal document where you choose someone you trust to help make decisions if you cannot. You can only make one yourself once you are 18. Health and Welfare LPA is for decisions about your care, medical treatment, and where you live. Money LPA is for decisions about your bank accounts, bills, and money stuff. To make an LPA, you need to understand what you are doing and who you are choosing. If this is tricky, there is another option." /></div>
                 <div className="space-y-3 ml-2">
                   <div>
                     <p className="font-medium text-sm text-warm-800">🏥 Health and Welfare LPA</p>
@@ -342,10 +342,13 @@ export function MoneyPip() {
                 <h3 className="font-semibold text-warm-800 mb-2">If you need more support: Deputyship</h3>
                 <p className="text-sm text-warm-600 leading-relaxed">
                   If making an LPA yourself is too tricky, someone who cares about you (like a parent)
-                  can apply to the Court to become your "Deputy". This means they can officially help
-                  you with decisions. It's best to start this process well before you turn 18.
+                  can apply to the Court of Protection to become your "Deputy". This means they can officially
+                  help you with some decisions. The Court can deal with young people from 16, so in some
+                  cases an application can start before you turn 18. Many health and care decisions
+                  don't need a deputy - they can be made in your best interests under the Mental Capacity Act.
+                  Ask for advice early.
                 </p>
-                <div className="mt-2"><ReadAloud text="If making an LPA yourself is too tricky, someone who cares about you, like a parent, can apply to the Court to become your Deputy. This means they can officially help you with decisions. It is best to start this process well before you turn 18." /></div>
+                <div className="mt-2"><ReadAloud text="If making an LPA yourself is too tricky, someone who cares about you, like a parent, can apply to the Court of Protection to become your Deputy. This means they can officially help you with some decisions. The Court can deal with young people from 16, so in some cases an application can start before you turn 18. Many health and care decisions do not need a deputy. They can be made in your best interests under the Mental Capacity Act. Ask for advice early." /></div>
               </div>
 
               {/* Timeline */}
@@ -354,15 +357,15 @@ export function MoneyPip() {
                 <ul className="space-y-2 text-sm text-warm-600">
                   <li className="flex items-start gap-2">
                     <span className="font-semibold text-primary-600 shrink-0">Age 16-17:</span>
-                    <span>Chat with your GP about whether you might need help with decisions</span>
+                    <span>The Mental Capacity Act already applies. Chat with your GP or team about whether you might need help with some decisions</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="font-semibold text-primary-600 shrink-0">6 months before 18:</span>
-                    <span>Start the LPA or deputyship paperwork</span>
+                    <span className="font-semibold text-primary-600 shrink-0">Before 18:</span>
+                    <span>Plan ahead with your family. Find out about LPAs. If a deputy might be needed, get advice about when to apply</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="font-semibold text-primary-600 shrink-0">Before you're 18:</span>
-                    <span>Make sure everything is signed and sorted</span>
+                    <span className="font-semibold text-primary-600 shrink-0">From 18:</span>
+                    <span>If you understand what it means, you can make an LPA yourself. You can't make one before you're 18</span>
                   </li>
                 </ul>
               </div>

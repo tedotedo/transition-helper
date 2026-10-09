@@ -38,6 +38,8 @@ import Install from './pages/Install'
 import Privacy from './pages/Privacy'
 import CommunicationPassport from './pages/CommunicationPassport'
 import { ComicGuide } from './pages/ComicGuide'
+import { NoAdultService } from './pages/NoAdultService'
+import { Neurodevelopmental } from './pages/Neurodevelopmental'
 import WelcomeIntroGate from './components/WelcomeIntroGate'
 
 // Wrapper to apply role-based styling and handle RTL
@@ -79,6 +81,8 @@ function AppContent() {
           <Route path="/journey/pip" element={<LookIntoPIP />} />
           <Route path="/journey/new-team" element={<MeetNewTeam />} />
           <Route path="/journey/check-support" element={<CheckYourSupport />} />
+          <Route path="/journey/no-adult-service" element={<NoAdultService />} />
+          <Route path="/neurodevelopmental" element={<Neurodevelopmental />} />
           <Route path="/rights" element={<RightsHub />} />
           <Route path="/rights/consent-under-16" element={<ConsentUnder16 />} />
           <Route path="/rights/consent-16-17" element={<Consent16to17 />} />

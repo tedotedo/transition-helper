@@ -25,7 +25,8 @@ const suggestedQuestions = [
   "What happens if I'm not ready to move yet?",
   "Will all my information be sent to the new team?",
   "Who do I contact if I have problems during the move?",
-  "What will change day to day once I'm in adult care?"
+  "What will change day to day once I'm in adult care?",
+  "Will my GP be involved in planning my move, and get a copy of my plan?"
 ]
 
 // Earlier versions of this page saved the ticked questions as text.
@@ -140,6 +141,34 @@ export function AskAboutMoveDate() {
             <ReadAloud text="Transition means handing your care over from the children's team to an adult team. It happens in small steps over a few years, not on a single day. The timing is different for everyone, but it is often between 16 and 18. It's really important to start talking about this early so you're not surprised! Your children's team should work with you and your family to make sure the move goes smoothly." />
           </div>
         </div>
+      </section>
+
+      {/* When planning should start (NICE NG43) */}
+      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card space-y-3">
+        <h2 className="text-lg font-semibold text-warm-800 flex items-center gap-2">
+          <span>🗓️</span>
+          <span>When should planning start?</span>
+        </h2>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-warm-600 leading-relaxed">
+          <li>Planning for your move should start by Year 9 (age 13 to 14) at the latest. If you're older and nothing has started yet, it's not too late. Ask your team to start now.</li>
+          <li>Your plan should be looked at with you at least once a year, or sooner if things change. Your family and the people who support you, including your GP, should be part of it.</li>
+          <li>
+            If you have an Education, Health and Care Plan (EHCP), your annual reviews from Year 9 should include 
+            <strong>preparing for adulthood</strong>. 
+            <a href="https://www.gov.uk/government/publications/send-code-of-practice-0-to-25" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">SEND Code of Practice on GOV.UK ↗</a>
+          </li>
+          <li>
+            If you're likely to need care and support as an adult, you or your family can ask your council for a 
+            <strong>transition assessment</strong> before you turn 18. 
+            <a href="https://www.nhs.uk/social-care-and-support/caring-for-children-and-young-people/moving-from-childrens-social-care-to-adults-social-care/" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">Transition assessments on NHS.uk ↗</a>
+          </li>
+          <li>Make sure you're registered with a GP, and that your GP knows about your plan.</li>
+        </ul>
+        <p className="text-sm text-warm-600">
+          Is there no adult service for you? 
+          <Link to="/journey/no-adult-service" className="text-primary-600 underline hover:text-primary-700">See what happens next</Link>.
+        </p>
+        <ReadAloud text="Planning for your move should start by Year 9 (age 13 to 14) at the latest. If you're older and nothing has started yet, it's not too late. Ask your team to start now. Your plan should be looked at with you at least once a year, or sooner if things change. Your family and the people who support you, including your GP, should be part of it. If you have an Education, Health and Care Plan (EHCP), your annual reviews from Year 9 should include preparing for adulthood. If you're likely to need care and support as an adult, you or your family can ask your council for a transition assessment before you turn 18. Make sure you're registered with a GP, and that your GP knows about your plan." />
       </section>
 
       {/* Timeline */}
@@ -336,9 +365,10 @@ export function AskAboutMoveDate() {
               <li>• You might have a gradual handover with several joint appointments</li>
               <li>• If you don't feel ready, tell your team - they may be able to delay the move</li>
               <li>• Ask for a written summary of your care to take to your new team</li>
+              <li>• Ask for your GP to get a copy of your plan and the summary</li>
             </ul>
             <div className="mt-3">
-              <ReadAloud text="Some areas have a transition clinic where you meet both teams together. You might have a gradual handover with several joint appointments. If you don't feel ready, tell your team - they may be able to delay the move. Ask for a written summary of your care to take to your new team." />
+              <ReadAloud text="Some areas have a transition clinic where you meet both teams together. You might have a gradual handover with several joint appointments. If you don't feel ready, tell your team - they may be able to delay the move. Ask for a written summary of your care to take to your new team. Ask for your GP to get a copy of your plan and the summary." />
             </div>
           </div>
         </div>

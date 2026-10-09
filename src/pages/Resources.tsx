@@ -27,6 +27,22 @@ const ownResources = [
     audience: 'Young person',
     linkLabel: 'Open Skills Builder →',
   },
+  {
+    title: 'ADHD, autism and learning disability',
+    emoji: '🧠',
+    description: 'ADHD medicine after 18, free annual health checks from 14, and where autistic young people usually get support.',
+    href: '/neurodevelopmental',
+    audience: 'Young person and family',
+    linkLabel: 'Open the guide →',
+  },
+  {
+    title: "If there's no adult service for you",
+    emoji: '🧭',
+    description: "What happens if there's no adult team, or you're told you're not eligible, and how to ask again later.",
+    href: '/journey/no-adult-service',
+    audience: 'Young person and family',
+    linkLabel: 'Find out more →',
+  },
 ]
 
 // Third-party documents. Links are unchanged from the original publisher.
@@ -84,8 +100,34 @@ export function Resources() {
         ))}
       </section>
 
+      <section id="more-support" className="scroll-mt-24 rounded-2xl border border-warm-200 bg-white px-5 py-5 shadow-card space-y-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-warm-500">More support</p>
+          <h2 className="mt-1 text-lg font-bold text-warm-800">Support for you and your family 💛</h2>
+        </div>
+        <div className="grid gap-3 md:grid-cols-3 text-sm text-warm-600">
+          <div className="rounded-xl border border-warm-200 bg-warm-50 px-4 py-3 space-y-2">
+            <p className="font-semibold text-warm-800">🤝 Peer support</p>
+            <p>Talking to other young people who've been through the move can really help. Ask your team or named worker about local groups. Many charities for your condition run groups too.</p>
+          </div>
+          <div className="rounded-xl border border-warm-200 bg-warm-50 px-4 py-3 space-y-2">
+            <p className="font-semibold text-warm-800">🧡 Young carers</p>
+            <p>If you help look after someone in your family, you're a young carer. You have the right to ask your council for an assessment of what support you need.</p>
+            <a href="https://www.nhs.uk/social-care-and-support/support-and-benefits-for-carers/being-a-young-carer-your-rights/" target="_blank" rel="noopener noreferrer" className="inline-block text-primary-600 underline hover:text-primary-700">NHS: Young carers' rights ↗</a>
+          </div>
+          <div className="rounded-xl border border-warm-200 bg-warm-50 px-4 py-3 space-y-2">
+            <p className="font-semibold text-warm-800">👨‍👩‍👧 Parents and carers</p>
+            <p>If you care for a young person, you can ask your council for a free carer's assessment. It looks at what would help you. Carers UK gives advice on caring, money and your rights.</p>
+            <a href="https://www.nhs.uk/social-care-and-support/support-and-benefits-for-carers/carer-assessments/" target="_blank" rel="noopener noreferrer" className="block text-primary-600 underline hover:text-primary-700">NHS: Carer's assessments ↗</a>
+            <a href="https://www.carersuk.org/help-and-advice/" target="_blank" rel="noopener noreferrer" className="block text-primary-600 underline hover:text-primary-700">Carers UK: Help and advice ↗</a>
+          </div>
+        </div>
+        <div className="mt-2"><ReadAloud text="Peer support. Talking to other young people who have been through the move can really help. Ask your team or named worker about local groups. Many charities for your condition run groups too. Young carers. If you help look after someone in your family, you are a young carer. You have the right to ask your council for an assessment of what support you need. Parents and carers. If you care for a young person, you can ask your council for a free carer's assessment. It looks at what would help you. Carers UK gives advice on caring, money and your rights." /></div>
+        <p className="text-xs text-warm-500">For the most up-to-date information, see the official websites.</p>
+      </section>
+
       <section className="text-sm text-warm-600 bg-warm-50 px-4 py-4 rounded-xl border border-warm-100 space-y-2">
-        <h2 className="text-base font-semibold text-warm-800">Read more: national guidance</h2>
+        <h2 className="text-base font-semibold text-warm-800">How this app follows NICE NG43</h2>
         <p>
           The{' '}
           <a
@@ -98,6 +140,17 @@ export function Resources() {
           </a>{' '}
           is the national guidance on how health and social care services should plan the move to adult services. It is NICE's own document and is separate from this app.
         </p>
+        <p>This app uses NG43 to help you know what to expect and what to ask for. For example:</p>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>Planning starts by Year 9 (age 13–14) and is reviewed at least once a year</li>
+          <li>You lead your plan, and choose how your family is involved</li>
+          <li>A named worker helps coordinate your move</li>
+          <li>You get the chance to meet the adult team before you move</li>
+          <li>Your GP is involved, especially if there's no specialist adult service</li>
+          <li>Adult services follow you up if you miss appointments, instead of just discharging you</li>
+        </ul>
+        <p>NG43 is written for services. Not every area does everything it suggests yet, so it's OK to ask.</p>
+        <div className="mt-2"><ReadAloud text="This app uses NICE guideline NG43 to help you know what to expect and what to ask for. For example: planning starts by Year 9, age 13 to 14, and is reviewed at least once a year. You lead your plan, and choose how your family is involved. A named worker helps coordinate your move. You get the chance to meet the adult team before you move. Your GP is involved, especially if there is no specialist adult service. Adult services follow you up if you miss appointments, instead of just discharging you. NG43 is written for services. Not every area does everything it suggests yet, so it is OK to ask." /></div>
         <p className="text-xs text-warm-500">For the most up-to-date guidance, see the official NICE website.</p>
       </section>
 
