@@ -30,7 +30,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
     color: 'text-blue-600',
     bgGradient: 'from-blue-50 to-sky-50 border-blue-200 hover:border-blue-300',
     description:
-      "You're practising small steps towards independence - like speaking up about how you feel, knowing your medicines, and asking questions.",
+      "You're practising small steps towards independence - like speaking up about how you feel, knowing your medicines, and asking questions. Planning your move should start by Year 9 (age 13–14), so ask your team about it.",
   },
   {
     key: 'almost-there',
@@ -41,7 +41,7 @@ const stages: { key: StageKey; name: string; ages: string; tagline: string; desc
     color: 'text-primary-600',
     bgGradient: 'from-primary-50 to-orange-50 border-primary-200 hover:border-primary-300',
     description:
-      "You're usually old enough now to make decisions about your own care. This is the time to plan your move to adult services!",
+      "You're usually old enough now to make decisions about your own care. Your move is getting closer, so this is the time to check your plan and firm up the details.",
   },
   {
     key: 'flying-solo',
@@ -90,6 +90,20 @@ const tasks: Record<
       description: 'Learn what your medicines are for and when you need to take them.',
       linkLabel: 'Track my medicines →',
       linkHref: '/journey/my-medicines',
+    },
+    {
+      title: 'Start your transition plan',
+      emoji: '🗓️',
+      description: 'Planning should start by Year 9 (age 13–14) at the latest, and be looked at again at least once a year.',
+      linkLabel: 'Start my plan →',
+      linkHref: '/journey/move-date',
+    },
+    {
+      title: 'ADHD, autism or a learning disability?',
+      emoji: '🧠',
+      description: 'Find out about ADHD medicine after 18, free health checks from 14, and support for autistic young people.',
+      linkLabel: 'Read the guide →',
+      linkHref: '/neurodevelopmental',
     },
   ],
   'almost-there': [
@@ -141,6 +155,13 @@ const tasks: Record<
         'Make sure you\'ve got the right support at college, work, or home - and know who to talk to if things change.',
       linkLabel: 'Review my support →',
       linkHref: '/journey/check-support',
+    },
+    {
+      title: "No adult service for you?",
+      emoji: '🧭',
+      description: "If there's no adult team, or you're told you're not eligible, find out what happens and who can help.",
+      linkLabel: 'Find out what happens →',
+      linkHref: '/journey/no-adult-service',
     },
   ],
 }

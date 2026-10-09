@@ -35,6 +35,8 @@ const checklistItems: ChecklistItem[] = [
   { id: 'bs-3', text: "I've tried answering a question from my doctor or nurse myself", stage: 'building-skills' },
   { id: 'bs-4', text: 'I know what to do if I run out of medicine or a prescription', stage: 'building-skills' },
   { id: 'bs-5', text: "I've jotted down ways my condition could affect my plans after school", stage: 'building-skills' },
+  { id: 'bs-6', text: "I've checked that I'm registered with a GP", stage: 'building-skills' },
+  { id: 'bs-7', text: "I've asked my GP practice who my named GP is", stage: 'building-skills' },
 
   // Almost There (16-17)
   { id: 'at-1', text: 'I can describe my full health history to someone new', stage: 'almost-there' },

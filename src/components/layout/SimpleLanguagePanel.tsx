@@ -126,6 +126,32 @@ const contentByPath: { match: (path: string) => boolean; content: SimpleLanguage
     },
   },
   {
+    match: (path) => path === '/journey/no-adult-service',
+    content: {
+      icon: '🧭',
+      title: 'Sometimes there is no adult team for you',
+      message: 'This is OK. Your GP can be your main doctor. Other people can help too.',
+      actions: [
+        { icon: '✍️', text: 'Ask why, and ask for it in writing' },
+        { icon: '🩺', text: 'Talk to your GP' },
+        { icon: '🔄', text: 'Ask again if things change' },
+      ],
+    },
+  },
+  {
+    match: (path) => path === '/neurodevelopmental',
+    content: {
+      icon: '🧠',
+      title: 'ADHD, autism and learning disability',
+      message: 'This page helps you get the right care after 18.',
+      actions: [
+        { icon: '💊', text: 'Ask who will give you your ADHD medicine' },
+        { icon: '🩺', text: 'Have a free health check every year from 14' },
+        { icon: '🧩', text: 'Ask for changes that help you at appointments' },
+      ],
+    },
+  },
+  {
     match: (path) => path === '/resources' || path === '/planning',
     content: {
       icon: '📚',

@@ -107,7 +107,7 @@ export function RightsHub() {
           <TopicCard
             title="Decisions at 18+"
             emoji="📝"
-            description="What happens when you become an adult? Learn about the Mental Capacity Act and getting support."
+            description="What happens when you become an adult? Learn about the Mental Capacity Act (which applies from 16) and getting support."
             active={activeTopic === 'decision-making'}
             onClick={() => toggleTopic('decision-making')}
             gradient="from-purple-400 to-pink-500"
@@ -606,9 +606,9 @@ function DecisionMakingContent() {
         </h4>
         <p className="text-sm sm:text-base text-warm-600 leading-relaxed">
           The Mental Capacity Act (MCA) is a law that protects people who might struggle to make some decisions.
-          It has five important principles:
+          It applies to everyone aged 16 and over, not just adults. It has five important principles:
         </p>
-        <div className="mt-2"><ReadAloud text="The Mental Capacity Act is a law that protects people who might struggle to make some decisions. It has five important principles. First, assume capacity and start by assuming someone can make decisions. Second, support first and help people make their own decisions where possible. Third, unwise is okay, you can make choices others disagree with. Fourth, best interests, decisions made for someone must help them. And fifth, least restrictive, choose options that limit freedom least." /></div>
+        <div className="mt-2"><ReadAloud text="The Mental Capacity Act is a law that protects people who might struggle to make some decisions. It applies to everyone aged 16 and over, not just adults. It has five important principles. First, assume capacity and start by assuming someone can make decisions. Second, support first and help people make their own decisions where possible. Third, unwise is okay, you can make choices others disagree with. Fourth, best interests, decisions made for someone must help them. And fifth, least restrictive, choose options that limit freedom least." /></div>
         <ol className="space-y-2 text-sm sm:text-base text-warm-600 ml-4">
           <li className="flex items-start gap-2">
             <span className="font-bold text-blue-600">1.</span>
@@ -661,7 +661,7 @@ function DecisionMakingContent() {
         </div>
         <div className="bg-white/60 rounded-xl p-3 sm:p-4 border border-warm-200 mt-3">
           <p className="text-sm sm:text-base text-warm-600">
-            <strong>Important:</strong> You need mental capacity when making an LPA - you need to
+            <strong>Important:</strong> You need to be 18 or over, and have mental capacity, to make an LPA - you need to
             understand what you're doing and who you're choosing.
           </p>
         </div>

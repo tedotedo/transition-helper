@@ -68,6 +68,29 @@ export function Consent16to17() {
             <div className="mt-2"><ReadAloud text="To give consent, you need to be able to understand the decision, think about your options, and share what you want to do. You need to understand what the treatment is for, remember the key info long enough to decide, think about the pros and cons in a way that makes sense to you, and tell someone your choice, in whatever way works for you. A doctor or nurse might ask you to explain the plan in your own words. If you don't understand yet, they should explain it again more clearly." /></div>
           </Card>
 
+          <Card title="If you can't make a particular decision ⚖️" emoji="⚖️">
+            <p className="text-sm text-warm-600">
+              The Mental Capacity Act applies to everyone aged 16 and over. It's a law about how decisions are made if someone can't make a particular decision, even with help.
+            </p>
+            <p className="mt-3 text-sm text-warm-600">
+              Capacity is about one decision at a time. You might be able to decide some things and not others, or be able to decide later on.
+            </p>
+            <p className="mt-3 text-sm text-warm-600">
+              If staff find you can't make a particular decision right now, even with support, the decision is made in your <strong>best interests</strong>. That means they should:
+            </p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-warm-600">
+              <li>Involve you as much as possible</li>
+              <li>Think about your wishes, feelings and beliefs</li>
+              <li>Talk to the people who know you well, such as your parents or carers</li>
+              <li>Choose the option that limits your freedom the least</li>
+            </ul>
+            <p className="mt-3 text-xs text-warm-500">
+              For the full rules, see the official 
+              <a href="https://www.gov.uk/government/publications/mental-capacity-act-code-of-practice" target="_blank" rel="noopener noreferrer" className="text-primary-600 underline hover:text-primary-700">Mental Capacity Act Code of Practice ↗</a>.
+            </p>
+            <div className="mt-2"><ReadAloud text="The Mental Capacity Act applies to everyone aged 16 and over. It's a law about how decisions are made if someone can't make a particular decision, even with help. Capacity is about one decision at a time. You might be able to decide some things and not others, or be able to decide later on. If staff find you can't make a particular decision right now, even with support, the decision is made in your best interests. That means they should: involve you as much as possible, think about your wishes, feelings and beliefs, talk to the people who know you well, such as your parents or carers, and choose the option that limits your freedom the least." /></div>
+          </Card>
+
           <Card title="When do parents and carers get involved?" emoji="👨‍👩‍👧">
             <p className="text-sm text-warm-600">
               You can usually decide if you want a parent, carer or friend with you. You can also choose what info gets shared with them, or keep some things private.

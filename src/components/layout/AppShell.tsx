@@ -85,6 +85,7 @@ export function AppShell({ children }: AppShellProps) {
           <NavItem to="/" label={t('nav.home')} icon="🏠" />
           <NavItem to="/journey" label={t('nav.journey')} icon="🚀" />
           <NavItem to="/rights" label={t('nav.rights')} icon="⚖️" />
+          <NavItem to="/neurodevelopmental" label="ADHD, autism & LD" icon="🧠" />
           <NavItem to="/money" label={t('nav.money')} icon="💰" />
           <NavItem to="/planning" label={t('nav.planning')} icon="📝" />
           <NavItem to="/videos" label={t('nav.videos')} icon="🎬" />
@@ -234,6 +235,7 @@ export function AppShell({ children }: AppShellProps) {
                   <MoreMenuItem to="/care-plan/passport" icon="🗂️" label="Communication Passport" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/journey" icon="🚀" label={t('nav.journey')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/rights" icon="⚖️" label={t('nav.rights')} onClick={closeMoreMenu} />
+                  <MoreMenuItem to="/neurodevelopmental" icon="🧠" label="ADHD, autism & LD" onClick={closeMoreMenu} />
                   <MoreMenuItem to="/money" icon="💰" label={t('nav.money')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/appointments" icon="📅" label={t('nav.appointments')} onClick={closeMoreMenu} />
                   <MoreMenuItem to="/videos" icon="🎬" label={t('nav.videos')} onClick={closeMoreMenu} />

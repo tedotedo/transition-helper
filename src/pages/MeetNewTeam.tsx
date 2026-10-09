@@ -432,6 +432,48 @@ export function MeetNewTeam() {
         </div>
       )}
 
+      {/* Before and just after the move (NICE NG43) */}
+      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card space-y-3">
+        <h2 className="text-lg font-semibold text-warm-800 flex items-center gap-2">
+          <span>👋</span>
+          <span>Before and just after your move</span>
+        </h2>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-warm-600 leading-relaxed">
+              <li>Ask to meet someone from the adult team before you move. This could be a joint appointment, a transition clinic, or a visit to the adult service with someone from your children's team.</li>
+              <li>National guidance says you should see the same adult doctor or nurse for your first 2 appointments after you move. It's fine to ask for this.</li>
+              <li>Bring a personal folder or summary to your first appointments. It could include a one-page profile, your health summary, your medicines, any emergency plan, and how you'd like your family to be involved.</li>
+        </ul>
+        <p className="text-sm text-warm-600">
+          You can build your summary in your 
+          <Link to="/care-plan" className="text-primary-600 underline hover:text-primary-700">care plan</Link> 
+          and 
+          <Link to="/care-plan/passport" className="text-primary-600 underline hover:text-primary-700">communication passport</Link>.
+        </p>
+        <ReadAloud text="Ask to meet someone from the adult team before you move. This could be a joint appointment, a transition clinic, or a visit to the adult service with someone from your children's team. National guidance says you should see the same adult doctor or nurse for your first 2 appointments after you move. It's fine to ask for this. Bring a personal folder or summary to your first appointments. It could include a one-page profile, your health summary, your medicines, any emergency plan, and how you'd like your family to be involved." />
+      </section>
+
+      {/* Missed appointments after the move (NICE NG43 1.4) */}
+      <section className="bg-white rounded-2xl border border-warm-200 p-5 shadow-card space-y-3">
+        <h2 className="text-lg font-semibold text-warm-800 flex items-center gap-2">
+          <span>📞</span>
+          <span>If you miss appointments after the move</span>
+        </h2>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-warm-600 leading-relaxed">
+              <li>Everyone misses an appointment sometimes. If you do, ring the number on your letter to rebook.</li>
+              <li>National guidance says adult services shouldn't just discharge you without trying to reach you. If you miss appointments or lose touch, they should try to contact you and your family, follow you up, and involve your GP.</li>
+              <li>If you still haven't been seen, they should pass you back to your named worker, with clear advice on how to be referred again.</li>
+        </ul>
+        <div className="rounded-xl bg-warm-50 px-4 py-3 text-sm text-warm-600">
+          <p className="font-semibold text-warm-800">Got a letter saying you've been discharged, and didn't expect it? Contact:</p>
+          <ul className="mt-1 space-y-1">
+            <li>• The clinic, using the phone number on your letter</li>
+            <li>• Your GP</li>
+            <li>• Your named worker, if you have one</li>
+          </ul>
+        </div>
+        <ReadAloud text="Everyone misses an appointment sometimes. If you do, ring the number on your letter to rebook. National guidance says adult services shouldn't just discharge you without trying to reach you. If you miss appointments or lose touch, they should try to contact you and your family, follow you up, and involve your GP. If you still haven't been seen, they should pass you back to your named worker, with clear advice on how to be referred again. If you get a letter saying you have been discharged and you did not expect it, contact: The clinic, using the phone number on your letter, Your GP, Your named worker, if you have one." />
+      </section>
+
       {/* Tips */}
       <section className="bg-gradient-to-br from-accent-50 to-white rounded-2xl border border-accent-100 p-5">
         <div className="flex items-start gap-3">

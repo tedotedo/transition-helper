@@ -22,7 +22,7 @@ const faqs: FAQ[] = [
   {
     id: 'when-does-it-happen',
     question: 'When will I transition?',
-    answer: 'There\'s no single age - it depends on your condition, your local services, and how ready you feel. Many young people move on between 16 and 18, but it can be earlier or later. Your team should talk to you about timing well in advance. If no one has mentioned it yet, it\'s okay to ask!',
+    answer: 'There\'s no single age - it depends on your condition, your local services, and how ready you feel. Many young people move on between 16 and 18, but it can be earlier or later. Planning should start by Year 9 (age 13-14) at the latest, and your plan should be looked at at least once a year. If no one has mentioned it yet, it\'s okay to ask!',
     emoji: '📅',
     category: 'basics',
   },
@@ -59,7 +59,7 @@ const faqs: FAQ[] = [
   {
     id: 'what-if-i-forget',
     question: 'What if I forget to take my medication or miss appointments?',
-    answer: 'It happens to everyone sometimes - you\'re human! The important thing is what you do next. If you miss medication, don\'t panic - check the instructions or call your pharmacist. If you miss an appointment, ring to rebook ASAP. Setting phone reminders really helps!',
+    answer: 'It happens to everyone sometimes - you\'re human! The important thing is what you do next. If you miss medication, don\'t panic - check the instructions or call your pharmacist. If you miss an appointment, ring to rebook ASAP. Adult services shouldn\'t just discharge you without trying to reach you - they should try to contact you, involve your GP, and if needed pass you back to your named worker. Setting phone reminders really helps!',
     emoji: '😅',
     category: 'appointments',
   },
@@ -129,6 +129,28 @@ const faqs: FAQ[] = [
     answer: 'Know your emergency plan BEFORE you need it! This includes: when to call 999, when to go to A&E, and when to contact your GP or specialist team. Keep emergency numbers in your phone. If in doubt, call 111 for advice. Your safety always comes first.',
     emoji: '🚨',
     category: 'worries',
+  },
+  // Added for NICE NG43 and neurodevelopmental guidance
+  {
+    id: 'no-adult-service',
+    question: 'What if there\'s no adult service for me?',
+    answer: 'This is quite common, for example for some autistic young people. Your GP usually becomes your main doctor. Ask for the reason in writing, ask about other support like your council\'s adult social care team, and remember you can be referred again later if things change.',
+    emoji: '🧭',
+    category: 'basics',
+  },
+  {
+    id: 'adhd-medicine-after-18',
+    question: 'Who will prescribe my ADHD medicine after 18?',
+    answer: 'Usually an adult ADHD service, sometimes with your GP prescribing under a "shared care agreement". Ask your team early, because adult services can have waits. Ask what will happen to your prescription in the meantime, and order repeats before you run out.',
+    emoji: '💊',
+    category: 'appointments',
+  },
+  {
+    id: 'mental-capacity-16',
+    question: 'Does the Mental Capacity Act apply to me before 18?',
+    answer: 'Yes - it applies from 16. If you can\'t make a particular decision, even with help, it\'s made in your best interests. That means involving you, thinking about your wishes, and talking to people who know you well.',
+    emoji: '⚖️',
+    category: 'rights',
   },
 ]
 
